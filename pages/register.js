@@ -1,14 +1,18 @@
 import InputResLog from '@components/atomics/inputResLog';
 import Link from 'next/link';
+import Navbar from '@components/molecules/Navbar';
 export default function RegisterPage() {
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden ">
+      <div className="absolute w-full">
+        <Navbar />
+      </div>
       <div className="max-w-full w-full relative">
         <div className="top-0 md:top-[-4.75rem] absolute w-full ">
           <img src="/image/iconTop.png" alt="logo" className="w-full" />
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-4 md:flex-row justify-center items-center w-full h-full font-semibold text-[#252525]  text-[2rem] my-8 md:my-16">
+      <div className="flex flex-col gap-2 p-4 md:flex-row justify-center items-center w-full h-full font-semibold text-[#252525]  text-[2rem] my-8 md:my-28">
         <div className="w-1/2 z-50 mt-36 md:mt-0">
           <img src="/image/iconlanjalan.png" alt="logo" className="" />
         </div>
@@ -41,7 +45,7 @@ export default function RegisterPage() {
               placeholder="Masukkan password"
               type="password"
             />
-             <InputResLog
+            <InputResLog
               name="password"
               text="Konfirmasi Password"
               placeholder="Masukkan password"

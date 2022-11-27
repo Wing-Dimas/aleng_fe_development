@@ -1,8 +1,12 @@
 import InputResLog from '@components/atomics/inputResLog';
+import Navbar from '@components/molecules/Navbar';
 import Link from 'next/link';
 export default function LoginPage() {
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden">
+      <div className="absolute w-full">
+        <Navbar />
+      </div>
       <div className="max-w-full w-full relative">
         <div className="top-0 md:top-[-4.75rem] absolute w-full ">
           <img src="/image/iconTop.png" alt="logo" className="w-full" />
@@ -23,7 +27,7 @@ export default function LoginPage() {
               placeholder="Masukkan Email"
               type="email"
             />
-           <InputResLog
+            <InputResLog
               name="password"
               text="Password"
               placeholder="Masukkan Password"
