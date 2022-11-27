@@ -8,8 +8,9 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        jua: ["Jua", "sans-serif"],
       },
     },
   },
   plugins: [],
-}
+};
