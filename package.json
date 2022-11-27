@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tabler/icons": "^1.113.0",
     "@next/font": "^13.0.4",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",

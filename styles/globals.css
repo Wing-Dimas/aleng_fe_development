@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: Jua;
+  src: url("../assets/fonts/jua-v13-latin-regular.woff2");
+  font-weight: 400;
+}
+@font-face {
   font-family: Inter;
   src: url("../assets/fonts/inter-v12-latin-100.woff2");
   font-weight: 100;
