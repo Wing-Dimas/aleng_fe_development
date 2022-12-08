@@ -3,13 +3,13 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div>
+    <div className="bg-[#F9F8F6]">
       <div className="max-w-7xl m-auto p-8">
-        <div className="flex justify-between gap-8">
+        <div className="block lg:flex justify-between gap-8">
           <div className="flex-shrink">
             <Link href="/" className="flex items-center gap-4 mb-8">
               <Image src="/logo.png" width={48} height={48} alt="logo" />
-              <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>
+              <p className="font-jua text-custom-primary_red text-2xl">Lanjalan Madura</p>
             </Link>
             <p className="text-neutral-500 mb-8">
               Lanjalan Madura adalah sebuah platform untuk menemani liburanmu,
@@ -55,7 +55,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="flex-grow flex-shrink-0 flex justify-end gap-16">
+          <div className="flex-grow flex-shrink-0 hidden lg:flex justify-end gap-16">
             <div>
               <p className="block text-neutral-700 text-xl font-semibold mb-4">
                 Tentang
