@@ -22,7 +22,9 @@
     "react-dom": "18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "tabler-icons-react": "^1.55.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "swiper": "^8.4.5",
+    "use-breakpoint": "^3.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

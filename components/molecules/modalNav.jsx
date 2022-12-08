@@ -42,7 +42,7 @@ export default function ModalNav({ openNav, setOpenNav }) {
               Masuk
             </Link>
             <Link
-              href="/signup"
+              href="register"
               className="rounded-full py-2 px-6 text-center w-1/2 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
             >
               Daftar

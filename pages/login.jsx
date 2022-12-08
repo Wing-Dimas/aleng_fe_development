@@ -1,11 +1,14 @@
 import InputResLog from '@components/atomics/inputResLog';
+import { useState } from 'react';
 import Navbar from '@components/molecules/Navbar';
 import Link from 'next/link';
+import ModalNav from '@components/molecules/modalNav';
 export default function LoginPage() {
+  const [openNav, setOpenNav] = useState(false);
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525]">
       <div className="absolute w-full">
-        <Navbar />
+        <Navbar openNav={openNav} setOpenNav={setOpenNav} />
       </div>
       <div className="max-w-full w-full relative">
         <div className="top-0 md:top-[-4.75rem] absolute w-full ">
@@ -84,6 +87,7 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
+      <ModalNav openNav={openNav} setOpenNav={setOpenNav} />
     </div>
   );
 }
