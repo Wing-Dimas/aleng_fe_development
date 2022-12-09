@@ -74,8 +74,8 @@ export default function DetailPenginapan({}) {
                 </span>
               </p>
               <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
-              <div className="flex flex-row items-center justify-between w-full gap-3">
-                <div className="flex flex-col items-center gap-1 justify-start w-1/2 ">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-3">
+                <div className="flex flex-col items-center gap-1 justify-start w-full md:w-1/2 ">
                   <p className="text-[#615A56] font-normal text-[0.75rem] w-full text-left after:content-['*'] after:ml-0.5">
                     Check-In
                   </p>
@@ -83,7 +83,7 @@ export default function DetailPenginapan({}) {
                     <DateTime type="date" />
                   </div>
                 </div>
-                <div className="flex flex-col items-center gap-1 justify-start w-1/2">
+                <div className="flex flex-col items-center gap-1 justify-start w-full md:w-1/2">
                   <p className="text-[#615A56] font-normal text-[0.75rem] w-full text-left after:content-['*'] after:ml-0.5">
                     Check-Out
                   </p>

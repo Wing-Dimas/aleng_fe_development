@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { X } from 'tabler-icons-react';
 import Link from 'next/link';
-import 'animate.css'
+import 'animate.css';
 export default function ModalNav({ openNav, setOpenNav }) {
   return (
     <div>
       {openNav ? (
-        <div className={`absolute md:hidden animate__animated  animate__slow animate__slideInUp bottom-0 w-full gap-6 bg-white border-[0.5px] border-[#ABACAC]/50 px-5 pt-5 pb-10 z-[100] rounded-t-[2rem] h-auto flex flex-col`}>
+        <div
+          className={`fixed md:hidden animate__animated  animate__slow animate__slideInUp bottom-0 w-full gap-6 bg-white border-[0.5px] border-[#ABACAC]/50 px-5 pt-5 pb-10 z-[100] rounded-t-[2rem] h-auto flex flex-col`}
+        >
           <X
             size={24}
             strokeWidth={3}
@@ -42,7 +44,7 @@ export default function ModalNav({ openNav, setOpenNav }) {
               Masuk
             </Link>
             <Link
-              href="register"
+              href="/register"
               className="rounded-full py-2 px-6 text-center w-1/2 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
             >
               Daftar

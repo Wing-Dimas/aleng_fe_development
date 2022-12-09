@@ -6,11 +6,11 @@ export default function Navbar({ openNav, setOpenNav }) {
   return (
     <div className="sticky top-0 z-[99] w-full">
       <div className="flex flex-row justify-center items-center py-3 px-4  gap-3 bg-[#003A4B] border-b-4 border-[#177B98]">
-        <img src="/logo-UTM.png" alt="logoUTM" className="" />
+        <img src="/logoUtm.png" alt="logoUTM" className="" />
         <p className="text-white text-center text-xs">
           Platform ini dibuat oleh Universitas Trunojoyo Madura
         </p>
-        <img src="/logo-UTM.png" alt="logoUTM" className="" />
+        <img src="/logoUtm.png" alt="logoUTM" className="" />
       </div>
       <div className="border-b  bg-white/30  shadow-md border border-gray-200 backdrop-blur-sm">
         <div className="max-w-7xl m-auto px-8 py-2 md:py-4 flex items-center justify-between gap-8">

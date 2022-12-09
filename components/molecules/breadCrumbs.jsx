@@ -43,7 +43,7 @@ export default function BreadCrumbs({pages, prev, current }) {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <p className="ml-1 font-normal text-[#615A56] text-[0.8rem]  sm:max-w-full truncate max-w-[7rem] w-full">
+              <p className="ml-1 font-normal text-[#615A56] text-[0.8rem]  sm:max-w-full  truncate max-w-[1rem] w-full">
                 Kaberaz Luxury
               </p>
             </div>
