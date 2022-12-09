@@ -234,7 +234,7 @@ const Wisata = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap max-w-xs">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap max-w-xs">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] max-w-xs bg-cover bg-center rounded-3xl"
                     style={{
@@ -350,7 +350,7 @@ const Wisata = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-cover bg-center rounded-3xl"
                     style={{
@@ -386,7 +386,7 @@ const Wisata = ({ breakpoint }) => {
                   <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
                     Kab. Sumenep
                   </p>
-                  <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
+                  <div className="pt-1 font-body1_mobile text-custom-primary_red flex flex-wrap items-center justify-between gap-4">
                     <p>Rp 500.000</p>
                     <div className="flex items-center justify-end gap-2">
                       <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
@@ -435,7 +435,7 @@ const Wisata = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                     style={{
@@ -522,7 +522,7 @@ const Kuliner = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                     style={{
@@ -683,7 +683,7 @@ const Kuliner = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                     style={{
@@ -770,7 +770,7 @@ const Penginapan = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                     style={{
@@ -939,7 +939,7 @@ const Penginapan = ({ breakpoint }) => {
           {[...Array(20)].map((v, i) => {
             return (
               <SwiperSlide key={i.toString()}>
-                <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                   <div
                     className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                     style={{
