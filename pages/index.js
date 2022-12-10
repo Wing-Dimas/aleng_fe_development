@@ -53,13 +53,13 @@ export default function Home() {
         className="pt-32 md:pt-40 mt-[-100px] bg-center bg-cover"
       >
         {/* Liburan bersama */}
-        <div className="px-12 text-custom-white font-bold text-lg lg:text-title max-w-7xl mx-auto">
-          <p>LIBURAN BERSAMA</p>
+        <div className="px-12 text-custom-white font-bold max-w-7xl mx-auto">
+          <p className="text-[15px] lg:text-title drop-shadow-md">LIBURAN BERSAMA</p>
           <div className="flex items-center text-lg justify-center lg:my-8">
-            <p>LENJELEN MADURA</p>
+            <p className="text-[15px]  lg:text-title drop-shadow-md">LENJELEN MADURA</p>
           </div>
           <div className="flex items-center justify-end ">
-            <p className="text-[8px]  lg:text-heading2 font-semibold">
+            <p className="text-[8px]  lg:text-heading2 font-semibold drop-shadow-md">
               RENCANAKAN LIBURAN SERUMU BERSAMA KAMI
             </p>
           </div>
