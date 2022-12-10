@@ -50,7 +50,7 @@ export default function DateTime({ pages, type }) {
           <Clock2 size={24} strokeWidth={2} color={'#615A56'} />
           <input
             type="time"
-            className="cursor-pointer   md:text-center  font-medium text-sm md:text-xs text-black"
+            className="bg-transparent cursor-pointer   md:text-center  font-medium text-sm md:text-xs text-black"
             onChange={onSetTime}
             defaultValue="07:00"
           />

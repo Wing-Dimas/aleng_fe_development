@@ -808,7 +808,7 @@ const Penginapan = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate   font-heading3_mobile text-heading3 sm:font-heading3 text-custom-black">
                       Kaberaz Luxury By Amithya
                     </p>
                     <div className="flex items-center">
