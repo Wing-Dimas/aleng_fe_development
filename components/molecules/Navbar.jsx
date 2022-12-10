@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { Menu2 } from 'tabler-icons-react';
+import Image from "next/image";
+import Link from "next/link";
+import { Menu2 } from "tabler-icons-react";
 
 export default function Navbar({ openNav, setOpenNav }) {
   return (
@@ -49,8 +49,8 @@ export default function Navbar({ openNav, setOpenNav }) {
             <Menu2
               size={24}
               strokeWidth={2}
-              color={'#252525'}
-              className={`${openNav ? 'hidden' : null}`}
+              color={"#252525"}
+              className={`${openNav ? "hidden" : null}`}
               onClick={() => setOpenNav(!openNav)}
             />
           </div>
