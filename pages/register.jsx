@@ -6,11 +6,11 @@ import ModalNav from '@components/molecules/modalNav';
 export default function RegisterPage() {
   const [openNav, setOpenNav] = useState(false);
   return (
-    <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525]">
+    <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525] bg">
       <div className="absolute w-full">
         <Navbar openNav={openNav} setOpenNav={setOpenNav} />
       </div>
-      <div className="max-w-full w-full relative">
+      <div className="max-w-full w-full relative ">
         <div className="top-0 md:top-[-4.75rem] absolute w-full ">
           <img src="/image/iconTop.png" alt="logo" className="w-full" />
         </div>

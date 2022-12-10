@@ -19,7 +19,7 @@ export default function DateTime({ pages, type }) {
     <div>
       {type === 'date' ? (
         <div
-          className={`flex relative flex-row items-center justify-start  gap-1 w-full   ${
+          className={` flex relative flex-row items-center justify-start  gap-1 w-full   ${
             pages == 'kuliner' || pages == 'wisata'
               ? 'md:justify-start'
               : 'md:justify-center'
@@ -28,7 +28,7 @@ export default function DateTime({ pages, type }) {
           <CalendarEvent size={24} strokeWidth={2} color={'#615A56'} />
           <input
             type="date"
-            className="cursor-pointer md:w-[5.5rem] md:min-w-[4.5rem]   md:text-center  font-medium  text-xs text-black"
+            className="bg-transparent cursor-pointer md:w-[5.5rem] md:min-w-[4.5rem]   md:text-center  font-medium  text-xs text-black"
             value={date.toLocaleDateString('en-CA')}
             onChange={onSetDate}
           />

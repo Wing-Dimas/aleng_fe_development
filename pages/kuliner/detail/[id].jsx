@@ -26,7 +26,7 @@ export default function DetailKuliner({}) {
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525] bg-white">
       <Navbar openNav={openNav} setOpenNav={setOpenNav} />
-      <div className={`mx-4 lg:mx-[7.5rem] ${openNav ? 'blur-3xl' : null}`}>
+      <div className={`mx-4 lg:mx-[7.5rem]`}>
         <div className="flex flex-row md:flex-col items-center justify-between md:items-stretch w-full">
           <BreadCrumbs pages="Kuliner" />
           <Search

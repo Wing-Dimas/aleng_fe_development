@@ -19,6 +19,9 @@ import useBreakpoint from 'use-breakpoint';
 import Head from 'next/head';
 import ModalNav from '@components/molecules/modalNav';
 import Link from 'next/link';
+import { ArrowsRightLeft, Users } from 'tabler-icons-react';
+import DateTime from '@components/molecules/dataTime';
+import ModalOpsiSearch from '@components/molecules/modalOpsiSearch';
 
 const BREAKPOINTS = {
   xs: 300,
@@ -32,6 +35,7 @@ const BREAKPOINTS = {
 export default function Home() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, 'xs');
   const [tabIndex, setTabIndex] = useState(0);
+  const [openOpsiSearch, setOpenOpsiSearch] = useState(false);
 
   const doChangeTabIndex = (e) => {
     setTabIndex(parseInt(e.currentTarget.value));
@@ -120,47 +124,45 @@ export default function Home() {
         {/* Search bar */}
         {tabIndex === 2 ? (
           <div className="px-4 max-w-7xl mx-auto">
-            <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col sm:flex-row items-center gap-4">
-              <div className="flex flex-col sm:flex-row items-center bg-white w-full rounded-md">
-                <div className="relative w-full">
-                  <IconCalendarEvent
-                    height={24}
-                    width={24}
-                    className="absolute top-3 left-3"
-                  />
-                  <input
-                    type="date"
-                    className="appearance-none px-12 py-4 rounded-md sm:rounded-l-md w-full font-semibold text-xs text-custom-black"
-                  />
-                  <IconChevronDown
-                    height={24}
-                    width={24}
-                    className="absolute top-3.5 right-3 text-custom-primary_red"
-                  />
+            <div className="bg-white bg-opacity-50 flex md:w-full flex-col lg:flex-row items-center gap-4 justify-between p-[1.5rem] border-[0.5px] border-[#ABACAC]/30 shadow-md rounded-md mb-4">
+              <div className="flex flex-col lg:flex-row items-center gap-4 w-full lg:w-auto">
+                <div className=" bg-white flex flex-col md:flex-row  gap-0 md:gap-4 w-full items-start md:justify-center md:items-center py-3 px-6 border-[0.5px] border-[#ABACAC]/20 shadow-md rounded-md">
+                  <DateTime type="date" />
+                  <div className="w-full">
+                    <div className="hidden md:flex">
+                      <ArrowsRightLeft
+                        size={18}
+                        strokeWidth={2}
+                        color={'#615A56'}
+                      />
+                    </div>
+                    <div className="flex md:hidden flex-row w-full h-[40px] items-center justify-between">
+                      <hr className="border-[0.5px] border-[#ABACAC]/40 w-[85%]" />
+                      <div className="flex flex-row items-center justify-center max-w-[2rem] max-h-[2rem]  w-full h-full">
+                        <ArrowsRightLeft
+                          size={16}
+                          strokeWidth={3}
+                          color={'#615A56'}
+                          className="w-full h-full rotate-90 bg-white shadow-lg rounded-md border-[0.5px] border-[#ABACAC]/20 p-2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <DateTime type="date" />
                 </div>
-                <button className="p-2 rounded shadow border -rotate-90 sm:rotate-0">
-                  <IconSwitchHorizontal height={16} width={16} />
-                </button>
-                <div className="relative w-full">
-                  <IconCalendarEvent
-                    height={24}
-                    width={24}
-                    className="absolute top-3 left-3"
-                  />
-                  <input
-                    type="date"
-                    className="appearance-none px-12 py-4 rounded-md sm:rounded-r-md w-full font-semibold text-xs text-custom-black"
-                  />
-                  <IconChevronDown
-                    height={24}
-                    width={24}
-                    className="absolute top-3.5 right-3 text-custom-primary_red"
-                  />
+                <div
+                  className=" bg-white flex flex-row gap-4 hover:bg-gray-200 w-full items-center justify-center py-3 px-6 cursor-pointer border-[0.5px] border-[#ABACAC]/20 shadow-md rounded-md"
+                  onClick={() => setOpenOpsiSearch(!openOpsiSearch)}
+                >
+                  <Users size={24} strokeWidth={2} color={'#615A56'} />
+                  <p className="font-medium text-xs text-black cursor-pointer ">
+                    1 Kamar, 1 Dewasa, 1 Anak
+                  </p>
                 </div>
               </div>
-              <button className="text-custom-black bg-[#FDD05C] p-4 rounded-md w-full sm:w-auto font-semibold text-xs">
-                Cari
-              </button>
+              <p className="font-medium text-base lg:max-w-sm w-full text-center text-black bg-[#FDD05C] hover:bg-secondary-yellow/80 py-3 px-14 rounded-md shadow-md cursor-pointer">
+                Ubah Pencarian
+              </p>
             </div>
           </div>
         ) : (
@@ -200,6 +202,10 @@ export default function Home() {
       )}
       <Footer />
       <ModalNav openNav={openNav} setOpenNav={setOpenNav} />
+      <ModalOpsiSearch
+        openOpsiSearch={openOpsiSearch}
+        setOpenOpsiSearch={setOpenOpsiSearch}
+      />
     </div>
   );
 }
@@ -240,7 +246,7 @@ const Wisata = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap max-w-xs cursor-pointer">
+                  <div className="m-4 p-4 shadow rounded-3xl overflow-ellipsis whitespace-nowrap max-w-xs cursor-pointer">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -358,7 +364,7 @@ const Wisata = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap cursor-pointer">
+                  <div className="m-4 p-4 shadow  overflow-ellipsis rounded-3xl whitespace-nowrap cursor-pointer">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -373,9 +379,10 @@ const Wisata = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
                       Pantai Lon Malang
                     </p>
+
                     <div className="flex items-center">
                       {[...Array(5)].map((v, i) => {
                         return (
@@ -394,7 +401,7 @@ const Wisata = ({ breakpoint }) => {
                     <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
                       Kab. Sumenep
                     </p>
-                    <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
+                    <div className="pt-1 font-body1_mobile text-custom-primary_red flex flex-wrap items-center justify-between gap-4">
                       <p>Rp 500.000</p>
                       <div className="flex items-center justify-end gap-2">
                         <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
@@ -445,7 +452,7 @@ const Wisata = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                  <div className="m-4 p-4 overflow-ellipsis shadow rounded-3xl whitespace-nowrap">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -534,7 +541,7 @@ const Kuliner = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/kuliner/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -549,7 +556,7 @@ const Kuliner = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
                       Amanish Resto
                     </p>
                     <div className="flex items-center">
@@ -697,7 +704,7 @@ const Kuliner = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/kuliner/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -712,7 +719,7 @@ const Kuliner = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
                       Amanish Resto
                     </p>
                     <div className="flex items-center">
@@ -786,7 +793,7 @@ const Penginapan = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/penginapan/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -801,7 +808,7 @@ const Penginapan = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
                       Kaberaz Luxury By Amithya
                     </p>
                     <div className="flex items-center">
@@ -957,7 +964,7 @@ const Penginapan = ({ breakpoint }) => {
             return (
               <SwiperSlide key={i.toString()}>
                 <Link href="/penginapan/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl whitespace-nowrap">
+                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
                     <div
                       className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
                       style={{
@@ -972,7 +979,7 @@ const Penginapan = ({ breakpoint }) => {
                         />
                       </div>
                     </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
+                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
                       Kabarez Luxury By Amithya
                     </p>
                     <div className="flex items-center">

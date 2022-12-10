@@ -10,7 +10,7 @@ export default function LoginPage() {
       <div className="absolute w-full">
         <Navbar openNav={openNav} setOpenNav={setOpenNav} />
       </div>
-      <div className="max-w-full w-full relative">
+      <div className={`max-w-full w-full relative ${openNav ? 'blur-3xl' : null}`}>
         <div className="top-0 md:top-[-4.75rem] absolute w-full ">
           <img src="/image/iconTop.png" alt="logo" className="w-full" />
         </div>
