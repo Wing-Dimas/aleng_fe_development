@@ -1,5 +1,6 @@
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -15,6 +16,9 @@ export default function LoginPage() {
   };
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525]">
+      <Head>
+        <title>Login | Lenjelen</title>
+      </Head>
       <Navbar transparentFirst />
       <div className="max-w-full w-full max-h-screen absolute top-0 left-0 blur-3xl">
         <div className="relative w-full h-96">

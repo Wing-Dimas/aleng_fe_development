@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "@components/molecules/Navbar";
 import Image from "next/image";
 import { useState } from "react";
+import Head from "next/head";
 export default function RegisterPage() {
   const [credentials, setCredentials] = useState({
     fname: "",
@@ -19,6 +20,9 @@ export default function RegisterPage() {
 
   return (
     <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525] bg">
+      <Head>
+        <title>Sign Up | Lenjelen</title>
+      </Head>
       <Navbar transparentFirst />
       <div className="max-w-full w-full absolute top-0 left-0 blur-3xl">
         <div className="relative w-full h-96">
