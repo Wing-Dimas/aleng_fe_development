@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="shadow-md bg-[#F2F2F2] ">
+    <div className="shadow-md bg-[#F9F8F6]">
       <div className="max-w-7xl m-auto p-8">
         <div className="flex justify-between gap-8">
           <div className="flex-shrink">
@@ -55,7 +55,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="flex-grow flex-shrink-0 md:flex justify-end gap-16 hidden">
+          <div className="flex-grow flex-shrink-0 lg:flex justify-end gap-16 hidden">
             <div>
               <p className="block text-neutral-700 text-xl font-semibold mb-4">
                 Tentang

@@ -1,80 +1,109 @@
+import { useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import {
-  IconBookmark,
   IconBriefcase,
   IconCalendarEvent,
   IconChevronDown,
+  IconDoor,
+  IconHorseToy,
   IconMapPin,
-  IconMenu2,
-  IconStar,
-  IconSwitch,
+  IconMinus,
+  IconPlus,
   IconSwitchHorizontal,
-} from '@tabler/icons';
-import Image from 'next/image';
-import { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import Footer from '@components/molecules/Footer';
-import Navbar from '@components/molecules/Navbar';
-import useBreakpoint from 'use-breakpoint';
-import Head from 'next/head';
-import ModalNav from '@components/molecules/modalNav';
-import Link from 'next/link';
-import { ArrowsRightLeft, Users } from 'tabler-icons-react';
-import DateTime from '@components/molecules/dataTime';
-import ModalOpsiSearch from '@components/molecules/modalOpsiSearch';
-
-const BREAKPOINTS = {
-  xs: 300,
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  '2xl': 1536,
-};
+  IconUser,
+  IconUsers,
+} from "@tabler/icons";
+import useBreakpoint from "use-breakpoint";
+import { BREAKPOINTS } from "@constants/index";
+import DateInput from "@components/molecules/DateInput";
+import DottedUnderline from "@components/molecules/DottedUnderline";
+import Footer from "@components/molecules/Footer";
+import Navbar from "@components/molecules/Navbar";
+import PopOver from "@components/molecules/PopOver";
+import QuickCard from "@components/molecules/QuickCard";
+import Tab from "@components/molecules/Tab";
+import Text from "@components/molecules/Text";
+import Title from "@components/molecules/Title";
 
 export default function Home() {
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, 'xs');
-  const [tabIndex, setTabIndex] = useState(0);
-  const [openOpsiSearch, setOpenOpsiSearch] = useState(false);
+  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
+  const [menuIndex, setMenuIndex] = useState(0);
+  const [check, setCheck] = useState({
+    date: {
+      in: new Date().toISOString().split("T")[0],
+      out: new Date().toISOString().split("T")[0],
+    },
+    options: {
+      room: 1,
+      adult: 1,
+      child: 1,
+    },
+  });
 
   const doChangeTabIndex = (e) => {
-    setTabIndex(parseInt(e.currentTarget.value));
+    setMenuIndex(parseInt(e.currentTarget.value));
   };
-  const [openNav, setOpenNav] = useState(false);
+
+  const doSwitchCheckDate = () => {
+    setCheck({
+      ...check,
+      date: {
+        in: check.date.out,
+        out: check.date.in,
+      },
+    });
+  };
+
+  const doChangeCheckDate = ({ name, value }) => {
+    setCheck({ ...check, date: { ...check.date, [name]: value } });
+  };
+
+  const doChangeCheckOptions = (e) => {
+    setCheck({
+      ...check,
+      options: {
+        ...check.options,
+        [e.currentTarget.name]: parseInt(e.currentTarget.value),
+      },
+    });
+  };
 
   return (
-    <div className="w-screen h-screen font-inter overflow-x-hidden text-dark-grey ">
+    <div className="font-inter min-h-screen min-w-screen max-w-screen">
       <Head>
         <title>Lenjelen Madura | Beranda</title>
       </Head>
-      <Navbar openNav={openNav} setOpenNav={setOpenNav} />
+      <Navbar transparentFirst />
       <div
         style={{ backgroundImage: "url('/image/hero.jpeg')" }}
-        className="pt-32 md:pt-40 mt-[-100px] bg-center bg-cover"
+        className="pt-48 bg-center bg-cover"
       >
         {/* Liburan bersama */}
-        <div className="px-12 text-custom-white font-bold max-w-7xl mx-auto">
-          <p className="text-[15px] lg:text-title drop-shadow-md">LIBURAN BERSAMA</p>
-          <div className="flex items-center text-lg justify-center lg:my-8">
-            <p className="text-[15px]  lg:text-title drop-shadow-md">LENJELEN MADURA</p>
+        <div className="px-12 text-custom-white font-bold text-base sm:text-4xl md:text-5xl lg:text-title max-w-7xl mx-auto">
+          <p>LIBURAN BERSAMA</p>
+          <div className="flex items-center justify-center lg:my-8">
+            <p className="sm:text-4xl md:text-5xl">LENJELEN MADURA</p>
           </div>
-          <div className="flex items-center justify-end ">
-            <p className="text-[8px]  lg:text-heading2 font-semibold drop-shadow-md">
+          <div className="flex items-center justify-end">
+            <p className="text-[8px] sm:text-2xl md:text-3xl lg:text-heading2 font-semibold">
               RENCANAKAN LIBURAN SERUMU BERSAMA KAMI
             </p>
           </div>
         </div>
         {/* tabbar */}
         <div className="text-custom-white font-semibold text-xs sm:font-heading3 sm:text-heading3 sm:my-8 px-4 max-w-xl mx-auto">
-          <div className="flex flex-row justify-between border-b border-b-custom-white w-full">
+          <div className="grid grid-cols-3 border-b border-b-custom-white">
             <button
               value={0}
               onClick={doChangeTabIndex}
               className={`${
-                tabIndex === 0
-                  ? 'border-b-custom-white'
-                  : 'border-b-transparent'
-              } border-b-4 p-2 flex items-center justify-center gap-2 md:gap-4 w-full`}
+                menuIndex === 0
+                  ? "border-b-custom-white"
+                  : "border-b-transparent"
+              } border-b-2 p-2 flex items-center justify-center gap-4`}
             >
               <Image
                 src="/icons/beach.png"
@@ -82,33 +111,33 @@ export default function Home() {
                 height={24}
                 alt="beach"
               />
-              <p className="text-white font-bold">WISATA</p>
+              <p>WISATA</p>
             </button>
             <button
               value={1}
               onClick={doChangeTabIndex}
               className={`${
-                tabIndex === 1
-                  ? 'border-b-custom-white'
-                  : 'border-b-transparent'
-              } border-b-4 p-2 flex items-center justify-center gap-2 md:gap-4 w-full`}
+                menuIndex === 1
+                  ? "border-b-custom-white"
+                  : "border-b-transparent"
+              } border-b-2 p-2 flex items-center justify-center gap-4`}
             >
               <Image
-                src="/icons/kuliner-white.png"
+                src="/icons/kuliner.png"
                 width={24}
                 height={24}
                 alt="kuliner"
               />
-              <p className="text-white font-bold">KULINER</p>
+              <p>KULINER</p>
             </button>
             <button
               value={2}
               onClick={doChangeTabIndex}
               className={`${
-                tabIndex === 2
-                  ? 'border-b-custom-white'
-                  : 'border-b-transparent'
-              } border-b-4 p-2 flex items-center justify-center gap-2 md:gap-4 w-full`}
+                menuIndex === 2
+                  ? "border-b-custom-white"
+                  : "border-b-transparent"
+              } border-b-2 p-2 flex items-center justify-center gap-4`}
             >
               <Image
                 src="/icons/hotel.png"
@@ -116,53 +145,150 @@ export default function Home() {
                 height={24}
                 alt="hotel"
               />
-              <p className="text-white font-bold">PENGINAPAN</p>
+              <p>PENGINAPAN</p>
             </button>
           </div>
         </div>
         <br />
         {/* Search bar */}
-        {tabIndex === 2 ? (
+        {menuIndex === 2 ? (
           <div className="px-4 max-w-7xl mx-auto">
-            <div className="bg-white bg-opacity-50 flex md:w-full flex-col lg:flex-row items-center gap-4 justify-between p-[1.5rem] border-[0.5px] border-[#ABACAC]/30 shadow-md rounded-md mb-4">
-              <div className="flex flex-col lg:flex-row items-center gap-4 w-full lg:w-auto">
-                <div className=" bg-white flex flex-col md:flex-row  gap-0 md:gap-4 w-full items-start md:justify-center md:items-center py-3 px-6 border-[0.5px] border-[#ABACAC]/20 shadow-md rounded-md">
-                  <DateTime type="date" />
-                  <div className="w-full">
-                    <div className="hidden md:flex">
-                      <ArrowsRightLeft
-                        size={18}
-                        strokeWidth={2}
-                        color={'#615A56'}
-                      />
-                    </div>
-                    <div className="flex md:hidden flex-row w-full h-[40px] items-center justify-between">
-                      <hr className="border-[0.5px] border-[#ABACAC]/40 w-[85%]" />
-                      <div className="flex flex-row items-center justify-center max-w-[2rem] max-h-[2rem]  w-full h-full">
-                        <ArrowsRightLeft
-                          size={16}
-                          strokeWidth={3}
-                          color={'#615A56'}
-                          className="w-full h-full rotate-90 bg-white shadow-lg rounded-md border-[0.5px] border-[#ABACAC]/20 p-2"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <DateTime type="date" />
+            <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col lg:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-md text-custom-black text-xs font-medium">
+                <DateInput
+                  name="in"
+                  value={check.date.in}
+                  onChange={doChangeCheckDate}
+                  containerClassName="w-full lg:w-auto"
+                  className="shadow-none border-none"
+                  leftIcon={
+                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
+                  }
+                  rightIcon={
+                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
+                  }
+                />
+                <div className="lg:block flex items-center justify-end gap-2 px-2 lg:px-0">
+                  <div className="w-full h-[0.5px] bg-custom-light_grey lg:hidden" />
+                  <button
+                    onClick={doSwitchCheckDate}
+                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow rounded border lg:border-none lg:rounded-none lg:shadow-none"
+                  >
+                    <IconSwitchHorizontal height={16} width={16} />
+                  </button>
                 </div>
-                <div
-                  className=" bg-white flex flex-row gap-4 hover:bg-gray-200 w-full items-center justify-center py-3 px-6 cursor-pointer border-[0.5px] border-[#ABACAC]/20 shadow-md rounded-md"
-                  onClick={() => setOpenOpsiSearch(!openOpsiSearch)}
-                >
-                  <Users size={24} strokeWidth={2} color={'#615A56'} />
-                  <p className="font-medium text-xs text-black cursor-pointer ">
-                    1 Kamar, 1 Dewasa, 1 Anak
-                  </p>
-                </div>
+                <DateInput
+                  name="out"
+                  value={check.date.out}
+                  onChange={doChangeCheckDate}
+                  containerClassName="w-full lg:w-auto"
+                  className="shadow-none border-none"
+                  leftIcon={
+                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
+                  }
+                  rightIcon={
+                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
+                  }
+                />
               </div>
-              <p className="font-medium text-base lg:max-w-sm w-full text-center text-black bg-[#FDD05C] hover:bg-secondary-yellow/80 py-3 px-14 rounded-md shadow-md cursor-pointer">
-                Ubah Pencarian
-              </p>
+              <PopOver
+                containerClassName="w-full !shadow-none"
+                className="text-xs font-medium text-custom-black !shadow-none"
+                childClassName="text-xs"
+                name="option"
+                label={`${check.options.room} Kamar ${check.options.adult} Dewasa ${check.options.child} Anak`}
+                leftIcon={
+                  <IconUsers className="text-custom-dark_grey w-4 h-4" />
+                }
+              >
+                {/* Kamar */}
+                <div className="mb-2 flex items-center justify-between gap-4">
+                  <div className="flex items-center justify-start gap-2">
+                    <IconDoor className="text-custom-dark_grey w-6 h-6" />
+                    <p>Kamar</p>
+                  </div>
+                  <div className="flex items-center justify-end gap-2">
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="room"
+                      value={
+                        check.options.room != 0 ? check.options.room - 1 : 0
+                      }
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconMinus className="w-4 h-4" />
+                    </button>
+                    <p>{check.options.room}</p>
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="room"
+                      value={check.options.room + 1}
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconPlus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                {/* Dewasa */}
+                <div className="mb-2 flex items-center justify-between gap-4">
+                  <div className="flex items-center justify-start gap-2">
+                    <IconUser className="text-custom-dark_grey w-6 h-6" />
+                    <p>Orang Dewasa</p>
+                  </div>
+                  <div className="flex items-center justify-end gap-2">
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="adult"
+                      value={
+                        check.options.adult != 0 ? check.options.adult - 1 : 0
+                      }
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconMinus className="w-4 h-4" />
+                    </button>
+                    <p>{check.options.adult}</p>
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="adult"
+                      value={check.options.adult + 1}
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconPlus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                {/* Anak */}
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center justify-start gap-2">
+                    <IconHorseToy className="text-custom-dark_grey w-6 h-6" />
+                    <p>Anak-anak</p>
+                  </div>
+                  <div className="flex items-center justify-end gap-2">
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="child"
+                      value={
+                        check.options.child != 0 ? check.options.child - 1 : 0
+                      }
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconMinus className="w-4 h-4" />
+                    </button>
+                    <p>{check.options.child}</p>
+                    <button
+                      onClick={doChangeCheckOptions}
+                      name="child"
+                      value={check.options.child + 1}
+                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
+                    >
+                      <IconPlus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </PopOver>
+              <button className="w-full lg:w-48 border border-custom-secondary_yellow text-custom-black bg-custom-secondary_yellow p-3 rounded-md font-semibold">
+                Cari
+              </button>
             </div>
           </div>
         ) : (
@@ -192,20 +318,14 @@ export default function Home() {
         )}
         <br />
       </div>
-
-      {tabIndex === 0 ? (
+      {menuIndex === 0 ? (
         <Wisata breakpoint={breakpoint} />
-      ) : tabIndex === 1 ? (
+      ) : menuIndex === 1 ? (
         <Kuliner breakpoint={breakpoint} />
       ) : (
         <Penginapan breakpoint={breakpoint} />
       )}
       <Footer />
-      <ModalNav openNav={openNav} setOpenNav={setOpenNav} />
-      <ModalOpsiSearch
-        openOpsiSearch={openOpsiSearch}
-        setOpenOpsiSearch={setOpenOpsiSearch}
-      />
     </div>
   );
 }
@@ -213,195 +333,85 @@ export default function Home() {
 const Wisata = ({ breakpoint }) => {
   return (
     <div>
-      {/* Wisata Populer */}
-      <div className="text-center px-4 py-4 md:my-4">
-        <p className="text-custom-black font-heading3 text-heading3 md:text-heading1 md:font-heading1">
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
           Wisata <span className="text-custom-primary_red">Populer</span> di
           Madura
-        </p>
-        <p className="font-body2 text-body2 sm:font-body1 sm:text-body1 sm: text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami menawarkan wisata disekitar madura untuk menemani liburanmu
-        </p>
-      </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 shadow rounded-3xl overflow-ellipsis whitespace-nowrap max-w-xs cursor-pointer">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/wisata/gambar1.jpg')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Pantai Lon Malang
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
-                      Kab. Sumenep
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-      {/* Pilihan Wisata */}
-      <div className="bg-[#F6F0E1] px-4 py-8 sm:px-8 sm:py-16">
+        </Text>
         <div className="max-w-7xl mx-auto">
-          <p className="text-center text-custom-black font-heading2_mobile text-heading2_mobile sm:text-heading1 sm:font-heading1">
-            Pilihan Wisata{' '}
-            <span className="text-custom-primary_red">di Kabupaten</span>
-          </p>
-          <div className="flex gap-2 max-w-md mx-auto">
-            <div className="h-1 rounded-full bg-custom-primary_red flex-grow" />
-            <div className="h-1 w-8 rounded-full bg-custom-primary_red" />
-            <div className="h-1 w-20 rounded-full bg-custom-primary_red" />
-          </div>
-          <br />
-          <div className="grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
-            <div
-              className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center justify-center bg-center"
-              style={{ backgroundImage: "url('/image/bangkalan.png')" }}
-            >
-              Bangkalan
-            </div>
-            <div
-              className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center justify-center bg-center"
-              style={{ backgroundImage: "url('/image/pamekasan.png')" }}
-            >
-              Pamekasan
-            </div>
-            <div
-              className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center justify-center bg-center"
-              style={{ backgroundImage: "url('/image/sampang.png')" }}
-            >
-              Sampang
-            </div>
-            <div
-              className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center justify-center bg-center"
-              style={{ backgroundImage: "url('/image/sumenep.png')" }}
-            >
-              Sumenep
-            </div>
-          </div>
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/giligenting.jpeg"
+                    title="Gili Genting Gili Genting Banget"
+                    address="Kab. Sumenep"
+                    review_count={666}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
-      {/* Paket wisata */}
-      <div className="text-center px-4 pb-4 pt-8">
-        <p className="font-heading3_mobile text-heading3_mobile sm:font-heading1 sm:text-heading1 text-custom-black">
+      <PilihanKabupaten name="Wisata" />
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
           Paket <span className="text-custom-primary_red">Wisata</span> Untukmu
-        </p>
-        <p className="font-body2_mobile text-body2_mobile sm:font-body1 sm:text-body1 text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami bisa memilihkanmu beberapa paket wisata agar kamu merasa nyaman
-        </p>
-      </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 shadow  overflow-ellipsis rounded-3xl whitespace-nowrap cursor-pointer">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/wisata/gambar1.jpg')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Pantai Lon Malang
-                    </p>
-
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
-                      Kab. Sumenep
-                    </p>
-                    <div className="pt-1 font-body1_mobile text-custom-primary_red flex flex-wrap items-center justify-between gap-4">
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/giligenting.jpeg"
+                    title="Jelajah Gili Iyang"
+                    address="Kab. Sumenep"
+                    review_count={666}
+                  >
+                    <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
                       <p>Rp 500.000</p>
                       <div className="flex items-center justify-end gap-2">
                         <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
@@ -410,609 +420,292 @@ const Wisata = ({ breakpoint }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-      {/* Wisata Religi dan Bersejarah */}
-      <div className="bg-white px-4 pt-8">
-        <p className="text-center text-custom-black font-heading2_mobile text-heading2_mobile sm:font-heading1 sm:text-heading1">
-          Wisata <span className="text-custom-primary_red">Religi</span> dan{' '}
-          <span className="text-custom-primary_red">Bersejarah</span>
-        </p>
-        <div className="flex gap-2 max-w-md mx-auto pt-3">
-          <div className="h-1 rounded-full bg-custom-primary_red flex-grow" />
-          <div className="h-1 w-8 rounded-full bg-custom-primary_red" />
-          <div className="h-1 w-20 rounded-full bg-custom-primary_red" />
+                  </QuickCard>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/wisata/detail/1">
-                  <div className="m-4 p-4 overflow-ellipsis shadow rounded-3xl whitespace-nowrap">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/wisata/gambar1.jpg')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 font-heading3_mobile text-heading3_mobile sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Pantai Lon Malang
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-[#615A56] text-xs">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                      Kab. Sumenep
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+      <div className="bg-white px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Wisata <span className="text-custom-primary_red">Religi</span> dan{" "}
+          <span className="text-custom-primary_red">Bersejarah</span>
+        </Title>
+        <DottedUnderline />
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/giligenting.jpeg"
+                    title="Gili Genting"
+                    address="Kab. Sumenep"
+                    review_count={666}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
       </div>
     </div>
   );
 };
 
 const Kuliner = ({ breakpoint }) => {
-  const [restoranIndex, setRestoranIndex] = useState(0);
-
-  const doChangeRestoranIndex = (e) => {
-    setRestoranIndex(parseInt(e.currentTarget.value));
-  };
+  const [index, setIndex] = useState(0);
 
   return (
     <div>
-      {/* Restoran Populer */}
-      <div className="text-center px-4 pb-4 pt-8">
-        <p className="text-custom-black font-heading3_mobile text-heading3_mobile sm:font-heading1 sm:text-heading1">
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
           Restoran <span className="text-custom-primary_red">Populer</span> di
           Madura
-        </p>
-        <p className="font-body2_mobile text-body2_mobile sm:font-body1 sm:text-body1 text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami menawarkan restoran disekitar madura untuk menunjang liburanmu
-        </p>
-      </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/kuliner/detail/1">
-                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/kuliner/gambar1.png')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Amanish Resto
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                      Jl. Raya Ketengan, Bangkalan
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-      {/* Pilihan Restoran */}
-      <div className="bg-[#F6F0E1] px-4 py-8">
-        <p className="text-center text-custom-black font-heading2_mobile text-heading2_mobile sm:font-heading1 sm:text-heading1">
-          Pilihan Restoran{' '}
-          <span className="text-custom-primary_red">di Kabupaten</span>
-        </p>
-        <div className="flex gap-2 pt-2 max-w-md mx-auto">
-          <div className="h-1 rounded-full bg-custom-primary_red flex-grow" />
-          <div className="h-1 w-8 rounded-full bg-custom-primary_red" />
-          <div className="h-1 w-20 rounded-full bg-custom-primary_red" />
-        </div>
-        <br />
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/bangkalan.png')" }}
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
           >
-            Bangkalan
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/pamekasan.png')" }}
-          >
-            Pamekasan
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/sampang.png')" }}
-          >
-            Sampang
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/sumenep.png')" }}
-          >
-            Sumenep
-          </div>
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/bebeksinjay.jpeg"
+                    title="Bebek Sinjay"
+                    address="Jl. Raya Ketengan, Bangkalan"
+                    review_count={666}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
-      {/* Pilih tipe restoranmu */}
-      <div className="text-center px-4 pb-4 pt-8">
-        <p className="font-heading3_mobile text-heading3_mobile sm:font-heading1 sm:text-heading1 text-custom-black">
+      <PilihanKabupaten name="Restoran" />
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
           Pilih <span className="text-custom-primary_red">Tipe</span> Restoranmu
-        </p>
-        <p className="font-body2_mobile text-body2_mobile sm:font-body1 sm:text-body1 text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami bisa memilihkanmu beberapa tipe restoran agar kamu merasa nyaman
-        </p>
-      </div>
-      <br />
-      <div className="px-4">
-        <div className="max-w-5xl mx-auto grid grid-cols-4 border-b font-body2_mobile text-body2_mobile sm:font-heading3 sm:text-heading3 text-center">
-          <button
-            value={0}
-            onClick={doChangeRestoranIndex}
-            className={`${
-              restoranIndex === 0
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
+        </Text>
+        <br />
+        <Tab
+          className="px-4"
+          options={[
+            "Family Eat",
+            "Makan Sepuasnya",
+            "Kafe & Nongkrong",
+            "Dijamin Halal",
+          ]}
+          index={index}
+          setIndex={setIndex}
+        />
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
           >
-            Family Eat
-          </button>
-          <button
-            value={1}
-            onClick={doChangeRestoranIndex}
-            className={`${
-              restoranIndex === 1
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Makan Sepuasnya
-          </button>
-          <button
-            value={2}
-            onClick={doChangeRestoranIndex}
-            className={`${
-              restoranIndex === 2
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Kafe & Nongkrong
-          </button>
-          <button
-            value={3}
-            onClick={doChangeRestoranIndex}
-            className={`${
-              restoranIndex === 3
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Dijamin Halal
-          </button>
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/bebeksinjay.jpeg"
+                    title="Jelajah Gili Iyang"
+                    address="Jl. Raya Ketengan, Bangkalan"
+                    review_count={666}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
-      </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/kuliner/detail/1">
-                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/kuliner/gambar1.png')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Amanish Resto
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56] text-xs">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                      Jl. Raya Ketengan, Bangkalan
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
       </div>
     </div>
   );
 };
 
 const Penginapan = ({ breakpoint }) => {
-  const [penginapanIndex, setPenginapanIndex] = useState(0);
-
-  const doChangePenginapanIndex = (e) => {
-    setPenginapanIndex(parseInt(e.currentTarget.value));
-  };
+  const [index, setIndex] = useState(0);
 
   return (
     <div>
-      {/* Penginapan Populer */}
-      <div className="text-center px-4 pb-4 pt-8">
-        <p className="font-heading3_mobile text-heading3_mobile sm:font-heading1 sm:text-heading1 text-custom-black">
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
           Penginapan <span className="text-custom-primary_red">Populer</span> di
           Madura
-        </p>
-        <p className="font-body2_mobile text-body2_mobile sm:font-body1 sm:text-body1 text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami menawarkan penginapan disekitar madura untuk menunjang liburanmu
-        </p>
-      </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/penginapan/detail/1">
-                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/penginapan/gambar1.png')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 truncate   font-heading3_mobile text-heading3 sm:font-heading3 text-custom-black">
-                      Kaberaz Luxury By Amithya
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                      Kab. Sumenep
-                    </p>
-                    <p className="pt-1 font-body1_mobile text-body1_mobile text-custom-primary_red">
-                      Rp 200.000
-                      <span className="font-caption_mobile text-caption_mobile sm:font-caption2 sm:text-caption2 text-[#615A56]">
-                        /malam
-                      </span>
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-      {/* Pilihan Restoran */}
-      <div className="bg-[#F6F0E1] px-4 py-8">
-        <p className="text-center text-custom-black font-heading2_mobile text-heading2_mobile sm:font-heading1 sm:text-heading1">
-          Pilihan Penginapan{' '}
-          <span className="text-custom-primary_red">di Kabupaten</span>
-        </p>
-        <div className="flex gap-2 pt-2 max-w-md mx-auto">
-          <div className="h-1 rounded-full bg-custom-primary_red flex-grow" />
-          <div className="h-1 w-8 rounded-full bg-custom-primary_red" />
-          <div className="h-1 w-20 rounded-full bg-custom-primary_red" />
-        </div>
-        <br />
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/bangkalan.png')" }}
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
           >
-            Bangkalan
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/pamekasan.png')" }}
-          >
-            Pamekasan
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/sampang.png')" }}
-          >
-            Sampang
-          </div>
-          <div
-            className="bg-cover rounded-md flex items-center justify-center h-16 sm:h-24 lg:h-48 bg-center"
-            style={{ backgroundImage: "url('/image/sumenep.png')" }}
-          >
-            Sumenep
-          </div>
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/homestay.jpeg"
+                    title="Homestay Amanah"
+                    address="Kab. Sumenep"
+                    review_count={666}
+                    price="200.000"
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
-      {/* Pilih tipe restoranmu */}
-      <div className="text-center px-4 pb-4 pt-8">
-        <p className="font-heading3_mobile text-heading3_mobile sm:font-heading1 sm:text-heading1 text-custom-black">
-          Pilih <span className="text-custom-primary_red">Tipe</span>{' '}
+      <PilihanKabupaten name="Penginapan" />
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Pilih <span className="text-custom-primary_red">Tipe</span>{" "}
           Penginapanmu
-        </p>
-        <p className="font-body2_mobile text-body2_mobile sm:font-body1 sm:text-body1 text-[#252525]">
+        </Title>
+        <Text className="text-center">
           Kami bisa memilihkanmu beberapa tipe penginapan agar kamu merasa
           nyaman
-        </p>
-      </div>
-      <br />
-      <div className="px-4">
-        <div className="max-w-2xl mx-auto grid grid-cols-4 border-b font-body2_mobile text-body2_mobile sm:font-heading3 sm:text-heading3 text-xs text-center">
-          <button
-            value={0}
-            onClick={doChangePenginapanIndex}
-            className={`${
-              penginapanIndex === 0
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
+        </Text>
+        <br />
+        <Tab
+          className="px-4"
+          index={index}
+          setIndex={setIndex}
+          options={["Bangkalan", "Pamekasan", "Sampang", "Sumenep"]}
+        />
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
           >
-            Bangkalan
-          </button>
-          <button
-            value={1}
-            onClick={doChangePenginapanIndex}
-            className={`${
-              penginapanIndex === 1
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Pamekasan
-          </button>
-          <button
-            value={2}
-            onClick={doChangePenginapanIndex}
-            className={`${
-              penginapanIndex === 2
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Sampang
-          </button>
-          <button
-            value={3}
-            onClick={doChangePenginapanIndex}
-            className={`${
-              penginapanIndex === 3
-                ? 'border-b-custom-primary_red text-custom-primary_red'
-                : 'border-b-transparent text-[#615A56]'
-            } p-1 sm:p-2 border-b-2`}
-          >
-            Sumenep
-          </button>
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <QuickCard
+                    imageUrl="/temp/homestay.jpeg"
+                    title="Homestay Amanah"
+                    address="Kab. Sumenep"
+                    review_count={666}
+                    price="200.000"
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
-      <div className="pb-4 max-w-7xl mx-auto">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={
-            breakpoint === 'xs'
-              ? 1.5
-              : breakpoint === 'sm'
-              ? 2.5
-              : breakpoint === 'md'
-              ? 2.5
-              : breakpoint === 'lg'
-              ? 3.5
-              : breakpoint === 'xl'
-              ? 3.5
-              : breakpoint === '2xl'
-              ? 4
-              : 4
-          }
-        >
-          {[...Array(20)].map((v, i) => {
-            return (
-              <SwiperSlide key={i.toString()}>
-                <Link href="/penginapan/detail/1">
-                  <div className="m-4 p-4 shadow overflow-ellipsis rounded-3xl whitespace-nowrap">
-                    <div
-                      className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
-                      style={{
-                        backgroundImage: "url('/penginapan/gambar1.png')",
-                      }}
-                    >
-                      <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-                        <IconBookmark
-                          height={24}
-                          width={24}
-                          className="text-white"
-                        />
-                      </div>
-                    </div>
-                    <p className="pt-2 truncate text-base  font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
-                      Kabarez Luxury By Amithya
-                    </p>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((v, i) => {
-                        return (
-                          <IconStar
-                            key={i}
-                            height={16}
-                            width={16}
-                            className="text-custom-secondary_yellow fill-custom-secondary_yellow"
-                          />
-                        );
-                      })}
-                      <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                        666 Reviews
-                      </p>
-                    </div>
-                    <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-                      Kab. Sumenep
-                    </p>
-                    <p className="pt-1 font-body1_mobile text-body1_mobile text-custom-primary_red">
-                      Rp 200.000
-                      <span className="font-caption_mobile text-caption_mobile sm:font-caption2 sm:text-caption2 text-[#615A56]">
-                        /malam
-                      </span>
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+    </div>
+  );
+};
+
+const PilihanKabupaten = ({ name }) => {
+  return (
+    <div className="bg-[#F6F0E1] px-4 py-4 md:py-8">
+      <Title className="text-center">
+        Pilihan {name}{" "}
+        <span className="text-custom-primary_red">di Kabupaten</span>
+      </Title>
+      <DottedUnderline />
+      <br />
+      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
+        <KabupatenCard name="Bangkalan" bgImage="/image/bangkalan.png" />
+        <KabupatenCard name="Pamekasan" bgImage="/image/pamekasan.png" />
+        <KabupatenCard name="Sampang" bgImage="/image/sampang.png" />
+        <KabupatenCard name="Sumenep" bgImage="/image/sumenep.png" />
       </div>
+    </div>
+  );
+};
+
+const KabupatenCard = ({ bgImage, name }) => {
+  return (
+    <div
+      className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center sm:items-start justify-center sm:justify-start p-0 sm:p-8 bg-center"
+      style={{ backgroundImage: `url('${bgImage}')` }}
+    >
+      {name}
     </div>
   );
 };
