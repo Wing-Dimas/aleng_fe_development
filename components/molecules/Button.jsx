@@ -1,7 +1,8 @@
-export default function Button({ onClick, className, children }) {
+export default function Button({ value, onClick, className, children }) {
   return (
     <button
       onClick={onClick}
+      value={value}
       className={`${
         className ? className + " " : ""
       }font-medium text-center text-base bg-custom-secondary_yellow py-3 px-6 rounded-md shadow-custom cursor-pointer`}
