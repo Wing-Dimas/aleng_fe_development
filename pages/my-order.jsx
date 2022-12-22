@@ -1,4 +1,7 @@
-import Badge from "@components/molecules/Badge";
+import { useState } from "react";
+import Head from "next/head";
+import { useBreakpoint } from "use-breakpoint";
+import { BREAKPOINTS } from "@constants/index";
 import Button from "@components/molecules/Button";
 import FABSheet from "@components/molecules/FABSheet";
 import Footer from "@components/molecules/Footer";
@@ -6,11 +9,7 @@ import Heading from "@components/molecules/Heading";
 import Navbar from "@components/molecules/Navbar";
 import OrderCard from "@components/molecules/OrderCard";
 import Text from "@components/molecules/Text";
-import { BREAKPOINTS } from "@constants/index";
 import { IconChevronLeft, IconFilter } from "@tabler/icons";
-import Head from "next/head";
-import { useState } from "react";
-import { useBreakpoint } from "use-breakpoint";
 
 export default function MyOrder() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
