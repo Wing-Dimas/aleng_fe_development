@@ -4,6 +4,7 @@ import FacilityIcon from "./FacilityIcon";
 import Tab from "./Tab";
 
 export default function TabDesc({ page }) {
+  console.log(page);
   const [index, setIndex] = useState(0);
   return (
     <div>

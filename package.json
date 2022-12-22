@@ -23,7 +23,8 @@
     "react-responsive-carousel": "^3.2.23",
     "swiper": "^8.4.5",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "use-breakpoint": "^3.0.5"
+    "use-breakpoint": "^3.0.5",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

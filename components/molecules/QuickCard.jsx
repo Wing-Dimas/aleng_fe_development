@@ -10,7 +10,7 @@ export default function QuickCard({
   children,
 }) {
   return (
-    <div className="m-4 p-4 shadow-custom rounded-3xl whitespace-nowrap bg-white">
+    <div className="m-4 p-4 shadow-custom rounded-3xl whitespace-nowrap cursor-pointer bg-white">
       <div
         className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
         style={{

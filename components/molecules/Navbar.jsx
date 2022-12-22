@@ -7,7 +7,6 @@ export default function Navbar({ transparentFirst = false }) {
   const [show, setShow] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [offset, setOffset] = useState(0);
-
   const doPreventClose = (e) => {
     e.stopPropagation();
   };
@@ -45,6 +44,7 @@ export default function Navbar({ transparentFirst = false }) {
   useEffect(() => {
     if (transparentFirst) {
       const onScroll = () => setOffset(window.pageYOffset);
+      console.log(onScroll);
       window.removeEventListener("scroll", onScroll);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
@@ -145,9 +145,9 @@ export default function Navbar({ transparentFirst = false }) {
           </Link>
           <div className="hidden md:flex items-center justify-end gap-16 font-semibold text-custom-black">
             <Link
-              className={`drop-shadow-md transition-all ${
+              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
-                  ? "text-white"
+                  ? "text-white "
                   : "text-custom-black"
               }`}
               href="/unduh-aplikasi"
@@ -155,7 +155,7 @@ export default function Navbar({ transparentFirst = false }) {
               Unduh Aplikasi
             </Link>
             <Link
-              className={`drop-shadow-md transition-all ${
+              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
                   ? "text-white"
                   : "text-custom-black"
@@ -165,7 +165,7 @@ export default function Navbar({ transparentFirst = false }) {
               Koleksi Kamu
             </Link>
             <Link
-              className={`drop-shadow-md transition-all ${
+              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
                   ? "text-white"
                   : "text-custom-black"
@@ -177,7 +177,7 @@ export default function Navbar({ transparentFirst = false }) {
           </div>
           <div className="hidden md:flex items-center justify-between gap-16 font-semibold">
             <Link
-              className={`drop-shadow-md transition-all ${
+              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
                   ? "text-white"
                   : "text-custom-black"

@@ -312,20 +312,41 @@ export default function DetailKuliner({}) {
         {/* Ulasan */}
         <div className="w-full mt-8 flex flex-col gap-3">
           <Heading.h2>Ulasan Pengunjung</Heading.h2>
-          <div className="flex flex-row gap-6 p-[1.5rem] border-[0.5px] border-[#ABACAC]/30 shadow-md rounded-md w-full h-full bg-white">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-6 p-[1.5rem] border-[0.5px] border-[#ABACAC]/30 shadow-md rounded-md w-full h-full">
             <div className="flex flex-col gap-2 w-1/2 md:w-[20%]">
               <Text>Ulasan Pengguna</Text>
               <Rating.descripted rate={4.5} count={666} />
             </div>
-            <div className="flex flex-col gap-2 w-1/2 md:w-[80%]">
+            <div className="flex flex-col gap-2 w-full md:w-[80%]">
               <Text>Ulasan yang mungkin membantumu</Text>
               <div className="flex flex-row gap-4 scrollbar-hide cursor-pointer overflow-x-scroll w-full">
-                <ReviewCard />
-                <ReviewCard />
-                <ReviewCard />
-                <ReviewCard />
-                <ReviewCard />
-                <ReviewCard />
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView={
+                    breakpoint === "xs"
+                      ? 1.3
+                      : breakpoint === "sm"
+                      ? 2.3
+                      : breakpoint === "md"
+                      ? 2.3
+                      : breakpoint === "lg"
+                      ? 2.8
+                      : breakpoint === "xl"
+                      ? 3.6
+                      : breakpoint === "2xl"
+                      ? 3.6
+                      : 1.6
+                  }
+                  // loop={loopUlasan}
+                >
+                  {[...Array(6)].map((item, i) => {
+                    return (
+                      <SwiperSlide key={i.toString()}>
+                        <ReviewCard />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
               </div>
             </div>
           </div>

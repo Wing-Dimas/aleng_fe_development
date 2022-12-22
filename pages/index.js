@@ -27,6 +27,7 @@ import QuickCard from "@components/molecules/QuickCard";
 import Tab from "@components/molecules/Tab";
 import Text from "@components/molecules/Text";
 import Title from "@components/molecules/Title";
+import Link from "next/link";
 
 export default function Home() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
@@ -363,12 +364,15 @@ const Wisata = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/giligenting.jpeg"
-                    title="Gili Genting Gili Genting Banget"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                  />
+                  <Link href="/wisata/1">
+                    <QuickCard
+                      imageUrl="/temp/giligenting.jpeg"
+                      title="Gili Genting Gili Genting Banget"
+                      address="Kab. Sumenep"
+                      review_count={666}
+                      link="/wisata1"
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -405,22 +409,24 @@ const Wisata = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/giligenting.jpeg"
-                    title="Jelajah Gili Iyang"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                  >
-                    <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
-                      <p>Rp 500.000</p>
-                      <div className="flex items-center justify-end gap-2">
-                        <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
-                        <p className="font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1">
-                          Paket 3hari
-                        </p>
+                  <Link href="/wisata/1">
+                    <QuickCard
+                      imageUrl="/temp/giligenting.jpeg"
+                      title="Jelajah Gili Iyang"
+                      address="Kab. Sumenep"
+                      review_count={666}
+                    >
+                      <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
+                        <p>Rp 500.000</p>
+                        <div className="flex items-center justify-end gap-2">
+                          <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
+                          <p className="font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1">
+                            Paket 3hari
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </QuickCard>
+                    </QuickCard>
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -455,12 +461,14 @@ const Wisata = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/giligenting.jpeg"
-                    title="Gili Genting"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                  />
+                  <Link href="/wisata/1">
+                    <QuickCard
+                      imageUrl="/temp/giligenting.jpeg"
+                      title="Gili Genting"
+                      address="Kab. Sumenep"
+                      review_count={666}
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -506,12 +514,14 @@ const Kuliner = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/bebeksinjay.jpeg"
-                    title="Bebek Sinjay"
-                    address="Jl. Raya Ketengan, Bangkalan"
-                    review_count={666}
-                  />
+                  <Link href="/kuliner/1">
+                    <QuickCard
+                      imageUrl="/temp/bebeksinjay.jpeg"
+                      title="Bebek Sinjay"
+                      address="Jl. Raya Ketengan, Bangkalan"
+                      review_count={666}
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -560,12 +570,14 @@ const Kuliner = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/bebeksinjay.jpeg"
-                    title="Jelajah Gili Iyang"
-                    address="Jl. Raya Ketengan, Bangkalan"
-                    review_count={666}
-                  />
+                  <Link href="/kuliner/1">
+                    <QuickCard
+                      imageUrl="/temp/bebeksinjay.jpeg"
+                      title="Jelajah Gili Iyang"
+                      address="Jl. Raya Ketengan, Bangkalan"
+                      review_count={666}
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -611,13 +623,15 @@ const Penginapan = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/homestay.jpeg"
-                    title="Homestay Amanah"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    price="200.000"
-                  />
+                  <Link href="/penginapan/1">
+                    <QuickCard
+                      imageUrl="/temp/homestay.jpeg"
+                      title="Homestay Amanah"
+                      address="Kab. Sumenep"
+                      review_count={666}
+                      price="200.000"
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}
@@ -663,13 +677,15 @@ const Penginapan = ({ breakpoint }) => {
             {[...Array(20)].map((v, i) => {
               return (
                 <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/temp/homestay.jpeg"
-                    title="Homestay Amanah"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    price="200.000"
-                  />
+                  <Link href="/penginapan/1">
+                    <QuickCard
+                      imageUrl="/temp/homestay.jpeg"
+                      title="Homestay Amanah"
+                      address="Kab. Sumenep"
+                      review_count={666}
+                      price="200.000"
+                    />
+                  </Link>
                 </SwiperSlide>
               );
             })}

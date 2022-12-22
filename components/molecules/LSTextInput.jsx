@@ -5,6 +5,7 @@ export default function LSTextInput({
   label,
   placeholder,
   type,
+  errorMassage,
 }) {
   const doChange = (e) => {
     onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
@@ -23,6 +24,13 @@ export default function LSTextInput({
         className="w-full block font-medium placeholder-gray-500 border rounded border-[#615A56] bg-gray-100 p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         type={type ?? "text"}
       />
+      <p
+        className={`mb-0 text-xs ${
+          errorMassage?.status ? "text-green-700" : "text-custom-primary_red"
+        }`}
+      >
+        {errorMassage?.message}
+      </p>
     </label>
   );
 }

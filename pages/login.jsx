@@ -4,30 +4,80 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import validator from "validator";
+
 export default function LoginPage() {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
     rememberme: false,
   });
-
+  const [emailError, setEmailError] = useState({ message: "", status: false });
+  const [passwordError, setPasswordError] = useState({
+    message: "",
+    status: false,
+  });
   const doChange = ({ name, value }) => {
+    if (name === "email") {
+      if (validator.isEmail(value)) {
+        setEmailError({ message: "Email sudah benar", status: true });
+      } else {
+        if (value === "") {
+          setEmailError({ message: "Email tidak boleh kosong", status: false });
+        } else {
+          setEmailError({ message: "Email harus lengkap", status: false });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name == "password") {
+      if (value.length > 8) {
+        setPasswordError({ message: "Password sudah sesuai", status: true });
+        setCredentials({ ...credentials, [name]: value });
+      } else {
+        if (value.length !== 0) {
+          setPasswordError({
+            message: "Password harus lebih dari 8 karakter",
+            status: false,
+          });
+        } else {
+          setPasswordError({
+            message: "Password tidak boleh kosong",
+            status: false,
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    }
     setCredentials({ ...credentials, [name]: value });
   };
+
   return (
-    <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525]">
+    <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
         <title>Login | Lenjelen</title>
       </Head>
       <Navbar transparentFirst />
-      <div className="max-w-full w-full max-h-screen absolute top-0 left-0 blur-3xl">
-        <div className="relative w-full h-96">
-          <Image src="/icons/sky.png" alt="logo" fill className="w-full" />
+      <div className={`max-w-full w-full relative`}>
+        <div className="absolute top-0 w-full md:top-[-4.75rem]">
+          <Image
+            src="/icons/sky.png"
+            width={1000}
+            height={50}
+            alt="gambarLanjalan"
+            className="drop-shadow-md w-full"
+            priority
+          />
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem]">
-        <div className="w-1/2">
-          <img src="/icons/lanjalan.png" alt="logo" className="" />
+      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem] my-24 md:my-48">
+        <div className="w-1/2 z-50 relative  justify-center flex">
+          <Image
+            src="/icons/lanjalan.png"
+            width={700}
+            height={50}
+            alt="iconLanjalan"
+            priority
+          />
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
           <p className="text-[1.2rem] md:text-[2rem] text-center">
@@ -41,6 +91,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
+              errorMassage={emailError}
             />
             <LSTextInput
               name="password"
@@ -49,6 +100,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Password"
               type="password"
+              errorMassage={passwordError}
             />
             <div className="flex flex-row justify-between w-full">
               <div className="flex flex-row gap-1">

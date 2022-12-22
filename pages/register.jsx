@@ -4,32 +4,153 @@ import Navbar from "@components/molecules/Navbar";
 import Image from "next/image";
 import { useState } from "react";
 import Head from "next/head";
-export default function RegisterPage() {
+import validator from "validator";
+
+export default function RegisterPage({}) {
   const [credentials, setCredentials] = useState({
     fname: "",
     email: "",
     notelepon: "",
     password: "",
     repassword: "",
-    rememberme: false,
+  });
+  const [emailError, setEmailError] = useState({ message: "", status: false });
+  const [nameError, setNameError] = useState({
+    message: "",
+    status: false,
+  });
+  const [telephoneError, setTelephoneError] = useState({
+    message: "",
+    status: false,
+  });
+  const [passwordError, setPasswordError] = useState({
+    message: "",
+    status: false,
+  });
+  const [RePasswordError, setRePasswordError] = useState({
+    message: "",
+    status: false,
   });
 
   const doChange = ({ name, value }) => {
-    setCredentials({ ...credentials, [name]: value });
+    if (name === "email") {
+      if (validator.isEmail(value)) {
+        setEmailError({ message: "Email sudah benar", status: true });
+      } else {
+        if (value === "") {
+          setEmailError({ message: "Email tidak boleh kosong", status: false });
+        } else {
+          setEmailError({ message: "Email harus lengkap", status: false });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name === "fname") {
+      if (value.length > 0) {
+        if (/[^a-zA-Z]/.test(value)) {
+          setNameError({
+            message: "Nama harus berupa huruf",
+            status: false,
+          });
+        } else {
+          setNameError({ message: "Nama sudah benar", status: true });
+        }
+      } else {
+        if (/[^a-zA-Z]/.test(value)) {
+          setNameError({
+            message: "Nama harus berupa huruf",
+            status: false,
+          });
+        } else if (value === "") {
+          setNameError({
+            message: "Nama tidak boleh kosong",
+            status: false,
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name === "notelepon") {
+      if (value.length > 0) {
+        if (/[^0-9]/.test(value)) {
+          setTelephoneError({
+            message: "Telephone harus berupa angka",
+            status: false,
+          });
+        } else {
+          setTelephoneError({ message: "Telephone sudah benar", status: true });
+        }
+      } else {
+        if (/[^0-9]/.test(value)) {
+          setTelephoneError({
+            message: "Telephone harus berupa angka",
+            status: false,
+          });
+        } else if (value === "") {
+          setTelephoneError({
+            message: "Telephone tidak boleh kosong",
+            status: false,
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name === "password") {
+      if (value.length > 8) {
+        setPasswordError({ message: "Password sudah sesuai", status: true });
+      } else {
+        if (value.length !== 0) {
+          setPasswordError({
+            message: "Password harus lebih dari 8 karakter",
+            status: false,
+          });
+        } else {
+          setPasswordError({
+            message: "Password tidak boleh kosong",
+            status: false,
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name === "repassword") {
+      if (value.length > 8) {
+        setRePasswordError({
+          message: "Password sudah sesuai",
+          status: true,
+        });
+      } else {
+        if (value.length !== 0) {
+          setRePasswordError({
+            message: "Password harus lebih dari 8 karakter",
+            status: false,
+          });
+        } else {
+          setRePasswordError({
+            message: "Password tidak boleh kosong",
+            status: false,
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    }
   };
 
   return (
-    <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525] bg">
+    <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
         <title>Sign Up | Lenjelen</title>
       </Head>
       <Navbar transparentFirst />
-      <div className="max-w-full w-full absolute top-0 left-0 blur-3xl">
-        <div className="relative w-full h-96">
-          <Image src="/icons/sky.png" alt="logo" fill className="w-full" />
+      <div className={`max-w-full w-full relative`}>
+        <div className="absolute top-0 w-full md:top-[-4.75rem]">
+          <Image
+            src="/icons/sky.png"
+            width={1000}
+            height={50}
+            alt="gambarLanjalan"
+            className="drop-shadow-md w-full"
+            priority
+          />
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem]">
+      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem] my-24 md:my-48">
         <div className="w-1/2 z-50 mt-36 md:mt-0">
           <img src="/icons/lanjalan.png" alt="logo" />
         </div>
@@ -45,6 +166,7 @@ export default function RegisterPage() {
               onChange={doChange}
               placeholder="Masukkan Nama"
               type="text"
+              errorMassage={nameError}
             />
             <LSTextInput
               name="email"
@@ -53,6 +175,7 @@ export default function RegisterPage() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
+              errorMassage={emailError}
             />
             <LSTextInput
               name="notelepon"
@@ -61,6 +184,7 @@ export default function RegisterPage() {
               onChange={doChange}
               placeholder="Masukkan Nomer Telepon"
               type="text"
+              errorMassage={telephoneError}
             />
             <LSTextInput
               name="password"
@@ -69,6 +193,7 @@ export default function RegisterPage() {
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
+              errorMassage={passwordError}
             />
             <LSTextInput
               name="repassword"
@@ -77,49 +202,32 @@ export default function RegisterPage() {
               onChange={doChange}
               placeholder="Masukkan password"
               type="confirmPassword"
+              errorMassage={RePasswordError}
             />
-            <div className="flex flex-row justify-between w-full">
-              <div className="flex flex-row gap-1">
-                <input
-                  type="checkbox"
-                  name="rememberme"
-                  id="rememberme"
-                  value={credentials.rememberme}
-                  onChange={doChange}
-                  className="checked:bg-blue-500 cursor-pointer"
-                />
-                <label htmlFor="rememberme" className="font-medium text-[12px]">
-                  Ingat aku
-                </label>
-              </div>
-              <Link href="">
-                <p className="font-medium text-[12px] hover:text-blue-500">
-                  Lupa password?
-                </p>
-              </Link>
-            </div>
 
-            <button
-              type="submit"
-              className="w-full p-3 bg-[#FDD05C] hover:bg-[#F6BE30] relative text-xs md:text-sm shadow-md rounded-md cursor-pointer"
-            >
-              Register
-            </button>
-            <p className="text-xs md:text-sm">atau</p>
-            <button className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
-              <div className="flex gap-4 justify-center max-w-sm items-center">
-                <img src="/icons/google.svg" className="w-5 " alt="google" />
-                <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
-                  Masuk dengan Google
+            <div className="flex flex-col w-full items-center justify-center gap-1 mt-4">
+              <button
+                type="submit"
+                className="w-full p-3 bg-[#FDD05C] hover:bg-[#F6BE30] relative text-xs md:text-sm shadow-md rounded-md cursor-pointer"
+              >
+                Register
+              </button>
+              <p className="text-xs md:text-sm">atau</p>
+              <button className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
+                <div className="flex gap-4 justify-center max-w-sm items-center">
+                  <img src="/icons/google.svg" className="w-5 " alt="google" />
+                  <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
+                    Masuk dengan Google
+                  </span>
+                </div>
+              </button>
+              <p className="">
+                Sudah Punya Account ?{" "}
+                <span className="text-red-600 hover:text-red-800 cursor-pointer">
+                  <Link href="/login">Login</Link>
                 </span>
-              </div>
-            </button>
-            <p className="">
-              Sudah Punya Account ?{" "}
-              <span className="text-red-600 hover:text-red-800 cursor-pointer">
-                <Link href="/login">Login</Link>
-              </span>
-            </p>
+              </p>
+            </div>
           </form>
         </div>
       </div>
