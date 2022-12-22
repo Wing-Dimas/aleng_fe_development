@@ -1,12 +1,15 @@
+import { useState } from "react";
+import Head from "next/head";
+import { useBreakpoint } from "use-breakpoint";
 import BreadCrumbs from "@components/molecules/BreadCrumbs";
 import Button from "@components/molecules/Button";
 import DateInput from "@components/molecules/DateInput";
+import FABSheet from "@components/molecules/FABSheet";
 import Footer from "@components/molecules/Footer";
 import Heading from "@components/molecules/Heading";
 import ListCard from "@components/molecules/ListCard";
 import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/molecules/PopOver";
-import Rating from "@components/molecules/Rating";
 import Text from "@components/molecules/Text";
 import TextInput from "@components/molecules/TextInput";
 import { BREAKPOINTS } from "@constants/index";
@@ -14,6 +17,7 @@ import {
   IconCalendarEvent,
   IconChevronDown,
   IconDoor,
+  IconFilter,
   IconHorseToy,
   IconMinus,
   IconPlus,
@@ -23,11 +27,6 @@ import {
   IconUser,
   IconUsers,
 } from "@tabler/icons";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useBreakpoint } from "use-breakpoint";
 
 export default function ListPenginapan() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
@@ -73,7 +72,7 @@ export default function ListPenginapan() {
     setFilter({ ...filter, options: { ...filter.options, [name]: value } });
   };
 
-  const doToggleFilter = () => {
+  const doToggleSearch = () => {
     setShow(!show);
   };
 
@@ -91,18 +90,162 @@ export default function ListPenginapan() {
               { link: "/penginapan/list", name: "List" },
             ]}
           />
-          <Button onClick={doToggleFilter} className="block md:hidden">
-            {show ? "Tutup" : "Lihat"} Filter
+          <Button onClick={doToggleSearch} className="block md:hidden">
+            Ubah Pencarian
           </Button>
         </div>
         <Heading.h2>Hotel di Sumenep</Heading.h2>
         <br />
+        {/* FAB Filter */}
+        {["xs", "sm", "md"].includes(breakpoint) && (
+          <FABSheet
+            icon={<IconFilter className="w-8 h-8 text-custom-primary_red" />}
+          >
+            <Text className="text-custom-primary_red mb-4 text-center">
+              Filter Pencarian Hotel
+            </Text>
+            <hr />
+            <br />
+            {/* Harga per malam */}
+            <Text.label>Harga per malam</Text.label>
+            <div className="flex items-center gap-4 w-full">
+              <TextInput
+                type="number"
+                name="min"
+                containerClassName="w-full"
+                className="!text-xs !border-none !shadow-custom !font-medium w-full"
+                leftIcon="Rp"
+                leftIconClassName="!text-xs !font-medium"
+                value={filter.price_range.min}
+                onChange={doChangePriceRange}
+              />
+              <IconSeparator className="w-6 h-6 text-custom-dark_grey" />
+              <TextInput
+                type="number"
+                name="max"
+                containerClassName="w-full"
+                className="!text-xs !border-none !shadow-custom !font-medium w-full"
+                leftIcon="Rp"
+                leftIconClassName="!text-xs !font-medium"
+                value={filter.price_range.max}
+                onChange={doChangePriceRange}
+              />
+            </div>
+            <br />
+            {/* Bintang Hotel */}
+            <Text.label>Bintang Hotel</Text.label>
+            <div className="mb-2 flex items-center gap-2">
+              <input type="checkbox" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
+            <div className="mb-2 flex items-center gap-2">
+              <input type="checkbox" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
+            <div className="mb-2 flex items-center gap-2">
+              <input type="checkbox" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
+            <div className="mb-2 flex items-center gap-2">
+              <input type="checkbox" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
+            <div className="mb-2 flex items-center gap-2">
+              <input type="checkbox" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
+            <br />
+            {/* Fasilitas Hotel */}
+            <Text.label>Fasilitas Hotel</Text.label>
+            <div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Boleh membawa hewan peliharaan
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Kolam Renang
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">AC</Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Light View
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Wifi
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Sarapan
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Ekstra Bantal
+                </Text.label>
+              </div>
+            </div>
+            <br />
+            {/* Tipe Hotel */}
+            <Text.label>Tipe Hotel</Text.label>
+            <div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Homestay
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Apartemen
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Kos
+                </Text.label>
+              </div>
+              <div className="mb-2 flex items-center gap-2">
+                <input type="checkbox" />
+                <Text.label className="!text-black !font-medium">
+                  Hotel
+                </Text.label>
+              </div>
+            </div>
+          </FABSheet>
+        )}
         <div
           className="flex flex-col lg:grid lg:grid-cols-2 gap-4"
-          style={{ gridTemplateColumns: "auto 1fr" }}
+          style={{ gridTemplateColumns: "1fr auto" }}
         >
           {/* Filter */}
-          <div className={`${show ? "block" : "hidden"} md:block`}>
+          <div className="hidden lg:block">
             <div className="border shadow-md p-4 rounded-xl bg-white">
               <Text className="text-custom-primary_red mb-4 text-center">
                 Filter Pencarian Hotel
@@ -245,7 +388,11 @@ export default function ListPenginapan() {
           </div>
           <div>
             {/* Options */}
-            <div className="rounded-md shadow-md p-6 bg-white border flex flex-col lg:flex-row items-center gap-2">
+            <div
+              className={`${
+                !show && "hidden"
+              } rounded-md shadow-md p-6 bg-white border block md:flex flex-col lg:flex-row items-center gap-2`}
+            >
               <div className="shadow-custom flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-md text-custom-black text-xs font-medium">
                 <DateInput
                   name="in"
@@ -379,7 +526,7 @@ export default function ListPenginapan() {
                 </div>
               </PopOver>
               <Button className="whitespace-nowrap w-full lg:w-auto">
-                Ubah Pencarian
+                Cari
               </Button>
             </div>
             {/* Content */}
