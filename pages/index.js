@@ -124,7 +124,7 @@ export default function Home() {
               } border-b-2 p-2 flex items-center justify-center gap-4`}
             >
               <Image
-                src="/icons/kuliner.png"
+                src="/icons/kuliner-white.png"
                 width={24}
                 height={24}
                 alt="kuliner"

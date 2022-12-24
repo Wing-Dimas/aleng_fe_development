@@ -23,6 +23,7 @@ Text.small = ({ className, children }) => {
 };
 
 Text.label = ({ className, children }) => {
+  console.log(className);
   return (
     <p
       className={`text-[#615A56] font-normal text-[0.75rem] w-full text-left${

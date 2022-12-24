@@ -88,7 +88,7 @@ export default function Navbar({ transparentFirst = false }) {
               <Link className="block font-semibold py-2" href="/koleksi-kamu">
                 Koleksi Kamu
               </Link>
-              <Link className="block font-semibold py-2" href="/cek-pesanan">
+              <Link className="block font-semibold py-2" href="/my-order">
                 Cek Pesanan
               </Link>
               <Link
@@ -170,7 +170,7 @@ export default function Navbar({ transparentFirst = false }) {
                   ? "text-white"
                   : "text-custom-black"
               }`}
-              href="/cek-pesanan"
+              href="/my-order"
             >
               Cek Pesanan
             </Link>
