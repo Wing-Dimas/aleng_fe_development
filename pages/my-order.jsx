@@ -151,7 +151,7 @@ export default function PesananSaya() {
             </FABSheet>
           )}
           <div className="min-h-full  w-full md:w-[65%] h-full  flex flex-col gap-6">
-            <div className="flex flex-row items-center w-full">
+            <div className="flex flex-row items-center w-full flex-nowrap whitespace-nowrap overflow-auto scrollbar-hide">
               <Swiper
                 spaceBetween={20}
                 slidesPerView={
