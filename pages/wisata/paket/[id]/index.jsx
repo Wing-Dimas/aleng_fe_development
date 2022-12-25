@@ -69,7 +69,7 @@ export default function PaketWisata({}) {
   return (
     <Wrapper>
       <Head>
-        <title>Detail Wisata</title>
+        <title>Detail Paket Wisata</title>
       </Head>
       <Navbar />
       <MainContent>

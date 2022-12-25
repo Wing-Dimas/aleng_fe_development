@@ -1,5 +1,6 @@
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/molecules/Text";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,6 +9,9 @@ export default function ForgetPassword() {
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
       <Navbar />
+      <Head>
+        <title>Forget Password</title>
+      </Head>
       <div className="flex flex-col items-center justify-start pt-20 relative w-full h-full">
         <div className=" w-4/5 md:w-1/4 flex flex-col gap-4 items-center justify-center">
           <div className="flex flex-row">

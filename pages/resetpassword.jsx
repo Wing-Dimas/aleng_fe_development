@@ -2,6 +2,7 @@ import Footer from "@components/molecules/Footer";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/molecules/Text";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -77,6 +78,9 @@ export default function ResetPassword() {
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
       <Navbar />
+      <Head>
+        <title>Reset Password</title>
+      </Head>
       <div className="flex flex-col items-center justify-start pt-14 relative w-full h-full">
         <div className=" w-4/5 md:w-1/4 flex flex-col gap-4 items-center justify-center">
           <div className="flex flex-row">
