@@ -115,7 +115,7 @@ export default function LoginPage() {
                   Ingat aku
                 </label>
               </div>
-              <Link href="">
+              <Link href="/forgetpassword">
                 <p className="font-medium text-[12px] hover:text-blue-500">
                   Lupa password?
                 </p>
