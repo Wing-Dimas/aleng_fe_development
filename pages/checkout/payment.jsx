@@ -61,7 +61,7 @@ export default function Payment() {
         </Heading.h2>
         <br />
         <div
-          className="grid grid-cols-2 gap-4"
+          className="md:grid grid-cols-2 gap-4"
           style={{ gridTemplateColumns: "1fr auto" }}
         >
           <div
@@ -74,7 +74,7 @@ export default function Payment() {
               <p className="rounded bg-[#F6F0E1] px-4 py-2 font-medium">
                 1 Kamar
               </p>
-              <div className="mt-4 flex items-center gap-2">
+              <div className="mt-4 flex items-start gap-2">
                 <div className="min-w-max">
                   <Select
                     leftIcon={<IconUser className="w-5 h-5" />}
@@ -150,7 +150,7 @@ export default function Payment() {
             </Container>
           </div>
           <div
-            className="grid grid-rows-2 gap-4"
+            className="mt-4 md:mt-0 grid grid-rows-2 gap-4"
             style={{ gridTemplateRows: "auto 1fr" }}
           >
             <Container>

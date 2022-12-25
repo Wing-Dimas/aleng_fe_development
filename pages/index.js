@@ -28,10 +28,13 @@ import Tab from "@components/molecules/Tab";
 import Text from "@components/molecules/Text";
 import Title from "@components/molecules/Title";
 import Link from "next/link";
+import Button from "@components/molecules/Button";
+import TextInput from "@components/molecules/TextInput";
 
 export default function Home() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [menuIndex, setMenuIndex] = useState(0);
+  const [destinasi, setDestinasi] = useState("");
   const [check, setCheck] = useState({
     date: {
       in: new Date().toISOString().split("T")[0],
@@ -46,6 +49,10 @@ export default function Home() {
 
   const doChangeTabIndex = (e) => {
     setMenuIndex(parseInt(e.currentTarget.value));
+  };
+
+  const doChangeDestinasi = ({ name, value }) => {
+    setDestinasi(value);
   };
 
   const doSwitchCheckDate = () => {
@@ -155,27 +162,23 @@ export default function Home() {
         {menuIndex === 2 ? (
           <div className="px-4 max-w-7xl mx-auto">
             <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col lg:flex-row items-center gap-4">
-              <div className="flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-md text-custom-black text-xs font-medium">
+              <div className="flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-lg text-custom-black text-xs font-medium">
                 <DateInput
                   name="in"
                   value={check.date.in}
                   onChange={doChangeCheckDate}
                   containerClassName="w-full lg:w-auto"
-                  className="shadow-none border-none"
-                  leftIcon={
-                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
-                  }
-                  rightIcon={
-                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
-                  }
+                  className="!shadow-none"
+                  leftIcon={<IconCalendarEvent className="w-5 h-5" />}
+                  rightIcon={<IconChevronDown className="w-5 h-5" />}
                 />
                 <div className="lg:block flex items-center justify-end gap-2 px-2 lg:px-0">
                   <div className="w-full h-[0.5px] bg-custom-light_grey lg:hidden" />
                   <button
                     onClick={doSwitchCheckDate}
-                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow rounded border lg:border-none lg:rounded-none lg:shadow-none"
+                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow-custom rounded-lg border lg:border-none lg:rounded-none lg:shadow-none"
                   >
-                    <IconSwitchHorizontal height={16} width={16} />
+                    <IconSwitchHorizontal className="w-5 h-5" />
                   </button>
                 </div>
                 <DateInput
@@ -183,137 +186,36 @@ export default function Home() {
                   value={check.date.out}
                   onChange={doChangeCheckDate}
                   containerClassName="w-full lg:w-auto"
-                  className="shadow-none border-none"
-                  leftIcon={
-                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
-                  }
-                  rightIcon={
-                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
-                  }
+                  className="!shadow-none"
+                  leftIcon={<IconCalendarEvent className="w-5 h-5" />}
+                  rightIcon={<IconChevronDown className="w-5 h-5" />}
                 />
               </div>
               <PopOver
                 containerClassName="w-full !shadow-none"
-                className="text-xs font-medium text-custom-black !shadow-none"
-                childClassName="text-xs"
-                name="option"
-                label={`${check.options.room} Kamar ${check.options.adult} Dewasa ${check.options.child} Anak`}
-                leftIcon={
-                  <IconUsers className="text-custom-dark_grey w-4 h-4" />
-                }
-              >
-                {/* Kamar */}
-                <div className="mb-2 flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconDoor className="text-custom-dark_grey w-6 h-6" />
-                    <p>Kamar</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="room"
-                      value={
-                        check.options.room != 0 ? check.options.room - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{check.options.room}</p>
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="room"
-                      value={check.options.room + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-                {/* Dewasa */}
-                <div className="mb-2 flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconUser className="text-custom-dark_grey w-6 h-6" />
-                    <p>Orang Dewasa</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="adult"
-                      value={
-                        check.options.adult != 0 ? check.options.adult - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{check.options.adult}</p>
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="adult"
-                      value={check.options.adult + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-                {/* Anak */}
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconHorseToy className="text-custom-dark_grey w-6 h-6" />
-                    <p>Anak-anak</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="child"
-                      value={
-                        check.options.child != 0 ? check.options.child - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{check.options.child}</p>
-                    <button
-                      onClick={doChangeCheckOptions}
-                      name="child"
-                      value={check.options.child + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </PopOver>
-              <button className="w-full lg:w-48 border border-custom-secondary_yellow text-custom-black bg-custom-secondary_yellow p-3 rounded-md font-semibold">
+                className="!shadow-none"
+                options={check.options}
+                onChange={doChangeCheckOptions}
+              />
+              <Button className="w-full lg:w-48 !text-xs py-5 px-12">
                 Cari
-              </button>
+              </Button>
             </div>
           </div>
         ) : (
           <div className="px-4 max-w-7xl mx-auto">
             <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col sm:flex-row gap-4">
-              <div className="relative text-custom-black sm:w-full">
-                <label htmlFor="destinasi">
-                  <IconMapPin
-                    height={24}
-                    width={24}
-                    className="absolute top-3 left-3"
-                  />
-                </label>
-                <input
-                  type="text"
-                  placeholder="Destinasi kunjungan"
-                  id="destinasi"
-                  name="destinasi"
-                  className="pl-12 pr-4 py-4 rounded-md w-full font-semibold text-xs text-custom-black"
-                />
-              </div>
-              <button className="text-custom-black bg-[#FDD05C] p-4 rounded-md w-full sm:w-auto font-semibold text-xs">
+              <TextInput
+                containerClassName="w-full"
+                name="destinasi"
+                value={destinasi}
+                onChange={doChangeDestinasi}
+                leftIcon={<IconMapPin className="w-5 h-5" />}
+                placeholder="Destinasi Kunjungan"
+              />
+              <Button className="w-full lg:w-48 !text-xs py-5 px-12">
                 Cari
-              </button>
+              </Button>
             </div>
           </div>
         )}

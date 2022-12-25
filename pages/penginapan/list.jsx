@@ -1,31 +1,27 @@
 import { useState } from "react";
 import Head from "next/head";
 import { useBreakpoint } from "use-breakpoint";
+import { BREAKPOINTS } from "@constants/index";
 import BreadCrumbs from "@components/molecules/BreadCrumbs";
 import Button from "@components/molecules/Button";
+import Checkbox from "@components/molecules/Checkbox";
+import Container from "@components/molecules/Container";
 import DateInput from "@components/molecules/DateInput";
 import FABSheet from "@components/molecules/FABSheet";
 import Footer from "@components/molecules/Footer";
 import Heading from "@components/molecules/Heading";
 import ListCard from "@components/molecules/ListCard";
+import MainContent from "@components/molecules/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/molecules/PopOver";
 import Text from "@components/molecules/Text";
 import TextInput from "@components/molecules/TextInput";
-import { BREAKPOINTS } from "@constants/index";
+import Wrapper from "@components/molecules/Wrapper";
 import {
-  IconCalendarEvent,
-  IconChevronDown,
-  IconDoor,
   IconFilter,
-  IconHorseToy,
-  IconMinus,
-  IconPlus,
   IconSeparator,
   IconStar,
   IconSwitchHorizontal,
-  IconUser,
-  IconUsers,
 } from "@tabler/icons";
 
 export default function ListPenginapan() {
@@ -36,9 +32,28 @@ export default function ListPenginapan() {
       min: 100000,
       max: 500000,
     },
-    stars: [false, false, false, false, false],
-    facility: {},
-    type: {},
+    stars: {
+      one: false,
+      two: false,
+      three: false,
+      four: false,
+      five: false,
+    },
+    facilities: {
+      pet: false,
+      pool: false,
+      ac: false,
+      light_view: false,
+      wifi: false,
+      breakfast: false,
+      extra_pillow: false,
+    },
+    types: {
+      homestay: false,
+      apartment: false,
+      dorm: false,
+      hotel: false,
+    },
     date: {
       in: new Date().toISOString().split("T")[0],
       out: new Date().toISOString().split("T")[0],
@@ -72,17 +87,32 @@ export default function ListPenginapan() {
     setFilter({ ...filter, options: { ...filter.options, [name]: value } });
   };
 
+  const doChangeFilterStars = ({ name, value }) => {
+    setFilter({ ...filter, stars: { ...filter.stars, [name]: value } });
+  };
+
+  const doChangeFilterFacilities = ({ name, value }) => {
+    setFilter({
+      ...filter,
+      facilities: { ...filter.facilities, [name]: value },
+    });
+  };
+
+  const doChangeFilterHotelTypes = ({ name, value }) => {
+    setFilter({ ...filter, types: { ...filter.types, [name]: value } });
+  };
+
   const doToggleSearch = () => {
     setShow(!show);
   };
 
   return (
-    <div className="font-inter min-h-screen min-w-screen max-w-screen text-[#252525] bg-custom-bg">
+    <Wrapper>
       <Head>
         <title>List Penginapan</title>
       </Head>
       <Navbar />
-      <div className="max-w-7xl px-4 mx-auto">
+      <MainContent>
         <div className="flex items-center justify-between">
           <BreadCrumbs
             breads={[
@@ -98,24 +128,19 @@ export default function ListPenginapan() {
         <br />
         {/* FAB Filter */}
         {["xs", "sm", "md"].includes(breakpoint) && (
-          <FABSheet
-            icon={<IconFilter className="w-8 h-8 text-custom-primary_red" />}
-          >
+          <FABSheet icon={<IconFilter className="w-8 h-8" />}>
             <Text className="text-custom-primary_red mb-4 text-center">
               Filter Pencarian Hotel
             </Text>
             <hr />
             <br />
-            {/* Harga per malam */}
             <Text.label>Harga per malam</Text.label>
             <div className="flex items-center gap-4 w-full">
               <TextInput
                 type="number"
                 name="min"
-                containerClassName="w-full"
-                className="!text-xs !border-none !shadow-custom !font-medium w-full"
+                containerClassName="!w-full"
                 leftIcon="Rp"
-                leftIconClassName="!text-xs !font-medium"
                 value={filter.price_range.min}
                 onChange={doChangePriceRange}
               />
@@ -123,120 +148,151 @@ export default function ListPenginapan() {
               <TextInput
                 type="number"
                 name="max"
-                containerClassName="w-full"
-                className="!text-xs !border-none !shadow-custom !font-medium w-full"
+                containerClassName="!w-full"
                 leftIcon="Rp"
-                leftIconClassName="!text-xs !font-medium"
                 value={filter.price_range.max}
                 onChange={doChangePriceRange}
               />
             </div>
             <br />
-            {/* Bintang Hotel */}
             <Text.label>Bintang Hotel</Text.label>
-            <div className="mb-2 flex items-center gap-2">
-              <input type="checkbox" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            </div>
-            <div className="mb-2 flex items-center gap-2">
-              <input type="checkbox" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            </div>
-            <div className="mb-2 flex items-center gap-2">
-              <input type="checkbox" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            </div>
-            <div className="mb-2 flex items-center gap-2">
-              <input type="checkbox" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            </div>
-            <div className="mb-2 flex items-center gap-2">
-              <input type="checkbox" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <div className="flex flex-col gap-2">
+              <Checkbox
+                name="one"
+                value={filter.stars.one}
+                onChange={doChangeFilterStars}
+                label={
+                  <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                }
+              />
+              <Checkbox
+                name="two"
+                value={filter.stars.two}
+                onChange={doChangeFilterStars}
+                labelClassName="flex items-center gap-2"
+                label={
+                  <>
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  </>
+                }
+              />
+              <Checkbox
+                name="three"
+                value={filter.stars.three}
+                onChange={doChangeFilterStars}
+                labelClassName="flex items-center gap-2"
+                label={
+                  <>
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  </>
+                }
+              />
+              <Checkbox
+                name="four"
+                value={filter.stars.four}
+                onChange={doChangeFilterStars}
+                labelClassName="flex items-center gap-2"
+                label={
+                  <>
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  </>
+                }
+              />
+              <Checkbox
+                name="five"
+                value={filter.stars.five}
+                onChange={doChangeFilterStars}
+                labelClassName="flex items-center gap-2"
+                label={
+                  <>
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  </>
+                }
+              />
             </div>
             <br />
-            {/* Fasilitas Hotel */}
             <Text.label>Fasilitas Hotel</Text.label>
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Boleh membawa hewan peliharaan
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Kolam Renang
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">AC</Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Light View
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Wifi
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Sarapan
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Ekstra Bantal
-                </Text.label>
-              </div>
+            <div className="flex flex-col gap-2">
+              <Checkbox
+                name="pet"
+                value={filter.facilities.pet}
+                onChange={doChangeFilterFacilities}
+                label="Boleh membawa hewan peliharaan"
+              />
+              <Checkbox
+                name="pool"
+                value={filter.facilities.pool}
+                onChange={doChangeFilterFacilities}
+                label="Kolam Renang"
+              />
+              <Checkbox
+                name="ac"
+                value={filter.facilities.ac}
+                onChange={doChangeFilterFacilities}
+                label="AC"
+              />
+              <Checkbox
+                name="light_view"
+                value={filter.facilities.light_view}
+                onChange={doChangeFilterFacilities}
+                label="Light View"
+              />
+              <Checkbox
+                name="wifi"
+                value={filter.facilities.wifi}
+                onChange={doChangeFilterFacilities}
+                label="Wifi"
+              />
+              <Checkbox
+                name="breakfast"
+                value={filter.facilities.breakfast}
+                onChange={doChangeFilterFacilities}
+                label="Sarapan"
+              />
+              <Checkbox
+                name="extra_pillow"
+                value={filter.facilities.extra_pillow}
+                onChange={doChangeFilterFacilities}
+                label="Ekstra Bantal"
+              />
             </div>
             <br />
-            {/* Tipe Hotel */}
             <Text.label>Tipe Hotel</Text.label>
-            <div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Homestay
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Apartemen
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Kos
-                </Text.label>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <Text.label className="!text-black !font-medium">
-                  Hotel
-                </Text.label>
-              </div>
+            <div className="flex flex-col gap-2">
+              <Checkbox
+                name="homestay"
+                value={filter.types.homestay}
+                onChange={doChangeFilterHotelTypes}
+                label="Homestay"
+              />
+              <Checkbox
+                name="apartment"
+                value={filter.types.apartment}
+                onChange={doChangeFilterHotelTypes}
+                label="Apartemen"
+              />
+              <Checkbox
+                name="dorm"
+                value={filter.types.dorm}
+                onChange={doChangeFilterHotelTypes}
+                label="Kos"
+              />
+              <Checkbox
+                name="hotel"
+                value={filter.types.hotel}
+                onChange={doChangeFilterHotelTypes}
+                label="Hotel"
+              />
             </div>
           </FABSheet>
         )}
@@ -246,21 +302,18 @@ export default function ListPenginapan() {
         >
           {/* Filter */}
           <div className="hidden lg:block">
-            <div className="border shadow-md p-4 rounded-xl bg-white">
+            <Container>
               <Text className="text-custom-primary_red mb-4 text-center">
                 Filter Pencarian Hotel
               </Text>
               <hr />
               <br />
-              {/* Harga per malam */}
               <Text.label>Harga per malam</Text.label>
               <div className="flex items-center gap-4">
                 <TextInput
                   type="number"
                   name="min"
-                  className="!text-xs !border-none !shadow-custom !font-medium"
                   leftIcon="Rp"
-                  leftIconClassName="!text-xs !font-medium"
                   value={filter.price_range.min}
                   onChange={doChangePriceRange}
                 />
@@ -268,152 +321,174 @@ export default function ListPenginapan() {
                 <TextInput
                   type="number"
                   name="max"
-                  className="!text-xs !border-none !shadow-custom !font-medium"
                   leftIcon="Rp"
-                  leftIconClassName="!text-xs !font-medium"
                   value={filter.price_range.max}
                   onChange={doChangePriceRange}
                 />
               </div>
               <br />
-              {/* Bintang Hotel */}
               <Text.label>Bintang Hotel</Text.label>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <input type="checkbox" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <div className="flex flex-col gap-2">
+                <Checkbox
+                  name="one"
+                  value={filter.stars.one}
+                  onChange={doChangeFilterStars}
+                  label={
+                    <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  }
+                />
+                <Checkbox
+                  name="two"
+                  value={filter.stars.two}
+                  onChange={doChangeFilterStars}
+                  labelClassName="flex items-center gap-2"
+                  label={
+                    <>
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    </>
+                  }
+                />
+                <Checkbox
+                  name="three"
+                  value={filter.stars.three}
+                  onChange={doChangeFilterStars}
+                  labelClassName="flex items-center gap-2"
+                  label={
+                    <>
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    </>
+                  }
+                />
+                <Checkbox
+                  name="four"
+                  value={filter.stars.four}
+                  onChange={doChangeFilterStars}
+                  labelClassName="flex items-center gap-2"
+                  label={
+                    <>
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    </>
+                  }
+                />
+                <Checkbox
+                  name="five"
+                  value={filter.stars.five}
+                  onChange={doChangeFilterStars}
+                  labelClassName="flex items-center gap-2"
+                  label={
+                    <>
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <IconStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    </>
+                  }
+                />
               </div>
               <br />
-              {/* Fasilitas Hotel */}
               <Text.label>Fasilitas Hotel</Text.label>
-              <div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Boleh membawa hewan peliharaan
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Kolam Renang
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    AC
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Light View
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Wifi
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Sarapan
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Ekstra Bantal
-                  </Text.label>
-                </div>
+              <div className="flex flex-col gap-2">
+                <Checkbox
+                  name="pet"
+                  value={filter.facilities.pet}
+                  onChange={doChangeFilterFacilities}
+                  label="Boleh membawa hewan peliharaan"
+                />
+                <Checkbox
+                  name="pool"
+                  value={filter.facilities.pool}
+                  onChange={doChangeFilterFacilities}
+                  label="Kolam Renang"
+                />
+                <Checkbox
+                  name="ac"
+                  value={filter.facilities.ac}
+                  onChange={doChangeFilterFacilities}
+                  label="AC"
+                />
+                <Checkbox
+                  name="light_view"
+                  value={filter.facilities.light_view}
+                  onChange={doChangeFilterFacilities}
+                  label="Light View"
+                />
+                <Checkbox
+                  name="wifi"
+                  value={filter.facilities.wifi}
+                  onChange={doChangeFilterFacilities}
+                  label="Wifi"
+                />
+                <Checkbox
+                  name="breakfast"
+                  value={filter.facilities.breakfast}
+                  onChange={doChangeFilterFacilities}
+                  label="Sarapan"
+                />
+                <Checkbox
+                  name="extra_pillow"
+                  value={filter.facilities.extra_pillow}
+                  onChange={doChangeFilterFacilities}
+                  label="Ekstra Bantal"
+                />
               </div>
               <br />
-              {/* Tipe Hotel */}
               <Text.label>Tipe Hotel</Text.label>
-              <div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Homestay
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Apartemen
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Kos
-                  </Text.label>
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input type="checkbox" />
-                  <Text.label className="!text-black !font-medium">
-                    Hotel
-                  </Text.label>
-                </div>
+              <div className="flex flex-col gap-2">
+                <Checkbox
+                  name="homestay"
+                  value={filter.types.homestay}
+                  onChange={doChangeFilterHotelTypes}
+                  label="Homestay"
+                />
+                <Checkbox
+                  name="apartment"
+                  value={filter.types.apartment}
+                  onChange={doChangeFilterHotelTypes}
+                  label="Apartemen"
+                />
+                <Checkbox
+                  name="dorm"
+                  value={filter.types.dorm}
+                  onChange={doChangeFilterHotelTypes}
+                  label="Kos"
+                />
+                <Checkbox
+                  name="hotel"
+                  value={filter.types.hotel}
+                  onChange={doChangeFilterHotelTypes}
+                  label="Hotel"
+                />
               </div>
-            </div>
+            </Container>
           </div>
           <div>
-            {/* Options */}
-            <div
+            <Container
               className={`${
                 !show && "hidden"
-              } rounded-md shadow-md p-6 bg-white border block md:flex flex-col lg:flex-row items-center gap-2`}
+              } md:flex flex-col lg:flex-row items-center gap-2`}
             >
-              <div className="shadow-custom flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-md text-custom-black text-xs font-medium">
+              <div className="mb-2 lg:mb-0 shadow-custom flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-lg">
                 <DateInput
                   name="in"
                   value={filter.date.in}
                   onChange={doChangeFilterDate}
                   containerClassName="w-full lg:w-auto"
-                  className="shadow-none border-none"
-                  leftIcon={
-                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
-                  }
-                  rightIcon={
-                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
-                  }
+                  className="!shadow-none md:!shadow-custom"
                 />
                 <div className="lg:block flex items-center justify-end gap-2 px-2 lg:px-0">
                   <div className="w-full h-[0.5px] bg-custom-light_grey lg:hidden" />
                   <button
                     onClick={doSwitchFilterDate}
-                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow rounded border lg:border-none lg:rounded-none lg:shadow-none"
+                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow rounded-lg border lg:border-none lg:rounded-none lg:shadow-none"
                   >
-                    <IconSwitchHorizontal height={16} width={16} />
+                    <IconSwitchHorizontal className="w-5 h-5" />
                   </button>
                 </div>
                 <DateInput
@@ -421,115 +496,18 @@ export default function ListPenginapan() {
                   value={filter.date.out}
                   onChange={doChangeFilterDate}
                   containerClassName="w-full lg:w-auto"
-                  className="shadow-none border-none"
-                  leftIcon={
-                    <IconCalendarEvent className="text-custom-dark_grey w-4 h-4" />
-                  }
-                  rightIcon={
-                    <IconChevronDown className="w-4 h-4 text-custom-primary_red" />
-                  }
+                  className="!shadow-none md:!shadow-custom"
                 />
               </div>
               <PopOver
-                containerClassName="w-full !shadow-custom !border-none !whitespace-nowrap"
-                className="text-xs font-medium text-custom-black !shadow-none !border-none"
-                childClassName="text-xs"
-                name="option"
-                label={`${filter.options.room} Kamar ${filter.options.adult} Dewasa ${filter.options.child} Anak`}
-                leftIcon={
-                  <IconUsers className="text-custom-dark_grey w-4 h-4" />
-                }
-              >
-                {/* Kamar */}
-                <div className="mb-2 flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconDoor className="text-custom-dark_grey w-6 h-6" />
-                    <p>Kamar</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="room"
-                      value={
-                        filter.options.room != 0 ? filter.options.room - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{filter.options.room}</p>
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="room"
-                      value={filter.options.room + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-                {/* Dewasa */}
-                <div className="mb-2 flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconUser className="text-custom-dark_grey w-6 h-6" />
-                    <p>Orang Dewasa</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="adult"
-                      value={
-                        filter.options.adult != 0 ? filter.options.adult - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{filter.options.adult}</p>
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="adult"
-                      value={filter.options.adult + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-                {/* Anak */}
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center justify-start gap-2">
-                    <IconHorseToy className="text-custom-dark_grey w-6 h-6" />
-                    <p>Anak-anak</p>
-                  </div>
-                  <div className="flex items-center justify-end gap-2">
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="child"
-                      value={
-                        filter.options.child != 0 ? filter.options.child - 1 : 0
-                      }
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconMinus className="w-4 h-4" />
-                    </button>
-                    <p>{filter.options.child}</p>
-                    <button
-                      onClick={doChangeFilterOptions}
-                      name="child"
-                      value={filter.options.child + 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-yellow-400 text-white"
-                    >
-                      <IconPlus className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </PopOver>
+                containerClassName="!w-full !mb-2 lg:!mb-0"
+                options={filter.options}
+                onChange={doChangeFilterOptions}
+              />
               <Button className="whitespace-nowrap w-full lg:w-auto">
                 Cari
               </Button>
-            </div>
-            {/* Content */}
+            </Container>
             <div className="mt-4">
               <Text className="!font-normal !mb-4">
                 Menampilkan 50 hotel yang tersedia
@@ -542,9 +520,9 @@ export default function ListPenginapan() {
             </div>
           </div>
         </div>
-      </div>
+      </MainContent>
       <br />
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
