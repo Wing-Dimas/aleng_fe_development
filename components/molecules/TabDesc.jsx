@@ -50,7 +50,7 @@ export default function TabDesc({ page }) {
               loading="lazy"
             ></iframe>
             <div className="flex flex-col md:flex-row gap-7 md:gap-20  items-start justify-start">
-              {page !== "kuliner" && (
+              {page !== "kuliner" && page !== "paketwisata" && (
                 <div>
                   <div className="flex flex-col gap-4">
                     <p className="text-xl font-semibold">Restoran Terdekat</p>
@@ -62,7 +62,7 @@ export default function TabDesc({ page }) {
                   </div>
                 </div>
               )}
-              {page !== "wisata" && (
+              {page !== "wisata" && page !== "paketwisata" && (
                 <div>
                   <div className="flex flex-col gap-4">
                     <p className="text-xl font-semibold">
@@ -76,7 +76,7 @@ export default function TabDesc({ page }) {
                   </div>
                 </div>
               )}
-              {page !== "penginapan" && (
+              {page !== "penginapan" && page !== "paketwisata" && (
                 <div>
                   <div className="flex flex-col gap-4">
                     <p className="text-xl font-semibold">Penginapan Terdekat</p>
