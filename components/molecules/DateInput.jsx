@@ -1,8 +1,8 @@
+import { IconCalendarEvent, IconChevronDown } from "@tabler/icons";
+
 export default function DateInput({
   isTime,
   name,
-  leftIcon,
-  rightIcon,
   label,
   containerClassName,
   leftIconClassName,
@@ -23,15 +23,15 @@ export default function DateInput({
     >
       {label && <p className={labelClassName}>{label}</p>}
       <label
-        className={`pointer-events-none absolute h-full top-0 left-4 flex items-center justify-center${
+        className={`text-custom-dark_grey pointer-events-none text-xs font-medium absolute h-full top-0 left-4 flex items-center justify-center${
           leftIconClassName ? " " + leftIconClassName : ""
         }`}
         htmlFor={name}
       >
-        {leftIcon}
+        <IconCalendarEvent className="w-5 h-5" />
       </label>
       <input
-        className={`outline-none px-12 py-4 rounded-lg shadow border w-full${
+        className={`outline-none px-12 py-5 text-xs font-medium rounded-lg shadow-custom bg-white w-full${
           className ? " " + className : ""
         }`}
         type={isTime ? "time" : "date"}
@@ -41,12 +41,12 @@ export default function DateInput({
         onChange={doChange}
       />
       <label
-        className={`pointer-events-none absolute h-full top-0 right-4 flex items-center justify-center${
+        className={`text-custom-primary_red pointer-events-none text-xs font-medium absolute h-full top-0 right-4 flex items-center justify-center${
           rightIconClassName ? " " + rightIconClassName : ""
         }`}
         htmlFor={name}
       >
-        {rightIcon}
+        <IconChevronDown className="w-5 h-5" />
       </label>
     </div>
   );

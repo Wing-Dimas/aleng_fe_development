@@ -44,7 +44,6 @@ export default function Navbar({ transparentFirst = false }) {
   useEffect(() => {
     if (transparentFirst) {
       const onScroll = () => setOffset(window.pageYOffset);
-      console.log(onScroll);
       window.removeEventListener("scroll", onScroll);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
