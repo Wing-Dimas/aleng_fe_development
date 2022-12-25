@@ -78,7 +78,7 @@ export default function Payment() {
                 <div className="min-w-max">
                   <Select
                     leftIcon={<IconUser className="w-5 h-5" />}
-                    value=""
+                    value={info.person.type}
                     name="type"
                     onChange={doChangePerson}
                     options={[

@@ -105,7 +105,12 @@ export default function PaketWisata({}) {
             />
             <Container className="mt-4">
               <Rating count={666} rate={4.5} />
-              <Heading.h2>Pantai Lon Malang</Heading.h2>
+              <div className="flex flex-row justify-between items-center">
+                <Heading.h2>Pantai Lon Malang</Heading.h2>
+                <Text className="font-semibold text-[10px] md:text-base text-custom-primary_red">
+                  Paket 2 Hari 2 Malam
+                </Text>
+              </div>
               <div className="flex flex-row gap-1 items-center">
                 <IconMapPin size={18} strokeWidth={2} color={"#615A56"} />
                 <p className="md:text-[0.75rem] text-[0.5rem] font-normal">
