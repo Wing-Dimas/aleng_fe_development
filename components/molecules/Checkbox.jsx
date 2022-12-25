@@ -6,25 +6,42 @@ export default function Checkbox({
   name,
   labelClassName,
   label,
+  value,
+  onChange,
 }) {
+  const doCheck = (e) => {
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.checked });
+  };
+
   return (
     <div
-      className={`relative flex items-center gap-4${
+      className={`relative flex items-center gap-2${
         containerClassName ? " " + containerClassName : ""
       }`}
     >
-      <label className="absolute top-1 left-0.5 pointer-events-none">
-        <IconCheck className="w-4 h-4" />
+      <label className="absolute top-0.5 left-0.5 pointer-events-none">
+        <IconCheck
+          className={`${
+            value ? "text-black" : "text-transparent"
+          } transition-all w-3 h-3`}
+        />
       </label>
       <input
         type="checkbox"
         name={name}
         id={name}
-        className={`border-2 appearance-none w-5 h-5 checked:bg-yellow-400 checked:border-yellow-400 rounded${
+        className={`border-2 appearance-none w-4 h-4 bg-white border-custom-black transition-all checked:bg-yellow-400 checked:border-yellow-400 rounded${
           className ? " " + className : ""
         }`}
+        onChange={doCheck}
+        checked={value}
       />
-      <label className={labelClassName ? labelClassName : ""} htmlFor={name}>
+      <label
+        className={`${
+          labelClassName ? labelClassName + " " : ""
+        } text-xs font-medium`}
+        htmlFor={name}
+      >
         {label}
       </label>
     </div>
