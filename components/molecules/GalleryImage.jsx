@@ -57,7 +57,7 @@ export default function GalleryImage({ images }) {
         </div>
       </div>
       <div className="flex flex-col md:hidden">
-        <Carousel autoPlay={true}>
+        <Carousel autoPlay={true} showThumbs={false}>
           {images.map((image, i) => {
             return (
               <div key={i} className="max-w-full w-full max-h-full h-full">

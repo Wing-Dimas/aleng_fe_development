@@ -192,11 +192,11 @@ export default function Navbar({ transparentFirst = false }) {
               Daftar
             </Link>
           </div>
-          <div className="block md:hidden cursor-pointer">
+          <div className="block md:hidden cursor-pointer drop-shadow-md">
             <IconMenu2
               className={`${
                 offset < 10 && transparentFirst
-                  ? "text-white"
+                  ? "text-custom-secondary_yellow"
                   : "text-custom-black"
               } transition-all h-6 w-6`}
               onClick={doToggleShow}
