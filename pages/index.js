@@ -318,9 +318,9 @@ const Wisata = ({ breakpoint }) => {
                       address="Kab. Sumenep"
                       review_count={666}
                     >
-                      <div className="pt-1 font-body1_mobile text-custom-primary_red flex items-center justify-between gap-4">
+                      <div className="pt-1 font-body1_mobile text-custom-primary_red flex flex-col justify-start md:flex-row md:items-center md:justify-between gap-1 md:gap-4">
                         <p>Rp 500.000</p>
-                        <div className="flex items-center justify-end gap-2">
+                        <div className="flex items-center justify-start md:justify-end gap-2">
                           <IconBriefcase className="w-4 h-4 text-white fill-custom-primary_red" />
                           <p className="font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1">
                             Paket 3hari

@@ -150,7 +150,7 @@ export default function RegisterPage({}) {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem] my-24 md:my-48">
+      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem] my-[2rem] md:my-[8rem]">
         <div className="w-1/2 z-50 mt-36 md:mt-0">
           <img src="/icons/lanjalan.png" alt="logo" />
         </div>
