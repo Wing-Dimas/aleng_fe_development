@@ -13,6 +13,7 @@ import FABSheet from "@components/molecules/FABSheet";
 import { IconChevronLeft, IconFilter } from "@tabler/icons";
 import Text from "@components/molecules/Text";
 import Heading from "@components/molecules/Heading";
+import ModalDetailOrder from "@components/ModalDetailOrder";
 
 export default function PesananSaya() {
   const titleStatus = [
@@ -23,12 +24,12 @@ export default function PesananSaya() {
   ];
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [index, setIndex] = useState(0);
-
+  const [showModal, setShowModal] = useState(false);
   const doChangeIndex = (e) => {
     setIndex(parseInt(e.currentTarget.value));
   };
   return (
-    <div className="w-screen h-screen font-inter overflow-x-hidden text-[#252525] bg-white">
+    <div className="w-screen h-screen font-inter relative overflow-x-hidden text-[#252525] bg-white">
       <Head>
         <title>Pesanan Saya</title>
       </Head>
@@ -190,13 +191,13 @@ export default function PesananSaya() {
               </Swiper>
             </div>
             <div className="flex flex-col gap-2 bg-custom-white py-4 rounded-xl">
-              <OrderCard />
-              <OrderCard />
-              <OrderCard />
-              <OrderCard />
+              {[...Array(4)].map(() => (
+                <OrderCard showModal={showModal} setShowModal={setShowModal} />
+              ))}
             </div>
           </div>
         </div>
+        <ModalDetailOrder showModal={showModal} setShowModal={setShowModal} />
       </div>
       <div className={`mt-10`}>
         <Footer />

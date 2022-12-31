@@ -1,8 +1,10 @@
+import Link from "next/link";
 import Badge from "./Badge";
 import Heading from "./Heading";
 import Text from "./Text";
+import { useState } from "react";
 
-export default function OrderCard() {
+export default function OrderCard({ showModal, setShowModal }) {
   return (
     <div className="bg-white border rounded-md">
       <div className="flex items-center gap-4 p-4">
@@ -31,8 +33,8 @@ export default function OrderCard() {
             <Badge name="Bisa Refund" />
           </div>
         </div>
-        <div>
-          <Text.label className="!text-custom-primary_red whitespace-nowrap">
+        <div onClick={() => setShowModal(!showModal)}>
+          <Text.label className="!text-custom-primary_red  whitespace-nowrap cursor-pointer">
             Lihat Detail
           </Text.label>
         </div>
