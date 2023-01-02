@@ -7,14 +7,14 @@ import "swiper/css";
 import BreadCrumbs from "@components/molecules/BreadCrumbs";
 import Button from "@components/molecules/Button";
 import Container from "@components/molecules/Container";
-import DateInput from "@components/molecules/DateInput";
 import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
 import Heading from "@components/molecules/Heading";
 import MainContent from "@components/molecules/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import PopOver from "@components/molecules/PopOver";
+import ScheduleTravel from "@components/molecules/ScheduleTravel";
+import Select from "@components/molecules/Select";
 import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
 import ReviewCard from "@components/molecules/ReviewCard";
@@ -22,8 +22,6 @@ import TabDesc from "@components/molecules/TabDesc";
 import Text from "@components/molecules/Text";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconCalendar, IconMapPin, IconUser } from "@tabler/icons";
-import Select from "@components/molecules/Select";
-import ScheduleTravel from "@components/molecules/scheduletravel";
 export default function PaketWisata({}) {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [order, setOrder] = useState({

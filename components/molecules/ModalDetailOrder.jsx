@@ -1,7 +1,7 @@
 import { IconCopy, IconX } from "@tabler/icons";
-import Text from "./molecules/Text";
+import Text from "./Text";
 import Image from "next/image";
-import Rating from "./molecules/Rating";
+import Rating from "./Rating";
 
 export default function ModalDetailOrder({ showModal, setShowModal }) {
   return (
@@ -95,9 +95,9 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
               <div className="flex flex-col gap-2">
                 <Text className="!sm:text-xl">Permintaan Khusus</Text>
                 <div className="flex flex-col bg-[#F6F0E1] rounded-md shadow-md p-2 gap-2">
-                  {[...Array(4)].map(() => {
+                  {[...Array(4)].map((v, i) => {
                     return (
-                      <div className="flex flex-row justify-between">
+                      <div key={i} className="flex flex-row justify-between">
                         <Text.small className="!font-normal !text-xs">
                           Sarapan AC Hari
                         </Text.small>
