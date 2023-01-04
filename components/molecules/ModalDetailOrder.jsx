@@ -2,8 +2,26 @@ import { IconCopy, IconX } from "@tabler/icons";
 import Text from "./Text";
 import Image from "next/image";
 import Rating from "./Rating";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ModalDetailOrder({ showModal, setShowModal }) {
+  const [copied, setCopied] = useState(false);
+  let num = 131233122;
+  const toastNotif = () => {
+    toast.success("Copied", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   return (
     <div>
       {showModal ? (
@@ -25,9 +43,18 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
                   </Text.small>
                   <div className="flex flex-row items-center">
                     <Text.small className="!font-semibold !text-xs">
-                      34535345
+                      {num}
                     </Text.small>
-                    <IconCopy className="h-4 w-4 cursor-pointer" />
+                    <CopyToClipboard
+                      text={num}
+                      onCopy={() => setCopied(!copied)}
+                    >
+                      <IconCopy
+                        className="h-4 w-4 cursor-pointer"
+                        onClick={toastNotif}
+                      />
+                    </CopyToClipboard>
+                    <ToastContainer />
                   </div>
                 </div>
                 <div className="flex flex-row justify-between">
