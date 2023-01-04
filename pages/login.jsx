@@ -69,7 +69,7 @@ export default function LoginPage() {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full h-full font-semibold text-[2rem] my-[8rem]">
+      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem]">
         <div className="w-1/2 z-50 relative  justify-center flex">
           <Image
             src="/icons/lanjalan.png"
