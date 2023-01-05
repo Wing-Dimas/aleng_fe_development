@@ -83,8 +83,14 @@ export default function ListPenginapan() {
     });
   };
 
-  const doChangeFilterOptions = ({ name, value }) => {
-    setFilter({ ...filter, options: { ...filter.options, [name]: value } });
+  const doChangeFilterOptions = (e) => {
+    setFilter({
+      ...filter,
+      options: {
+        ...filter.options,
+        [e.currentTarget.name]: parseInt(e.currentTarget.value),
+      },
+    });
   };
 
   const doChangeFilterStars = ({ name, value }) => {
@@ -503,6 +509,7 @@ export default function ListPenginapan() {
                 containerClassName="!w-full !mb-2 lg:!mb-0"
                 options={filter.options}
                 onChange={doChangeFilterOptions}
+                pages="penginapan"
               />
               <Button className="whitespace-nowrap w-full lg:w-auto">
                 Cari

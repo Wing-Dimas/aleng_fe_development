@@ -2,10 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import DateInput from "./DateInput";
 import PopOver from "./PopOver";
-import {
-  IconMapPin,
-  IconSwitchHorizontal,
-} from "@tabler/icons";
+import { IconMapPin, IconSwitchHorizontal } from "@tabler/icons";
 import TextInput from "./TextInput";
 import Container from "./Container";
 
@@ -13,6 +10,8 @@ export default function DetailSearchInput({
   isOpen,
   isPenginapan,
   placeholder,
+  order,
+  setOrder,
 }) {
   const [check, setCheck] = useState({
     date: {
@@ -25,7 +24,7 @@ export default function DetailSearchInput({
       child: 1,
     },
   });
-
+  console.log(order);
   const doSwitchCheckDate = () => {
     setCheck({
       ...check,

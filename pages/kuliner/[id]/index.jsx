@@ -31,10 +31,9 @@ export default function DetailKuliner({}) {
     name: "",
     email: "",
     notelp: "",
+    search: "",
     options: {
-      room: 1,
-      adult: 1,
-      child: 1,
+      people: 1,
     },
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +77,9 @@ export default function DetailKuliner({}) {
         <DetailSearchInput
           isOpen={isOpen}
           placeholder="Masukkan kuliner yang ingin dicari"
+          order={order}
+          setOrder={setOrder}
+          
         />
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
@@ -139,6 +141,8 @@ export default function DetailKuliner({}) {
                   containerClassName="w-full"
                   options={order.options}
                   onChange={doChangeOrderOptions}
+                  pages="kuliner"
+                  name="Orang"
                 />
               </div>
               <div className="flex flex-col items-center gap-1 justify-start w-full my-3">

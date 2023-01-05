@@ -196,6 +196,7 @@ export default function Home() {
                 className="!shadow-none"
                 options={check.options}
                 onChange={doChangeCheckOptions}
+                pages="penginapan"
               />
               <Button className="w-full lg:w-48 !text-xs py-5 px-12">
                 Cari
@@ -619,11 +620,13 @@ const PilihanKabupaten = ({ name }) => {
 
 const KabupatenCard = ({ bgImage, name }) => {
   return (
-    <div
-      className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center sm:items-start justify-center sm:justify-start p-0 sm:p-8 bg-center"
-      style={{ backgroundImage: `url('${bgImage}')` }}
-    >
-      {name}
-    </div>
+    <Link href="/">
+      <div
+        className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center sm:items-start justify-center sm:justify-start p-0 sm:p-8 bg-center"
+        style={{ backgroundImage: `url('${bgImage}')` }}
+      >
+        {name}
+      </div>
+    </Link>
   );
 };

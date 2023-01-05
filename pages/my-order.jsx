@@ -14,6 +14,7 @@ import { IconChevronLeft, IconFilter } from "@tabler/icons";
 import Text from "@components/molecules/Text";
 import Heading from "@components/molecules/Heading";
 import ModalDetailOrder from "@components/molecules/ModalDetailOrder";
+import Link from "next/link";
 
 export default function PesananSaya() {
   const titleStatus = [
@@ -37,10 +38,12 @@ export default function PesananSaya() {
       <div className={`mx-4 lg:mx-[7.5rem] mt-8`}>
         <div className="flex flex-col md:flex-row items-start  justify-center gap-3 w-full h-full">
           <div className="flex-col w-full md:w-[35%] h-full flex gap-2">
-            <Heading.h2 className="flex items-center gap-2">
-              <IconChevronLeft className="w-8 h-8" />
-              <span>Cek Pesanan</span>
-            </Heading.h2>
+            <Link href="/">
+              <Heading.h2 className="flex items-center gap-2">
+                <IconChevronLeft className="w-8 h-8" />
+                <span>Cek Pesanan</span>
+              </Heading.h2>
+            </Link>
             <div className=" border-[#ABACAC]/30 p-[1rem] shadow-md rounded-md border-[0.5px] hidden md:flex flex-col">
               <p className="font-semibold text-base">Filter Pesanan</p>
               <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />

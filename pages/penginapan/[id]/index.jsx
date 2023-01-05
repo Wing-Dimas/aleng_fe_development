@@ -148,6 +148,7 @@ export default function DetailPenginapan({}) {
                   containerClassName="!w-full"
                   options={order.options}
                   onChange={doChangeOrderOptions}
+                  pages="penginapan"
                 />
               </div>
               <div className="flex flex-col items-center gap-1 justify-start w-full my-3">

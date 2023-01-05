@@ -27,9 +27,7 @@ export default function DetailWisata({}) {
   const [order, setOrder] = useState({
     date: new Date().toISOString().split("T")[0],
     options: {
-      room: 1,
-      adult: 1,
-      child: 1,
+      people: 1,
     },
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -131,6 +129,8 @@ export default function DetailWisata({}) {
                   containerClassName="w-full"
                   options={order.options}
                   onChange={doChangeOrderOptions}
+                  pages="wisata"
+                  name="Wisatawan"
                 />
               </div>
             </div>

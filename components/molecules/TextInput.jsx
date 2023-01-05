@@ -13,8 +13,10 @@ export default function TextInput({
   onChange,
 }) {
   const doChange = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+    // onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+    console.log(name, e.currentTarget.value);
   };
+
   return (
     <div
       className={`relative${
