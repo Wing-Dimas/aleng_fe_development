@@ -1,7 +1,6 @@
 import Footer from "@components/molecules/Footer";
 import Navbar from "@components/molecules/Navbar";
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useBreakpoint } from "use-breakpoint";
 import Image from "next/image";
@@ -15,13 +14,16 @@ import Text from "@components/molecules/Text";
 import Heading from "@components/molecules/Heading";
 import ModalDetailOrder from "@components/molecules/ModalDetailOrder";
 import Link from "next/link";
+import Wrapper from "@components/molecules/Wrapper";
+import MainContent from "@components/molecules/MainContent";
+import Container from "@components/molecules/Container";
 
 export default function PesananSaya() {
-  const titleStatus = [
-    { title: "Menunggu Pembayaran" },
-    { title: "Sudah Dibayar" },
-    { title: "Pembayaran Expired" },
-    { title: "refund" },
+  const tabStatus = [
+    "Menunggu Pembayaran",
+    "Sudah Dibayar",
+    "Pembayaran Expired",
+    "Refund",
   ];
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [index, setIndex] = useState(0);
@@ -30,21 +32,26 @@ export default function PesananSaya() {
     setIndex(parseInt(e.currentTarget.value));
   };
   return (
-    <div className="w-screen h-screen font-inter relative overflow-x-hidden text-[#252525] bg-white">
+    <Wrapper>
       <Head>
         <title>Pesanan Saya</title>
       </Head>
       <Navbar />
-      <div className={`mx-4 lg:mx-[7.5rem] mt-8`}>
-        <div className="flex flex-col md:flex-row items-start  justify-center gap-3 w-full h-full">
-          <div className="flex-col w-full md:w-[35%] h-full flex gap-2">
-            <Link href="/">
-              <Heading.h2 className="flex items-center gap-2">
-                <IconChevronLeft className="w-8 h-8" />
-                <span>Cek Pesanan</span>
-              </Heading.h2>
-            </Link>
-            <div className=" border-[#ABACAC]/30 p-[1rem] shadow-md rounded-md border-[0.5px] hidden md:flex flex-col">
+      <MainContent>
+        <br />
+        <Link href="/">
+          <Heading.h2 className="flex items-center gap-2">
+            <IconChevronLeft className="w-8 h-8" />
+            <span>Cek Pesanan</span>
+          </Heading.h2>
+        </Link>
+        <br />
+        <div
+          className="flex flex-col lg:grid lg:grid-cols-2 gap-3 h-full max-w-7xl"
+          style={{ gridTemplateColumns: "minmax(14rem, 100%) 1fr" }}
+        >
+          <div>
+            <Container className="hidden lg:flex flex-col !border-none !shadow-none">
               <p className="font-semibold text-base">Filter Pesanan</p>
               <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
               <div className="flex flex-col gap-4">
@@ -95,7 +102,7 @@ export default function PesananSaya() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Container>
           </div>
           {/* mobile */}
           {["xs", "sm", "md"].includes(breakpoint) && (
@@ -154,46 +161,26 @@ export default function PesananSaya() {
               </div>
             </FABSheet>
           )}
-          <div className="min-h-full  w-full md:w-[65%] h-full  flex flex-col gap-6">
-            <div className="flex flex-row items-center w-full flex-nowrap whitespace-nowrap overflow-auto scrollbar-hide">
-              <Swiper
-                spaceBetween={20}
-                slidesPerView={
-                  breakpoint === "xs"
-                    ? 1.6
-                    : breakpoint === "sm"
-                    ? 2.3
-                    : breakpoint === "md"
-                    ? 1.6
-                    : breakpoint === "lg"
-                    ? 1.6
-                    : breakpoint === "xl"
-                    ? 2.3
-                    : breakpoint === "2xl"
-                    ? 3.3
-                    : 3.3
-                }
-              >
-                {titleStatus?.map((item, i) => {
-                  return (
-                    <SwiperSlide key={i.toString()}>
-                      <Button
-                        value={i}
-                        onClick={doChangeIndex}
-                        className={`!rounded-full w-full ${
-                          index === i
-                            ? "!bg-gradient-to-b !from-custom-gradient1 !to-custom-gradient2 !text-white"
-                            : "!bg-white !text-custom-black !shadow-none border-[#ABACAC]/30 border-[0.5px]"
-                        }`}
-                      >
-                        {item.title}
-                      </Button>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
+          <div className="w-full flex flex-col gap-6">
+            <div className="flex items-center gap-4 flex-nowrap overflow-x-auto">
+              {tabStatus.map((title, i) => {
+                return (
+                  <Button
+                    key={title}
+                    value={i}
+                    onClick={doChangeIndex}
+                    className={`!whitespace-nowrap !rounded-full !shadow-none ${
+                      index == i
+                        ? "!bg-gradient-to-b !from-custom-gradient1 !to-custom-gradient2 !text-white"
+                        : "!bg-white !text-custom-black"
+                    }`}
+                  >
+                    {title}
+                  </Button>
+                );
+              })}
             </div>
-            <div className="flex flex-col gap-2 bg-custom-white py-4 rounded-xl">
+            <div className="flex flex-col gap-2 rounded-xl">
               {[...Array(4)].map((v, i) => (
                 <OrderCard
                   key={i}
@@ -205,10 +192,9 @@ export default function PesananSaya() {
           </div>
         </div>
         <ModalDetailOrder showModal={showModal} setShowModal={setShowModal} />
-      </div>
-      <div className={`mt-10`}>
-        <Footer />
-      </div>
-    </div>
+      </MainContent>
+      <br />
+      <Footer />
+    </Wrapper>
   );
 }
