@@ -17,23 +17,23 @@ import TextArea from "@components/molecules/TextArea";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconChevronLeft, IconUser } from "@tabler/icons";
 import Stepper from "@components/molecules/Stepper";
-export default function Payment() {
+export default function Finish() {
   return (
     <Wrapper>
       <Head>
-        <title>Payment</title>
+        <title>Finish</title>
       </Head>
       <Navbar />
 
       <MainContent>
-        <Stepper status="payment" />
+        <Stepper status="finish" />
         <br />
         <Heading.h2 className="flex items-center gap-2">
           <IconChevronLeft className="w-8 h-8" />
-          <span>Pembayaran Pesanan</span>
+          <span>Pesanan Berhasil</span>
         </Heading.h2>
         <br />
-        {/* <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5">
           <Text.small className="!font-normal md:text-xs text-custom-dark_grey">
             Terima kasih sudah melakukan pembelian pada Lenjelenan Madura
           </Text.small>
@@ -134,7 +134,7 @@ export default function Payment() {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </MainContent>
       <br />
       <Footer />
