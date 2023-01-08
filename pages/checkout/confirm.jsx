@@ -56,7 +56,7 @@ export default function Confirm() {
       <Navbar />
 
       <MainContent>
-        <Stepper status="payment" />
+        <Stepper status="confirm" />
         <br />
         <Heading.h2 className="flex items-center gap-2">
           <IconChevronLeft className="w-8 h-8" />
