@@ -8,14 +8,12 @@ import Footer from "@components/molecules/Footer";
 import Heading from "@components/molecules/Heading";
 import MainContent from "@components/molecules/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import Radio from "@components/molecules/Radio";
 import Rating from "@components/molecules/Rating";
-import Select from "@components/molecules/Select";
 import Text from "@components/molecules/Text";
 import TextInput from "@components/molecules/TextInput";
 import TextArea from "@components/molecules/TextArea";
 import Wrapper from "@components/molecules/Wrapper";
-import { IconChevronLeft, IconUser } from "@tabler/icons";
+import { IconChevronLeft } from "@tabler/icons";
 import Stepper from "@components/molecules/Stepper";
 import Link from "next/link";
 import CardPayment from "@components/molecules/CardPayment";
@@ -88,18 +86,21 @@ export default function Payment() {
               <div className="flex flex-col gap-2">
                 <Text>E-Wallet</Text>
                 <div className=" grid-cols-1 grid sm:grid-cols-3 gap-3">
-                  {[...Array(3)].map((item, index) => (
-                    <CardPayment />
-                  ))}
+                  <CardPayment id="1" name="payment" />
+                  <CardPayment id="2" name="payment" />
+                  <CardPayment id="3" name="payment" />
+                  <CardPayment id="4" name="payment" />
+                  <CardPayment id="5" name="payment" />
+                  <CardPayment id="6" name="payment" />
+                  <CardPayment id="7" name="payment" />
                 </div>
               </div>
-              <br/>
+              <br />
               <div className="flex flex-col gap-2">
                 <Text>Bank Transfer</Text>
                 <div className=" grid-cols-1 grid sm:grid-cols-3 gap-3">
-                  {[...Array(7)].map((item, index) => (
-                    <CardPayment />
-                  ))}
+                  <CardPayment id="9" name="payment" />
+                  <CardPayment id="8" name="payment" />
                 </div>
               </div>
             </Container>
