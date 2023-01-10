@@ -17,6 +17,7 @@ import TextArea from "@components/molecules/TextArea";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconChevronLeft, IconUser } from "@tabler/icons";
 import Stepper from "@components/molecules/Stepper";
+import Link from "next/link";
 export default function Finish() {
   return (
     <Wrapper>
@@ -28,10 +29,12 @@ export default function Finish() {
       <MainContent>
         <Stepper status="finish" />
         <br />
-        <Heading.h2 className="flex items-center gap-2">
-          <IconChevronLeft className="w-8 h-8" />
-          <span>Pesanan Berhasil</span>
-        </Heading.h2>
+        <Link href="/checkout/payment">
+          <Heading.h2 className="flex items-center gap-2">
+            <IconChevronLeft className="w-8 h-8" />
+            <span>Pesanan Berhasil</span>
+          </Heading.h2>
+        </Link>
         <br />
         <div className="flex flex-col gap-5">
           <Text.small className="!font-normal md:text-xs text-custom-dark_grey">
@@ -69,8 +72,9 @@ export default function Finish() {
               <Text>1998</Text>
             </div>
           </div>
-          <div className="bg-white rounded-xl flex flex-col p-4 shadow-md">
+          <div className="bg-white rounded-xl flex flex-col p-5 shadow-md">
             <Text className="md:text-xl">Detail Pesanan</Text>
+            <br />
             <div className="flex flex-col gap-3">
               <div className="flex gap-4">
                 <div className="relative h-24 w-32 rounded-lg">

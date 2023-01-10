@@ -6,7 +6,7 @@ export default function Stepper({ status }) {
           <li
             className={`relative w-[150px] text-center text-sm 
                 after:content-[''] after:absolute after:left-[40%] after:top-[-150%] after:w-5 after:h-5 
-              after:bg-white after:border-2 after:border-custom-primary_red after:rounded-full after:z-50 text-custom-primary_red`}
+              after:bg-custom-white after:border-2 after:border-custom-primary_red after:rounded-full after:z-50 text-custom-primary_red`}
           >
             Konfirmasi
           </li>
@@ -18,7 +18,7 @@ export default function Stepper({ status }) {
             after:content-[''] after:absolute after:left-[40%] after:top-[-150%] after:w-5 after:h-5 
             after:bg-gray-300 after:rounded-full after:z-50  ${
               status == "finish" || status== "payment"
-                ? "after:bg-white after:border-2 after:border-custom-primary_red before:bg-custom-primary_red text-custom-primary_red"
+                ? " after:bg-custom-white after:border-2 after:border-custom-primary_red before:bg-custom-primary_red text-custom-primary_red"
                 : null
             }`}
           >
@@ -31,7 +31,7 @@ export default function Stepper({ status }) {
             after:content-[''] after:absolute after:left-[40%] after:top-[-150%] after:w-5 after:h-5 
             after:bg-gray-300 after:rounded-full after:z-50 ${
               status == "finish"
-                ? "after:bg-white after:border-2 after:border-custom-primary_red before:bg-custom-primary_red text-custom-primary_red"
+                ? "after:bg-custom-white after:border-2 after:border-custom-primary_red before:bg-custom-primary_red text-custom-primary_red"
                 : null
             }`}
           >

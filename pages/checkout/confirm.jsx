@@ -17,6 +17,7 @@ import TextArea from "@components/molecules/TextArea";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconChevronLeft, IconUser } from "@tabler/icons";
 import Stepper from "@components/molecules/Stepper";
+import Link from "next/link";
 
 export default function Confirm() {
   const [info, setInfo] = useState({
@@ -58,10 +59,12 @@ export default function Confirm() {
       <MainContent>
         <Stepper status="confirm" />
         <br />
-        <Heading.h2 className="flex items-center gap-2">
-          <IconChevronLeft className="w-8 h-8" />
-          <span>Konfirmasi Pesanan</span>
-        </Heading.h2>
+        {/* <Link href="/"> */}
+          <Heading.h2 className="flex items-center gap-2">
+            <IconChevronLeft className="w-8 h-8" />
+            <span>Konfirmasi Pesanan</span>
+          </Heading.h2>
+        {/* </Link> */}
         <br />
         <div
           className="md:grid grid-cols-2 gap-4"
@@ -158,8 +161,8 @@ export default function Confirm() {
           >
             <Container>
               <Heading.h3>Detail Pemesanan</Heading.h3>
-              <br />
               <div className="flex gap-4">
+                <br />
                 <div className="relative h-24 w-32 rounded-lg">
                   <Image
                     src="/image/room.jpeg"
