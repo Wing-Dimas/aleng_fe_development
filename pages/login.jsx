@@ -3,10 +3,20 @@ import Navbar from "@components/molecules/Navbar";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import validator from "validator";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+}
 
 export default function LoginPage() {
+  const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -17,6 +27,15 @@ export default function LoginPage() {
     message: "",
     status: false,
   });
+
+  const doChangeCheck = (e) => {
+    const name = e.currentTarget.name;
+    setCredentials({
+      ...credentials,
+      [name]: !credentials.rememberme,
+    });
+  };
+
   const doChange = ({ name, value }) => {
     if (name === "email") {
       if (validator.isEmail(value)) {
@@ -48,9 +67,36 @@ export default function LoginPage() {
       }
       setCredentials({ ...credentials, [name]: value });
     }
+
     setCredentials({ ...credentials, [name]: value });
   };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (credentials.rememberme == true) {
+      try {
+        await axios
+          .post("http://api.lenjelenanmadura.id/api/auth/login", {
+            email: credentials.email,
+            password: credentials.password,
+          })
+          .then((res) => {
+            Cookies.set("token", res?.data?.access_token);
+            let token = Cookies.get("token");
+            if (token) {
+              router.push("/");
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  useEffect(() => {
+    let token = Cookies.get("token");
+    // if (token) {
+    //   router.push("/");
+    // }
+  }, []);
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
@@ -83,7 +129,10 @@ export default function LoginPage() {
           <p className="text-[1.2rem] md:text-[2rem] text-center">
             Selamat Datang Kembali
           </p>
-          <form className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full">
+          <form
+            className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full"
+            onSubmit={handleSubmit}
+          >
             <LSTextInput
               name="email"
               label="Email"
@@ -106,12 +155,16 @@ export default function LoginPage() {
               <div className="flex flex-row gap-1">
                 <input
                   type="checkbox"
+                  id="rememberme"
                   name="rememberme"
                   value={credentials.rememberme}
-                  onChange={doChange}
+                  onChange={doChangeCheck}
                   className="checked:bg-blue-500 cursor-pointer"
                 />
-                <label htmlFor="rememberme" className="font-medium text-[12px]">
+                <label
+                  htmlFor="rememberme"
+                  className="font-medium text-[12px] cursor-pointer"
+                >
                   Ingat aku
                 </label>
               </div>

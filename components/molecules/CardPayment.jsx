@@ -2,6 +2,7 @@ import Image from "next/image";
 import Text from "./Text";
 import { useState } from "react";
 
+
 export default function CardPayment({ id, name }) {
   const [status, setStatus] = useState(null);
 
