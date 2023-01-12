@@ -30,12 +30,12 @@ export default function LoginPage() {
 
   const doChangeCheck = (e) => {
     const name = e.currentTarget.name;
+    const check = e.currentTarget.checked;
     setCredentials({
       ...credentials,
-      [name]: !credentials.rememberme,
+      [name]: check,
     });
   };
-
   const doChange = ({ name, value }) => {
     if (name === "email") {
       if (validator.isEmail(value)) {
@@ -72,6 +72,7 @@ export default function LoginPage() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (credentials.rememberme == true) {
       try {
         await axios
@@ -80,23 +81,35 @@ export default function LoginPage() {
             password: credentials.password,
           })
           .then((res) => {
-            Cookies.set("token", res?.data?.access_token);
-            let token = Cookies.get("token");
-            if (token) {
+            console.log(res?.data?.access_token);
+            if (res?.data?.access_token != undefined) {
+              Cookies.set("token", res?.data?.access_token);
               router.push("/");
+            } else {
+              setCredentials({ ...credentials, email: "", password: "" });
+              setEmailError({ message: "", status: false });
+              setPasswordError({ message: "", status: false });
             }
           });
       } catch (err) {
-        console.log(err);
+        setCredentials({ ...credentials, email: "", password: "" });
+        setEmailError({ message: "", status: false });
+        setPasswordError({ message: "", status: false });
       }
+    } else {
+      setCredentials({ ...credentials, email: "", password: "" });
+      setEmailError({ message: "", status: false });
+      setPasswordError({ message: "", status: false });
     }
   };
+
   useEffect(() => {
     let token = Cookies.get("token");
-    // if (token) {
-    //   router.push("/");
-    // }
+    if (token) {
+      router.push("/");
+    }
   }, []);
+
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
@@ -159,7 +172,7 @@ export default function LoginPage() {
                   name="rememberme"
                   value={credentials.rememberme}
                   onChange={doChangeCheck}
-                  className="checked:bg-blue-500 cursor-pointer"
+                  className={`checked:bg-blue-500 cursor-pointer`}
                 />
                 <label
                   htmlFor="rememberme"
