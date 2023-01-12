@@ -86,18 +86,18 @@ export default function LoginPage() {
               Cookies.set("token", res?.data?.access_token);
               router.push("/");
             } else {
-              setCredentials({ ...credentials, email: "", password: "" });
+              setCredentials({ email: "", password: "", rememberme: false });
               setEmailError({ message: "", status: false });
               setPasswordError({ message: "", status: false });
             }
           });
       } catch (err) {
-        setCredentials({ ...credentials, email: "", password: "" });
+        setCredentials({ email: "", password: "", rememberme: false });
         setEmailError({ message: "", status: false });
         setPasswordError({ message: "", status: false });
       }
     } else {
-      setCredentials({ ...credentials, email: "", password: "" });
+      setCredentials({ email: "", password: "", rememberme: false });
       setEmailError({ message: "", status: false });
       setPasswordError({ message: "", status: false });
     }
@@ -170,9 +170,9 @@ export default function LoginPage() {
                   type="checkbox"
                   id="rememberme"
                   name="rememberme"
-                  value={credentials.rememberme}
                   onChange={doChangeCheck}
                   className={`checked:bg-blue-500 cursor-pointer`}
+                  checked={credentials.rememberme}
                 />
                 <label
                   htmlFor="rememberme"
