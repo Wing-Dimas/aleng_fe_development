@@ -2,7 +2,6 @@ import Image from "next/image";
 import Text from "./Text";
 import { useState } from "react";
 
-
 export default function CardPayment({ id, name }) {
   const [status, setStatus] = useState(null);
 
@@ -22,7 +21,7 @@ export default function CardPayment({ id, name }) {
       />
       <label
         htmlFor={id}
-        className={`flex flex-row items-center w-min sm:w-full  gap-2 border-2 rounded-md border-custom-dark_grey p-1  cursor-pointer peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-500`}
+        className={`flex flex-row items-center w-min sm:w-full  gap-2 border-2 rounded-md border-custom-dark_grey p-1  cursor-pointer peer-checked:border-[#FDD05C]  peer-checked:bg-[#F6F0E1]`}
       >
         <div className="relative w-28">
           <Image

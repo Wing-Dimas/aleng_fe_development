@@ -49,7 +49,7 @@ export default function Payment() {
             <Container>
               <Heading.h3>Detail Tamu</Heading.h3>
               <br />
-              <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex flex-col gap-3">
                 <TextInput
                   // value={info.person.name}
                   // name="name"
