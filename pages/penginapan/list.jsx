@@ -10,7 +10,7 @@ import DateInput from "@components/molecules/DateInput";
 import FABSheet from "@components/molecules/FABSheet";
 import Footer from "@components/molecules/Footer";
 import Heading from "@components/molecules/Heading";
-import ListCard from "@components/molecules/ListCard";
+import ListCardPenginapan from "@components/molecules/ListCardPenginapan";
 import MainContent from "@components/molecules/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/molecules/PopOver";
@@ -141,7 +141,7 @@ export default function ListPenginapan() {
             <hr />
             <br />
             <Text.label>Harga per malam</Text.label>
-            <div className="flex items-center gap-4 w-full">
+            <div className="mt-1 flex items-center gap-4 w-full">
               <TextInput
                 type="number"
                 name="min"
@@ -162,7 +162,7 @@ export default function ListPenginapan() {
             </div>
             <br />
             <Text.label>Bintang Hotel</Text.label>
-            <div className="flex flex-col gap-2">
+            <div className="mt-1 flex flex-col gap-2">
               <Checkbox
                 name="one"
                 value={filter.stars.one}
@@ -228,7 +228,7 @@ export default function ListPenginapan() {
             </div>
             <br />
             <Text.label>Fasilitas Hotel</Text.label>
-            <div className="flex flex-col gap-2">
+            <div className="mt-1 flex flex-col gap-2">
               <Checkbox
                 name="pet"
                 value={filter.facilities.pet}
@@ -274,7 +274,7 @@ export default function ListPenginapan() {
             </div>
             <br />
             <Text.label>Tipe Hotel</Text.label>
-            <div className="flex flex-col gap-2">
+            <div className="mt-1 flex flex-col gap-2">
               <Checkbox
                 name="homestay"
                 value={filter.types.homestay}
@@ -308,14 +308,14 @@ export default function ListPenginapan() {
         >
           {/* Filter */}
           <div className="hidden lg:block">
-            <Container>
+            <Container className="w-max max-w-sm">
               <Text className="text-custom-primary_red mb-4 text-center">
                 Filter Pencarian Hotel
               </Text>
               <hr />
               <br />
               <Text.label>Harga per malam</Text.label>
-              <div className="flex items-center gap-4">
+              <div className="mt-1 flex items-center gap-4">
                 <TextInput
                   type="number"
                   name="min"
@@ -334,7 +334,7 @@ export default function ListPenginapan() {
               </div>
               <br />
               <Text.label>Bintang Hotel</Text.label>
-              <div className="flex flex-col gap-2">
+              <div className="mt-1 flex flex-col gap-2">
                 <Checkbox
                   name="one"
                   value={filter.stars.one}
@@ -400,7 +400,7 @@ export default function ListPenginapan() {
               </div>
               <br />
               <Text.label>Fasilitas Hotel</Text.label>
-              <div className="flex flex-col gap-2">
+              <div className="mt-1 flex flex-col gap-2">
                 <Checkbox
                   name="pet"
                   value={filter.facilities.pet}
@@ -446,7 +446,7 @@ export default function ListPenginapan() {
               </div>
               <br />
               <Text.label>Tipe Hotel</Text.label>
-              <div className="flex flex-col gap-2">
+              <div className="mt-1 flex flex-col gap-2">
                 <Checkbox
                   name="homestay"
                   value={filter.types.homestay}
@@ -521,7 +521,7 @@ export default function ListPenginapan() {
               </Text>
               <div className="">
                 {[...Array(10).keys()].map((_, i) => {
-                  return <ListCard key={i} />;
+                  return <ListCardPenginapan key={i} />;
                 })}
               </div>
             </div>

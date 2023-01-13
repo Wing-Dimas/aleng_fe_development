@@ -6,7 +6,7 @@ import Heading from "./Heading";
 import Rating from "./Rating";
 import Text from "./Text";
 
-export default function ListCard() {
+export default function ListCardPenginapan() {
   return (
     <div
       className="grid grid-cols-2 gap-2 mb-4 bg-white md:bg-transparent p-2 md:p-0 rounded-xl md:rounded-none"
@@ -34,8 +34,8 @@ export default function ListCard() {
           </div>
         </div>
         <Text.label>Jl. Siwalan Parangan</Text.label>
-        <div className="flex items-end">
-          <Text className="text-custom-primary_red whitespace-nowrap">
+        <div className="flex items-end justify-end">
+          <Text className="text-custom-primary_red whitespace-nowrap !text-right">
             Rp 150.000
           </Text>
           <Text.label>/malam</Text.label>
@@ -78,8 +78,8 @@ export default function ListCard() {
                 Lihat Detail
               </Link>
             </div>
-            <div className="flex items-end">
-              <Heading.h3 className="!text-custom-primary_red">
+            <div className="flex items-end justify-end">
+              <Heading.h3 className="!text-custom-primary_red !text-right">
                 Rp 70.000
               </Heading.h3>
               <Text.small className="!font-normal">/malam</Text.small>
