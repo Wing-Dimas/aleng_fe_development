@@ -81,7 +81,6 @@ export default function LoginPage() {
             password: credentials.password,
           })
           .then((res) => {
-            console.log(res?.data?.access_token);
             if (res?.data?.access_token != undefined) {
               Cookies.set("token", res?.data?.access_token);
               router.push("/");

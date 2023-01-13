@@ -2,19 +2,29 @@ import Footer from "@components/molecules/Footer";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/molecules/Text";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import validator from "validator";
 
 export default function ResetPassword() {
+  const router = useRouter();
+  useEffect(() => {
+    const email = Cookies.get("email");
+    const token = Cookies.get("token");
+    setCredentials({ ...credentials, email: email, token: token });
+  }, []);
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
     repassword: "",
+    token: "",
   });
-  const [emailError, setEmailError] = useState({ message: "", status: false });
   const [passwordError, setPasswordError] = useState({
     message: "",
     status: false,
@@ -24,18 +34,7 @@ export default function ResetPassword() {
     status: false,
   });
   const doChange = ({ name, value }) => {
-    if (name === "email") {
-      if (validator.isEmail(value)) {
-        setEmailError({ message: "Email sudah benar", status: true });
-      } else {
-        if (value === "") {
-          setEmailError({ message: "Email tidak boleh kosong", status: false });
-        } else {
-          setEmailError({ message: "Email harus lengkap", status: false });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name == "password") {
+    if (name == "password") {
       if (value.length > 8) {
         setPasswordError({ message: "Password sudah sesuai", status: true });
         setCredentials({ ...credentials, [name]: value });
@@ -54,27 +53,48 @@ export default function ResetPassword() {
       }
       setCredentials({ ...credentials, [name]: value });
     } else if (name === "repassword") {
-      if (value.length > 8) {
-        setRePasswordError({
-          message: "Password sudah sesuai",
-          status: true,
-        });
-      } else {
-        if (value.length !== 0) {
+      if (value.length !== 0) {
+        if (credentials.password !== value) {
           setRePasswordError({
-            message: "Password harus lebih dari 8 karakter",
+            message: "Password Tidak Sama",
             status: false,
           });
         } else {
           setRePasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
+            message: "Password Sudah Sama",
+            status: true,
           });
         }
+      } else {
+        setRePasswordError({
+          message: "Password tidak boleh kosong",
+          status: false,
+        });
       }
+
       setCredentials({ ...credentials, [name]: value });
     }
   };
+
+  const handleClick = async () => {
+    try {
+      await axios
+        .post("http://api.lenjelenanmadura.id/api/resetPassword", {
+          token: credentials.token,
+          email: credentials.email,
+          password: credentials.password,
+          password_confirmation: credentials.repassword,
+        })
+        .then((res) => {
+          router.push("/login");
+          Cookies.remove("email");
+          Cookies.remove("token");
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
       <Navbar />
@@ -106,7 +126,7 @@ export default function ResetPassword() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              errorMassage={emailError}
+              readonly="readOnly"
             />
             <LSTextInput
               name="password"
@@ -123,7 +143,7 @@ export default function ResetPassword() {
               value={credentials.repassword}
               onChange={doChange}
               placeholder="Masukkan password"
-              type="confirmPassword"
+              type="password"
               errorMassage={RePasswordError}
             />
             <Text.small className="!text-xs text-dark-grey mt-1">
@@ -131,9 +151,11 @@ export default function ResetPassword() {
               Lanjalan
             </Text.small>
           </div>
-          <Text className="bg-red-500 hover:bg-red-400 cursor-pointer text-white font-semibold text-center w-full p-2 rounded-md">
-            Kirim
-          </Text>
+          <div className="w-full" onClick={handleClick}>
+            <Text className="bg-red-500 hover:bg-red-400 cursor-pointer text-white font-semibold text-center w-full p-2 rounded-md">
+              Kirim
+            </Text>
+          </div>
         </div>
       </div>
     </div>

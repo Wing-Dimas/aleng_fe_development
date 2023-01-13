@@ -6,6 +6,7 @@ export default function LSTextInput({
   placeholder,
   type,
   errorMassage,
+  readonly,
 }) {
   const doChange = (e) => {
     onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
@@ -23,6 +24,7 @@ export default function LSTextInput({
         placeholder={placeholder ?? ""}
         className="w-full block font-medium placeholder-gray-500 border rounded border-[#615A56] bg-gray-100 p-2 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         type={type ?? "text"}
+        readOnly={readonly}
       />
       <p
         className={`mb-0 text-xs ${

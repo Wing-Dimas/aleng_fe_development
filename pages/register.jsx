@@ -5,8 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import Head from "next/head";
 import validator from "validator";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function RegisterPage({}) {
+  const router = useRouter();
   const [credentials, setCredentials] = useState({
     fname: "",
     email: "",
@@ -46,7 +49,7 @@ export default function RegisterPage({}) {
       setCredentials({ ...credentials, [name]: value });
     } else if (name === "fname") {
       if (value.length > 0) {
-        if (/[^a-zA-Z]/.test(value)) {
+        if (/[^a-z A-Z]/.test(value)) {
           setNameError({
             message: "Nama harus berupa huruf",
             status: false,
@@ -55,7 +58,7 @@ export default function RegisterPage({}) {
           setNameError({ message: "Nama sudah benar", status: true });
         }
       } else {
-        if (/[^a-zA-Z]/.test(value)) {
+        if (/[^a-z A-Z]/.test(value)) {
           setNameError({
             message: "Nama harus berupa huruf",
             status: false,
@@ -110,28 +113,57 @@ export default function RegisterPage({}) {
       }
       setCredentials({ ...credentials, [name]: value });
     } else if (name === "repassword") {
-      if (value.length > 8) {
-        setRePasswordError({
-          message: "Password sudah sesuai",
-          status: true,
-        });
-      } else {
-        if (value.length !== 0) {
+      if (value.length !== 0) {
+        if (credentials.password !== value) {
           setRePasswordError({
-            message: "Password harus lebih dari 8 karakter",
+            message: "Password Tidak Sama",
             status: false,
           });
         } else {
           setRePasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
+            message: "Password Sudah Sama",
+            status: true,
           });
         }
+      } else {
+        setRePasswordError({
+          message: "Password tidak boleh kosong",
+          status: false,
+        });
       }
+
       setCredentials({ ...credentials, [name]: value });
     }
   };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post("http://api.lenjelenanmadura.id/api/auth/register", {
+          name: credentials.fname,
+          email: credentials.email,
+          password: credentials.password,
+          password_confirmation: credentials.repassword,
+          phoneNumber: credentials.notelepon,
+        })
+        .then((res) => {
+          router.push("/login");
+        });
+    } catch (err) {
+      setCredentials({
+        fname: "",
+        email: "",
+        notelepon: "",
+        password: "",
+        repassword: "",
+      });
+      setEmailError({ message: "", status: false });
+      setNameError({ message: "", status: false });
+      setPasswordError({ message: "", status: false });
+      setRePasswordError({ message: "", status: false });
+      setTelephoneError({ message: "", status: false });
+    }
+  };
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
@@ -158,7 +190,10 @@ export default function RegisterPage({}) {
           <p className="text-[1.2rem] md:text-[2rem] text-center">
             Selamat Bergabung
           </p>
-          <form className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full">
+          <form
+            className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full"
+            onSubmit={handleSubmit}
+          >
             <LSTextInput
               name="fname"
               label="Nama Lengkap"
@@ -201,7 +236,7 @@ export default function RegisterPage({}) {
               value={credentials.repassword}
               onChange={doChange}
               placeholder="Masukkan password"
-              type="confirmPassword"
+              type="password"
               errorMassage={RePasswordError}
             />
 
