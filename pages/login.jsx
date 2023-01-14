@@ -194,14 +194,22 @@ export default function LoginPage() {
               Masuk
             </button>
             <p className="text-xs md:text-sm">atau</p>
-            <button className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
-              <div className="flex gap-4 justify-center max-w-sm items-center">
-                <img src="/icons/google.svg" className="w-5 " alt="google" />
-                <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
-                  Masuk dengan Google
-                </span>
-              </div>
-            </button>
+            {/* <Link href="/api/auth/signup/callback" className="w-full"> */}
+              <button
+                className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
+                onClick={() => {
+                  window.location =
+                    "http://lenjelenanmadura.id/api/auth/signup";
+                }}
+              >
+                <div className="flex gap-4 justify-center max-w-sm items-center">
+                  <img src="/icons/google.svg" className="w-5 " alt="google" />
+                  <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
+                    Masuk dengan Google
+                  </span>
+                </div>
+              </button>
+            {/* </Link> */}
             <p className="">
               Belum Punya Account ?{" "}
               <span className="text-red-600 hover:text-red-800 cursor-pointer">

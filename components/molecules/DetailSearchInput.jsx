@@ -82,6 +82,7 @@ export default function DetailSearchInput({
             containerClassName="w-full"
             options={check.options}
             onChange={doChangeCheckOptions}
+            pages="penginapan"
           />
         </div>
         <Button className="w-full lg:w-auto !px-14">Cari</Button>
