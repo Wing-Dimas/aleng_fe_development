@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
-import validator from "validator";
 import Checkbox from "@components/molecules/Checkbox";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
+import validateLogin from "@validators/loginValidator";
 
 export async function getServerSideProps(context) {
   return {
@@ -24,92 +24,48 @@ export default function LoginPage() {
     password: "",
     rememberme: false,
   });
-  const [errors, setErrors] = useState({
+  const [messages, setMessages] = useState({
     email: { isError: false, message: "" },
     password: { isError: false, message: "" },
   });
 
   const doChange = ({ name, value }) => {
-    if (name === "email") {
-      if (validator.isEmail(value)) {
-        setErrors({
-          ...errors,
-          email: { isError: false, message: "Email sudah benar" },
-        });
-      } else {
-        if (value === "") {
-          setErrors({
-            ...errors,
-            email: { isError: true, message: "Email tidak boleh kosong" },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            email: { isError: true, message: "Email harus lengkap" },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name == "password") {
-      if (value.length > 8) {
-        setErrors({
-          ...errors,
-          password: { isError: false, message: "Password sudah sesuai" },
-        });
-        setCredentials({ ...credentials, [name]: value });
-      } else {
-        if (value.length !== 0) {
-          setErrors({
-            ...errors,
-            password: {
-              isError: true,
-              message: "Password harus lebih dari 8 karakter",
-            },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            password: { isError: true, message: "Password tidak boleh kosong" },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    }
-
     setCredentials({ ...credentials, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (credentials.rememberme == true) {
       try {
-        await axios
-          .post(process.env.BASE_API + "/auth/login", {
-            email: credentials.email,
-            password: credentials.password,
-          })
-          .then((res) => {
-            if (res?.data?.access_token != undefined) {
-              Cookies.set("token", res?.data?.access_token);
-              router.push("/");
-            } else {
-              setCredentials({ email: "", password: "", rememberme: false });
-              setErrors({
-                email: { isError: false, message: "" },
-                password: { isError: false, message: "" },
-              });
-            }
-          });
+        const validated = await validateLogin(credentials);
+        if (validated.isError) {
+          setMessages(validated.form);
+          return;
+        }
+        const res = await axios.post(process.env.BASE_API + "/auth/login", {
+          email: credentials.email,
+          password: credentials.password,
+        });
+        if (!!res.data.access_token) {
+          Cookies.set("token", res.data.access_token);
+          router.push("/");
+          return;
+        }
+        setCredentials({ email: "", password: "", rememberme: false });
+        setMessages({
+          email: { isError: false, message: "" },
+          password: { isError: false, message: "" },
+        });
       } catch (err) {
         setCredentials({ email: "", password: "", rememberme: false });
-        setErrors({
+        setMessages({
           email: { isError: false, message: "" },
           password: { isError: false, message: "" },
         });
       }
     } else {
       setCredentials({ email: "", password: "", rememberme: false });
-      setErrors({
+      setMessages({
         email: { isError: false, message: "" },
         password: { isError: false, message: "" },
       });
@@ -167,7 +123,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              error={errors.email}
+              message={messages.email}
             />
             <LSTextInput
               name="password"
@@ -176,7 +132,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Password"
               type="password"
-              error={errors.password}
+              message={messages.password}
             />
             <div className="flex flex-row justify-between w-full">
               <Checkbox

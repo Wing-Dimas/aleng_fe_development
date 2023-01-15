@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
-import validator from "validator";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
+import validateRegister from "@validators/registerValidator";
 
 export default function RegisterPage({}) {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function RegisterPage({}) {
     password: "",
     password_confirmation: "",
   });
-  const [errors, setErrors] = useState({
+  const [messages, setMessages] = useState({
     name: { isError: false, message: "" },
     email: { isError: false, message: "" },
     phoneNumber: { isError: false, message: "" },
@@ -27,150 +27,17 @@ export default function RegisterPage({}) {
   });
 
   const doChange = ({ name, value }) => {
-    if (name === "email") {
-      if (validator.isEmail(value)) {
-        setErrors({
-          ...errors,
-          email: { isError: false, message: "Email sudah benar" },
-        });
-      } else {
-        if (value === "") {
-          setErrors({
-            ...errors,
-            email: { isError: true, message: "Email tidak boleh kosong" },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            email: { isError: true, message: "Email harus lengkap" },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "name") {
-      if (value.length > 0) {
-        if (/[^a-z A-Z]/.test(value)) {
-          setErrors({
-            ...errors,
-            name: { isError: true, message: "Nama harus berupa huruf" },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            name: { isError: false, message: "Nama sudah benar" },
-          });
-        }
-      } else {
-        if (/[^a-z A-Z]/.test(value)) {
-          setErrors({
-            ...errors,
-            name: { isError: true, message: "Nama harus berupa huruf" },
-          });
-        } else if (value === "") {
-          setErrors({
-            ...errors,
-            name: { isError: true, message: "Nama tidak boleh kosong" },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "phoneNumber") {
-      if (value.length > 0) {
-        if (/[^0-9]/.test(value)) {
-          setErrors({
-            ...errors,
-            phoneNumber: {
-              isError: true,
-              message: "Nomor Telepon harus berupa angka",
-            },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            phoneNumber: {
-              isError: false,
-              message: "Nomor Telepon sudah benar",
-            },
-          });
-        }
-      } else {
-        if (/[^0-9]/.test(value)) {
-          setErrors({
-            ...errors,
-            phoneNumber: {
-              isError: true,
-              message: "Nomor Telepon harus berupa angka",
-            },
-          });
-        } else if (value === "") {
-          setErrors({
-            ...errors,
-            phoneNumber: {
-              isError: true,
-              message: "Nomor Telepon tidak boleh kosong",
-            },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "password") {
-      if (value.length > 8) {
-        setErrors({
-          ...errors,
-          password: { isError: false, message: "Password sudah sesuai" },
-        });
-      } else {
-        if (value.length !== 0) {
-          setErrors({
-            ...errors,
-            password: {
-              isError: true,
-              message: "Password harus lebih dari 8 karakter",
-            },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            password: { isError: true, message: "Password tidak boleh kosong" },
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "password_confirmation") {
-      if (value.length !== 0) {
-        if (credentials.password !== value) {
-          setErrors({
-            ...errors,
-            password_confirmation: {
-              isError: true,
-              message: "Password tidak sama",
-            },
-          });
-        } else {
-          setErrors({
-            ...errors,
-            password_confirmation: {
-              isError: false,
-              message: "Password sudah benar",
-            },
-          });
-        }
-      } else {
-        setErrors({
-          ...errors,
-          password_confirmation: {
-            isError: true,
-            message: "Password tidak boleh kosong",
-          },
-        });
-      }
-      setCredentials({ ...credentials, [name]: value });
-    }
+    setCredentials({ ...credentials, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const validated = await validateRegister(credentials);
+      if (validated.isError) {
+        setMessages(validated.form);
+        return;
+      }
       await axios
         .post(process.env.BASE_API + "/auth/register", {
           name: credentials.name,
@@ -190,7 +57,7 @@ export default function RegisterPage({}) {
         password: "",
         password_confirmation: "",
       });
-      setErrors({
+      setMessages({
         name: { isError: false, message: "" },
         email: { isError: false, message: "" },
         phoneNumber: { isError: false, message: "" },
@@ -237,7 +104,7 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan Nama"
               type="text"
-              error={errors.name}
+              message={messages.name}
             />
             <LSTextInput
               name="email"
@@ -246,7 +113,7 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              error={errors.email}
+              message={messages.email}
             />
             <LSTextInput
               name="phoneNumber"
@@ -255,7 +122,7 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan Nomer Telepon"
               type="text"
-              error={errors.phoneNumber}
+              message={messages.phoneNumber}
             />
             <LSTextInput
               name="password"
@@ -264,7 +131,7 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
-              error={errors.password}
+              message={messages.password}
             />
             <LSTextInput
               name="password_confirmation"
@@ -273,7 +140,7 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
-              error={errors.password_confirmation}
+              message={messages.password_confirmation}
             />
 
             <div className="flex flex-col w-full items-center justify-center gap-1 mt-4">

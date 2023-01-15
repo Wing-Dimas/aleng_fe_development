@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/molecules/Text";
+import validateResetPassword from "@validators/resetPasswordValidator";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -20,74 +21,33 @@ export default function ResetPassword() {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    repassword: "",
+    password_confirmation: "",
     token: "",
   });
-  const [passwordError, setPasswordError] = useState({
-    message: "",
-    status: false,
-  });
-  const [RePasswordError, setRePasswordError] = useState({
-    message: "",
-    status: false,
-  });
-  const doChange = ({ name, value }) => {
-    if (name == "password") {
-      if (value.length > 8) {
-        setPasswordError({ message: "Password sudah sesuai", status: true });
-        setCredentials({ ...credentials, [name]: value });
-      } else {
-        if (value.length !== 0) {
-          setPasswordError({
-            message: "Password harus lebih dari 8 karakter",
-            status: false,
-          });
-        } else {
-          setPasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "repassword") {
-      if (value.length !== 0) {
-        if (credentials.password !== value) {
-          setRePasswordError({
-            message: "Password Tidak Sama",
-            status: false,
-          });
-        } else {
-          setRePasswordError({
-            message: "Password Sudah Sama",
-            status: true,
-          });
-        }
-      } else {
-        setRePasswordError({
-          message: "Password tidak boleh kosong",
-          status: false,
-        });
-      }
 
-      setCredentials({ ...credentials, [name]: value });
-    }
+  const [messages, setMessages] = useState({
+    password: { isError: false, message: "" },
+    password_confirmation: { isError: false, message: "" },
+  });
+
+  const doChange = ({ name, value }) => {
+    setCredentials({ ...credentials, [name]: value });
   };
 
   const handleClick = async () => {
     try {
-      await axios
-        .post(process.env.BASE_API + "/resetPassword", {
-          token: credentials.token,
-          email: credentials.email,
-          password: credentials.password,
-          password_confirmation: credentials.repassword,
-        })
-        .then((res) => {
-          router.push("/login");
-          Cookies.remove("email");
-          Cookies.remove("token");
-        });
+      const validated = await validateResetPassword(credentials);
+      if (validated.isError) {
+        setMessages(validated.form);
+        return;
+      }
+      const _ = await axios.post(
+        process.env.BASE_API + "/resetPassword",
+        credentials
+      );
+      router.push("/login");
+      Cookies.remove("email");
+      Cookies.remove("token");
     } catch (err) {
       console.log(err);
     }
@@ -133,16 +93,16 @@ export default function ResetPassword() {
               onChange={doChange}
               placeholder="Masukkan Password"
               type="password"
-              errorMassage={passwordError}
+              message={messages.password}
             />
             <LSTextInput
-              name="repassword"
+              name="password_confirmation"
               label="Konfirmasi Password"
-              value={credentials.repassword}
+              value={credentials.password_confirmation}
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
-              errorMassage={RePasswordError}
+              message={messages.password_confirmation}
             />
             <Text.small className="!text-xs text-dark-grey mt-1">
               Reset Password menggunakan alamat E-Mail yang terdaftar di

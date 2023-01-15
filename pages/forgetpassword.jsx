@@ -21,20 +21,17 @@ export default function ForgetPassword() {
   };
 
   const handleClick = async (e) => {
-    console.log(e);
     e.preventDefault();
     try {
-      await axios
-        .post(process.env.BASE_API + "/password/email", { email })
-        .then((res) => {
-          if (res?.data?.mailData?.token != undefined) {
-            Router.push("/resetpassword");
-            Cookies.set("token", res?.data?.mailData?.token);
-            Cookies.set("email", res?.data?.mailData?.email);
-          } else {
-            setEmail("");
-          }
-        });
+      const res = await axios.post(process.env.BASE_API + "/password/email", {
+        email,
+      });
+      if (!!res.data.mailData.token) {
+        setEmail("");
+      }
+      Router.push("/resetpassword");
+      Cookies.set("token", res.data.mailData.token);
+      Cookies.set("email", res.data.mailData.email);
     } catch (err) {
       console.log(err);
     }
