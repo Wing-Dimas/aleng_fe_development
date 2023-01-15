@@ -41,10 +41,27 @@ export default function Profile() {
     setUser({ ...user, [name]: value });
   };
   const handleClick = async () => {
-    Cookies.remove("token");
     const cookie = Cookies.get("token");
-    if (cookie == undefined) {
-      router.push("/");
+    try {
+      await axios
+        .post(
+          process.env.BASE_API + "/auth/logout",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${cookie}`,
+            },
+          }
+        )
+        .then((res) => {
+          Cookies.remove("token");
+          const cookie = Cookies.get("token");
+          if (cookie == undefined) {
+            router.push("/");
+          }
+        });
+    } catch (err) {
+      console.log(err);
     }
   };
 
