@@ -28,6 +28,8 @@
     "tailwind-scrollbar-hide": "^1.1.7",
     "use-breakpoint": "^3.0.5",
     "validator": "^13.7.0",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.10",
     "zustand": "^4.3.1"
   },
   "devDependencies": {

@@ -1,13 +1,15 @@
-import LSTextInput from "@components/molecules/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
+/* eslint-disable @next/next/no-img-element */
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import validator from "validator";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
+import Checkbox from "@components/molecules/Checkbox";
+import LSTextInput from "@components/molecules/LSTextInput";
+import Navbar from "@components/molecules/Navbar";
+import validateLogin from "@validators/loginValidator";
 
 export async function getServerSideProps(context) {
   return {
@@ -22,83 +24,51 @@ export default function LoginPage() {
     password: "",
     rememberme: false,
   });
-  const [emailError, setEmailError] = useState({ message: "", status: false });
-  const [passwordError, setPasswordError] = useState({
-    message: "",
-    status: false,
+  const [messages, setMessages] = useState({
+    email: { isError: false, message: "" },
+    password: { isError: false, message: "" },
   });
 
-  const doChangeCheck = (e) => {
-    const name = e.currentTarget.name;
-    const check = e.currentTarget.checked;
-    setCredentials({
-      ...credentials,
-      [name]: check,
-    });
-  };
   const doChange = ({ name, value }) => {
-    if (name === "email") {
-      if (validator.isEmail(value)) {
-        setEmailError({ message: "Email sudah benar", status: true });
-      } else {
-        if (value === "") {
-          setEmailError({ message: "Email tidak boleh kosong", status: false });
-        } else {
-          setEmailError({ message: "Email harus lengkap", status: false });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name == "password") {
-      if (value.length > 8) {
-        setPasswordError({ message: "Password sudah sesuai", status: true });
-        setCredentials({ ...credentials, [name]: value });
-      } else {
-        if (value.length !== 0) {
-          setPasswordError({
-            message: "Password harus lebih dari 8 karakter",
-            status: false,
-          });
-        } else {
-          setPasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
-          });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    }
-
     setCredentials({ ...credentials, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (credentials.rememberme == true) {
       try {
-        await axios
-          .post("http://api.lenjelenanmadura.id/api/auth/login", {
-            email: credentials.email,
-            password: credentials.password,
-          })
-          .then((res) => {
-            if (res?.data?.access_token != undefined) {
-              Cookies.set("token", res?.data?.access_token);
-              router.push("/");
-            } else {
-              setCredentials({ email: "", password: "", rememberme: false });
-              setEmailError({ message: "", status: false });
-              setPasswordError({ message: "", status: false });
-            }
-          });
+        const validated = await validateLogin(credentials);
+        if (validated.isError) {
+          setMessages(validated.form);
+          return;
+        }
+        const res = await axios.post(process.env.BASE_API + "/auth/login", {
+          email: credentials.email,
+          password: credentials.password,
+        });
+        if (!!res.data.access_token) {
+          Cookies.set("token", res.data.access_token);
+          router.push("/");
+          return;
+        }
+        setCredentials({ email: "", password: "", rememberme: false });
+        setMessages({
+          email: { isError: false, message: "" },
+          password: { isError: false, message: "" },
+        });
       } catch (err) {
         setCredentials({ email: "", password: "", rememberme: false });
-        setEmailError({ message: "", status: false });
-        setPasswordError({ message: "", status: false });
+        setMessages({
+          email: { isError: false, message: "" },
+          password: { isError: false, message: "" },
+        });
       }
     } else {
       setCredentials({ email: "", password: "", rememberme: false });
-      setEmailError({ message: "", status: false });
-      setPasswordError({ message: "", status: false });
+      setMessages({
+        email: { isError: false, message: "" },
+        password: { isError: false, message: "" },
+      });
     }
   };
 
@@ -107,6 +77,7 @@ export default function LoginPage() {
     if (token) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -152,7 +123,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              errorMassage={emailError}
+              message={messages.email}
             />
             <LSTextInput
               name="password"
@@ -161,25 +132,15 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Password"
               type="password"
-              errorMassage={passwordError}
+              message={messages.password}
             />
             <div className="flex flex-row justify-between w-full">
-              <div className="flex flex-row gap-1">
-                <input
-                  type="checkbox"
-                  id="rememberme"
-                  name="rememberme"
-                  onChange={doChangeCheck}
-                  className={`checked:bg-blue-500 cursor-pointer`}
-                  checked={credentials.rememberme}
-                />
-                <label
-                  htmlFor="rememberme"
-                  className="font-medium text-[12px] cursor-pointer"
-                >
-                  Ingat aku
-                </label>
-              </div>
+              <Checkbox
+                name="rememberme"
+                value={credentials.rememberme}
+                onChange={doChange}
+                label="Ingat aku"
+              />
               <Link href="/forgetpassword">
                 <p className="font-medium text-[12px] hover:text-blue-500">
                   Lupa password?
