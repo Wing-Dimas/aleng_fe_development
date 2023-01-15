@@ -6,7 +6,8 @@
       "@constants/*": ["constants/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@validators/*": ["validators/*"],
     }
   },
   "exclude": ["node_modules"]
