@@ -1,169 +1,205 @@
-import LSTextInput from "@components/molecules/LSTextInput";
-import Link from "next/link";
-import Navbar from "@components/molecules/Navbar";
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import Head from "next/head";
-import validator from "validator";
-import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import axios from "axios";
+import validator from "validator";
+import LSTextInput from "@components/molecules/LSTextInput";
+import Navbar from "@components/molecules/Navbar";
 
 export default function RegisterPage({}) {
   const router = useRouter();
   const [credentials, setCredentials] = useState({
-    fname: "",
+    name: "",
     email: "",
-    notelepon: "",
+    phoneNumber: "",
     password: "",
-    repassword: "",
+    password_confirmation: "",
   });
-  const [emailError, setEmailError] = useState({ message: "", status: false });
-  const [nameError, setNameError] = useState({
-    message: "",
-    status: false,
-  });
-  const [telephoneError, setTelephoneError] = useState({
-    message: "",
-    status: false,
-  });
-  const [passwordError, setPasswordError] = useState({
-    message: "",
-    status: false,
-  });
-  const [RePasswordError, setRePasswordError] = useState({
-    message: "",
-    status: false,
+  const [errors, setErrors] = useState({
+    name: { isError: false, message: "" },
+    email: { isError: false, message: "" },
+    phoneNumber: { isError: false, message: "" },
+    password: { isError: false, message: "" },
+    password_confirmation: { isError: false, message: "" },
   });
 
   const doChange = ({ name, value }) => {
     if (name === "email") {
       if (validator.isEmail(value)) {
-        setEmailError({ message: "Email sudah benar", status: true });
+        setErrors({
+          ...errors,
+          email: { isError: false, message: "Email sudah benar" },
+        });
       } else {
         if (value === "") {
-          setEmailError({ message: "Email tidak boleh kosong", status: false });
-        } else {
-          setEmailError({ message: "Email harus lengkap", status: false });
-        }
-      }
-      setCredentials({ ...credentials, [name]: value });
-    } else if (name === "fname") {
-      if (value.length > 0) {
-        if (/[^a-z A-Z]/.test(value)) {
-          setNameError({
-            message: "Nama harus berupa huruf",
-            status: false,
+          setErrors({
+            ...errors,
+            email: { isError: true, message: "Email tidak boleh kosong" },
           });
         } else {
-          setNameError({ message: "Nama sudah benar", status: true });
-        }
-      } else {
-        if (/[^a-z A-Z]/.test(value)) {
-          setNameError({
-            message: "Nama harus berupa huruf",
-            status: false,
-          });
-        } else if (value === "") {
-          setNameError({
-            message: "Nama tidak boleh kosong",
-            status: false,
+          setErrors({
+            ...errors,
+            email: { isError: true, message: "Email harus lengkap" },
           });
         }
       }
       setCredentials({ ...credentials, [name]: value });
-    } else if (name === "notelepon") {
+    } else if (name === "name") {
       if (value.length > 0) {
-        if (/[^0-9]/.test(value)) {
-          setTelephoneError({
-            message: "Telephone harus berupa angka",
-            status: false,
+        if (/[^a-z A-Z]/.test(value)) {
+          setErrors({
+            ...errors,
+            name: { isError: true, message: "Nama harus berupa huruf" },
           });
         } else {
-          setTelephoneError({ message: "Telephone sudah benar", status: true });
+          setErrors({
+            ...errors,
+            name: { isError: false, message: "Nama sudah benar" },
+          });
+        }
+      } else {
+        if (/[^a-z A-Z]/.test(value)) {
+          setErrors({
+            ...errors,
+            name: { isError: true, message: "Nama harus berupa huruf" },
+          });
+        } else if (value === "") {
+          setErrors({
+            ...errors,
+            name: { isError: true, message: "Nama tidak boleh kosong" },
+          });
+        }
+      }
+      setCredentials({ ...credentials, [name]: value });
+    } else if (name === "phoneNumber") {
+      if (value.length > 0) {
+        if (/[^0-9]/.test(value)) {
+          setErrors({
+            ...errors,
+            phoneNumber: {
+              isError: true,
+              message: "Nomor Telepon harus berupa angka",
+            },
+          });
+        } else {
+          setErrors({
+            ...errors,
+            phoneNumber: {
+              isError: false,
+              message: "Nomor Telepon sudah benar",
+            },
+          });
         }
       } else {
         if (/[^0-9]/.test(value)) {
-          setTelephoneError({
-            message: "Telephone harus berupa angka",
-            status: false,
+          setErrors({
+            ...errors,
+            phoneNumber: {
+              isError: true,
+              message: "Nomor Telepon harus berupa angka",
+            },
           });
         } else if (value === "") {
-          setTelephoneError({
-            message: "Telephone tidak boleh kosong",
-            status: false,
+          setErrors({
+            ...errors,
+            phoneNumber: {
+              isError: true,
+              message: "Nomor Telepon tidak boleh kosong",
+            },
           });
         }
       }
       setCredentials({ ...credentials, [name]: value });
     } else if (name === "password") {
       if (value.length > 8) {
-        setPasswordError({ message: "Password sudah sesuai", status: true });
+        setErrors({
+          ...errors,
+          password: { isError: false, message: "Password sudah sesuai" },
+        });
       } else {
         if (value.length !== 0) {
-          setPasswordError({
-            message: "Password harus lebih dari 8 karakter",
-            status: false,
+          setErrors({
+            ...errors,
+            password: {
+              isError: true,
+              message: "Password harus lebih dari 8 karakter",
+            },
           });
         } else {
-          setPasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
+          setErrors({
+            ...errors,
+            password: { isError: true, message: "Password tidak boleh kosong" },
           });
         }
       }
       setCredentials({ ...credentials, [name]: value });
-    } else if (name === "repassword") {
+    } else if (name === "password_confirmation") {
       if (value.length !== 0) {
         if (credentials.password !== value) {
-          setRePasswordError({
-            message: "Password Tidak Sama",
-            status: false,
+          setErrors({
+            ...errors,
+            password_confirmation: {
+              isError: true,
+              message: "Password tidak sama",
+            },
           });
         } else {
-          setRePasswordError({
-            message: "Password Sudah Sama",
-            status: true,
+          setErrors({
+            ...errors,
+            password_confirmation: {
+              isError: false,
+              message: "Password sudah benar",
+            },
           });
         }
       } else {
-        setRePasswordError({
-          message: "Password tidak boleh kosong",
-          status: false,
+        setErrors({
+          ...errors,
+          password_confirmation: {
+            isError: true,
+            message: "Password tidak boleh kosong",
+          },
         });
       }
-
       setCredentials({ ...credentials, [name]: value });
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios
-        .post("http://api.lenjelenanmadura.id/api/auth/register", {
-          name: credentials.fname,
+        .post(process.env.BASE_API + "/auth/register", {
+          name: credentials.name,
           email: credentials.email,
           password: credentials.password,
-          password_confirmation: credentials.repassword,
-          phoneNumber: credentials.notelepon,
+          password_confirmation: credentials.password_confirmation,
+          phoneNumber: credentials.phoneNumber,
         })
-        .then((res) => {
+        .then((_) => {
           router.push("/login");
         });
     } catch (err) {
       setCredentials({
-        fname: "",
+        name: "",
         email: "",
-        notelepon: "",
+        phoneNumber: "",
         password: "",
-        repassword: "",
+        password_confirmation: "",
       });
-      setEmailError({ message: "", status: false });
-      setNameError({ message: "", status: false });
-      setPasswordError({ message: "", status: false });
-      setRePasswordError({ message: "", status: false });
-      setTelephoneError({ message: "", status: false });
+      setErrors({
+        name: { isError: false, message: "" },
+        email: { isError: false, message: "" },
+        phoneNumber: { isError: false, message: "" },
+        password: { isError: false, message: "" },
+        password_confirmation: { isError: false, message: "" },
+      });
     }
   };
+
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
@@ -195,13 +231,13 @@ export default function RegisterPage({}) {
             onSubmit={handleSubmit}
           >
             <LSTextInput
-              name="fname"
+              name="name"
               label="Nama Lengkap"
-              value={credentials.fname}
+              value={credentials.name}
               onChange={doChange}
               placeholder="Masukkan Nama"
               type="text"
-              errorMassage={nameError}
+              error={errors.name}
             />
             <LSTextInput
               name="email"
@@ -210,16 +246,16 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              errorMassage={emailError}
+              error={errors.email}
             />
             <LSTextInput
-              name="notelepon"
+              name="phoneNumber"
               label="Nomer Telepon"
-              value={credentials.notelepon}
+              value={credentials.phoneNumber}
               onChange={doChange}
               placeholder="Masukkan Nomer Telepon"
               type="text"
-              errorMassage={telephoneError}
+              error={errors.phoneNumber}
             />
             <LSTextInput
               name="password"
@@ -228,16 +264,16 @@ export default function RegisterPage({}) {
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
-              errorMassage={passwordError}
+              error={errors.password}
             />
             <LSTextInput
-              name="repassword"
+              name="password_confirmation"
               label="Konfirmasi Password"
-              value={credentials.repassword}
+              value={credentials.password_confirmation}
               onChange={doChange}
               placeholder="Masukkan password"
               type="password"
-              errorMassage={RePasswordError}
+              error={errors.password_confirmation}
             />
 
             <div className="flex flex-col w-full items-center justify-center gap-1 mt-4">

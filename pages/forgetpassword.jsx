@@ -1,12 +1,12 @@
-import Navbar from "@components/molecules/Navbar";
-import Text from "@components/molecules/Text";
-import axios from "axios";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useState } from "react";
+import axios from "axios";
 import Cookies from "js-cookie";
+import Navbar from "@components/molecules/Navbar";
+import Text from "@components/molecules/Text";
 
 export async function getServerSideProps(context) {
   return {
@@ -25,7 +25,7 @@ export default function ForgetPassword() {
     e.preventDefault();
     try {
       await axios
-        .post("http://api.lenjelenanmadura.id/api/password/email", { email })
+        .post(process.env.BASE_API + "/password/email", { email })
         .then((res) => {
           if (res?.data?.mailData?.token != undefined) {
             Router.push("/resetpassword");

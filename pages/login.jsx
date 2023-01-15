@@ -1,13 +1,15 @@
-import LSTextInput from "@components/molecules/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
+/* eslint-disable @next/next/no-img-element */
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import validator from "validator";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
+import validator from "validator";
+import Checkbox from "@components/molecules/Checkbox";
+import LSTextInput from "@components/molecules/LSTextInput";
+import Navbar from "@components/molecules/Navbar";
 
 export async function getServerSideProps(context) {
   return {
@@ -22,46 +24,52 @@ export default function LoginPage() {
     password: "",
     rememberme: false,
   });
-  const [emailError, setEmailError] = useState({ message: "", status: false });
-  const [passwordError, setPasswordError] = useState({
-    message: "",
-    status: false,
+  const [errors, setErrors] = useState({
+    email: { isError: false, message: "" },
+    password: { isError: false, message: "" },
   });
 
-  const doChangeCheck = (e) => {
-    const name = e.currentTarget.name;
-    const check = e.currentTarget.checked;
-    setCredentials({
-      ...credentials,
-      [name]: check,
-    });
-  };
   const doChange = ({ name, value }) => {
     if (name === "email") {
       if (validator.isEmail(value)) {
-        setEmailError({ message: "Email sudah benar", status: true });
+        setErrors({
+          ...errors,
+          email: { isError: false, message: "Email sudah benar" },
+        });
       } else {
         if (value === "") {
-          setEmailError({ message: "Email tidak boleh kosong", status: false });
+          setErrors({
+            ...errors,
+            email: { isError: true, message: "Email tidak boleh kosong" },
+          });
         } else {
-          setEmailError({ message: "Email harus lengkap", status: false });
+          setErrors({
+            ...errors,
+            email: { isError: true, message: "Email harus lengkap" },
+          });
         }
       }
       setCredentials({ ...credentials, [name]: value });
     } else if (name == "password") {
       if (value.length > 8) {
-        setPasswordError({ message: "Password sudah sesuai", status: true });
+        setErrors({
+          ...errors,
+          password: { isError: false, message: "Password sudah sesuai" },
+        });
         setCredentials({ ...credentials, [name]: value });
       } else {
         if (value.length !== 0) {
-          setPasswordError({
-            message: "Password harus lebih dari 8 karakter",
-            status: false,
+          setErrors({
+            ...errors,
+            password: {
+              isError: true,
+              message: "Password harus lebih dari 8 karakter",
+            },
           });
         } else {
-          setPasswordError({
-            message: "Password tidak boleh kosong",
-            status: false,
+          setErrors({
+            ...errors,
+            password: { isError: true, message: "Password tidak boleh kosong" },
           });
         }
       }
@@ -76,7 +84,7 @@ export default function LoginPage() {
     if (credentials.rememberme == true) {
       try {
         await axios
-          .post("http://api.lenjelenanmadura.id/api/auth/login", {
+          .post(process.env.BASE_API + "/auth/login", {
             email: credentials.email,
             password: credentials.password,
           })
@@ -86,19 +94,25 @@ export default function LoginPage() {
               router.push("/");
             } else {
               setCredentials({ email: "", password: "", rememberme: false });
-              setEmailError({ message: "", status: false });
-              setPasswordError({ message: "", status: false });
+              setErrors({
+                email: { isError: false, message: "" },
+                password: { isError: false, message: "" },
+              });
             }
           });
       } catch (err) {
         setCredentials({ email: "", password: "", rememberme: false });
-        setEmailError({ message: "", status: false });
-        setPasswordError({ message: "", status: false });
+        setErrors({
+          email: { isError: false, message: "" },
+          password: { isError: false, message: "" },
+        });
       }
     } else {
       setCredentials({ email: "", password: "", rememberme: false });
-      setEmailError({ message: "", status: false });
-      setPasswordError({ message: "", status: false });
+      setErrors({
+        email: { isError: false, message: "" },
+        password: { isError: false, message: "" },
+      });
     }
   };
 
@@ -107,6 +121,7 @@ export default function LoginPage() {
     if (token) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -152,7 +167,7 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Email"
               type="email"
-              errorMassage={emailError}
+              error={errors.email}
             />
             <LSTextInput
               name="password"
@@ -161,25 +176,15 @@ export default function LoginPage() {
               onChange={doChange}
               placeholder="Masukkan Password"
               type="password"
-              errorMassage={passwordError}
+              error={errors.password}
             />
             <div className="flex flex-row justify-between w-full">
-              <div className="flex flex-row gap-1">
-                <input
-                  type="checkbox"
-                  id="rememberme"
-                  name="rememberme"
-                  onChange={doChangeCheck}
-                  className={`checked:bg-blue-500 cursor-pointer`}
-                  checked={credentials.rememberme}
-                />
-                <label
-                  htmlFor="rememberme"
-                  className="font-medium text-[12px] cursor-pointer"
-                >
-                  Ingat aku
-                </label>
-              </div>
+              <Checkbox
+                name="rememberme"
+                value={credentials.rememberme}
+                onChange={doChange}
+                label="Ingat aku"
+              />
               <Link href="/forgetpassword">
                 <p className="font-medium text-[12px] hover:text-blue-500">
                   Lupa password?
@@ -195,20 +200,19 @@ export default function LoginPage() {
             </button>
             <p className="text-xs md:text-sm">atau</p>
             {/* <Link href="/api/auth/signup/callback" className="w-full"> */}
-              <button
-                className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
-                onClick={() => {
-                  window.location =
-                    "http://lenjelenanmadura.id/api/auth/signup";
-                }}
-              >
-                <div className="flex gap-4 justify-center max-w-sm items-center">
-                  <img src="/icons/google.svg" className="w-5 " alt="google" />
-                  <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
-                    Masuk dengan Google
-                  </span>
-                </div>
-              </button>
+            <button
+              className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
+              onClick={() => {
+                window.location = "http://lenjelenanmadura.id/api/auth/signup";
+              }}
+            >
+              <div className="flex gap-4 justify-center max-w-sm items-center">
+                <img src="/icons/google.svg" className="w-5 " alt="google" />
+                <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
+                  Masuk dengan Google
+                </span>
+              </div>
+            </button>
             {/* </Link> */}
             <p className="">
               Belum Punya Account ?{" "}

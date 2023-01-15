@@ -1,15 +1,12 @@
-import Footer from "@components/molecules/Footer";
+import { useEffect, useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Cookies from "js-cookie";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/molecules/Text";
-import axios from "axios";
-import Cookies from "js-cookie";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import validator from "validator";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -17,6 +14,7 @@ export default function ResetPassword() {
     const email = Cookies.get("email");
     const token = Cookies.get("token");
     setCredentials({ ...credentials, email: email, token: token });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [credentials, setCredentials] = useState({
@@ -79,7 +77,7 @@ export default function ResetPassword() {
   const handleClick = async () => {
     try {
       await axios
-        .post("http://api.lenjelenanmadura.id/api/resetPassword", {
+        .post(process.env.BASE_API + "/resetPassword", {
           token: credentials.token,
           email: credentials.email,
           password: credentials.password,
