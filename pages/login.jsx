@@ -194,12 +194,11 @@ export default function LoginPage() {
               Masuk
             </button>
             <p className="text-xs md:text-sm">atau</p>
-            {/* <Link href="/api/auth/signup/callback" className="w-full"> */}
+            {/* <Link href="/googleAuthCallback" className="w-full"> */}
               <button
                 className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
                 onClick={() => {
-                  window.location =
-                    "http://lenjelenanmadura.id/api/auth/signup";
+                  router.push("http://api.lenjelenanmadura.id/api/auth/signup");
                 }}
               >
                 <div className="flex gap-4 justify-center max-w-sm items-center">
