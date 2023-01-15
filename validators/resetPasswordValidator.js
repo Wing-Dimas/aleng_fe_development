@@ -1,6 +1,6 @@
 const { object, string, ref } = require("yup");
 
-let loginSchema = object().shape({
+let resetPasswordSchema = object().shape({
   password: string("Password tidak valid")
     .min(8, "Password harus lebih dari 8 karakter")
     .required("Password tidak boleh kosong"),
@@ -12,7 +12,7 @@ let loginSchema = object().shape({
 
 const validateResetPassword = async (form) => {
   try {
-    const res = await loginSchema.validate(form, { abortEarly: false });
+    const res = await resetPasswordSchema.validate(form, { abortEarly: false });
     // return back form
     return { isError: false, form };
   } catch (err) {
