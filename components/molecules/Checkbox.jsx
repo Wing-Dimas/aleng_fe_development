@@ -19,7 +19,7 @@ export default function Checkbox({
         containerClassName ? " " + containerClassName : ""
       }`}
     >
-      <label className="absolute top-0.5 left-0.5 pointer-events-none">
+      <label className="absolute h-full flex items-center justify-center top-0 w-4 pointer-events-none">
         <IconCheck
           className={`${
             value ? "text-black" : "text-transparent"
