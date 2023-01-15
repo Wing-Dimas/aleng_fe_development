@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useBreakpoint } from "use-breakpoint";
@@ -21,8 +21,12 @@ import {
   IconSettings,
   IconUser,
 } from "@tabler/icons";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Profile() {
+  const router = useRouter();
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [user, setUser] = useState({
     email: "",
@@ -33,9 +37,15 @@ export default function Profile() {
     password: "",
     repassword: "",
   });
-
   const doChangeUser = ({ name, value }) => {
     setUser({ ...user, [name]: value });
+  };
+  const handleClick = async () => {
+    Cookies.remove("token");
+    const cookie = Cookies.get("token");
+    if (cookie == undefined) {
+      router.push("/");
+    }
   };
 
   return (
@@ -82,7 +92,10 @@ export default function Profile() {
                 </Text.small>
               </Link>
               <br />
-              <Button className="w-full bg-custom-primary_red text-white">
+              <Button
+                className="w-full bg-custom-primary_red text-white"
+                onClick={handleClick}
+              >
                 Keluar
               </Button>
             </Container>
@@ -116,7 +129,10 @@ export default function Profile() {
                 </Text.small>
               </Link>
               <br />
-              <Button className="w-full bg-custom-primary_red text-white">
+              <Button
+                className="w-full bg-custom-primary_red text-white"
+                onClick={handleClick}
+              >
                 Keluar
               </Button>
             </FABSheet>

@@ -18,6 +18,7 @@ export default function RegisterPage({}) {
     password: "",
     password_confirmation: "",
   });
+  
   const [messages, setMessages] = useState({
     name: { isError: false, message: "" },
     email: { isError: false, message: "" },

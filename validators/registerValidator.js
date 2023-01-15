@@ -10,7 +10,7 @@ let registerSchema = object().shape({
     .test(
       "len",
       "Nomor Telepon harus lebih dari 11 karakter",
-      (val) => val.toString().length > 11
+      (val) => val.toString().length >= 11
     )
     .required("Nomor Telepon tidak boleh kosong")
     .transform((_, val) => (val !== "" ? Number(val) : null)),

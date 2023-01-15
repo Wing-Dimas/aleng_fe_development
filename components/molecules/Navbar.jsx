@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IconMenu2, IconX } from "@tabler/icons";
+import Cookies from "js-cookie";
 
 export default function Navbar({ transparentFirst = false }) {
   const [show, setShow] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [cookie, setCookie] = useState("");
   const doPreventClose = (e) => {
     e.stopPropagation();
   };
@@ -18,6 +20,10 @@ export default function Navbar({ transparentFirst = false }) {
       setAnimate(false);
     }
   };
+
+  useEffect(() => {
+    setCookie(Cookies.get("token"));
+  }, []);
 
   useEffect(() => {
     if (show) {
@@ -49,14 +55,13 @@ export default function Navbar({ transparentFirst = false }) {
       return () => window.removeEventListener("scroll", onScroll);
     }
   }, [transparentFirst]);
-
   return (
     <div
       className={`${
         offset < 10 && transparentFirst ? "bg-transparent" : "bg-white"
       } ${
         transparentFirst ? "fixed" : "sticky"
-      } top-0 z-[99] w-full backdrop-blur-sm transition-all`}
+      } top-0 z-[1000] w-full backdrop-blur-sm transition-all`}
     >
       {/* SIDEBAR */}
       <div
@@ -98,20 +103,31 @@ export default function Navbar({ transparentFirst = false }) {
               </Link>
             </div>
             <br />
-            <div className="grid grid-cols-2 gap-8">
-              <Link
-                className="rounded-full text-center font-semibold py-2.5 px-6 bg-custom-secondary_yellow border-2 border-custom-secondary_yellow shadow-md hover:bg-slate-500 hover:bg-none"
-                href="/login"
-              >
-                Masuk
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-full text-center font-semibold py-2.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-              >
-                Daftar
-              </Link>
-            </div>
+            {cookie ? (
+              <div className="w-full">
+                <Link
+                  href="/profile"
+                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
+                >
+                  Profile
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-8">
+                <Link
+                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-custom-secondary_yellow border-2 border-custom-secondary_yellow shadow-md hover:bg-slate-500 hover:bg-none"
+                  href="/login"
+                >
+                  Masuk
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
+                >
+                  Daftar
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -174,24 +190,35 @@ export default function Navbar({ transparentFirst = false }) {
               Cek Pesanan
             </Link>
           </div>
-          <div className="hidden md:flex items-center justify-between gap-16 font-semibold">
-            <Link
-              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
-                offset < 10 && transparentFirst
-                  ? "text-white"
-                  : "text-custom-black"
-              }`}
-              href="/login"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-full py-1.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-            >
-              Daftar
-            </Link>
-          </div>
+          {cookie ? (
+            <div className="hidden md:flex font-semibold">
+              <Link
+                href="/profile"
+                className="rounded-full py-1.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
+              >
+                Profile
+              </Link>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center justify-between gap-16 font-semibold">
+              <Link
+                className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
+                  offset < 10 && transparentFirst
+                    ? "text-white"
+                    : "text-custom-black"
+                }`}
+                href="/login"
+              >
+                Masuk
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-full py-1.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
+              >
+                Daftar
+              </Link>
+            </div>
+          )}
           <div className="block md:hidden cursor-pointer drop-shadow-md">
             <IconMenu2
               className={`${
