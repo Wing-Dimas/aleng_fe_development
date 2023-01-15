@@ -5,7 +5,7 @@ export default function LSTextInput({
   label,
   placeholder,
   type,
-  error,
+  message,
   readonly,
 }) {
   const doChange = (e) => {
@@ -28,10 +28,10 @@ export default function LSTextInput({
       />
       <p
         className={`mb-0 text-xs ${
-          error?.isError ? "text-custom-primary_red" : "text-green-700"
+          message?.isError ? "text-custom-primary_red" : "text-green-700"
         }`}
       >
-        {error?.message}
+        {message?.message}
       </p>
     </label>
   );
