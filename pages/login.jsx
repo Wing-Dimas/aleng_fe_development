@@ -80,17 +80,32 @@ export default function LoginPage() {
     // eslint-disable-next-line
   }, []);
 
-  // const handleApi=async(e)=>{
-  //   await axios.post
-  // }
+  const handleApi = async (e) => {
+    try {
+      await axios
+        .get("http://api.lenjelenanmadura.id/api/auth/signup/", {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            "Access-Control-Allow-Methods": "*",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
+    <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
       <Head>
         <title>Login | Lenjelen</title>
       </Head>
       <Navbar transparentFirst />
-      <div className={`max-w-full w-full relative`}>
+      <div className={`max-w-full w-full relative bg-white`}>
         <div className="absolute top-0 w-full md:top-[-4.75rem]">
           <Image
             src="/icons/sky.png"
@@ -159,19 +174,19 @@ export default function LoginPage() {
               Masuk
             </button>
             <p className="text-xs md:text-sm">atau</p>
-            <Link href="/googleAuthCallback" className="w-full">
-              <button
-                className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
-                // onClick={handleApi}
-              >
-                <div className="flex gap-4 justify-center max-w-sm items-center">
-                  <img src="/icons/google.svg" className="w-5 " alt="google" />
-                  <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
-                    Masuk dengan Google
-                  </span>
-                </div>
-              </button>
-            </Link>
+            {/* <Link href="/googleAuthCallback" className="w-full"> */}
+            <button
+              className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
+              onClick={handleApi}
+            >
+              <div className="flex gap-4 justify-center max-w-sm items-center">
+                <img src="/icons/google.svg" className="w-5 " alt="google" />
+                <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
+                  Masuk dengan Google
+                </span>
+              </div>
+            </button>
+            {/* </Link> */}
             <p className="">
               Belum Punya Account ?{" "}
               <span className="text-red-600 hover:text-red-800 cursor-pointer">

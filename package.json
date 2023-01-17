@@ -12,6 +12,7 @@
     "@next/font": "^13.0.4",
     "@tabler/icons": "^1.113.0",
     "axios": "^1.2.2",
+    "cors": "^2.8.5",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
     "fslightbox-react": "^1.6.2-2",
