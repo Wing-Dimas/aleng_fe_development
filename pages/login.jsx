@@ -10,6 +10,7 @@ import Checkbox from "@components/molecules/Checkbox";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   return {
@@ -17,7 +18,8 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function LoginPage() {
+export default function LoginPage({}) {
+  const { data: session } = useSession();
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -74,30 +76,12 @@ export default function LoginPage() {
 
   useEffect(() => {
     let token = Cookies.get("token");
-    if (token) {
+    let tokenGoogle = Cookies.get("next-auth.session-token");
+    if (token || tokenGoogle) {
       router.push("/");
     }
     // eslint-disable-next-line
   }, []);
-
-  const handleApi = async (e) => {
-    try {
-      await axios
-        .get("http://api.lenjelenanmadura.id/api/auth/signup/", {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": true,
-            "Access-Control-Allow-Methods": "*",
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
@@ -174,10 +158,9 @@ export default function LoginPage() {
               Masuk
             </button>
             <p className="text-xs md:text-sm">atau</p>
-            {/* <Link href="/googleAuthCallback" className="w-full"> */}
             <button
               className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
-              onClick={handleApi}
+              onClick={signIn}
             >
               <div className="flex gap-4 justify-center max-w-sm items-center">
                 <img src="/icons/google.svg" className="w-5 " alt="google" />
@@ -186,7 +169,6 @@ export default function LoginPage() {
                 </span>
               </div>
             </button>
-            {/* </Link> */}
             <p className="">
               Belum Punya Account ?{" "}
               <span className="text-red-600 hover:text-red-800 cursor-pointer">

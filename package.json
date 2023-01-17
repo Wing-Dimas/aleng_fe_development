@@ -18,6 +18,7 @@
     "fslightbox-react": "^1.6.2-2",
     "js-cookie": "^3.0.1",
     "next": "13.0.4",
+    "next-auth": "^4.18.8",
     "next-cookies": "^2.0.3",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
@@ -31,7 +32,7 @@
     "validator": "^13.7.0",
     "yup": "^0.32.11",
     "yup-locales": "^1.2.10",
-    "zustand": "^4.3.1"
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

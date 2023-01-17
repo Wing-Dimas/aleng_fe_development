@@ -8,8 +8,10 @@ import axios from "axios";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateRegister from "@validators/registerValidator";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function RegisterPage({}) {
+  const { data: session } = useSession();
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     name: "",
@@ -18,7 +20,7 @@ export default function RegisterPage({}) {
     password: "",
     password_confirmation: "",
   });
-  
+
   const [messages, setMessages] = useState({
     name: { isError: false, message: "" },
     email: { isError: false, message: "" },
@@ -92,7 +94,7 @@ export default function RegisterPage({}) {
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200  p-9  z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
           <p className="text-[1.2rem] md:text-[2rem] text-center">
-            Selamat Bergabung
+            Selamat Bergabung {session ? "Logged in" : "not logged in"}
           </p>
           <form
             className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full"
@@ -152,7 +154,10 @@ export default function RegisterPage({}) {
                 Register
               </button>
               <p className="text-xs md:text-sm">atau</p>
-              <button className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
+              <button
+                onClick={signIn}
+                className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
+              >
                 <div className="flex gap-4 justify-center max-w-sm items-center">
                   <img src="/icons/google.svg" className="w-5 " alt="google" />
                   <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
