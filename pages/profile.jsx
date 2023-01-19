@@ -24,8 +24,10 @@ import {
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Profile() {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [user, setUser] = useState({
@@ -40,30 +42,44 @@ export default function Profile() {
   const doChangeUser = ({ name, value }) => {
     setUser({ ...user, [name]: value });
   };
-  const handleClick = async () => {
+  const handleClick = async (e) => {
     const cookie = Cookies.get("token");
-    try {
-      await axios
-        .post(
-          process.env.BASE_API + "/auth/logout",
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${cookie}`,
-            },
-          }
-        )
-        .then((res) => {
-          Cookies.remove("token");
-          const cookie = Cookies.get("token");
-          if (cookie == undefined) {
-            router.push("/");
-          }
-        });
-    } catch (err) {
-      console.log(err);
+    if (cookie) {
+      try {
+        await axios
+          .post(
+            process.env.BASE_API + "/auth/logout",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${cookie}`,
+              },
+            }
+          )
+          .then((res) => {
+            Cookies.remove("token");
+            const cookie = Cookies.get("token");
+            if (cookie == undefined) {
+              router.push("/");
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (status == "authenticated") {
+      signOut();
     }
   };
+
+  useEffect(() => {
+    const cookie = Cookies.get("token");
+    if (status == "unauthenticated") {
+      if (cookie == undefined) {
+        router.push("/");
+      }
+    }
+  }, [status]);
 
   return (
     <Wrapper>

@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconMenu2, IconX } from "@tabler/icons";
 import Cookies from "js-cookie";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navbar({ transparentFirst = false }) {
+  const { data: session, status } = useSession();
   const [show, setShow] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [offset, setOffset] = useState(0);
@@ -103,7 +105,7 @@ export default function Navbar({ transparentFirst = false }) {
               </Link>
             </div>
             <br />
-            {cookie ? (
+            {cookie || status == "authenticated" ? (
               <div className="w-full">
                 <Link
                   href="/profile"
@@ -190,7 +192,7 @@ export default function Navbar({ transparentFirst = false }) {
               Cek Pesanan
             </Link>
           </div>
-          {cookie ? (
+          {cookie || status == "authenticated" ? (
             <div className="hidden md:flex font-semibold">
               <Link
                 href="/profile"

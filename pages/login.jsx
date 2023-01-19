@@ -10,7 +10,7 @@ import Checkbox from "@components/molecules/Checkbox";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   return {
@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function LoginPage({}) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -75,13 +75,19 @@ export default function LoginPage({}) {
   };
 
   useEffect(() => {
-    let token = Cookies.get("token");
-    let tokenGoogle = Cookies.get("next-auth.session-token");
-    if (token || tokenGoogle) {
+    const token = Cookies.get("token");
+    if (status == "authenticated") {
+      router.push("/");
+    }
+    if (token) {
       router.push("/");
     }
     // eslint-disable-next-line
-  }, []);
+  }, [status]);
+
+  const handleSignIn = () => {
+    signIn();
+  };
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
@@ -160,7 +166,7 @@ export default function LoginPage({}) {
             <p className="text-xs md:text-sm">atau</p>
             <button
               className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
-              onClick={signIn}
+              onClick={handleSignIn}
             >
               <div className="flex gap-4 justify-center max-w-sm items-center">
                 <img src="/icons/google.svg" className="w-5 " alt="google" />
@@ -169,6 +175,7 @@ export default function LoginPage({}) {
                 </span>
               </div>
             </button>
+
             <p className="">
               Belum Punya Account ?{" "}
               <span className="text-red-600 hover:text-red-800 cursor-pointer">
