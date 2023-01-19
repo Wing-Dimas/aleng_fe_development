@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +8,11 @@ import axios from "axios";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateRegister from "@validators/registerValidator";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import Cookies from "js-cookie";
 
 export default function RegisterPage({}) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     name: "",
@@ -69,7 +70,20 @@ export default function RegisterPage({}) {
       });
     }
   };
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (status == "authenticated") {
+      router.push("/");
+    }
+    if (token) {
+      router.push("/");
+    }
+    // eslint-disable-next-line
+  }, [status]);
 
+  const handleSignIn = () => {
+    signIn();
+  };
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
@@ -155,7 +169,7 @@ export default function RegisterPage({}) {
               </button>
               <p className="text-xs md:text-sm">atau</p>
               <button
-                onClick={signIn}
+                onClick={handleSignIn}
                 className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
               >
                 <div className="flex gap-4 justify-center max-w-sm items-center">
