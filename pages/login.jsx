@@ -134,7 +134,7 @@ export default function LoginPage({}) {
               type="email"
               message={messages.email}
             />
-            <LSTextInput
+            <LSTextInput.obscure
               name="password"
               label="Password"
               value={credentials.password}

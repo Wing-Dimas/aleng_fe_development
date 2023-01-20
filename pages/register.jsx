@@ -141,7 +141,7 @@ export default function RegisterPage({}) {
               type="text"
               message={messages.phoneNumber}
             />
-            <LSTextInput
+            <LSTextInput.obscure
               name="password"
               label="Password"
               value={credentials.password}
@@ -150,7 +150,7 @@ export default function RegisterPage({}) {
               type="password"
               message={messages.password}
             />
-            <LSTextInput
+            <LSTextInput.obscure
               name="password_confirmation"
               label="Konfirmasi Password"
               value={credentials.password_confirmation}
