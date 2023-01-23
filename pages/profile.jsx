@@ -26,17 +26,23 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+// import { useUserStore } from "store/userstore";
+import ReverseDate from "@components/molecules/ReverseDate";
 
 export default function Profile() {
+  // const dataUser = useUserStore((state) => state.user);
+  const dataUser = JSON.parse(localStorage.getItem("user-storage"))?.state
+    ?.user;
   const { data: session, status } = useSession();
   const router = useRouter();
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [index, setIndex] = useState(0);
+
   const [user, setUser] = useState({
     email: "",
     fname: "",
     gender: "L",
-    birth_date: Date(),
+    birth_date: "",
     no_hp: "",
     password: "",
     repassword: "",
@@ -60,6 +66,7 @@ export default function Profile() {
           )
           .then((res) => {
             Cookies.remove("token");
+            localStorage.removeItem("user-storage");
             const cookie = Cookies.get("token");
             if (cookie == undefined) {
               router.push("/");
@@ -73,7 +80,8 @@ export default function Profile() {
       signOut();
     }
   };
-
+  const handleSubmit = (e) => {};
+  
   useEffect(() => {
     const cookie = Cookies.get("token");
     if (status == "unauthenticated") {
@@ -82,6 +90,22 @@ export default function Profile() {
       }
     }
   }, [status]);
+
+  useEffect(() => {
+    setUser({
+      ...user,
+      email: dataUser?.user?.email,
+      fname: dataUser?.profile?.nama,
+      gender:
+        dataUser?.profile?.jenis_kelamin.toLowerCase() == "laki-laki"
+          ? "L"
+          : "P",
+      birth_date: new Date(ReverseDate(dataUser?.profile?.tanggal_lahir))
+        .toISOString()
+        .substring(0, 10),
+      no_hp: dataUser?.profile?.no_hp,
+    });
+  }, []);
 
   return (
     <Wrapper>
@@ -107,8 +131,8 @@ export default function Profile() {
               <div className="flex items-start gap-2">
                 <div className="h-12 w-12 rounded-full bg-red-500" />
                 <div>
-                  <Text>Oliver Sykez</Text>
-                  <Text.small>oliversykez@gmail.com</Text.small>
+                  <Text>{user?.fname}</Text>
+                  <Text.small>{user.email}</Text.small>
                 </div>
               </div>
               <br />
@@ -165,8 +189,8 @@ export default function Profile() {
               <div className="flex items-center gap-2">
                 <div className="h-12 w-12 rounded-full bg-red-500" />
                 <div>
-                  <Text>Oliver Sykez</Text>
-                  <Text.small>oliversykez@gmail.com</Text.small>
+                  <Text>{user?.fname}</Text>
+                  <Text.small>{user?.email}</Text.small>
                 </div>
               </div>
               <br />
@@ -226,17 +250,26 @@ export default function Profile() {
               <Text>Alamat Email</Text>
               <TextInput
                 name="email"
-                value={user.email}
+                value={dataUser?.user?.email}
                 onChange={doChangeUser}
                 placeholder="Masukkan emailmu"
+                readonly="readOnly"
               />
               <br />
               <Text>Nama Lengkap</Text>
               <TextInput
                 name="fname"
-                value={user.fname}
+                value={user?.fname}
                 onChange={doChangeUser}
                 placeholder="Masukkan nama lengkapmu"
+              />
+              <br />
+              <Text>Alamat Lengkap</Text>
+              <TextInput
+                name="alamat"
+                // value={user?.fname}
+                onChange={doChangeUser}
+                placeholder="Masukkan Alamat lengkapmu"
               />
               <br />
               <div className="flex items-center gap-2">
@@ -263,7 +296,7 @@ export default function Profile() {
                   <Text>Tanggal Lahir</Text>
                   <DateInput
                     name="birth_date"
-                    value={user.birth_date}
+                    value={user?.birth_date}
                     onChange={doChangeUser}
                   />
                 </div>
@@ -272,12 +305,14 @@ export default function Profile() {
               <Text>No Telepon</Text>
               <TextInput
                 name="no_hp"
-                value={user.no_hp}
+                value={user?.no_hp}
                 onChange={doChangeUser}
                 placeholder="Masukkan no telepon"
               />
               <br />
-              <Button className="w-full">Perbarui Profil</Button>
+              <Button className="w-full" onClick={handleSubmit}>
+                Perbarui Profil
+              </Button>
             </Container>
           ) : index == 1 ? (
             <Container>

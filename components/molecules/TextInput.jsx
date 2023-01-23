@@ -14,9 +14,19 @@ const TextInput = ({
   placeholder = "",
   value,
   onChange,
+  readonly,
+  pattern,
+  inputMode,
 }) => {
+  
   const doChange = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+    if (e.currentTarget.name == "no_hp") {
+      if (!isNaN(e.target.value)) {
+        onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+      }
+    } else {
+      onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+    }
   };
 
   return (
@@ -48,6 +58,7 @@ const TextInput = ({
         }`}
         name={name}
         id={name}
+        readOnly={readonly}
       />
       {rightIcon && (
         <label
@@ -76,6 +87,7 @@ TextInput.obscure = ({
   placeholder = "",
   value,
   onChange,
+  readonly,
 }) => {
   const doChange = (e) => {
     onChange({ name: e.currentTarget.name, value: e.currentTarget.value });

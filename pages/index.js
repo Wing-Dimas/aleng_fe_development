@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,8 +24,11 @@ import Title from "@components/molecules/Title";
 import Link from "next/link";
 import Button from "@components/molecules/Button";
 import TextInput from "@components/molecules/TextInput";
+import { useUserStore } from "store/userstore";
+import Cookies from "js-cookie";
 
 export default function Home() {
+  const changeUserStore = useUserStore((state) => state.fetchUser);
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [menuIndex, setMenuIndex] = useState(0);
   const [destinasi, setDestinasi] = useState("");
@@ -72,6 +75,13 @@ export default function Home() {
       },
     });
   };
+
+  const cookie = Cookies.get("token");
+  useEffect(() => {
+    if (cookie != undefined) {
+      changeUserStore(process.env.BASE_API + "/auth/user/profile", cookie);
+    }
+  }, [cookie]);
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">

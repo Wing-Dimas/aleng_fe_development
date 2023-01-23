@@ -24,7 +24,6 @@ export default function DetailSearchInput({
       child: 1,
     },
   });
-  console.log(order);
   const doSwitchCheckDate = () => {
     setCheck({
       ...check,

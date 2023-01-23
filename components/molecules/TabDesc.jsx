@@ -2,6 +2,8 @@ import { useState } from "react";
 import ClosestObject from "./ClosestObject";
 import FacilityIcon from "./FacilityIcon";
 import Tab from "./Tab";
+import JamOperasional from "./JamOperasional";
+import Text from "./Text";
 
 export default function TabDesc({ page }) {
   const [index, setIndex] = useState(0);
@@ -26,17 +28,39 @@ export default function TabDesc({ page }) {
             berbagai fasilitas untuk menunjang kualitas dan kenyamanan selama
             Anda menginap.
           </p>
+          <br />
           {page === "kuliner" && (
             <div className="flex flex-col gap-3">
-              <p>Jam Operasional</p>
+              <Text>Jam Operasional</Text>
               <div className="flex flex-col gap-3">
-                {/* <JamOperasional days="Senin" />
-                      <JamOperasional days="Selasa" />
-                      <JamOperasional days="Rabu" />
-                      <JamOperasional days="Kamis" />
-                      <JamOperasional days="Jumat" />
-                      <JamOperasional days="Sabtu" />
-                      <JamOperasional days="Minggu" /> */}
+                <JamOperasional
+                  days="Senin"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Selasa"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Rabu"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Kamis"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Jumat"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Sabtu"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
+                <JamOperasional
+                  days="Minggu"
+                  decs="Buka sepanjang hari dari 06:00-23:00"
+                />
               </div>
             </div>
           )}

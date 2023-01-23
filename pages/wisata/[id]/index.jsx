@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useBreakpoint } from "use-breakpoint";
@@ -22,6 +22,7 @@ import TabDesc from "@components/molecules/TabDesc";
 import Text from "@components/molecules/Text";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconMapPin } from "@tabler/icons";
+import axios from "axios";
 export default function DetailWisata({}) {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [order, setOrder] = useState({
@@ -31,6 +32,7 @@ export default function DetailWisata({}) {
     },
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [item, setItem] = useState(null);
 
   const doOpen = () => {
     setIsOpen(!isOpen);
@@ -49,6 +51,19 @@ export default function DetailWisata({}) {
       },
     });
   };
+
+  //coba
+  useEffect(() => {
+    try {
+      axios
+        .get("http://api.lenjelenanmadura.id/api/wisata/showAll")
+        .then((res) => {
+          setItem(res?.data?.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   return (
     <Wrapper>
@@ -210,19 +225,21 @@ export default function DetailWisata({}) {
                 : 4.5
             }
           >
-            {[...Array(20)].map((v, i) => {
-              return (
-                <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="/wisata/gambar5.jpg"
-                    title="Air Terjun Toroan"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    price="200.000"
-                  />
-                </SwiperSlide>
-              );
-            })}
+            {item &&
+              item.map((item, i) => {
+                console.log(item);
+                return (
+                  <SwiperSlide key={i}>
+                    <QuickCard
+                      imageUrl="/wisata/gambar5.jpg"
+                      title={item?.nama_wisata}
+                      address={`Kab. ${item?.kota}`}
+                      review_count={666}
+                      price={item?.harga}
+                    />
+                  </SwiperSlide>
+                );
+              })}
           </Swiper>
         </div>
       </MainContent>
