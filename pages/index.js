@@ -27,7 +27,13 @@ import TextInput from "@components/molecules/TextInput";
 import { useUserStore } from "store/userstore";
 import Cookies from "js-cookie";
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+}
+export default function Home({}) {
+  const cookie = Cookies.get("token");
   const changeUserStore = useUserStore((state) => state.fetchUser);
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [menuIndex, setMenuIndex] = useState(0);
@@ -76,7 +82,6 @@ export default function Home() {
     });
   };
 
-  const cookie = Cookies.get("token");
   useEffect(() => {
     if (cookie != undefined) {
       changeUserStore(process.env.BASE_API + "/auth/user/profile", cookie);

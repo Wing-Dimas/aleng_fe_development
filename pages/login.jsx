@@ -11,15 +11,11 @@ import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
 import { signIn, useSession } from "next-auth/react";
-
-export async function getServerSideProps(context) {
-  return {
-    props: {},
-  };
-}
+import { authPage } from "protectedRoute/authentication";
 
 export default function LoginPage({}) {
   const { data: session, status } = useSession();
+  const token = Cookies.get("token");
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -75,13 +71,7 @@ export default function LoginPage({}) {
   };
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (status == "authenticated") {
-      router.push("/");
-    }
-    if (token) {
-      router.push("/");
-    }
+    authPage(token, status, router);
     // eslint-disable-next-line
   }, [status]);
 

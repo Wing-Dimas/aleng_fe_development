@@ -26,15 +26,19 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
-// import { useUserStore } from "store/userstore";
 import ReverseDate from "@components/molecules/ReverseDate";
+import { unauthPage } from "protectedRoute/authentication";
 
 export default function Profile() {
-  // const dataUser = useUserStore((state) => state.user);
-  const dataUser = JSON.parse(localStorage.getItem("user-storage"))?.state
-    ?.user;
+
+  if (typeof window !== "undefined") {
+    var dataUser = JSON.parse(localStorage.getItem("user-storage"))?.state
+      ?.user;
+  }
+  const token = Cookies.get("token");
   const { data: session, status } = useSession();
   const router = useRouter();
+
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [index, setIndex] = useState(0);
 
@@ -44,6 +48,7 @@ export default function Profile() {
     gender: "L",
     birth_date: "",
     no_hp: "",
+    alamat: "",
     password: "",
     repassword: "",
   });
@@ -66,7 +71,9 @@ export default function Profile() {
           )
           .then((res) => {
             Cookies.remove("token");
-            localStorage.removeItem("user-storage");
+            if (typeof window !== "undefined") {
+              localStorage.removeItem("user-storage");
+            }
             const cookie = Cookies.get("token");
             if (cookie == undefined) {
               router.push("/");
@@ -80,15 +87,11 @@ export default function Profile() {
       signOut();
     }
   };
+
   const handleSubmit = (e) => {};
-  
+
   useEffect(() => {
-    const cookie = Cookies.get("token");
-    if (status == "unauthenticated") {
-      if (cookie == undefined) {
-        router.push("/");
-      }
-    }
+    unauthPage(token, status, router);
   }, [status]);
 
   useEffect(() => {
@@ -104,6 +107,7 @@ export default function Profile() {
         .toISOString()
         .substring(0, 10),
       no_hp: dataUser?.profile?.no_hp,
+      alamat: dataUser?.profile?.alamat,
     });
   }, []);
 
@@ -267,12 +271,12 @@ export default function Profile() {
               <Text>Alamat Lengkap</Text>
               <TextInput
                 name="alamat"
-                // value={user?.fname}
+                value={user?.alamat}
                 onChange={doChangeUser}
                 placeholder="Masukkan Alamat lengkapmu"
               />
               <br />
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col md:flex-row items-center gap-2">
                 <div className="w-full">
                   <Text>Jenis Kelamin</Text>
                   <Select
