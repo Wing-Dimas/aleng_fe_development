@@ -10,12 +10,18 @@ import Checkbox from "@components/molecules/Checkbox";
 import LSTextInput from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
-import { signIn, useSession } from "next-auth/react";
-import { authPage } from "protectedRoute/authentication";
+// import { signIn, useSession } from "next-auth/react";
+import { unauthPage } from "protectedRoute/authentication";
+
+export async function getServerSideProps(context) {
+  await unauthPage(context);
+  return {
+    props: {},
+  };
+}
 
 export default function LoginPage({}) {
-  const { data: session, status } = useSession();
-  const token = Cookies.get("token");
+  // const { data: session, status } = useSession();
   const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -47,7 +53,6 @@ export default function LoginPage({}) {
         if (!!res.data.access_token) {
           Cookies.set("token", res.data.access_token);
           router.push("/");
-          return;
         }
         setCredentials({ email: "", password: "", rememberme: false });
         setMessages({
@@ -69,11 +74,6 @@ export default function LoginPage({}) {
       });
     }
   };
-
-  useEffect(() => {
-    authPage(token, status, router);
-    // eslint-disable-next-line
-  }, [status]);
 
   const handleSignIn = () => {
     signIn();

@@ -26,17 +26,22 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+// import { useUserStore } from "store/userstore";
 import ReverseDate from "@components/molecules/ReverseDate";
-import { unauthPage } from "protectedRoute/authentication";
+import { authPage } from "protectedRoute/authentication";
 
+export async function getServerSideProps(context) {
+  await authPage(context);
+  return {
+    props: {},
+  };
+}
 export default function Profile() {
-
   if (typeof window !== "undefined") {
     var dataUser = JSON.parse(localStorage.getItem("user-storage"))?.state
       ?.user;
   }
-  const token = Cookies.get("token");
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
   const router = useRouter();
 
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
@@ -89,10 +94,6 @@ export default function Profile() {
   };
 
   const handleSubmit = (e) => {};
-
-  useEffect(() => {
-    unauthPage(token, status, router);
-  }, [status]);
 
   useEffect(() => {
     setUser({

@@ -1,16 +1,33 @@
-export function unauthPage(token, status, router) {
-  if (status == "unauthenticated") {
-    if (token == undefined) {
-      router.push("/");
+import cookies from "next-cookies";
+
+export function unauthPage(context) {
+  return new Promise((resolve) => {
+    const cookie = cookies(context);
+    //redirect server
+    if (cookie.token) {
+      return context.res
+        .writeHead(302, {
+          Location: "/",
+        })
+        .end();
     }
-  }
+    return resolve("unauthorization");
+  });
 }
 
-export function authPage(token, status, router) {
-  if (status == "authenticated") {
-    router.push("/");
-  }
-  if (token) {
-    router.push("/");
-  }
+export function authPage(context) {
+  return new Promise((resolve) => {
+    const cookie = cookies(context);
+    //redirect server
+    if (!cookie.token) {
+      return context.res
+        .writeHead(302, {
+          Location: "/",
+        })
+        .end();
+    }
+    return resolve({
+      token: cookie.token,
+    });
+  });
 }

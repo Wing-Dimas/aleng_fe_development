@@ -10,12 +10,18 @@ import Navbar from "@components/molecules/Navbar";
 import validateRegister from "@validators/registerValidator";
 import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
-import { authPage } from "protectedRoute/authentication";
+import { unauthPage } from "protectedRoute/authentication";
+
+export async function getServerSideProps(context) {
+  await unauthPage(context);
+  return {
+    props: {},
+  };
+}
 
 export default function RegisterPage({}) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const token = Cookies.get("token");
 
   const [credentials, setCredentials] = useState({
     name: "",
@@ -73,10 +79,6 @@ export default function RegisterPage({}) {
       });
     }
   };
-  useEffect(() => {
-    authPage(token, status, router);
-    // eslint-disable-next-line
-  }, [status]);
 
   const handleSignIn = () => {
     signIn();
