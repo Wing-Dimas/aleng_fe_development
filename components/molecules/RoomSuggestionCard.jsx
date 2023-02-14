@@ -2,14 +2,17 @@ import { IconParking, IconToiletPaper } from "@tabler/icons";
 import Button from "./Button";
 import Rating from "./Rating";
 import Text from "./Text";
+import Image from "next/image";
 
 export default function RoomSuggestionCard() {
   return (
     <div className="">
       <div className="hidden md:flex flex-row w-full h-full gap-[10px] max-h-52">
         <div className="flex flex-col shadow-custom rounded-md w-1/4 bg-white">
-          <div className="w-full h-[80%]">
-            <img
+          <div className="relative w-full h-[80%]">
+            <Image
+              width={1000}
+              height={1000}
               src="/penginapan/gambar1.png"
               alt=""
               className="rounded-t-md w-full h-full object-cover object-bottom"
@@ -63,11 +66,13 @@ export default function RoomSuggestionCard() {
         </div>
       </div>
       <div className="flex md:hidden flex-row w-full gap-2 p-2 bg-white h-full max-h-52 border-[0.5px] border-[#ABACAC]/30 shadow-md rounded-md">
-        <div className="flex flex-col w-[40%] ">
-          <img
+        <div className="relative flex flex-col w-[40%] ">
+          <Image
+            width={1000}
+            height={1000}
             src="/penginapan/gambar1.png"
             alt=""
-            className="rounded-md w-full h-full object-cover object-bottom"
+            className="rounded-t-md w-full h-full object-cover object-bottom"
           />
         </div>
         <div className="flex flex-col gap-2 w-[60%] items-start justify-between">
@@ -83,8 +88,11 @@ export default function RoomSuggestionCard() {
               </p>
             </div>
             <div className="flex flex-row items-center p-1 gap-1 rounded-md">
-              <div className="w-[15px]">
-                <img
+              <div className="w-[15px] relative">
+                <Image
+                  alt=""
+                  height={1000}
+                  width={1000}
                   src="/icons/stars-active.png"
                   className="max-w-[15px] w-full"
                 />

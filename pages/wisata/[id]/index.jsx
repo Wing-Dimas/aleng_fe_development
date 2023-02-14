@@ -23,6 +23,7 @@ import Text from "@components/molecules/Text";
 import Wrapper from "@components/molecules/Wrapper";
 import { IconMapPin } from "@tabler/icons";
 import axios from "axios";
+import Link from "next/link";
 export default function DetailWisata({}) {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [order, setOrder] = useState({
@@ -156,9 +157,11 @@ export default function DetailWisata({}) {
                   Rp<span className="ml-1 font-semibold">50.000</span>
                 </p>
               </div>
-              <p className="font-medium text-center mt-3 hover:bg-secondary-yellow/80 text-base text-black bg-[#FDD05C] py-3 px-14 rounded-md shadow-md cursor-pointer">
-                Pesan Sekarang
-              </p>
+              <Link href="/checkout/confirm">
+                <p className="font-medium text-center mt-3 hover:bg-secondary-yellow/80 text-base text-black bg-[#FDD05C] py-3 px-14 rounded-md shadow-md cursor-pointer">
+                  Pesan Sekarang
+                </p>
+              </Link>
             </div>
           </Container>
         </div>

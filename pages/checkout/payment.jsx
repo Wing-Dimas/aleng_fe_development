@@ -31,12 +31,14 @@ export default function Payment() {
       <MainContent>
         <Stepper status="payment" />
         <br />
-        <Link href="/checkout/confirm">
-          <Heading.h2 className="flex items-center gap-2">
-            <IconChevronLeft className="w-8 h-8" />
-            <span>Pembayaran</span>
-          </Heading.h2>
-        </Link>
+        <div className="w-fit">
+          <Link href="/checkout/confirm">
+            <Heading.h2 className="flex items-center gap-2 w-fit">
+              <IconChevronLeft className="w-8 h-8" />
+              <span>Pembayaran</span>
+            </Heading.h2>
+          </Link>
+        </div>
         <br />
         <div
           className="md:grid grid-cols-2 gap-4"

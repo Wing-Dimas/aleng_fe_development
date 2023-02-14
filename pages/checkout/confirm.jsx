@@ -59,12 +59,14 @@ export default function Confirm() {
       <MainContent>
         <Stepper status="confirm" />
         <br />
-        {/* <Link href="/"> */}
-          <Heading.h2 className="flex items-center gap-2">
-            <IconChevronLeft className="w-8 h-8" />
-            <span>Konfirmasi Pesanan</span>
-          </Heading.h2>
-        {/* </Link> */}
+        <div className="w-fit">
+          <Link href="/">
+            <Heading.h2 className="flex items-center gap-2 w-fit">
+              <IconChevronLeft className="w-8 h-8" />
+              <span>Konfirmasi Pesanan</span>
+            </Heading.h2>
+          </Link>
+        </div>
         <br />
         <div
           className="md:grid grid-cols-2 gap-4"

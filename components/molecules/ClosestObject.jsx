@@ -1,22 +1,28 @@
 import { IconWalk } from "@tabler/icons";
-
+import Image from "next/image";
 export default function ClosestObject({ object }) {
   return (
     <div className="flex flex-row items-start justify-center gap-6">
       <div className="flex flex-row items-center gap-2">
         <div className="bg-[#D2001A] p-3 rounded-full">
           {object == "wisata" ? (
-            <img
-              src="/icons/building-carousel-white.png"
-              alt="building"
-              className="w-[1rem]"
-            />
+            <div className="relative w-[1rem]">
+              <Image
+                width={1000}
+                height={1000}
+                src="/icons/building-carousel-white.png"
+                alt="building"
+              />
+            </div>
           ) : (
-            <img
-              src="/icons/kuliner-white.png"
-              alt="kuliner"
-              className="w-[1rem]"
-            />
+            <div className="relative w-[1rem]">
+              <Image
+                width={1000}
+                height={1000}
+                src="/icons/kuliner-white.png"
+                alt="kuliner"
+              />
+            </div>
           )}
         </div>
         <div className="flex flex-col justify-start items-start">

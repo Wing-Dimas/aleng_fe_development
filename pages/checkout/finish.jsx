@@ -29,12 +29,14 @@ export default function Finish() {
       <MainContent>
         <Stepper status="finish" />
         <br />
-        <Link href="/checkout/payment">
-          <Heading.h2 className="flex items-center gap-2">
-            <IconChevronLeft className="w-8 h-8" />
-            <span>Pesanan Berhasil</span>
-          </Heading.h2>
-        </Link>
+        <div className="w-fit">
+          <Link href="/checkout/payment">
+            <Heading.h2 className="flex items-center gap-2 w-fit">
+              <IconChevronLeft className="w-8 h-8" />
+              <span>Pesanan Berhasil</span>
+            </Heading.h2>
+          </Link>
+        </div>
         <br />
         <div className="flex flex-col gap-5">
           <Text.small className="!font-normal md:text-xs text-custom-dark_grey">

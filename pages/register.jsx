@@ -104,8 +104,14 @@ export default function RegisterPage({}) {
         </div>
       </div>
       <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full min-h-[calc(100vh-8rem)] font-semibold text-[2rem] my-8 md:my-32">
-        <div className="w-1/2 z-50 mt-36 md:mt-0">
-          <img src="/icons/lanjalan.png" alt="logo" />
+        <div className="w-1/2 z-50 mt-36 md:mt-0 relative">
+          <Image
+            src="/icons/lanjalan.png"
+            width={700}
+            height={50}
+            alt="iconLanjalan"
+            priority
+          />
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200  p-9  z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
           <p className="text-[1.2rem] md:text-[2rem] text-center">
@@ -174,7 +180,9 @@ export default function RegisterPage({}) {
                 className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
               >
                 <div className="flex gap-4 justify-center max-w-sm items-center">
-                  <img src="/icons/google.svg" className="w-5 " alt="google" />
+                  <div className="relative w-5 h-5">
+                    <Image src="/icons/google.svg" priority fill alt="google" />
+                  </div>
                   <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
                     Masuk dengan Google
                   </span>
@@ -192,10 +200,27 @@ export default function RegisterPage({}) {
       </div>
       <div className="max-w-full relative bottom-0 w-full">
         <div className="w-full relative md:absolute bottom-8 md:bottom-4">
-          <img src="/icons/surface.png" alt="logo" className="w-full" />
+          <div className="relative">
+            <Image
+              priority
+              width={1000}
+              height={1000}
+              src="/icons/surface.png"
+              alt="logo"
+              className="w-full"
+            />
+          </div>
         </div>
         <div className="bottom-8 md:bottom-4 absolute max-w-4xl left-[-2.25rem] md:left-20 z-40">
-          <img src="/icons/characters.png" alt="logo" className="w-full" />
+          <div className="relative">
+            <Image
+              priority
+              width={1000}
+              height={1000}
+              src="/icons/characters.png"
+              alt="logo"
+            />
+          </div>
         </div>
         <div className="relative">
           <p className="w-full absolute bg-[#FFF4E8] p-2 bottom-0 text-[#615A56] font-medium text-[0.60rem] md:text-[0.75] text-center">

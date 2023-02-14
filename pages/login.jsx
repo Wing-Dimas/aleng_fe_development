@@ -161,7 +161,9 @@ export default function LoginPage({}) {
               onClick={handleSignIn}
             >
               <div className="flex gap-4 justify-center max-w-sm items-center">
-                <img src="/icons/google.svg" className="w-5 " alt="google" />
+                <div className="relative w-5 h-5">
+                  <Image src="/icons/google.svg" priority fill alt="google" />
+                </div>
                 <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
                   Masuk dengan Google
                 </span>
@@ -179,10 +181,27 @@ export default function LoginPage({}) {
       </div>
       <div className="max-w-full relative bottom-0 w-full ">
         <div className="w-full absolute bottom-8 md:bottom-4">
-          <img src="/icons/surface.png" alt="logo" className="w-full" />
+          <div className="relative">
+            <Image
+              priority
+              width={1000}
+              height={1000}
+              src="/icons/surface.png"
+              alt="logo"
+              className="w-full"
+            />
+          </div>
         </div>
         <div className="bottom-8 md:bottom-4 absolute max-w-4xl left-[-2.25rem] md:left-20 z-40">
-          <img src="/icons/characters.png" alt="logo" className="w-full" />
+          <div className="relative">
+            <Image
+              priority
+              width={1000}
+              height={1000}
+              src="/icons/characters.png"
+              alt="logo"
+            />
+          </div>
         </div>
         <div className="relative">
           <p className="w-full absolute bg-[#FFF4E8] p-2 bottom-0 text-[#615A56] font-medium text-[0.60rem] md:text-[0.75] text-center">
