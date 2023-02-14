@@ -7,7 +7,9 @@ import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Checkbox from "@components/molecules/Checkbox";
-import LSTextInput from "@components/molecules/LSTextInput";
+import LSTextInput, {
+  ObscuredLSTextInput,
+} from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
 // import { signIn, useSession } from "next-auth/react";
@@ -124,7 +126,7 @@ export default function LoginPage({}) {
               type="email"
               message={messages.email}
             />
-            <LSTextInput.obscure
+            <ObscuredLSTextInput
               name="password"
               label="Password"
               value={credentials.password}

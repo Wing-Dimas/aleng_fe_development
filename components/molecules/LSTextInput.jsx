@@ -40,7 +40,7 @@ const LSTextInput = ({
   );
 };
 
-LSTextInput.obscure = ({
+const ObscuredLSTextInput = ({
   value,
   onChange,
   name,
@@ -94,4 +94,5 @@ LSTextInput.obscure = ({
   );
 };
 
+export { ObscuredLSTextInput };
 export default LSTextInput;

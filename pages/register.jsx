@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
-import LSTextInput from "@components/molecules/LSTextInput";
+import LSTextInput, {
+  ObscuredLSTextInput,
+} from "@components/molecules/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateRegister from "@validators/registerValidator";
 import { signIn, useSession } from "next-auth/react";
@@ -140,7 +142,7 @@ export default function RegisterPage({}) {
               type="text"
               message={messages.phoneNumber}
             />
-            <LSTextInput.obscure
+            <ObscuredLSTextInput
               name="password"
               label="Password"
               value={credentials.password}
@@ -149,7 +151,7 @@ export default function RegisterPage({}) {
               type="password"
               message={messages.password}
             />
-            <LSTextInput.obscure
+            <ObscuredLSTextInput
               name="password_confirmation"
               label="Konfirmasi Password"
               value={credentials.password_confirmation}
