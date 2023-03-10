@@ -4,10 +4,15 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
+  IconBeach,
   IconBriefcase,
+  IconBuildingCottage,
+  IconBus,
   IconCalendarEvent,
   IconChevronDown,
+  IconHorseToy,
   IconMapPin,
+  IconSoup,
   IconSwitchHorizontal,
 } from "@tabler/icons";
 import useBreakpoint from "use-breakpoint";
@@ -95,74 +100,82 @@ export default function Home({}) {
       </Head>
       <Navbar transparentFirst />
       <div
-        style={{ backgroundImage: "url('/image/hero.jpeg')" }}
+        style={{
+          backgroundImage: "url('/image/hero.jpeg')",
+        }}
         className="pt-48 bg-center bg-cover"
       >
         {/* Liburan bersama */}
-        <div className="px-12 text-custom-white font-bold text-base sm:text-4xl md:text-5xl lg:text-title max-w-7xl mx-auto">
-          <p>LIBURAN BERSAMA</p>
-          <div className="flex items-center justify-center lg:my-8">
-            <p className="sm:text-4xl md:text-5xl">LENJELEN MADURA</p>
-          </div>
-          <div className="flex items-center justify-end">
-            <p className="text-[8px] sm:text-2xl md:text-3xl lg:text-heading2 font-semibold">
-              RENCANAKAN LIBURAN SERUMU BERSAMA KAMI
-            </p>
-          </div>
+        <div className="px-4 sm:px-12 text-custom-white max-w-7xl mx-auto text-center">
+          <p className="font-bold text-4xl lg:text-title">
+            Lenjhelenan Madhureh
+          </p>
+          <p className="sm:mt-4 text-xs sm:text-base font-semibold">
+            Rencanakan liburan serumu bersama kami
+          </p>
         </div>
         {/* tabbar */}
-        <div className="text-custom-white font-semibold text-xs sm:font-heading3 sm:text-heading3 sm:my-8 px-4 max-w-xl mx-auto">
-          <div className="grid grid-cols-3 border-b border-b-custom-white">
+        <div className="text-neutral-700 font-medium my-2 sm:my-8 px-4 max-w-3xl mx-auto">
+          <div className="text-xs sm:text-base flex flex-nowrap gap-2 justify-betrween items-center bg-white rounded-full p-2 overflow-x-auto">
             <button
               value={0}
               onClick={doChangeTabIndex}
               className={`${
                 menuIndex === 0
-                  ? "border-b-custom-white"
-                  : "border-b-transparent"
-              } border-b-2 p-2 flex items-center justify-center gap-4`}
+                  ? "bg-neutral-200 border-neutral-300"
+                  : "border-transparent"
+              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
             >
-              <Image
-                src="/icons/beach.png"
-                width={24}
-                height={24}
-                alt="beach"
-              />
-              <p>WISATA</p>
+              <IconBeach className="h-5 w-5" />
+              <p>Wisata</p>
             </button>
             <button
               value={1}
               onClick={doChangeTabIndex}
               className={`${
                 menuIndex === 1
-                  ? "border-b-custom-white"
-                  : "border-b-transparent"
-              } border-b-2 p-2 flex items-center justify-center gap-4`}
+                  ? "bg-neutral-200 border-neutral-300"
+                  : "border-transparent"
+              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
             >
-              <Image
-                src="/icons/kuliner-white.png"
-                width={24}
-                height={24}
-                alt="kuliner"
-              />
-              <p>KULINER</p>
+              <IconSoup className="h-5 w-5" />
+              <p>Kuliner</p>
             </button>
             <button
               value={2}
               onClick={doChangeTabIndex}
               className={`${
                 menuIndex === 2
-                  ? "border-b-custom-white"
-                  : "border-b-transparent"
-              } border-b-2 p-2 flex items-center justify-center gap-4`}
+                  ? "bg-neutral-200 border-neutral-300"
+                  : "border-transparent"
+              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
             >
-              <Image
-                src="/icons/hotel.png"
-                width={24}
-                height={24}
-                alt="hotel"
-              />
-              <p>PENGINAPAN</p>
+              <IconBuildingCottage className="h-5 w-5" />
+              <p>Penginapan</p>
+            </button>
+            <button
+              value={3}
+              onClick={doChangeTabIndex}
+              className={`${
+                menuIndex === 3
+                  ? "bg-neutral-200 border-neutral-300"
+                  : "border-transparent"
+              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+            >
+              <IconHorseToy className="h-5 w-5" />
+              <p>Kerajinan</p>
+            </button>
+            <button
+              value={4}
+              onClick={doChangeTabIndex}
+              className={`${
+                menuIndex === 4
+                  ? "bg-neutral-200 border-neutral-300"
+                  : "border-transparent"
+              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+            >
+              <IconBus className="h-5 w-5" />
+              <p>Transportasi</p>
             </button>
           </div>
         </div>
@@ -235,8 +248,12 @@ export default function Home({}) {
         <Wisata breakpoint={breakpoint} />
       ) : menuIndex === 1 ? (
         <Kuliner breakpoint={breakpoint} />
-      ) : (
+      ) : menuIndex === 2 ? (
         <Penginapan breakpoint={breakpoint} />
+      ) : menuIndex === 3 ? (
+        <Kerajinan breakpoint={breakpoint} />
+      ) : (
+        <Transportasi breakpoint={breakpoint} />
       )}
       <Footer />
     </div>
@@ -596,6 +613,166 @@ const Penginapan = ({ breakpoint }) => {
                       address="Kab. Sumenep"
                       review_count={666}
                       price="200.000"
+                    />
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Kerajinan = ({ breakpoint }) => {
+  const [index, setIndex] = useState(0);
+
+  return (
+    <div>
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Kerajinan <span className="text-custom-primary_red">Populer</span> di
+          Madura
+        </Title>
+        <Text className="text-center">
+          Kami menawarkan kerajinan madura untuk kenang-kenangan liburanmu
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <Link href="/kerajinan/1">
+                    <QuickCard
+                      imageUrl="/image/kerajinan.jpg"
+                      title="Kerajinan Batok Kelapa"
+                      address="Jl. Raya Ketengan, Bangkalan"
+                      review_count={666}
+                    />
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+      <PilihanKabupaten name="Kerajinan" />
+    </div>
+  );
+};
+
+const Transportasi = ({ breakpoint }) => {
+  const [index, setIndex] = useState(0);
+
+  return (
+    <div>
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Transportasi <span className="text-custom-primary_red">Populer</span> di
+          Madura
+        </Title>
+        <Text className="text-center">
+          Kami menawarkan transportasi disekitar madura untuk menunjang liburanmu
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <Link href="/transportasi/1">
+                    <QuickCard
+                      imageUrl="/image/kapal.jpg"
+                      title="Kapal Penyebrangan"
+                      address="Kab. Bangkalan"
+                      review_count={666}
+                    />
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+      <PilihanKabupaten name="Transportasi" />
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Pilih <span className="text-custom-primary_red">Tipe</span>{" "}
+          Transportasi
+        </Title>
+        <Text className="text-center">
+          Kami bisa memilihkanmu beberapa tipe transportasi agar kamu merasa
+          nyaman
+        </Text>
+        <br />
+        <Tab
+          className="px-4"
+          index={index}
+          setIndex={setIndex}
+          options={["Kapal", "Bus", "Ojek", "Bentor"]}
+        />
+        <div className="max-w-7xl mx-auto">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={
+              breakpoint === "xs"
+                ? 1.5
+                : breakpoint === "sm"
+                ? 2.2
+                : breakpoint === "md"
+                ? 2.5
+                : breakpoint === "lg"
+                ? 3.2
+                : breakpoint === "xl"
+                ? 3.5
+                : breakpoint === "2xl"
+                ? 4.2
+                : 4.5
+            }
+          >
+            {[...Array(20)].map((v, i) => {
+              return (
+                <SwiperSlide key={i.toString()}>
+                  <Link href="/transportasi/1">
+                    <QuickCard
+                      imageUrl="/image/kapal.jpg"
+                      title="Kapal Penyebrangan"
+                      address="Kab. Bangkalan"
+                      review_count={666}
                     />
                   </Link>
                 </SwiperSlide>
