@@ -139,7 +139,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-yellow-400 text-center p-4 md:p-6">
-        Copyright © 2022 Lanjalan Madura
+        Copyright © 2022 Lenjhelenan Madura
       </div>
     </div>
   );

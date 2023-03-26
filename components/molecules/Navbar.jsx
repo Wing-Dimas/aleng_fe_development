@@ -5,7 +5,7 @@ import { IconMenu2, IconX } from "@tabler/icons";
 import Cookies from "js-cookie";
 import { signOut, useSession } from "next-auth/react";
 
-export default function Navbar({ transparentFirst = false }) {
+export default function Navbar({ transparentFirst = false, auth = false }) {
   const { data: session, status } = useSession();
   const [show, setShow] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -162,9 +162,9 @@ export default function Navbar({ transparentFirst = false }) {
           </Link>
           <div className="hidden md:flex items-center justify-end gap-16 font-semibold text-custom-black">
             <Link
-              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
+              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow  ${
                 offset < 10 && transparentFirst
-                  ? "text-white "
+                  ? `${auth ? "text-custom-black" : "text-white"} `
                   : "text-custom-black"
               }`}
               href="/unduh-aplikasi"
@@ -174,7 +174,7 @@ export default function Navbar({ transparentFirst = false }) {
             <Link
               className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
-                  ? "text-white"
+                  ? `${auth ? "text-custom-black" : "text-white"} `
                   : "text-custom-black"
               }`}
               href="/koleksi-kamu"
@@ -184,7 +184,7 @@ export default function Navbar({ transparentFirst = false }) {
             <Link
               className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                 offset < 10 && transparentFirst
-                  ? "text-white"
+                  ? `${auth ? "text-custom-black" : "text-white"} `
                   : "text-custom-black"
               }`}
               href="/my-order"
@@ -206,7 +206,7 @@ export default function Navbar({ transparentFirst = false }) {
               <Link
                 className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
                   offset < 10 && transparentFirst
-                    ? "text-white"
+                    ? `${auth ? "text-custom-black" : "text-white"}`
                     : "text-custom-black"
                 }`}
                 href="/login"
@@ -223,11 +223,7 @@ export default function Navbar({ transparentFirst = false }) {
           )}
           <div className="block md:hidden cursor-pointer drop-shadow-md">
             <IconMenu2
-              className={`${
-                offset < 10 && transparentFirst
-                  ? "text-custom-secondary_yellow"
-                  : "text-custom-black"
-              } transition-all h-6 w-6`}
+              className={`text-custom-black transition-all h-6 w-6`}
               onClick={doToggleShow}
             />
           </div>

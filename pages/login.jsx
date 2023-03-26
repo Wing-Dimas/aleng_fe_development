@@ -86,24 +86,24 @@ export default function LoginPage({}) {
       <Head>
         <title>Login | Lenjelen</title>
       </Head>
-      <Navbar transparentFirst />
-      <div className={`max-w-full w-full relative bg-white`}>
-        <div className="absolute top-0 w-full md:top-[-4.75rem]">
+      <Navbar transparentFirst auth />
+      {/* <div className={`max-w-full w-full relative bg-white`}>
+        <div className="absolute top-0 w-full md:top-[2rem]">
           <Image
-            src="/icons/sky.png"
+            src="/icons/batik_footer.png"
             width={1000}
             height={50}
             alt="gambarLanjalan"
-            className="drop-shadow-md w-full"
+            className="drop-shadow-md w-full opacity-80"
             priority
           />
         </div>
-      </div>
-      <div className="flex flex-col gap-2 p-4 lg:flex-row justify-center items-center w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem]">
-        <div className="w-1/2 z-50 relative  justify-center flex">
+      </div> */}
+      <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem]">
+        <div className="w-1/2 z-50 relative justify-center flex  md:mt-10 ">
           <Image
             src="/icons/lanjalan.png"
-            width={700}
+            width={600}
             height={50}
             alt="iconLanjalan"
             priority
@@ -180,32 +180,32 @@ export default function LoginPage({}) {
         </div>
       </div>
       <div className="max-w-full relative bottom-0 w-full ">
-        <div className="w-full absolute bottom-8 md:bottom-4">
+        <div className="w-full absolute bottom-8 md:bottom-0">
           <div className="relative">
             <Image
               priority
               width={1000}
               height={1000}
-              src="/icons/surface.png"
+              src="/icons/batik_footer.png"
               alt="logo"
-              className="w-full"
+              className="w-full opacity-80"
             />
           </div>
         </div>
-        <div className="bottom-8 md:bottom-4 absolute max-w-4xl left-[-2.25rem] md:left-20 z-40">
-          <div className="relative">
+        <div className="bottom-8 md:bottom-7 absolute w-full z-40 md:left-8">
+          <div className="relative md:w-1/2">
             <Image
               priority
               width={1000}
               height={1000}
-              src="/icons/characters.png"
+              src="/icons/characters_madura.png"
               alt="logo"
             />
           </div>
         </div>
-        <div className="relative">
+        <div className="relative z-50">
           <p className="w-full absolute bg-[#FFF4E8] p-2 bottom-0 text-[#615A56] font-medium text-[0.60rem] md:text-[0.75] text-center">
-            Copyright © 2022 Lanjalan Madura
+            Copyright © 2022 Lenjhelenan Madura
           </p>
         </div>
       </div>
