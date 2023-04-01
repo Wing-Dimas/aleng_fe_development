@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useBreakpoint } from "use-breakpoint";
-import Button from "@components/molecules/Button";
-import Container from "@components/molecules/Container";
-import DateInput from "@components/molecules/DateInput";
-import FABSheet from "@components/molecules/FABSheet";
+import Button from "@components/atomics/Button";
+import Container from "@components/atomics/Container";
+import DateInput from "@components/atomics/DateInput";
+import FABSheet from "@components/atomics/FABSheet";
 import Footer from "@components/molecules/Footer";
-import Heading from "@components/molecules/Heading";
-import MainContent from "@components/molecules/MainContent";
+import Heading from "@components/atomics/Heading";
+import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import Select from "@components/molecules/Select";
-import Text from "@components/molecules/Text";
-import TextInput from "@components/molecules/TextInput";
-import Wrapper from "@components/molecules/Wrapper";
+import Select from "@components/atomics/Select";
+import Text from "@components/atomics/Text";
+import TextInput from "@components/atomics/TextInput";
+import Wrapper from "@components/atomics/Wrapper";
 import { BREAKPOINTS } from "@constants/index";
 import {
   IconChevronLeft,

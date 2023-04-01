@@ -2,21 +2,21 @@ import { useState } from "react";
 import Head from "next/head";
 import { useBreakpoint } from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";
-import BreadCrumbs from "@components/molecules/BreadCrumbs";
-import Button from "@components/molecules/Button";
-import Checkbox from "@components/molecules/Checkbox";
-import Container from "@components/molecules/Container";
-import DateInput from "@components/molecules/DateInput";
-import FABSheet from "@components/molecules/FABSheet";
+import BreadCrumbs from "@components/atomics/BreadCrumbs";
+import Button from "@components/atomics/Button";
+import Checkbox from "@components/atomics/Checkbox";
+import Container from "@components/atomics/Container";
+import DateInput from "@components/atomics/DateInput";
+import FABSheet from "@components/atomics/FABSheet";
 import Footer from "@components/molecules/Footer";
-import Heading from "@components/molecules/Heading";
+import Heading from "@components/atomics/Heading";
 import ListCardKuliner from "@components/molecules/ListCardKuliner";
-import MainContent from "@components/molecules/MainContent";
+import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import PopOver from "@components/molecules/PopOver";
-import Text from "@components/molecules/Text";
-import TextInput from "@components/molecules/TextInput";
-import Wrapper from "@components/molecules/Wrapper";
+import PopOver from "@components/atomics/PopOver";
+import Text from "@components/atomics/Text";
+import TextInput from "@components/atomics/TextInput";
+import Wrapper from "@components/atomics/Wrapper";
 import {
   IconFilter,
   IconMapPin,

@@ -136,13 +136,13 @@ export default function Navbar({ transparentFirst = false, auth = false }) {
       {/* AFTER SIDEBAR */}
       <div className="flex flex-row justify-center items-center py-3 md:py-1 px-4 gap-3 bg-[#003A4B] border-b-4 border-[#177B98]">
         <div className="relative w-4 h-4 md:w-6 md:h-6">
-          <Image src="/utm_logo.png" alt="utm_logo" fill={true} />
+          <Image src="/static_icons/utm_logo.png" alt="utm_logo" fill={true} />
         </div>
         <p className="text-white text-center text-xs">
           Platform ini dibuat oleh Universitas Trunojoyo Madura
         </p>
         <div className="relative w-4 h-4 md:w-6 md:h-6">
-          <Image src="/utm_logo.png" alt="utm_logo" fill={true} />
+          <Image src="/static_icons/utm_logo.png" alt="utm_logo" fill={true} />
         </div>
       </div>
       <div
@@ -154,7 +154,7 @@ export default function Navbar({ transparentFirst = false, auth = false }) {
           <Link href="/">
             <Image
               className="drop-shadow-md max-w-[40px] w-full"
-              src="/logo.png"
+              src="/static_icons/logo.png"
               alt="me"
               width="48"
               height="48"

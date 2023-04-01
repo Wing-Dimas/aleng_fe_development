@@ -1,10 +1,10 @@
 import { IconParking, IconStar, IconToiletPaper } from "@tabler/icons";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./Button";
-import Heading from "./Heading";
+import Button from "@components/atomics/Button";
+import Heading from "@components/atomics/Heading";
 import Rating from "./Rating";
-import Text from "./Text";
+import Text from "@components/atomics/Text";
 
 export default function ListCardKuliner() {
   return (
@@ -15,7 +15,7 @@ export default function ListCardKuliner() {
       <div className="bg-white rounded-2xl">
         <div className="relative h-24 w-24 md:h-48 md:w-72 rounded-b-lg rounded-t-lg md:rounded-b-none md:rounded-t-2xl">
           <Image
-            src="/kuliner/gambar1.png"
+            src="https://source.unsplash.com/random/?food"
             fill
             alt="room"
             className="object-cover rounded-b-lg rounded-t-lg md:rounded-b-none md:rounded-t-2xl"

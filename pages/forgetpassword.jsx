@@ -6,7 +6,7 @@ import Router from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Navbar from "@components/molecules/Navbar";
-import Text from "@components/molecules/Text";
+import Text from "@components/atomics/Text";
 
 export async function getServerSideProps(context) {
   return {
@@ -48,7 +48,7 @@ export default function ForgetPassword() {
           <div className="flex flex-row">
             <div className="relative">
               <Image
-                src="/logo.png"
+                src="/static_icons/logo.png"
                 priority
                 width={48}
                 height={48}

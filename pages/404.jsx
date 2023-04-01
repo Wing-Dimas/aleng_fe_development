@@ -1,5 +1,5 @@
 import Navbar from "@components/molecules/Navbar";
-import Text from "@components/molecules/Text";
+import Text from "@components/atomics/Text";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ export default function ErrorPage({}) {
       <div className="flex flex-col items-center justify-center relative w-full ">
         <div className="relative">
           <Image
-            src="/icons/error.png"
+            src="/static_images/404.png"
             width={500}
             height={400}
             alt="ImageError"

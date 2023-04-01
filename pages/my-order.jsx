@@ -6,17 +6,17 @@ import { useBreakpoint } from "use-breakpoint";
 import Image from "next/image";
 import OrderCard from "@components/molecules/OrderCard";
 import Head from "next/head";
-import Button from "@components/molecules/Button";
+import Button from "@components/atomics/Button";
 import { BREAKPOINTS } from "@constants/index";
-import FABSheet from "@components/molecules/FABSheet";
+import FABSheet from "@components/atomics/FABSheet";
 import { IconChevronLeft, IconFilter } from "@tabler/icons";
-import Text from "@components/molecules/Text";
-import Heading from "@components/molecules/Heading";
+import Text from "@components/atomics/Text";
+import Heading from "@components/atomics/Heading";
 import ModalDetailOrder from "@components/molecules/ModalDetailOrder";
 import Link from "next/link";
-import Wrapper from "@components/molecules/Wrapper";
-import MainContent from "@components/molecules/MainContent";
-import Container from "@components/molecules/Container";
+import Wrapper from "@components/atomics/Wrapper";
+import MainContent from "@components/atomics/MainContent";
+import Container from "@components/atomics/Container";
 
 export default function PesananSaya() {
   const tabStatus = [

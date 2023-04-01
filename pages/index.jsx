@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
@@ -17,18 +16,18 @@ import {
 } from "@tabler/icons";
 import useBreakpoint from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";
-import DateInput from "@components/molecules/DateInput";
-import DottedUnderline from "@components/molecules/DottedUnderline";
+import DateInput from "@components/atomics/DateInput";
+import DottedUnderline from "@components/atomics/DottedUnderline";
 import Footer from "@components/molecules/Footer";
 import Navbar from "@components/molecules/Navbar";
-import PopOver from "@components/molecules/PopOver";
+import PopOver from "@components/atomics/PopOver";
 import QuickCard from "@components/molecules/QuickCard";
-import Tab from "@components/molecules/Tab";
-import Text from "@components/molecules/Text";
-import Title from "@components/molecules/Title";
+import Tab from "@components/atomics/Tab";
+import Text from "@components/atomics/Text";
+import Title from "@components/atomics/Title";
 import Link from "next/link";
-import Button from "@components/molecules/Button";
-import TextInput from "@components/molecules/TextInput";
+import Button from "@components/atomics/Button";
+import TextInput from "@components/atomics/TextInput";
 import { useUserStore } from "store/userstore";
 import Cookies from "js-cookie";
 
@@ -101,7 +100,7 @@ export default function Home({}) {
       <Navbar transparentFirst />
       <div
         style={{
-          backgroundImage: "url('/image/hero.jpeg')",
+          backgroundImage: "url('/static_images/hero.jpeg')",
         }}
         className="pt-48 bg-center bg-cover"
       >
@@ -295,7 +294,7 @@ const Wisata = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/wisata/1">
                     <QuickCard
-                      imageUrl="/temp/giligenting.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?tour&1"
                       title="Gili Genting Gili Genting Banget"
                       address="Kab. Sumenep"
                       review_count={666}
@@ -340,7 +339,7 @@ const Wisata = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/wisata/1">
                     <QuickCard
-                      imageUrl="/temp/giligenting.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?tour&2"
                       title="Jelajah Gili Iyang"
                       address="Kab. Sumenep"
                       review_count={666}
@@ -392,7 +391,7 @@ const Wisata = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/wisata/1">
                     <QuickCard
-                      imageUrl="/temp/giligenting.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?tour&3"
                       title="Gili Genting"
                       address="Kab. Sumenep"
                       review_count={666}
@@ -445,7 +444,7 @@ const Kuliner = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/kuliner/1">
                     <QuickCard
-                      imageUrl="/temp/bebeksinjay.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?food&1"
                       title="Bebek Sinjay"
                       address="Jl. Raya Ketengan, Bangkalan"
                       review_count={666}
@@ -501,7 +500,7 @@ const Kuliner = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/kuliner/1">
                     <QuickCard
-                      imageUrl="/temp/bebeksinjay.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?food&2"
                       title="Jelajah Gili Iyang"
                       address="Jl. Raya Ketengan, Bangkalan"
                       review_count={666}
@@ -554,7 +553,7 @@ const Penginapan = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/penginapan/1">
                     <QuickCard
-                      imageUrl="/temp/homestay.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?homestay&1"
                       title="Homestay Amanah"
                       address="Kab. Sumenep"
                       review_count={666}
@@ -608,7 +607,7 @@ const Penginapan = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/penginapan/1">
                     <QuickCard
-                      imageUrl="/temp/homestay.jpeg"
+                      imageUrl="https://source.unsplash.com/random/?homestay&2"
                       title="Homestay Amanah"
                       address="Kab. Sumenep"
                       review_count={666}
@@ -662,7 +661,7 @@ const Kerajinan = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/kerajinan/1">
                     <QuickCard
-                      imageUrl="/image/kerajinan.jpg"
+                      imageUrl="https://source.unsplash.com/random/?handcraft&1"
                       title="Kerajinan Batok Kelapa"
                       address="Jl. Raya Ketengan, Bangkalan"
                       review_count={666}
@@ -686,11 +685,12 @@ const Transportasi = ({ breakpoint }) => {
     <div>
       <div className="px-4 py-4 md:py-8">
         <Title className="text-center">
-          Transportasi <span className="text-custom-primary_red">Populer</span> di
-          Madura
+          Transportasi <span className="text-custom-primary_red">Populer</span>{" "}
+          di Madura
         </Title>
         <Text className="text-center">
-          Kami menawarkan transportasi disekitar madura untuk menunjang liburanmu
+          Kami menawarkan transportasi disekitar madura untuk menunjang
+          liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
           <Swiper
@@ -716,7 +716,7 @@ const Transportasi = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/transportasi/1">
                     <QuickCard
-                      imageUrl="/image/kapal.jpg"
+                      imageUrl="https://source.unsplash.com/random/?transportation&1"
                       title="Kapal Penyebrangan"
                       address="Kab. Bangkalan"
                       review_count={666}
@@ -769,7 +769,7 @@ const Transportasi = ({ breakpoint }) => {
                 <SwiperSlide key={i.toString()}>
                   <Link href="/transportasi/1">
                     <QuickCard
-                      imageUrl="/image/kapal.jpg"
+                      imageUrl="https://source.unsplash.com/random/?transportation&2"
                       title="Kapal Penyebrangan"
                       address="Kab. Bangkalan"
                       review_count={666}
@@ -795,10 +795,16 @@ const PilihanKabupaten = ({ name }) => {
       <DottedUnderline />
       <br />
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
-        <KabupatenCard name="Bangkalan" bgImage="/image/bangkalan.png" />
-        <KabupatenCard name="Pamekasan" bgImage="/image/pamekasan.png" />
-        <KabupatenCard name="Sampang" bgImage="/image/sampang.png" />
-        <KabupatenCard name="Sumenep" bgImage="/image/sumenep.png" />
+        <KabupatenCard
+          name="Bangkalan"
+          bgImage="/static_images/bangkalan.png"
+        />
+        <KabupatenCard
+          name="Pamekasan"
+          bgImage="/static_images/pamekasan.png"
+        />
+        <KabupatenCard name="Sampang" bgImage="/static_images/sampang.png" />
+        <KabupatenCard name="Sumenep" bgImage="/static_images/sumenep.png" />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { IconParking, IconToiletPaper } from "@tabler/icons";
-import Button from "./Button";
+import Button from "@components/atomics/Button";
 import Rating from "./Rating";
-import Text from "./Text";
+import Text from "@components/atomics/Text";
 import Image from "next/image";
 
 export default function RoomSuggestionCard() {
@@ -13,7 +13,7 @@ export default function RoomSuggestionCard() {
             <Image
               width={1000}
               height={1000}
-              src="/penginapan/gambar1.png"
+              src="https://source.unsplash.com/random/?homestay&1"
               alt=""
               className="rounded-t-md w-full h-full object-cover object-bottom"
             />
@@ -70,7 +70,7 @@ export default function RoomSuggestionCard() {
           <Image
             width={1000}
             height={1000}
-            src="/penginapan/gambar1.png"
+            src="https://source.unsplash.com/random/?homestay&2"
             alt=""
             className="rounded-t-md w-full h-full object-cover object-bottom"
           />
@@ -93,7 +93,7 @@ export default function RoomSuggestionCard() {
                   alt=""
                   height={1000}
                   width={1000}
-                  src="/icons/stars-active.png"
+                  src="/static_icons/stars-active.png"
                   className="max-w-[15px] w-full"
                 />
               </div>

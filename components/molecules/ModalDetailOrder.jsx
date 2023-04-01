@@ -1,5 +1,5 @@
 import { IconCopy, IconX } from "@tabler/icons";
-import Text from "./Text";
+import Text from "@components/atomics/Text";
 import Image from "next/image";
 import Rating from "./Rating";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -73,7 +73,7 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
                     <div className="flex flex-row gap-2 items-center justify-start ">
                       <div className="relative max-w-[30%] md:max-w-[20%] w-full md:max-w-1/6">
                         <Image
-                          src="/penginapan/gambar1.png"
+                          src="https://source.unsplash.com/random/?homestay"
                           width={1000}
                           height={1000}
                           alt="ImagePesanan"

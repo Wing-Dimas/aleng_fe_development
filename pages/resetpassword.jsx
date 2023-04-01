@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
-import LSTextInput from "@components/molecules/LSTextInput";
+import LSTextInput from "@components/atomics/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
-import Text from "@components/molecules/Text";
+import Text from "@components/atomics/Text";
 import validateResetPassword from "@validators/resetPasswordValidator";
 
 export default function ResetPassword() {
@@ -64,7 +64,7 @@ export default function ResetPassword() {
           <div className="flex flex-row">
             <div className="relative">
               <Image
-                src="/logo.png"
+                src="/static_icons/logo.png"
                 priority
                 width={48}
                 height={48}

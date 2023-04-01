@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Text from "./Text";
+import Text from "@components/atomics/Text";
 import { useState } from "react";
 
 export default function CardPayment({ id, name }) {
@@ -25,7 +25,7 @@ export default function CardPayment({ id, name }) {
       >
         <div className="relative w-28">
           <Image
-            src="/payment/shoppe.png"
+            src="/static_icons/shoppe.png"
             alt="cardPayment"
             width={1000}
             height={1000}

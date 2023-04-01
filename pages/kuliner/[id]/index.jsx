@@ -4,24 +4,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useBreakpoint } from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";
 import "swiper/css";
-import BreadCrumbs from "@components/molecules/BreadCrumbs";
-import Button from "@components/molecules/Button";
-import Container from "@components/molecules/Container";
-import DateInput from "@components/molecules/DateInput";
+import BreadCrumbs from "@components/atomics/BreadCrumbs";
+import Button from "@components/atomics/Button";
+import Container from "@components/atomics/Container";
+import DateInput from "@components/atomics/DateInput";
 import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
-import Heading from "@components/molecules/Heading";
-import MainContent from "@components/molecules/MainContent";
+import Heading from "@components/atomics/Heading";
+import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import PopOver from "@components/molecules/PopOver";
+import PopOver from "@components/atomics/PopOver";
 import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
 import ReviewCard from "@components/molecules/ReviewCard";
-import TabDesc from "@components/molecules/TabDesc";
-import Text from "@components/molecules/Text";
-import TextInput from "@components/molecules/TextInput";
-import Wrapper from "@components/molecules/Wrapper";
+import TabDesc from "@components/atomics/TabDesc";
+import Text from "@components/atomics/Text";
+import TextInput from "@components/atomics/TextInput";
+import Wrapper from "@components/atomics/Wrapper";
 import { IconMap, IconUser, IconMail, IconPhone } from "@tabler/icons";
 export default function DetailKuliner({}) {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
@@ -79,7 +79,6 @@ export default function DetailKuliner({}) {
           placeholder="Masukkan kuliner yang ingin dicari"
           order={order}
           setOrder={setOrder}
-          
         />
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
@@ -91,10 +90,10 @@ export default function DetailKuliner({}) {
           <div className="flex flex-col w-full h-full">
             <GalleryImage
               images={[
-                "/kuliner/gambar1.png",
-                "/kuliner/gambar2.png",
-                "/kuliner/gambar3.png",
-                "/kuliner/gambar4.png",
+                "https://source.unsplash.com/random/?food&1",
+                "https://source.unsplash.com/random/?food&2",
+                "https://source.unsplash.com/random/?food&3",
+                "https://source.unsplash.com/random/?food&4",
               ]}
             />
             <Container className="mt-4">
@@ -265,7 +264,7 @@ export default function DetailKuliner({}) {
               return (
                 <SwiperSlide key={i.toString()}>
                   <QuickCard
-                    imageUrl="/kuliner/sinjay.png"
+                    imageUrl="https://source.unsplash.com/random/?food"
                     title="Bebek Sinjay"
                     address="Kab. Sumenep"
                     review_count={666}

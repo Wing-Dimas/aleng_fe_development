@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Checkbox from "@components/molecules/Checkbox";
+import Checkbox from "@components/atomics/Checkbox";
 import LSTextInput, {
   ObscuredLSTextInput,
-} from "@components/molecules/LSTextInput";
+} from "@components/atomics/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import validateLogin from "@validators/loginValidator";
 // import { signIn, useSession } from "next-auth/react";
@@ -102,7 +102,7 @@ export default function LoginPage({}) {
       <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem]">
         <div className="w-1/2 z-50 relative justify-center flex  md:mt-10 ">
           <Image
-            src="/icons/lanjalan.png"
+            src="/static_images/lanjalan_baner.png"
             width={600}
             height={50}
             alt="iconLanjalan"
@@ -162,7 +162,12 @@ export default function LoginPage({}) {
             >
               <div className="flex gap-4 justify-center max-w-sm items-center">
                 <div className="relative w-5 h-5">
-                  <Image src="/icons/google.svg" priority fill alt="google" />
+                  <Image
+                    src="/static_icons/google.svg"
+                    priority
+                    fill
+                    alt="google"
+                  />
                 </div>
                 <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
                   Masuk dengan Google
@@ -186,7 +191,7 @@ export default function LoginPage({}) {
               priority
               width={1000}
               height={1000}
-              src="/icons/batik_footer.png"
+              src="/static_images/batik_footer.png"
               alt="logo"
               className="w-full opacity-80"
             />
@@ -198,7 +203,7 @@ export default function LoginPage({}) {
               priority
               width={1000}
               height={1000}
-              src="/icons/characters_madura.png"
+              src="/static_images/characters_madura.png"
               alt="logo"
             />
           </div>

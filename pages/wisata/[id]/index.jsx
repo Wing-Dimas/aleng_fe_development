@@ -4,23 +4,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useBreakpoint } from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";
 import "swiper/css";
-import BreadCrumbs from "@components/molecules/BreadCrumbs";
-import Button from "@components/molecules/Button";
-import Container from "@components/molecules/Container";
-import DateInput from "@components/molecules/DateInput";
+import BreadCrumbs from "@components/atomics/BreadCrumbs";
+import Button from "@components/atomics/Button";
+import Container from "@components/atomics/Container";
+import DateInput from "@components/atomics/DateInput";
 import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
-import Heading from "@components/molecules/Heading";
-import MainContent from "@components/molecules/MainContent";
+import Heading from "@components/atomics/Heading";
+import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import PopOver from "@components/molecules/PopOver";
+import PopOver from "@components/atomics/PopOver";
 import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
 import ReviewCard from "@components/molecules/ReviewCard";
-import TabDesc from "@components/molecules/TabDesc";
-import Text from "@components/molecules/Text";
-import Wrapper from "@components/molecules/Wrapper";
+import TabDesc from "@components/atomics/TabDesc";
+import Text from "@components/atomics/Text";
+import Wrapper from "@components/atomics/Wrapper";
 import { IconMapPin } from "@tabler/icons";
 import axios from "axios";
 import Link from "next/link";
@@ -97,10 +97,10 @@ export default function DetailWisata({}) {
           <div className="flex flex-col w-full h-full">
             <GalleryImage
               images={[
-                "/wisata/gambar1.jpg",
-                "/wisata/gambar2.jpeg",
-                "/wisata/gambar3.jpg",
-                "/wisata/gambar4.jpg",
+                "https://source.unsplash.com/random/?tour&1",
+                "https://source.unsplash.com/random/?tour&2",
+                "https://source.unsplash.com/random/?tour&3",
+                "https://source.unsplash.com/random/?tour&4",
               ]}
             />
             <Container className="mt-4">
@@ -234,7 +234,7 @@ export default function DetailWisata({}) {
                 return (
                   <SwiperSlide key={i}>
                     <QuickCard
-                      imageUrl="/wisata/gambar5.jpg"
+                      imageUrl="https://source.unsplash.com/random/?tour"
                       title={item?.nama_wisata}
                       address={`Kab. ${item?.kota}`}
                       review_count={666}

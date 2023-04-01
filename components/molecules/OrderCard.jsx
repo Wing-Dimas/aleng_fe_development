@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Badge from "./Badge";
-import Heading from "./Heading";
-import Text from "./Text";
+import Badge from "@components/atomics/Badge";
+import Heading from "@components/atomics/Heading";
+import Text from "@components/atomics/Text";
 import { useState } from "react";
-import Container from "./Container";
+import Container from "@components/atomics/Checkbox";
 
 export default function OrderCard({ showModal, setShowModal }) {
   return (

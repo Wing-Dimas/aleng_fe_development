@@ -23,7 +23,7 @@ export default function Footer() {
                 className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
-                  src="/icons/mini/twitter.png"
+                  src="/static_icons/twitter.png"
                   width={24}
                   height={24}
                   alt="twitter"
@@ -35,7 +35,7 @@ export default function Footer() {
                 className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
-                  src="/icons/mini/instagram.png"
+                  src="/static_icons/instagram.png"
                   width={24}
                   height={24}
                   alt="instagram"
@@ -47,7 +47,7 @@ export default function Footer() {
                 className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
-                  src="/icons/mini/youtube.png"
+                  src="/static_icons/youtube.png"
                   width={24}
                   height={24}
                   alt="youtube"

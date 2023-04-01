@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Button from "./Button";
-import DateInput from "./DateInput";
-import PopOver from "./PopOver";
+import Button from "@components/atomics/Button";
+import DateInput from "@components/atomics/DateInput";
+import PopOver from "../atomics/PopOver";
 import { IconMapPin, IconSwitchHorizontal } from "@tabler/icons";
-import TextInput from "./TextInput";
-import Container from "./Container";
+import TextInput from "@components/atomics/TextInput";
+import Container from "@components/atomics/Checkbox";
 
 export default function DetailSearchInput({
   isOpen,

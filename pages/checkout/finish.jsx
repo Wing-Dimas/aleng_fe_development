@@ -1,20 +1,20 @@
 import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Button from "@components/molecules/Button";
-import Checkbox from "@components/molecules/Checkbox";
-import Container from "@components/molecules/Container";
+import Button from "@components/atomics/Button";
+import Checkbox from "@components/atomics/Checkbox";
+import Container from "@components/atomics/Container";
 import Footer from "@components/molecules/Footer";
-import Heading from "@components/molecules/Heading";
-import MainContent from "@components/molecules/MainContent";
+import Heading from "@components/atomics/Heading";
+import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import Radio from "@components/molecules/Radio";
+import Radio from "@components/atomics/Radio";
 import Rating from "@components/molecules/Rating";
-import Select from "@components/molecules/Select";
-import Text from "@components/molecules/Text";
-import TextInput from "@components/molecules/TextInput";
-import TextArea from "@components/molecules/TextArea";
-import Wrapper from "@components/molecules/Wrapper";
+import Select from "@components/atomics/Select";
+import Text from "@components/atomics/Text";
+import TextInput from "@components/atomics/TextInput";
+import TextArea from "@components/atomics/TextArea";
+import Wrapper from "@components/atomics/Wrapper";
 import { IconChevronLeft, IconUser } from "@tabler/icons";
 import Stepper from "@components/molecules/Stepper";
 import Link from "next/link";
@@ -81,7 +81,7 @@ export default function Finish() {
               <div className="flex gap-4">
                 <div className="relative h-24 w-32 rounded-lg">
                   <Image
-                    src="/image/room.jpeg"
+                    src="https://source.unsplash.com/random/?homestay"
                     fill
                     alt="room"
                     className="bg-cover rounded-lg"

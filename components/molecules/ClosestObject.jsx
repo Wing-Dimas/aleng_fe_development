@@ -10,7 +10,7 @@ export default function ClosestObject({ object }) {
               <Image
                 width={1000}
                 height={1000}
-                src="/icons/building-carousel-white.png"
+                src="/static_icons/building-carousel-white.png"
                 alt="building"
               />
             </div>
@@ -19,7 +19,7 @@ export default function ClosestObject({ object }) {
               <Image
                 width={1000}
                 height={1000}
-                src="/icons/kuliner-white.png"
+                src="/static_icons/kuliner-white.png"
                 alt="kuliner"
               />
             </div>

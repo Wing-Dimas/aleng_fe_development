@@ -8,6 +8,9 @@ const nextConfig = {
     GOOGLE_CLIENT_SECRET: "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",
     NEXTAUTH_URL: "http://localhost:3000",
   },
+  images: {
+    domains: ['source.unsplash.com'],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ClosestObject from "./ClosestObject";
 import FacilityIcon from "./FacilityIcon";
-import Tab from "./Tab";
+import Tab from "@components/atomics/Tab";
 import JamOperasional from "./JamOperasional";
-import Text from "./Text";
+import Text from "@components/atomics/Text";
 
 export default function TabDesc({ page }) {
   const [index, setIndex] = useState(0);
