@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        emd: "888px",
+      },
       boxShadow: {
         custom: "0px 4px 10px rgba(0, 0, 0, 0.05)",
       },
@@ -63,5 +66,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };
