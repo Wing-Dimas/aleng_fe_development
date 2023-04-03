@@ -90,7 +90,7 @@ export default function RegisterPage({}) {
       <Head>
         <title>Sign Up | Lenjelen</title>
       </Head>
-      <Navbar transparentFirst auth />
+      <Navbar isFixed auth />
       {/* <div className={`max-w-full w-full relative`}>
         <div className="absolute top-0 w-full md:top-[-4.75rem]">
           <Image

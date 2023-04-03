@@ -1,21 +1,241 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IconMenu2, IconX } from "@tabler/icons";
-import Cookies from "js-cookie";
-import { signOut, useSession } from "next-auth/react";
+import {
+  IconBeach,
+  IconBuildingCottage,
+  IconBus,
+  IconHorseToy,
+  IconMenu,
+  IconSearch,
+  IconSoup,
+} from "@tabler/icons";
+import Text from "@components/atomics/Text";
 
-export default function Navbar({ transparentFirst = false, auth = false }) {
-  const { data: session, status } = useSession();
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [cookie, setCookie] = useState("");
-  const doPreventClose = (e) => {
-    e.stopPropagation();
+export default function Navbar({ isFixed = false }) {
+  const [tabId, setTabId] = useState("wisata");
+  const [expandNavbar, setExpandNavbar] = useState(false);
+  const [animateExpand, setAnimateExpand] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const [expandOptions, setExpandOptions] = useState(false);
+  const [animateExpandOptions, setAnimateExpandOptions] = useState(false);
+
+  const doChangeTabId = (e) => {
+    if (e.currentTarget.value == "penginapan") {
+      setExpandOptions(true);
+    } else {
+      setAnimateExpandOptions(false);
+    }
+    setTabId(e.currentTarget.value);
   };
 
-  const doToggleShow = () => {
+  const doExpandNavbar = () => {
+    setExpandNavbar(true);
+  };
+
+  const doBlurNavbar = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setAnimateExpand(false);
+    }
+  };
+
+  useEffect(() => {
+    if (expandNavbar) {
+      setAnimateExpand(true);
+    }
+  }, [expandNavbar]);
+
+  useEffect(() => {
+    if (!animateExpand) {
+      setTimeout(() => {
+        setExpandNavbar(false);
+      }, 150);
+    }
+  }, [animateExpand]);
+
+  useEffect(() => {
+    if (expandOptions) {
+      setAnimateExpandOptions(true);
+    }
+  }, [expandOptions]);
+
+  useEffect(() => {
+    if (!animateExpandOptions) {
+      setTimeout(() => {
+        setExpandOptions(false);
+      }, 150);
+    }
+  }, [animateExpandOptions]);
+
+  const doChangeKeyword = (e) => {
+    setKeyword(e.currentTarget.value);
+  };
+
+  return (
+    <div
+      className={
+        isFixed ? "fixed w-full top-0 z-[1000]" : "sticky top-0 z-[1000]"
+      }
+    >
+      <div className="relative" onBlur={doBlurNavbar}>
+        <div
+          tabIndex={1}
+          className={`${
+            expandNavbar ? "border-transparent shadow-none" : "shadow-sm"
+          } border-b bg-white sticky top-0 z-[1000] w-full transition-all`}
+        >
+          <div
+            style={{ gridTemplateColumns: "1fr auto 1fr" }}
+            className="z-[1000] max-w-7xl m-auto px-4 sm:px-8 py-2 md:py-4 flex justify-between emd:grid items-center w-full gap-4 sm:gap-8"
+          >
+            <div className="hidden emd:block">
+              <Link href="/">
+                <Image
+                  src="/static_icons/logo.png"
+                  alt="logo"
+                  width={48}
+                  height={48}
+                  className="drop-shadow-md max-w-[40px] w-full"
+                />
+              </Link>
+            </div>
+            <div className="relative w-full emd:w-96">
+              <input
+                value={keyword}
+                onChange={doChangeKeyword}
+                onFocus={doExpandNavbar}
+                type="text"
+                placeholder="Lagi pengen cari apa nih?"
+                className="border transition-all w-full focus:ring-1 focus:ring-red-300 border-neutral-300 bg-neutral-50 hover:bg-neutral-100 focus:bg-neutral-100 rounded-full outline-none pl-12 pr-20 placeholder-shown:pl-9 placeholder-shown:pr-9 py-2.5 placeholder-shown:text-neutral-300 placeholder-shown:text-center"
+              />
+              <div className="absolute left-4 top-0 h-full flex flex-col items-center justify-center">
+                <IconSearch className="h-5 w-5 text-neutral-400" />
+              </div>
+              {keyword && (
+                <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
+                  <button className="text-sm bg-custom-secondary_yellow px-2 py-1.5 font-medium rounded-full">
+                    Search
+                  </button>
+                </div>
+              )}
+            </div>
+            <div>
+              <NavbarMenu />
+            </div>
+          </div>
+        </div>
+        <div
+          tabIndex={1}
+          className={`${expandNavbar ? "block" : "hidden"} ${
+            animateExpand ? "translate-y-0" : "-translate-y-full"
+          } transition-all z-[999] absolute top-full w-full`}
+        >
+          <div className="relative">
+            <div className="z-[999] w-full bg-white py-4">
+              <div className="scrollbar scrollbar-h-1 scrollbar-thumb-neutral-300 scrollbar-thumb-rounded-full max-w-3xl mx-auto overflow-auto whitespace-nowrap flex-nowrap flex items-center justify-between gap-2">
+                <button
+                  value="wisata"
+                  onClick={doChangeTabId}
+                  className={`${
+                    tabId === "wisata" ? "bg-neutral-100" : "border-transparent"
+                  } ml-6 border rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+                >
+                  <IconBeach className="h-5 w-5" />
+                  <p>Wisata</p>
+                </button>
+                <button
+                  value="kuliner"
+                  onClick={doChangeTabId}
+                  className={`${
+                    tabId === "kuliner"
+                      ? "bg-neutral-100"
+                      : "border-transparent"
+                  } border rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+                >
+                  <IconSoup className="h-5 w-5" />
+                  <p>Kuliner</p>
+                </button>
+                <button
+                  value="penginapan"
+                  onClick={doChangeTabId}
+                  className={`${
+                    tabId === "penginapan"
+                      ? "bg-neutral-100"
+                      : "border-transparent"
+                  } border rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+                >
+                  <IconBuildingCottage className="h-5 w-5" />
+                  <p>Penginapan</p>
+                </button>
+                <button
+                  value="kerajinan"
+                  onClick={doChangeTabId}
+                  className={`${
+                    tabId === "kerajinan"
+                      ? "bg-neutral-100"
+                      : "border-transparent"
+                  } border rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+                >
+                  <IconHorseToy className="h-5 w-5" />
+                  <p>Kerajinan</p>
+                </button>
+                <button
+                  value="transportasi"
+                  onClick={doChangeTabId}
+                  className={`${
+                    tabId === "transportasi"
+                      ? "bg-neutral-100"
+                      : "border-transparent"
+                  } mr-6 border rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+                >
+                  <IconBus className="h-5 w-5" />
+                  <p>Transportasi</p>
+                </button>
+              </div>
+            </div>
+            <div
+              tabIndex={1}
+              className={`${
+                expandOptions && expandNavbar ? "block" : "hidden"
+              } ${
+                animateExpandOptions && animateExpand
+                  ? "translate-y-0"
+                  : "-translate-y-full"
+              } transition-all absolute z-[-1] bg-white w-full py-4`}
+            >
+              <div className="scrollbar scrollbar-h-1 scrollbar-thumb-neutral-300 scrollbar-thumb-rounded-full relative max-w-2xl mx-auto flex flex-nowrap overflow-auto items-center justify-between">
+                <div className="relative">
+                  <input
+                    type="date"
+                    className="relative outline-none py-2 px-8 rounded-full border"
+                  />
+                </div>
+                <input
+                  type="date"
+                  className="relative outline-none p-2 rounded-full border"
+                />
+                <select className="">
+                  <option>hsdgisdog</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`${expandNavbar ? "block" : "hidden"} ${
+          animateExpand ? "opacity-50" : "opacity-0"
+        } transition-all z-[997] absolute top-0 bg-black w-full h-screen`}
+      />
+    </div>
+  );
+}
+
+const NavbarMenu = () => {
+  const [show, setShow] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  const doFocus = () => {
     if (!show) {
       setShow(true);
     } else {
@@ -23,17 +243,11 @@ export default function Navbar({ transparentFirst = false, auth = false }) {
     }
   };
 
-  useEffect(() => {
-    setCookie(Cookies.get("token"));
-  }, []);
-
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+  const doBlur = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setAnimate(false);
     }
-  }, [show]);
+  };
 
   useEffect(() => {
     if (show) {
@@ -49,186 +263,63 @@ export default function Navbar({ transparentFirst = false, auth = false }) {
     }
   }, [animate]);
 
-  useEffect(() => {
-    if (transparentFirst) {
-      const onScroll = () => setOffset(window.pageYOffset);
-      window.removeEventListener("scroll", onScroll);
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
-    }
-  }, [transparentFirst]);
   return (
     <div
-      className={`${
-        offset < 10 && transparentFirst ? "bg-transparent" : "bg-white"
-      } ${
-        transparentFirst ? "fixed" : "sticky"
-      } top-0 z-[1000] w-full backdrop-blur-sm transition-all`}
+      onBlur={doBlur}
+      className="relative z-[1000] flex items-center justify-end"
     >
-      {/* SIDEBAR */}
-      <div
-        onClick={doToggleShow}
-        className={`${show ? "block" : "hidden"} ${
-          animate ? "bg-opacity-25" : "bg-opacity-0"
-        } transition-all fixed z-50 top-0 left-0 w-screen h-screen bg-black`}
+      <button
+        onClick={doFocus}
+        className="transition-all hover:bg-neutral-100 flex items-center gap-2 border px-4 py-2 rounded-full"
       >
-        <div
-          onClick={doPreventClose}
-          tabIndex={0}
-          className={`${
-            animate ? "translate-y-0" : "translate-y-full"
-          } transition-all absolute z-[101] bottom-0 left-0 w-screen bg-white rounded-t-3xl shadow`}
+        <Text className="hidden sm:block">Menu</Text>
+        <IconMenu className="h-5 w-5" />
+      </button>
+      <div
+        tabIndex={1}
+        className={`${show ? "" : "hidden "}${
+          animate ? "opacity-100 scale-100 " : "opacity-0 scale-95 "
+        }transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
+      >
+        <Link
+          href="/unduh-aplikasi"
+          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
         >
-          <div className="p-8">
-            <div className="flex items-center justify-start">
-              <IconX
-                className="text-custom-black cursor-pointer h-6 w-6"
-                onClick={doToggleShow}
-              />
-            </div>
-            <br />
-            <div>
-              <Link className="block font-semibold py-2" href="/unduh-aplikasi">
-                Unduh Aplikasi
-              </Link>
-              <Link className="block font-semibold py-2" href="/koleksi-kamu">
-                Koleksi Kamu
-              </Link>
-              <Link className="block font-semibold py-2" href="/my-order">
-                Cek Pesanan
-              </Link>
-              <Link
-                className="block font-semibold py-2"
-                href="/jadi-partner-kami"
-              >
-                Jadi Partner Kami
-              </Link>
-            </div>
-            <br />
-            {cookie || status == "authenticated" ? (
-              <div className="w-full">
-                <Link
-                  href="/profile"
-                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-                >
-                  Profile
-                </Link>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 gap-8">
-                <Link
-                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-custom-secondary_yellow border-2 border-custom-secondary_yellow shadow-md hover:bg-slate-500 hover:bg-none"
-                  href="/login"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  href="/register"
-                  className="rounded-full text-center font-semibold py-2.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-                >
-                  Daftar
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      {/* AFTER SIDEBAR */}
-      <div className="flex flex-row justify-center items-center py-3 md:py-1 px-4 gap-3 bg-[#003A4B] border-b-4 border-[#177B98]">
-        <div className="relative w-4 h-4 md:w-6 md:h-6">
-          <Image src="/static_icons/utm_logo.png" alt="utm_logo" fill={true} />
-        </div>
-        <p className="text-white text-center text-xs">
-          Platform ini dibuat oleh Universitas Trunojoyo Madura
-        </p>
-        <div className="relative w-4 h-4 md:w-6 md:h-6">
-          <Image src="/static_icons/utm_logo.png" alt="utm_logo" fill={true} />
-        </div>
-      </div>
-      <div
-        className={`${
-          offset < 10 && transparentFirst ? "border-b-transparent" : ""
-        } border-b shadow-md transition-all`}
-      >
-        <div className="max-w-7xl m-auto px-8 py-2 md:py-4 flex items-center justify-between gap-8">
-          <Link href="/">
-            <Image
-              className="drop-shadow-md max-w-[40px] w-full"
-              src="/static_icons/logo.png"
-              alt="me"
-              width="48"
-              height="48"
-            />
+          Unduh Aplikasi
+        </Link>
+        <Link
+          href="/collection"
+          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
+        >
+          Koleksi Kamu
+        </Link>
+        <Link
+          href="/my-order"
+          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
+        >
+          My Order
+        </Link>
+        <Link
+          href="/profile"
+          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
+        >
+          Profile
+        </Link>
+        <div className="grid grid-cols-2 p-2 gap-2">
+          <Link
+            className="text-center bg-gradient-to-br from-custom-gradient1 to-custom-gradient2 text-white rounded-md transition-all p-2"
+            href="/login"
+          >
+            Login
           </Link>
-          <div className="hidden md:flex items-center justify-end gap-16 font-semibold text-custom-black">
-            <Link
-              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow  ${
-                offset < 10 && transparentFirst
-                  ? `${auth ? "text-custom-black" : "text-white"} `
-                  : "text-custom-black"
-              }`}
-              href="/unduh-aplikasi"
-            >
-              Unduh Aplikasi
-            </Link>
-            <Link
-              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
-                offset < 10 && transparentFirst
-                  ? `${auth ? "text-custom-black" : "text-white"} `
-                  : "text-custom-black"
-              }`}
-              href="/koleksi-kamu"
-            >
-              Koleksi Kamu
-            </Link>
-            <Link
-              className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
-                offset < 10 && transparentFirst
-                  ? `${auth ? "text-custom-black" : "text-white"} `
-                  : "text-custom-black"
-              }`}
-              href="/my-order"
-            >
-              Cek Pesanan
-            </Link>
-          </div>
-          {cookie || status == "authenticated" ? (
-            <div className="hidden md:flex font-semibold">
-              <Link
-                href="/profile"
-                className="rounded-full py-1.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-              >
-                Profile
-              </Link>
-            </div>
-          ) : (
-            <div className="hidden md:flex items-center justify-between gap-16 font-semibold">
-              <Link
-                className={`drop-shadow-md transition-all hover:text-custom-secondary_yellow ${
-                  offset < 10 && transparentFirst
-                    ? `${auth ? "text-custom-black" : "text-white"}`
-                    : "text-custom-black"
-                }`}
-                href="/login"
-              >
-                Masuk
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-full py-1.5 px-6 bg-gradient-to-b from-yellow-400 to-red-600 text-white border-2 border-white shadow-md hover:bg-slate-500 hover:bg-none"
-              >
-                Daftar
-              </Link>
-            </div>
-          )}
-          <div className="block md:hidden cursor-pointer drop-shadow-md">
-            <IconMenu2
-              className={`text-custom-black transition-all h-6 w-6`}
-              onClick={doToggleShow}
-            />
-          </div>
+          <Link
+            className="text-center bg-custom-gradient1 rounded-md transition-all p-2"
+            href="/register"
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>
   );
-}
+};

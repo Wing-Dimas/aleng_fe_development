@@ -97,12 +97,12 @@ export default function Home({}) {
       <Head>
         <title>Lenjelen Madura | Beranda</title>
       </Head>
-      <Navbar transparentFirst />
+      <Navbar />
       <div
         style={{
           backgroundImage: "url('/static_images/hero.jpeg')",
         }}
-        className="pt-48 bg-center bg-cover"
+        className="pt-24 pb-12 bg-center bg-cover"
       >
         {/* Liburan bersama */}
         <div className="px-4 sm:px-12 text-custom-white max-w-7xl mx-auto text-center">
@@ -115,7 +115,7 @@ export default function Home({}) {
         </div>
         {/* tabbar */}
         <div className="text-neutral-700 font-medium my-2 sm:my-8 px-4 max-w-3xl mx-auto">
-          <div className="text-xs sm:text-base flex flex-nowrap gap-2 justify-betrween items-center bg-white rounded-full p-2 overflow-x-auto">
+          <div className="scrollbar scrollbar-h-1 scrollbar-thumb-neutral-300 scrollbar-thumb-rounded-full text-xs sm:text-base flex flex-nowrap gap-2 justify-between items-center bg-white rounded-full p-2 overflow-x-auto">
             <button
               value={0}
               onClick={doChangeTabIndex}
@@ -178,69 +178,6 @@ export default function Home({}) {
             </button>
           </div>
         </div>
-        <br />
-        {/* Search bar */}
-        {menuIndex === 2 ? (
-          <div className="px-4 max-w-7xl mx-auto">
-            <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col lg:flex-row items-center gap-4">
-              <div className="flex flex-col sm:flex-row w-full lg:w-auto lg:items-center bg-white rounded-lg text-custom-black text-xs font-medium">
-                <DateInput
-                  name="in"
-                  value={check.date.in}
-                  onChange={doChangeCheckDate}
-                  containerClassName="w-full lg:w-auto"
-                  className="!shadow-none"
-                  leftIcon={<IconCalendarEvent className="w-5 h-5" />}
-                  rightIcon={<IconChevronDown className="w-5 h-5" />}
-                />
-                <div className="lg:block flex items-center justify-end gap-2 px-2 lg:px-0">
-                  <div className="w-full h-[0.5px] bg-custom-light_grey lg:hidden" />
-                  <button
-                    onClick={doSwitchCheckDate}
-                    className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow-custom rounded-lg border lg:border-none lg:rounded-none lg:shadow-none"
-                  >
-                    <IconSwitchHorizontal className="w-5 h-5" />
-                  </button>
-                </div>
-                <DateInput
-                  name="out"
-                  value={check.date.out}
-                  onChange={doChangeCheckDate}
-                  containerClassName="w-full lg:w-auto"
-                  className="!shadow-none"
-                  leftIcon={<IconCalendarEvent className="w-5 h-5" />}
-                  rightIcon={<IconChevronDown className="w-5 h-5" />}
-                />
-              </div>
-              <PopOver
-                containerClassName="w-full !shadow-none"
-                className="!shadow-none"
-                options={check.options}
-                onChange={doChangeCheckOptions}
-                pages="penginapan"
-              />
-              <Button className="w-full lg:w-48 !text-xs py-5 px-12">
-                Cari
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="px-4 max-w-7xl mx-auto">
-            <div className="bg-white bg-opacity-50 p-6 rounded-xl flex flex-col sm:flex-row gap-4">
-              <TextInput
-                containerClassName="w-full"
-                name="destinasi"
-                value={destinasi}
-                onChange={doChangeDestinasi}
-                leftIcon={<IconMapPin className="w-5 h-5" />}
-                placeholder="Destinasi Kunjungan"
-              />
-              <Button className="w-full lg:w-48 !text-xs py-5 px-12">
-                Cari
-              </Button>
-            </div>
-          </div>
-        )}
         <br />
       </div>
       {menuIndex === 0 ? (

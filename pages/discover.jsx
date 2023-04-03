@@ -8,7 +8,7 @@ export default function Discover() {
       <Head>
         <title>Discover | Lanjalan</title>
       </Head>
-      <Navbar withShadow={false} />
+      <Navbar />
     </Wrapper>
   );
 }

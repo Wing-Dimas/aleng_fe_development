@@ -86,7 +86,7 @@ export default function LoginPage({}) {
       <Head>
         <title>Login | Lenjelen</title>
       </Head>
-      <Navbar transparentFirst auth />
+      <Navbar isFixed auth />
       {/* <div className={`max-w-full w-full relative bg-white`}>
         <div className="absolute top-0 w-full md:top-[2rem]">
           <Image
