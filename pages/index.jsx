@@ -114,68 +114,65 @@ export default function Home({}) {
           </p>
         </div>
         {/* tabbar */}
-        <div className="text-neutral-700 font-medium my-2 sm:my-8 px-4 max-w-3xl mx-auto">
-          <div className="scrollbar scrollbar-h-1 scrollbar-thumb-neutral-300 scrollbar-thumb-rounded-full text-xs sm:text-base flex flex-nowrap gap-2 justify-between items-center bg-white rounded-full p-2 overflow-x-auto">
-            <button
-              value={0}
-              onClick={doChangeTabIndex}
-              className={`${
-                menuIndex === 0
-                  ? "bg-neutral-200 border-neutral-300"
-                  : "border-transparent"
-              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
+        <div className="px-4 my-2 sm:my-8">
+          <div className="font-medium max-w-3xl mx-auto">
+            <div
+              style={{
+                gridTemplateColumns: "repeat(5, 1fr)",
+              }}
+              className="scrollbar-custom text-xs sm:text-base grid bg-neutral-200 rounded-full border-2 border-neutral-200"
             >
-              <IconBeach className="h-5 w-5" />
-              <p>Wisata</p>
-            </button>
-            <button
-              value={1}
-              onClick={doChangeTabIndex}
-              className={`${
-                menuIndex === 1
-                  ? "bg-neutral-200 border-neutral-300"
-                  : "border-transparent"
-              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
-            >
-              <IconSoup className="h-5 w-5" />
-              <p>Kuliner</p>
-            </button>
-            <button
-              value={2}
-              onClick={doChangeTabIndex}
-              className={`${
-                menuIndex === 2
-                  ? "bg-neutral-200 border-neutral-300"
-                  : "border-transparent"
-              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
-            >
-              <IconBuildingCottage className="h-5 w-5" />
-              <p>Penginapan</p>
-            </button>
-            <button
-              value={3}
-              onClick={doChangeTabIndex}
-              className={`${
-                menuIndex === 3
-                  ? "bg-neutral-200 border-neutral-300"
-                  : "border-transparent"
-              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
-            >
-              <IconHorseToy className="h-5 w-5" />
-              <p>Kerajinan</p>
-            </button>
-            <button
-              value={4}
-              onClick={doChangeTabIndex}
-              className={`${
-                menuIndex === 4
-                  ? "bg-neutral-200 border-neutral-300"
-                  : "border-transparent"
-              } border-2 rounded-full py-2 px-4 flex items-center justify-center gap-2`}
-            >
-              <IconBus className="h-5 w-5" />
-              <p>Transportasi</p>
-            </button>
+              <button
+                value={0}
+                onClick={doChangeTabIndex}
+                className={`${
+                  menuIndex === 0 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconBeach className="h-5 w-5" />
+                <p>Wisata</p>
+              </button>
+              <button
+                value={1}
+                onClick={doChangeTabIndex}
+                className={`${
+                  menuIndex === 1 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconSoup className="h-5 w-5" />
+                <p>Kuliner</p>
+              </button>
+              <button
+                value={2}
+                onClick={doChangeTabIndex}
+                className={`${
+                  menuIndex === 2 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconBuildingCottage className="h-5 w-5" />
+                <p>Penginapan</p>
+              </button>
+              <button
+                value={3}
+                onClick={doChangeTabIndex}
+                className={`${
+                  menuIndex === 3 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconHorseToy className="h-5 w-5" />
+                <p>Kerajinan</p>
+              </button>
+              <button
+                value={4}
+                onClick={doChangeTabIndex}
+                className={`${
+                  menuIndex === 4 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconBus className="h-5 w-5" />
+                <p>Transportasi</p>
+              </button>
+            </div>
           </div>
         </div>
         <br />
