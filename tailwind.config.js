@@ -54,7 +54,8 @@ module.exports = {
           dark_grey: "#615A56",
           light_grey: "#ABACAC",
           white: "#FAFAFA",
-          bg: "#F6F5F2",
+          // bg: "#F6F5F2",
+          bg: "#F4F4F5",
           gradient1: "#FDD05C",
           gradient2: "#D2001A",
           bg_yellow: "#F6F0E1",
@@ -67,7 +68,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("tailwind-scrollbar-hide"),
     require("tailwind-scrollbar")({ nocompatible: true }),
   ],
 };

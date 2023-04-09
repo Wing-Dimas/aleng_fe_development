@@ -62,6 +62,10 @@ body {
   overflow: overlay;
 }
 
+* {
+  outline: none;
+}
+
 .overflow-y-unset {
   overflow-y: unset;
 }
