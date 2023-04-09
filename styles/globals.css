@@ -53,6 +53,20 @@
   font-weight: 900;
 }
 
+.overflow-y-unset {
+  overflow-y: unset;
+}
+
+.scrollbar-custom {
+  @apply scrollbar;
+  @apply scrollbar-h-1;
+  @apply scrollbar-w-1;
+  @apply scrollbar-thumb-neutral-300;
+  @apply scrollbar-thumb-rounded-full;
+  @apply scrollbar-track-transparent;
+  overflow: overlay;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent;
   bottom: 0;
@@ -77,4 +91,107 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   right: 0;
   top: 0;
   width: auto;
+}
+
+.rmdp-calendar {
+  @apply w-full;
+}
+
+.rmdp-week:not(:first-of-type) {
+  @apply !my-2;
+}
+
+.rmdp-day-picker > div,
+.rmdp-month-picker > div,
+.rmdp-year-picker > div {
+  @apply !w-full;
+}
+
+.rmdp-week-day {
+  @apply !text-neutral-400;
+}
+
+.rmdp-day.rmdp-today > span {
+  @apply !text-white;
+  @apply !bg-transparent;
+  @apply !transition-all;
+  @apply !border-transparent;
+  @apply !rounded-full;
+  @apply !shadow-none;
+  @apply !bg-gradient-to-bl;
+  @apply !from-custom-primary_red;
+  @apply !to-custom-secondary_yellow;
+}
+
+.rmdp-day.rmdp-today > span:hover {
+  @apply !text-white;
+}
+
+.rmdp-day,
+.rmdp-day > span {
+  @apply !transition-all;
+  @apply !shadow-none;
+  @apply !border-transparent;
+}
+
+.rmdp-day:not(.rmdp-today):not(.rmdp-day-hidden) > span:hover {
+  @apply !bg-red-100;
+  @apply !text-black;
+}
+
+.rmdp-range,
+.rmdp-range-hover {
+  @apply !transition-all;
+  @apply !border-transparent;
+  @apply !rounded-full;
+  @apply !shadow-none;
+}
+
+.rmdp-range:not(.rmdp-today) {
+  @apply !bg-red-100;
+  @apply !text-black;
+}
+
+.rmdp-range.rmdp-today {
+  @apply !bg-red-100;
+}
+
+.rmdp-range-hover:not(.rmdp-today) {
+  @apply !bg-red-100;
+  @apply !text-black;
+}
+
+.rmdp-range-hover.rmdp-today {
+  @apply !bg-red-100;
+}
+
+.rmdp-range > span:hover,
+.rmdp-range-hover > span:hover {
+  @apply !transition-all;
+  @apply !border-transparent;
+  @apply !rounded-full;
+  @apply !shadow-none;
+}
+
+.rmdp-range:not(.rmdp-today) > span:hover {
+  @apply !bg-red-100;
+  @apply !text-black;
+}
+
+.rmdp-range-hover:not(.rmdp-today):not(.end) > span:hover {
+  @apply !bg-red-100;
+  @apply !text-black;
+}
+
+.rmdp-range.start,
+.rmdp-range.end,
+.rmdp-range-hover.end,
+.rmdp-range-hover.end > span:hover {
+  @apply !bg-red-600;
+  @apply !text-white;
+}
+
+.rmdp-selected > span {
+  @apply !bg-red-600;
+  @apply !text-white;
 }
