@@ -100,7 +100,12 @@ export default function Navbar({ isFixed = false }) {
 
   useEffect(() => {
     if (expandNavbar) {
+      document.body.style.overflow = "hidden";
+      // document.body.style.paddingRight = "0.25rem";
       setAnimateExpand(true);
+    } else {
+      // document.body.style.paddingRight = "0rem";
+      document.body.style.overflow = "auto";
     }
   }, [expandNavbar]);
 

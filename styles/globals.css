@@ -53,6 +53,15 @@
   font-weight: 900;
 }
 
+body {
+  @apply !scrollbar;
+  @apply !scrollbar-w-1;
+  @apply !scrollbar-thumb-neutral-300;
+  @apply !scrollbar-thumb-rounded-full;
+  @apply !scrollbar-track-transparent;
+  overflow: overlay;
+}
+
 .overflow-y-unset {
   overflow-y: unset;
 }
