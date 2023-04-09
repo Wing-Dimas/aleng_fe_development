@@ -8,7 +8,12 @@ export default function Footer() {
         <div className="flex justify-between gap-8">
           <div className="flex-shrink">
             <Link href="/" className="flex items-center gap-4 mb-8">
-              <Image src="/logo.png" width={48} height={48} alt="logo" />
+              <Image
+                src="/static_icons/logo.png"
+                width={48}
+                height={48}
+                alt="logo"
+              />
               <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>
             </Link>
             <p className="text-neutral-500 mb-8">
