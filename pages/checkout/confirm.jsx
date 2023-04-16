@@ -100,7 +100,9 @@ export default function Confirm() {
                       },
                     ]}
                   />
-                  <Text.label className="mt-1 ml-2">Title</Text.label>
+                  <Text.label className="mt-1 ml-2 md:!text-[0.75rem] !text-[9px]">
+                    Title
+                  </Text.label>
                 </div>
                 <div className="w-full">
                   <TextInput
@@ -110,7 +112,7 @@ export default function Confirm() {
                     onChange={doChangePerson}
                     placeholder="Nama"
                   />
-                  <Text.label className="mt-1 ml-2">
+                  <Text.label className="mt-1 ml-2 md:!text-[0.75rem] !text-[9px]">
                     Isi sesuai KTP/Paspor/SIM (tanpa tanda baca dan gelar)
                   </Text.label>
                 </div>
@@ -119,7 +121,7 @@ export default function Confirm() {
             <Container>
               <Heading.h3>Permintaan Khusus</Heading.h3>
               <br />
-              <Text.label>
+              <Text.label className="md:!text-[0.75rem] !text-[9px]">
                 Jika kamu punya permintaan khusus untuk membuatmu makin nyaman,
                 minta di sini ya. Permintaanmu tergantung persediaan.
               </Text.label>
@@ -149,12 +151,15 @@ export default function Confirm() {
                   onChange={doChangeSpecial}
                 />
               </div>
-              <TextArea
-                name="note"
-                value={info.note}
-                onChange={doChangeInfo}
-                placeholder="Lainnya"
-              />
+              <div className="md:min-h-[300px]">
+                <TextArea
+                  name="note"
+                  value={info.note}
+                  onChange={doChangeInfo}
+                  placeholder="Lainnya"
+                  className="md:!h-[300px]"
+                />
+              </div>
             </Container>
           </div>
           <div
@@ -163,6 +168,7 @@ export default function Confirm() {
           >
             <Container>
               <Heading.h3>Detail Pemesanan</Heading.h3>
+              <br />
               <div className="flex gap-4">
                 <br />
                 <div className="relative h-24 w-32 rounded-lg">
@@ -195,6 +201,7 @@ export default function Confirm() {
               </div>
               <br />
               <Text>Rincian Harga</Text>
+              <br />
               <div className="p-2 rounded-lg bg-[#F6F0E1]">
                 <div className="flex items-center justify-between gap-2">
                   <Text.label>1 Malam</Text.label>
@@ -236,9 +243,11 @@ export default function Confirm() {
                 onChange={doChangeInfo}
               />
               <br />
-              <Button onClick={doPayment} className="w-full">
-                Lanjut Bayar
-              </Button>
+              <Link href="/checkout/payment">
+                <Button onClick={doPayment} className="w-full">
+                  Lanjut Bayar
+                </Button>
+              </Link>
             </Container>
           </div>
         </div>

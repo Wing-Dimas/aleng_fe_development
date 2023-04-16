@@ -71,7 +71,7 @@ export default function ListKuliner() {
         <div className="flex items-center justify-between">
           <BreadCrumbs
             breads={[
-              { link: "/kuliner", name: "Kuliner" },
+              { link: "/", name: "Kuliner" },
               { link: "/kuliner/list", name: "List" },
             ]}
           />

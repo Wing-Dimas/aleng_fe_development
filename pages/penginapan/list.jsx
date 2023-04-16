@@ -122,7 +122,7 @@ export default function ListPenginapan() {
         <div className="flex items-center justify-between">
           <BreadCrumbs
             breads={[
-              { link: "/penginapan", name: "Penginapan" },
+              { link: "/", name: "Penginapan" },
               { link: "/penginapan/list", name: "List" },
             ]}
           />

@@ -112,7 +112,7 @@ export default function Payment() {
             className="mt-4 md:mt-0 grid grid-rows-2 gap-4"
             style={{ gridTemplateRows: "auto 1fr" }}
           >
-            <Container>
+            <Container className="">
               <Heading.h3>Detail Pemesanan</Heading.h3>
               <br />
               <div className="flex gap-4">
@@ -146,6 +146,7 @@ export default function Payment() {
               </div>
               <br />
               <Text>Rincian Harga</Text>
+              <br/>
               <div className="p-2 rounded-lg bg-[#F6F0E1]">
                 <div className="flex items-center justify-between gap-2">
                   <Text.label>1 Malam</Text.label>
@@ -168,13 +169,17 @@ export default function Payment() {
                 </Heading.h3>
               </div>
             </Container>
-            <Container className="h-min">
-              <Button
-                // onClick={doPayment}
-                className="w-full"
-              >
-                Lanjut Bayar
-              </Button>
+            <Container className="flex flex-col justify-end">
+              <Heading.h3>Pembayaran</Heading.h3>
+              <br />
+              <Link href="/checkout/finish">
+                <Button
+                  // onClick={doPayment}
+                  className="w-full"
+                >
+                  Lanjut Bayar
+                </Button>
+              </Link>
             </Container>
           </div>
         </div>

@@ -746,7 +746,7 @@ const PilihanKabupaten = ({ name }) => {
 
 const KabupatenCard = ({ bgImage, name }) => {
   return (
-    <Link href="/">
+    <Link href="/wisata/list">
       <div
         className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center sm:items-start justify-center sm:justify-start p-0 sm:p-8 bg-center"
         style={{ backgroundImage: `url('${bgImage}')` }}

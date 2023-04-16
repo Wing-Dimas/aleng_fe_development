@@ -71,7 +71,7 @@ export default function ListWisata() {
         <div className="flex items-center justify-between">
           <BreadCrumbs
             breads={[
-              { link: "/wisata", name: "Wisata" },
+              { link: "/", name: "Wisata" },
               { link: "/wisata/list", name: "List" },
             ]}
           />

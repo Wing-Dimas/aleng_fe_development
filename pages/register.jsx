@@ -216,7 +216,7 @@ export default function RegisterPage({}) {
             />
           </div>
         </div>
-        <div className="bottom-8 md:bottom-7 absolute w-full z-40 md:-left-28">
+        <div className="bottom-8 md:bottom-7 absolute w-full z-40 ">
           <div className="relative md:w-full">
             <Image
               priority
