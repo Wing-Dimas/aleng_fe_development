@@ -39,4 +39,21 @@ Rating.descripted = ({ rate, count }) => {
   );
 };
 
+Rating.comment = () => {
+  return (
+    <div>
+      <div className="flex items-center">
+        {[...Array(5)].map((v, i) => {
+          return (
+            <IconStar
+              key={i}
+              className="w-2 h-2 text-custom-secondary_yellow fill-custom-secondary_yellow"
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export default Rating;

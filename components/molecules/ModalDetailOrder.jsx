@@ -36,12 +36,12 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
             <div className="flex flex-col p-5 gap-3 overflow-y-auto scrollbar-hide h-full">
               <Text className="!text-lg text-center">Detail Transaksi</Text>
               <hr className="" />
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center gap-1">
                 <div className="flex flex-row justify-between">
                   <Text.small className="!font-normal !text-xs">
                     Nomor pemesanan:
                   </Text.small>
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center gap-1">
                     <Text.small className="!font-semibold !text-xs">
                       {num}
                     </Text.small>

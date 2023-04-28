@@ -4,7 +4,7 @@ import { useState } from "react";
 import "swiper/css";
 import { useBreakpoint } from "use-breakpoint";
 import Image from "next/image";
-import OrderCard from "@components/molecules/OrderCard";
+
 import Head from "next/head";
 import Button from "@components/atomics/Button";
 import { BREAKPOINTS } from "@constants/index";
@@ -17,6 +17,7 @@ import Link from "next/link";
 import Wrapper from "@components/atomics/Wrapper";
 import MainContent from "@components/atomics/MainContent";
 import Container from "@components/atomics/Container";
+import OrderCard from "@components/molecules/OrderCard";
 
 export default function PesananSaya() {
   const tabStatus = [

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ClosestObject from "./ClosestObject";
-import FacilityIcon from "./FacilityIcon";
+import ClosestObject from "../molecules/ClosestObject";
+import FacilityIcon from "../molecules/FacilityIcon";
 import Tab from "@components/atomics/Tab";
-import JamOperasional from "./JamOperasional";
+import JamOperasional from "../molecules/JamOperasional";
 import Text from "@components/atomics/Text";
 
 export default function TabDesc({ page }) {

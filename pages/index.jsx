@@ -7,12 +7,8 @@ import {
   IconBriefcase,
   IconBuildingCottage,
   IconBus,
-  IconCalendarEvent,
-  IconChevronDown,
   IconHorseToy,
-  IconMapPin,
   IconSoup,
-  IconSwitchHorizontal,
 } from "@tabler/icons";
 import useBreakpoint from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";

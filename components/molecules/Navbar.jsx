@@ -150,7 +150,7 @@ export default function Navbar({ isFixed = false }) {
     <div
       className={
         isFixed
-          ? "fixed w-full h-screen top-0 z-[1000]"
+          ? "fixed w-full top-0 z-[1000]"
           : "sticky top-0 z-[1000]"
       }
     >
@@ -329,7 +329,7 @@ const NavbarMenu = () => {
   return (
     <div
       onBlur={doBlur}
-      className="relative z-[1000] flex items-center justify-end"
+      className="relative z-[1000] flex items-center justify-end "
     >
       <button
         onClick={doFocus}

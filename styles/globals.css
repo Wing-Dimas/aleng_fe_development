@@ -208,3 +208,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   @apply !bg-red-600;
   @apply !text-white;
 }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: brown;
+}
+
+input[type=range]::-moz-range-thumb {
+  display: none;
+  background-color: brown;
+}
+
+input[type=range]{
+  background-color: aquamarine;
+}
+

@@ -23,8 +23,10 @@ import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
 import Wrapper from "@components/atomics/Wrapper";
 import { IconMap, IconUser, IconMail, IconPhone } from "@tabler/icons";
+import ReviewVisitor from "@components/molecules/ReviewVisitor";
 export default function DetailKuliner({}) {
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
+  const { breakpoint } = useBreakpoint(BREAKPOINTS, "xs");
+  const [openReview, setOpenReview] = useState(false);
   const [order, setOrder] = useState({
     date: new Date().toISOString().split("T")[0],
     time: new Date().toISOString().substr(11, 5),
@@ -70,16 +72,8 @@ export default function DetailKuliner({}) {
               { name: "Soto Bekasi", link: "/kuliner/soto-bekasi" },
             ]}
           />
-          <div className="block md:hidden">
-            <Button onClick={doOpen}>Ubah Pencarian</Button>
-          </div>
         </div>
-        <DetailSearchInput
-          isOpen={isOpen}
-          placeholder="Masukkan kuliner yang ingin dicari"
-          order={order}
-          setOrder={setOrder}
-        />
+
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
           style={{
@@ -200,44 +194,10 @@ export default function DetailKuliner({}) {
         {/* Ulasan */}
         <div className="w-full mt-8 flex flex-col gap-3">
           <Heading.h2>Ulasan Pengunjung</Heading.h2>
-          <Container className="!flex !flex-col md:!flex-row !gap-3 md:!gap-6">
-            <div className="flex flex-col gap-2 w-1/2 md:w-[20%]">
-              <Text>Ulasan Pengguna</Text>
-              <Rating.descripted rate={4.5} count={666} />
-            </div>
-            <div className="flex flex-col gap-2 w-full md:w-[80%]">
-              <Text>Ulasan yang mungkin membantumu</Text>
-              <div className="flex flex-row gap-4 scrollbar-hide cursor-pointer overflow-x-scroll w-full">
-                <Swiper
-                  spaceBetween={20}
-                  slidesPerView={
-                    breakpoint === "xs"
-                      ? 1.3
-                      : breakpoint === "sm"
-                      ? 2.3
-                      : breakpoint === "md"
-                      ? 2.3
-                      : breakpoint === "lg"
-                      ? 2.8
-                      : breakpoint === "xl"
-                      ? 3.6
-                      : breakpoint === "2xl"
-                      ? 3.6
-                      : 1.6
-                  }
-                  // loop={loopUlasan}
-                >
-                  {[...Array(6)].map((item, i) => {
-                    return (
-                      <SwiperSlide key={i.toString()}>
-                        <ReviewCard />
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </div>
-            </div>
-          </Container>
+          <ReviewVisitor
+            openReview={openReview}
+            setOpenReview={setOpenReview}
+          />
         </div>
         {/* Restoran Serupa */}
         <div className="w-full mt-8">
