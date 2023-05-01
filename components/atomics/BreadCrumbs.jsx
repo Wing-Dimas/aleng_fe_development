@@ -1,4 +1,4 @@
-import { IconChevronRight } from "@tabler/icons";
+import { IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function BreadCrumbs({ breads }) {

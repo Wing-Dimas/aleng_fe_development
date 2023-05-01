@@ -9,7 +9,7 @@ import Head from "next/head";
 import Button from "@components/atomics/Button";
 import { BREAKPOINTS } from "@constants/index";
 import FABSheet from "@components/atomics/FABSheet";
-import { IconChevronLeft, IconFilter } from "@tabler/icons";
+import { IconChevronLeft, IconFilter } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 import Heading from "@components/atomics/Heading";
 import ModalDetailOrder from "@components/molecules/ModalDetailOrder";

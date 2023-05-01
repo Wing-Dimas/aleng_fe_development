@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IconChevronDown } from "@tabler/icons";
+import { IconChevronDown } from "@tabler/icons-react";
 
 export default function Select({
   containerClassName,

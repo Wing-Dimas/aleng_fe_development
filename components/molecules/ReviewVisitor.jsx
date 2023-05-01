@@ -1,5 +1,5 @@
 import Container from "@components/atomics/Container";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import Rating from "./Rating";
 import RatingSlider from "@components/atomics/RatingSlider";
 import { useBreakpoint } from "use-breakpoint";

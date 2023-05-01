@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconCamera } from "@tabler/icons";
+import { IconCamera } from "@tabler/icons-react";
 import FsLightbox from "fslightbox-react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";

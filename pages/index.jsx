@@ -9,7 +9,7 @@ import {
   IconBus,
   IconHorseToy,
   IconSoup,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import useBreakpoint from "use-breakpoint";
 import { BREAKPOINTS } from "@constants/index";
 import DateInput from "@components/atomics/DateInput";

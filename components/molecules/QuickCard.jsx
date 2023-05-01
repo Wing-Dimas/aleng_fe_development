@@ -1,4 +1,4 @@
-import { IconBookmark, IconStar } from "@tabler/icons";
+import { IconBookmark, IconStar } from "@tabler/icons-react";
 
 export default function QuickCard({
   imageUrl,

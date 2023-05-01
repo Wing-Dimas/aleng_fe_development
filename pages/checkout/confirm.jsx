@@ -15,7 +15,7 @@ import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
 import TextArea from "@components/atomics/TextArea";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconChevronLeft, IconUser } from "@tabler/icons";
+import { IconChevronLeft, IconUser } from "@tabler/icons-react";
 import Stepper from "@components/molecules/Stepper";
 import Link from "next/link";
 

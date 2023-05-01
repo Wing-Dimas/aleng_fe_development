@@ -1,4 +1,4 @@
-import { IconCopy, IconX } from "@tabler/icons";
+import { IconCopy, IconX } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 import Image from "next/image";
 import Rating from "./Rating";

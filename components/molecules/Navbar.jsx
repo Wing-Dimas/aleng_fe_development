@@ -15,7 +15,7 @@ import {
   IconSearch,
   IconSoup,
   IconUser,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 import { Calendar } from "react-multi-date-picker";
 
@@ -149,9 +149,7 @@ export default function Navbar({ isFixed = false }) {
   return (
     <div
       className={
-        isFixed
-          ? "fixed w-full top-0 z-[1000]"
-          : "sticky top-0 z-[1000]"
+        isFixed ? "fixed w-full top-0 z-[1000]" : "sticky top-0 z-[1000]"
       }
     >
       <div onBlur={doBlurNavbar} className="relative">

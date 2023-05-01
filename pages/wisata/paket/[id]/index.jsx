@@ -21,7 +21,7 @@ import ReviewCard from "@components/molecules/ReviewCard";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconCalendar, IconMapPin, IconUser } from "@tabler/icons";
+import { IconCalendar, IconMapPin, IconUser } from "@tabler/icons-react";
 export default function PaketWisata({}) {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [order, setOrder] = useState({

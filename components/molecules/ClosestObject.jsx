@@ -1,4 +1,4 @@
-import { IconWalk } from "@tabler/icons";
+import { IconWalk } from "@tabler/icons-react";
 import Image from "next/image";
 export default function ClosestObject({ object }) {
   return (

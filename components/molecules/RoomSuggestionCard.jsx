@@ -1,4 +1,4 @@
-import { IconParking, IconToiletPaper } from "@tabler/icons";
+import { IconParking, IconToiletPaper } from "@tabler/icons-react";
 import Button from "@components/atomics/Button";
 import Rating from "./Rating";
 import Text from "@components/atomics/Text";

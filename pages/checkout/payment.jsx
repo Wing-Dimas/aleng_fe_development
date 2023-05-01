@@ -13,7 +13,7 @@ import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
 import TextArea from "@components/atomics/TextArea";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconChevronLeft } from "@tabler/icons";
+import { IconChevronLeft } from "@tabler/icons-react";
 import Stepper from "@components/molecules/Stepper";
 import Link from "next/link";
 import CardPayment from "@components/molecules/CardPayment";
@@ -146,7 +146,7 @@ export default function Payment() {
               </div>
               <br />
               <Text>Rincian Harga</Text>
-              <br/>
+              <br />
               <div className="p-2 rounded-lg bg-[#F6F0E1]">
                 <div className="flex items-center justify-between gap-2">
                   <Text.label>1 Malam</Text.label>

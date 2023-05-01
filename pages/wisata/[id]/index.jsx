@@ -19,7 +19,7 @@ import Rating from "@components/molecules/Rating";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconMapPin } from "@tabler/icons";
+import { IconMapPin } from "@tabler/icons-react";
 import axios from "axios";
 import Link from "next/link";
 import QuickCard from "@components/molecules/QuickCard";

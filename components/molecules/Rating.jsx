@@ -1,4 +1,4 @@
-import { IconStar } from "@tabler/icons";
+import { IconStar } from "@tabler/icons-react";
 
 const Rating = ({ count }) => {
   return (

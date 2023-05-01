@@ -23,7 +23,7 @@ import {
   IconSeparator,
   IconStar,
   IconSwitchHorizontal,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 
 export default function ListWisata() {
   const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");

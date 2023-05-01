@@ -1,4 +1,4 @@
-import { IconCircle } from "@tabler/icons";
+import { IconCircle } from "@tabler/icons-react";
 
 export default function Radio({
   containerClassName,

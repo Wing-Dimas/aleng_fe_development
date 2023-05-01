@@ -1,4 +1,4 @@
-import { IconStar } from "@tabler/icons";
+import { IconStar } from "@tabler/icons-react";
 import Rating from "./Rating";
 
 export default function ReviewCard({ open }) {

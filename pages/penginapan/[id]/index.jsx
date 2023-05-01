@@ -24,7 +24,7 @@ import RoomSuggestionCard from "@components/molecules/RoomSuggestionCard";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconMapPin } from "@tabler/icons";
+import { IconMapPin } from "@tabler/icons-react";
 import ReviewVisitor from "@components/molecules/ReviewVisitor";
 
 export default function DetailPenginapan({}) {

@@ -22,7 +22,7 @@ import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconMap, IconUser, IconMail, IconPhone } from "@tabler/icons";
+import { IconMap, IconUser, IconMail, IconPhone } from "@tabler/icons-react";
 import ReviewVisitor from "@components/molecules/ReviewVisitor";
 export default function DetailKuliner({}) {
   const { breakpoint } = useBreakpoint(BREAKPOINTS, "xs");

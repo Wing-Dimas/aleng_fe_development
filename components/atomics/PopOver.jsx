@@ -6,7 +6,7 @@ import {
   IconPlus,
   IconUser,
   IconUsers,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
 export default function PopOver({

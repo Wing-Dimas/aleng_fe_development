@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@components/atomics/Button";
 import DateInput from "@components/atomics/DateInput";
 import PopOver from "../atomics/PopOver";
-import { IconMapPin, IconSwitchHorizontal } from "@tabler/icons";
+import { IconMapPin, IconSwitchHorizontal } from "@tabler/icons-react";
 import TextInput from "@components/atomics/TextInput";
 import Container from "@components/atomics/Checkbox";
 

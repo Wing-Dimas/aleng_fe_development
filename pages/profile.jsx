@@ -21,7 +21,7 @@ import {
   IconLock,
   IconSettings,
   IconUser,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";

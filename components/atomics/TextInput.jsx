@@ -1,4 +1,4 @@
-import { IconEye, IconEyeOff } from "@tabler/icons";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import { useState } from "react";
 const TextInput = ({
   type = "text",
@@ -18,7 +18,6 @@ const TextInput = ({
   pattern,
   inputMode,
 }) => {
-  
   const doChange = (e) => {
     if (e.currentTarget.name == "no_hp") {
       if (!isNaN(e.target.value)) {

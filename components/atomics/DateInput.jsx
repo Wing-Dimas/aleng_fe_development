@@ -1,4 +1,4 @@
-import { IconCalendarEvent, IconChevronDown } from "@tabler/icons";
+import { IconCalendarEvent, IconChevronDown } from "@tabler/icons-react";
 
 export default function DateInput({
   isTime,
