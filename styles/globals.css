@@ -132,8 +132,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   @apply !rounded-full;
   @apply !shadow-none;
   @apply !bg-gradient-to-bl;
-  @apply !from-custom-primary_red;
-  @apply !to-custom-secondary_yellow;
+  @apply !from-custom-primary-red;
+  @apply !to-custom-secondary-yellow;
 }
 
 .rmdp-day.rmdp-today > span:hover {
@@ -208,18 +208,3 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   @apply !bg-red-600;
   @apply !text-white;
 }
-
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  background-color: brown;
-}
-
-input[type=range]::-moz-range-thumb {
-  display: none;
-  background-color: brown;
-}
-
-input[type=range]{
-  background-color: aquamarine;
-}
-

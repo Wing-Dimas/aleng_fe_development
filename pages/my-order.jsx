@@ -18,6 +18,7 @@ import Wrapper from "@components/atomics/Wrapper";
 import MainContent from "@components/atomics/MainContent";
 import Container from "@components/atomics/Container";
 import OrderCard from "@components/molecules/OrderCard";
+import Checkbox from "@components/atomics/Checkbox";
 
 export default function PesananSaya() {
   const tabStatus = [
@@ -58,49 +59,45 @@ export default function PesananSaya() {
               <div className="flex flex-col gap-4">
                 <div className="w-full flex flex-col gap-2">
                   <Text.label>Produk</Text.label>
-                  <div className="">
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Penginapan
-                      </Text.label>
-                    </div>
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Wisata
-                      </Text.label>
-                    </div>
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Paket Wisata
-                      </Text.label>
-                    </div>
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Kuliner
-                      </Text.label>
-                    </div>
-                  </div>
+                  <Checkbox
+                    value=""
+                    name="penginapan"
+                    label="Penginapan"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="wisata"
+                    label="Wisata"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="paket_wisata"
+                    label="Paket Wisata"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="kuliner"
+                    label="Kuliner"
+                    onChange={() => {}}
+                  />
                 </div>
                 <div className="w-full flex flex-col gap-2">
                   <Text.label>Tanggal Pesanan</Text.label>
-                  <div className="">
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Minggu Ini
-                      </Text.label>
-                    </div>
-                    <div className="mb-2 flex items-center gap-2">
-                      <input type="checkbox" />
-                      <Text.label className="!text-black !font-medium">
-                        Bulan Ini
-                      </Text.label>
-                    </div>
-                  </div>
+                  <Checkbox
+                    value=""
+                    name="minggu_ini"
+                    label="Minggu Ini"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="Bulan Ini"
+                    label="Bulan Ini"
+                    onChange={() => {}}
+                  />
                 </div>
               </div>
             </Container>
@@ -108,7 +105,7 @@ export default function PesananSaya() {
           {/* mobile */}
           {["xs", "sm", "md"].includes(breakpoint) && (
             <FABSheet
-              icon={<IconFilter className="w-8 h-8 text-custom-primary_red" />}
+              icon={<IconFilter className="w-8 h-8 text-custom-primary-red" />}
             >
               <div className="p-4 rounded-xl bg-custom-white">
                 <Text className="mb-4">Filter Pesanan</Text>
@@ -116,48 +113,48 @@ export default function PesananSaya() {
                 <br />
                 {/* Fasilitas Hotel */}
                 <Text.label>Produk</Text.label>
-                <div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Penginapan
-                    </Text.label>
-                  </div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Wisata
-                    </Text.label>
-                  </div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Paket Wisata
-                    </Text.label>
-                  </div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Kuliner
-                    </Text.label>
-                  </div>
+                <div className="flex flex-col gap-2">
+                  <Checkbox
+                    value=""
+                    name="penginapan"
+                    label="Penginapan"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="wisata"
+                    label="Wisata"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="paket_wisata"
+                    label="Paket Wisata"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="kuliner"
+                    label="Kuliner"
+                    onChange={() => {}}
+                  />
                 </div>
                 <br />
                 {/* Tipe Hotel */}
                 <Text.label>Tanggal Pesan</Text.label>
-                <div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Minggu ini
-                    </Text.label>
-                  </div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <input type="checkbox" />
-                    <Text.label className="!text-black !font-medium">
-                      Bulan ini
-                    </Text.label>
-                  </div>
+                <div className="flex flex-col gap-2">
+                  <Checkbox
+                    value=""
+                    name="minggu_ini"
+                    label="Minggu Ini"
+                    onChange={() => {}}
+                  />
+                  <Checkbox
+                    value=""
+                    name="Bulan Ini"
+                    label="Bulan Ini"
+                    onChange={() => {}}
+                  />
                 </div>
               </div>
             </FABSheet>

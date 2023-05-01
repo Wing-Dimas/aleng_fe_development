@@ -37,7 +37,7 @@ export default function ListCardWisata() {
           Desa Banraas, Kecamatan Dungkek, Kabupaten Sumenep
         </Text.label>
         <div className="flex gap-2 items-end justify-end">
-          <Text className="text-custom-primary_red whitespace-nowrap !text-right">
+          <Text className="text-custom-primary-red whitespace-nowrap !text-right">
             Rp 150.000
           </Text>
           <Text.label>/wisatawan</Text.label>
@@ -76,12 +76,12 @@ export default function ListCardWisata() {
         <div className="p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-end w-full">
-              <Link className="text-custom-primary_red text-xs" href="/">
+              <Link className="text-custom-primary-red text-xs" href="/">
                 Lihat Detail
               </Link>
             </div>
             <div className="flex gap-2 items-end justify-end">
-              <Heading.h3 className="!text-custom-primary_red !text-right">
+              <Heading.h3 className="!text-custom-primary-red !text-right">
                 Rp 70.000
               </Heading.h3>
               <Text.small className="!font-normal">/wisatawan</Text.small>

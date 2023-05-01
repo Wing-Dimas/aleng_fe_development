@@ -9,9 +9,9 @@ export default function ScheduleTravel({ days, address, decs }) {
           <p className="text-xs md:text-sm font-normal">{address}</p>
         </div>
       </div>
-      <div className="border-l-2 border-custom-primary_red w-[80%] flex flex-col gap-2">
+      <div className="border-l-2 border-custom-primary-red w-[80%] flex flex-col gap-2">
         <div className="flex flex-start items-center">
-          <div className="bg-custom-primary_red w-4 h-4 flex items-center justify-center rounded-full -ml-[9px] mr-3 -mt-2"></div>
+          <div className="bg-custom-primary-red w-4 h-4 flex items-center justify-center rounded-full -ml-[9px] mr-3 -mt-2"></div>
           <h4 className="text-gray-800 font-semibold md:text-xl text-base -mt-2">
             Kegiatan
           </h4>

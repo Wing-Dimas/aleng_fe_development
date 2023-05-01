@@ -37,7 +37,7 @@ const TextInput = ({
       {label && <p className={labelClassName}>{label}</p>}
       {leftIcon && (
         <label
-          className={`text-custom-dark_grey pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center left-4 top-0${
+          className={`text-custom-dark-grey pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center left-4 top-0${
             leftIconClassName ? " " + leftIconClassName : ""
           }`}
           htmlFor={name}
@@ -61,7 +61,7 @@ const TextInput = ({
       />
       {rightIcon && (
         <label
-          className={`text-custom-primary_red pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4${
+          className={`text-custom-primary-red pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4${
             rightIconClassName ? " " + rightIconClassName : ""
           }`}
           htmlFor={name}
@@ -108,7 +108,7 @@ TextInput.obscure = ({
       {label && <p className={labelClassName}>{label}</p>}
       {leftIcon && (
         <label
-          className={`text-custom-dark_grey pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center left-4 top-0${
+          className={`text-custom-dark-grey pointer-events-none text-xs font-medium absolute h-full flex items-center justify-center left-4 top-0${
             leftIconClassName ? " " + leftIconClassName : ""
           }`}
           htmlFor={name}
@@ -130,7 +130,7 @@ TextInput.obscure = ({
         id={name}
       />
       <label
-        className={`text-custom-primary_red text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4${
+        className={`text-custom-primary-red text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4${
           rightIconClassName ? " " + rightIconClassName : ""
         }`}
         htmlFor={name}

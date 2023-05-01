@@ -39,7 +39,7 @@ export default function ListCardKuliner() {
         </Text.label>
         <div className="flex gap-2 items-end justify-end">
           <Text.label className="!text-right">mulai dari</Text.label>
-          <Text className="text-custom-primary_red whitespace-nowrap">
+          <Text className="text-custom-primary-red whitespace-nowrap">
             Rp 150.000
           </Text>
         </div>
@@ -78,7 +78,7 @@ export default function ListCardKuliner() {
         <div className="p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-end w-full">
-              <Link className="text-custom-primary_red text-xs" href="/">
+              <Link className="text-custom-primary-red text-xs" href="/">
                 Lihat Detail
               </Link>
             </div>
@@ -86,7 +86,7 @@ export default function ListCardKuliner() {
               <Text.small className="!font-normal !text-right">
                 mulai dari
               </Text.small>
-              <Heading.h3 className="!text-custom-primary_red">
+              <Heading.h3 className="!text-custom-primary-red">
                 Rp 70.000
               </Heading.h3>
             </div>

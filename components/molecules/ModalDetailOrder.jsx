@@ -27,7 +27,7 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
       {showModal ? (
         <div className="justify-center items-center flex fixed inset-0 top-20 z-50">
           <div className="w-10/12 md:w-1/2 h-[400px] bg-white rounded-lg shadow-md border-2 relative">
-            <div className="text-custom-black cursor-pointer rounded-md h-6 w-6 p-1 absolute right-3 top-[-10px] bg-custom-primary_red flex justify-center items-center">
+            <div className="text-custom-black cursor-pointer rounded-md h-6 w-6 p-1 absolute right-3 top-[-10px] bg-custom-primary-red flex justify-center items-center">
               <IconX
                 className="h-6 w-6 text-white "
                 onClick={() => setShowModal(!showModal)}
@@ -82,13 +82,13 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
                       </div>
                       <div className="flex flex-col gap-1  max-w-[70%] md:max-w-[80%] w-full">
                         <div className="flex flex-col">
-                          <Text className="text-custom-dark_grey">
+                          <Text className="text-custom-dark-grey">
                             Kaberaz Luxury
                           </Text>
-                          <Text.small className="text-custom-dark_grey">
+                          <Text.small className="text-custom-dark-grey">
                             {1} Deluxe Room
                           </Text.small>
-                          <div className="flex flex-row items-center gap-1 text-custom-dark_grey">
+                          <div className="flex flex-row items-center gap-1 text-custom-dark-grey">
                             <Text.small>1 Malam</Text.small>
                             <Text.small>1 Dewasa</Text.small>
                             <Text.small>1 Anak</Text.small>
@@ -138,15 +138,15 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
               </div>
               <div className="flex flex-row justify-between items-center gap-2">
                 <Text className="!sm:text-xl">Total</Text>
-                <Text className="!sm:text-xl text-custom-primary_red">
+                <Text className="!sm:text-xl text-custom-primary-red">
                   Rp.165.000
                 </Text>
               </div>
               <div className="flex flex-row items-center justify-end gap-2">
-                <p className="bg-custom-secondary_yellow shadow-md rounded-md p-2 cursor-pointer">
+                <p className="bg-custom-secondary-yellow shadow-md rounded-md p-2 cursor-pointer">
                   Beli Lagi
                 </p>
-                <p className="border-2 border-custom-secondary_yellow shadow-md rounded-md p-2 cursor-pointer">
+                <p className="border-2 border-custom-secondary-yellow shadow-md rounded-md p-2 cursor-pointer">
                   Berikan Ulasan
                 </p>
               </div>

@@ -1,54 +1,45 @@
-import { IconBookmark, IconStar } from "@tabler/icons-react";
+import Heading from "@components/atomics/Heading";
+import { IconBookmark, IconThumbUpFilled } from "@tabler/icons-react";
+import Text from "@components/atomics/Text";
 
 export default function QuickCard({
   imageUrl,
   title,
-  star,
   review_count,
   address,
   price,
   children,
 }) {
   return (
-    <div className="m-4 p-4 shadow-custom rounded-3xl whitespace-nowrap cursor-pointer bg-white">
+    <div className="m-4 whitespace-nowrap">
       <div
-        className="relative aspect-[1/1.1] sm:aspect-[1.3/1] bg-center bg-cover rounded-3xl"
+        className="aspect-[9/10] bg-center bg-cover rounded-2xl flex justify-end p-4"
         style={{
           backgroundImage: `url('${imageUrl}')`,
         }}
       >
-        <div className="absolute top-2 right-2 p-2 rounded-full bg-yellow-400">
-          <IconBookmark height={24} width={24} className="text-white" />
+        <IconBookmark className="h-8 w-8 text-white fill-[#00000050]" />
+      </div>
+      <div className="p-4 flex flex-col gap-1">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1 text-orange-400">
+            <IconThumbUpFilled className="h-4 w-4" />
+            <Text.small>{review_count} Reviews</Text.small>
+          </div>
+          {price && (
+            <Text.small className="text-custom-primary-red">
+              {price}K
+            </Text.small>
+          )}
         </div>
+        <Heading.h3 className="!font-bold tracking-tight truncate">
+          {title}
+        </Heading.h3>
+        <Text.label className="!font-medium !text-neutral-700">
+          {address}
+        </Text.label>
+        {children}
       </div>
-      <p className="pt-2 truncate font-heading3_mobile text-heading3 sm:font-heading3 sm:text-heading3 text-custom-black">
-        {title}
-      </p>
-      <div className="flex items-center">
-        {[...Array(5)].map((v, i) => {
-          return (
-            <IconStar
-              key={i}
-              className="w-4 h-4 text-custom-secondary_yellow fill-custom-secondary_yellow"
-            />
-          );
-        })}
-        <p className="ml-2 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-          {review_count} Reviews
-        </p>
-      </div>
-      <p className="pt-1 font-caption_mobile text-caption_mobile sm:font-caption1 sm:text-caption1 text-[#615A56]">
-        {address}
-      </p>
-      {price && (
-        <p className="pt-1 font-body1_mobile text-body1_mobile text-custom-primary_red">
-          Rp {price}
-          <span className="font-caption_mobile text-caption_mobile sm:font-caption2 sm:text-caption2 text-[#615A56]">
-            /malam
-          </span>
-        </p>
-      )}
-      {children}
     </div>
   );
 }

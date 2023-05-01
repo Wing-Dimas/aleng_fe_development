@@ -18,8 +18,10 @@ import {
 } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 import { Calendar } from "react-multi-date-picker";
+import { useRouter } from "next/router";
 
-export default function Navbar({ isFixed = false }) {
+export default function Navbar({ isFixed = false, isDiscover = false }) {
+  const router = useRouter();
   const [tabId, setTabId] = useState("wisata");
   const [expandNavbar, setExpandNavbar] = useState(false);
   const [animateExpand, setAnimateExpand] = useState(false);
@@ -33,6 +35,19 @@ export default function Navbar({ isFixed = false }) {
     adult_count: 1,
     child_count: 0,
   });
+
+  useEffect(() => {
+    const query = router.query;
+    setTabId(query.tabId ?? tabId);
+    setOptions({
+      check_in: query.checkIn ?? options.check_in,
+      check_out: query.checkOut ?? options.check_out,
+      room_count: query.roomCount ?? options.room_count,
+      adult_count: query.adultCount ?? options.adult_count,
+      child_count: query.childCount ?? options.child_count,
+    });
+    setKeyword(query.keyword ?? keyword);
+  }, [router]);
 
   const doChangeKeyword = (e) => {
     setKeyword(e.currentTarget.value);
@@ -154,6 +169,7 @@ export default function Navbar({ isFixed = false }) {
     >
       <div onBlur={doBlurNavbar} className="relative">
         <TopNavBar
+          isDiscover={isDiscover}
           doChangeKeyword={doChangeKeyword}
           doExpandNavbar={doExpandNavbar}
           expandNavbar={expandNavbar}
@@ -183,7 +199,7 @@ export default function Navbar({ isFixed = false }) {
                 {/* Dates */}
                 <div>
                   <div className="flex items-center gap-4">
-                    <IconCalendarEvent className="w-12 h-12 p-3 rounded-full bg-neutral-100 text-custom-primary_red" />
+                    <IconCalendarEvent className="w-12 h-12 p-3 rounded-full bg-neutral-100 text-custom-primary-red" />
                     <div>
                       <p className="">Kapan nih?</p>
                       <p className="text-xs text-neutral-400">
@@ -223,6 +239,7 @@ export default function Navbar({ isFixed = false }) {
 }
 
 const TopNavBar = ({
+  isDiscover,
   expandNavbar,
   keyword,
   doChangeKeyword,
@@ -233,13 +250,15 @@ const TopNavBar = ({
   return (
     <div
       tabIndex={1}
-      className={`${
-        expandNavbar ? "border-transparent shadow-none" : "shadow-sm"
-      } border-b bg-white sticky top-0 z-[1000] w-full transition-all`}
+      className={`${expandNavbar ? "border-transparent shadow-none " : ""}${
+        isDiscover ? "border-b-0 shadow-none" : "border-b shadow-sm"
+      } bg-white sticky top-0 z-[1000] w-full transition-all`}
     >
       <div
         style={{ gridTemplateColumns: "1fr auto 1fr" }}
-        className="z-[1000] max-w-7xl m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8"
+        className={`${
+          isDiscover ? "max-w-[112rem]" : "max-w-7xl"
+        } z-[1000] m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8`}
       >
         <div
           className={`${expandNavbar ? "flex" : "hidden"} ${
@@ -278,7 +297,7 @@ const TopNavBar = ({
           </div>
           {keyword && (
             <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
-              <button className="text-sm bg-custom-secondary_yellow px-2 py-1.5 font-medium rounded-full">
+              <button className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full">
                 Search
               </button>
             </div>
@@ -327,7 +346,7 @@ const NavbarMenu = () => {
   return (
     <div
       onBlur={doBlur}
-      className="relative z-[1000] flex items-center justify-end "
+      className="relative z-[1000] flex items-center justify-end"
     >
       <button
         onClick={doFocus}
@@ -468,7 +487,7 @@ const StayOptions = ({
   return (
     <div>
       <div className="flex items-center gap-4">
-        <IconUser className="w-12 h-12 p-3 rounded-full bg-neutral-100 text-custom-primary_red" />
+        <IconUser className="w-12 h-12 p-3 rounded-full bg-neutral-100 text-custom-primary-red" />
         <div>
           <p className="">Siapa aja?</p>
           <p className="text-xs text-neutral-400">Tambah tamu</p>

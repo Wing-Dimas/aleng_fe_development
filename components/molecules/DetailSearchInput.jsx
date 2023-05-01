@@ -61,10 +61,10 @@ export default function DetailSearchInput({
               className="shadow-none lg:shadow-custom"
             />
             <div className="lg:block flex items-center justify-end gap-2 px-2 lg:px-0">
-              <div className="w-full h-[0.5px] bg-custom-light_grey lg:hidden" />
+              <div className="w-full h-[0.5px] bg-custom-light-grey lg:hidden" />
               <button
                 onClick={doSwitchCheckDate}
-                className="text-custom-dark_grey p-2 -rotate-90 sm:rotate-0 shadow-custom rounded-lg border lg:border-none lg:rounded-none lg:shadow-none"
+                className="text-custom-dark-grey p-2 -rotate-90 sm:rotate-0 shadow-custom rounded-lg border lg:border-none lg:rounded-none lg:shadow-none"
               >
                 <IconSwitchHorizontal height={16} width={16} />
               </button>
@@ -92,7 +92,7 @@ export default function DetailSearchInput({
       <Container className="!flex md:!w-full !flex-col lg:!flex-row !items-center !gap-4 !justify-between mb-4">
         <div className="flex flex-col lg:flex-row items-center gap-4 w-full">
           <TextInput
-            leftIcon={<IconMapPin className="w-5 h-5 text-custom-dark_grey" />}
+            leftIcon={<IconMapPin className="w-5 h-5 text-custom-dark-grey" />}
             placeholder={placeholder}
             className="!w-full"
             containerClassName="!w-full"

@@ -1,7 +1,7 @@
-import Navbar from "@components/molecules/Navbar";
-import Text from "@components/atomics/Text";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "@components/molecules/Navbar";
+import Text from "@components/atomics/Text";
 
 export default function ErrorPage({}) {
   return (
@@ -18,7 +18,7 @@ export default function ErrorPage({}) {
           />
         </div>
         <Link href="/" className="absolute bottom-[30px] md:bottom-[40px]">
-          <Text className="bg-custom-secondary_yellow hover:bg-yellow-200  py-2 px-3 rounded-full text-custom-dark_grey border-2 cursor-pointer text-center border-custom-dark_grey shadow-md">
+          <Text className="bg-custom-secondary-yellow hover:bg-yellow-200  py-2 px-3 rounded-full text-custom-dark-grey border-2 cursor-pointer text-center border-custom-dark-grey shadow-md">
             Back To Home
           </Text>
         </Link>

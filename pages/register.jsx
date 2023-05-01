@@ -13,6 +13,7 @@ import validateRegister from "@validators/registerValidator";
 import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import { unauthPage } from "protectedRoute/authentication";
+import Text from "@components/atomics/Text";
 
 export async function getServerSideProps(context) {
   await unauthPage(context);
@@ -114,9 +115,9 @@ export default function RegisterPage({}) {
           />
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200  p-9  z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
-          <p className="text-[1.2rem] md:text-[2rem] text-center">
+          <Text className="md:text-[2rem] text-center">
             Selamat Bergabung {session ? "Logged in" : "not logged in"}
-          </p>
+          </Text>
           <form
             className="text-sm max-w-[400px] h-full mt-[1rem] md:mt-[2.25rem] flex flex-col items-center gap-2 md:gap-3 w-full"
             onSubmit={handleSubmit}
@@ -193,12 +194,12 @@ export default function RegisterPage({}) {
                   </span>
                 </div>
               </button>
-              <p className="">
+              <Text>
                 Sudah Punya Account ?{" "}
                 <span className="text-red-600 hover:text-red-800 cursor-pointer">
                   <Link href="/login">Login</Link>
                 </span>
-              </p>
+              </Text>
             </div>
           </form>
         </div>

@@ -13,7 +13,7 @@ const Text = ({ className, children }) => {
 Text.small = ({ className, children }) => {
   return (
     <p
-      className={`font-medium text-xs sm:text-base${
+      className={`font-medium text-xs sm:text-sm${
         className ? " " + className : ""
       }`}
     >

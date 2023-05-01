@@ -49,7 +49,7 @@ export default function FABSheet({ className, icon, children }) {
       <div className="fixed z-[998] right-8 bottom-8">
         <button
           onClick={doToggleSheet}
-          className="p-2 rounded-full shadow bg-custom-secondary_yellow text-custom-primary_red"
+          className="p-2 rounded-full shadow bg-custom-secondary-yellow text-custom-primary-red"
         >
           {icon}
         </button>

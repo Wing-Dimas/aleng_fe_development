@@ -88,7 +88,7 @@ export default function Select({
       </button>
       <div className="absolute h-full w-full pointer-events-none top-0 flex px-4 items-center justify-between">
         {leftIcon}
-        <IconChevronDown className="h-5 w-5 text-custom-primary_red" />
+        <IconChevronDown className="h-5 w-5 text-custom-primary-red" />
       </div>
     </div>
   );

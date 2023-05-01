@@ -177,7 +177,7 @@ export default function Profile() {
               </div>
               <br />
               <Button
-                className="w-full bg-custom-primary_red text-white"
+                className="w-full bg-custom-primary-red text-white"
                 onClick={handleClick}
               >
                 Keluar
@@ -188,7 +188,7 @@ export default function Profile() {
           {["xs", "sm", "md"].includes(breakpoint) && (
             <FABSheet
               icon={
-                <IconSettings className="w-8 h-8 text-custom-primary_red" />
+                <IconSettings className="w-8 h-8 text-custom-primary-red" />
               }
             >
               <div className="flex items-center gap-2">
@@ -236,7 +236,7 @@ export default function Profile() {
 
               <br />
               <Button
-                className="w-full bg-custom-primary_red text-white"
+                className="w-full bg-custom-primary-red text-white"
                 onClick={handleClick}
               >
                 Keluar

@@ -23,7 +23,7 @@ export default function DateInput({
     >
       {label && <p className={labelClassName}>{label}</p>}
       <label
-        className={`text-custom-dark_grey pointer-events-none text-xs font-medium absolute h-full top-0 left-4 flex items-center justify-center${
+        className={`text-custom-dark-grey pointer-events-none text-xs font-medium absolute h-full top-0 left-4 flex items-center justify-center${
           leftIconClassName ? " " + leftIconClassName : ""
         }`}
         htmlFor={name}
@@ -41,7 +41,7 @@ export default function DateInput({
         onChange={doChange}
       />
       <label
-        className={`text-custom-primary_red pointer-events-none text-xs font-medium absolute h-full top-0 right-4 flex items-center justify-center${
+        className={`text-custom-primary-red pointer-events-none text-xs font-medium absolute h-full top-0 right-4 flex items-center justify-center${
           rightIconClassName ? " " + rightIconClassName : ""
         }`}
         htmlFor={name}

@@ -1,10 +1,7 @@
-import Link from "next/link";
 import Badge from "@components/atomics/Badge";
 import Heading from "@components/atomics/Heading";
 import Text from "@components/atomics/Text";
-import { useState } from "react";
 import Container from "@components/atomics/Container";
-
 
 export default function OrderCard({ showModal, setShowModal }) {
   return (
@@ -22,7 +19,7 @@ export default function OrderCard({ showModal, setShowModal }) {
           </Text.label>
         </div>
 
-        <Heading.h3 className="text-custom-primary_red whitespace-nowrap">
+        <Heading.h3 className="text-custom-primary-red whitespace-nowrap">
           Rp 165.000
         </Heading.h3>
       </div>
@@ -36,7 +33,7 @@ export default function OrderCard({ showModal, setShowModal }) {
           </div>
         </div>
         <div onClick={() => setShowModal(!showModal)}>
-          <Text.label className="!text-custom-primary_red  whitespace-nowrap cursor-pointer">
+          <Text.label className="!text-custom-primary-red  whitespace-nowrap cursor-pointer">
             Lihat Detail
           </Text.label>
         </div>

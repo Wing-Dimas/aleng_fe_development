@@ -31,7 +31,7 @@ const LSTextInput = ({
       />
       <p
         className={`mb-0 text-xs ${
-          message?.isError ? "text-custom-primary_red" : "text-green-700"
+          message?.isError ? "text-custom-primary-red" : "text-green-700"
         }`}
       >
         {message?.message}
@@ -75,7 +75,7 @@ const ObscuredLSTextInput = ({
           type={show ? "text" : "password"}
           readOnly={readonly}
         />
-        <div className="text-custom-primary_red text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4">
+        <div className="text-custom-primary-red text-xs font-medium absolute h-full flex items-center justify-center top-0 right-4">
           {show ? (
             <IconEye onClick={doToggleShow} className="w-5 h-5" />
           ) : (
@@ -85,7 +85,7 @@ const ObscuredLSTextInput = ({
       </div>
       <p
         className={`mb-0 text-xs ${
-          message?.isError ? "text-custom-primary_red" : "text-green-700"
+          message?.isError ? "text-custom-primary-red" : "text-green-700"
         }`}
       >
         {message?.message}

@@ -21,7 +21,7 @@ export default function CardPayment({ id, name }) {
       />
       <label
         htmlFor={id}
-        className={`flex flex-row items-center w-min sm:w-full  gap-2 border-2 rounded-md border-custom-dark_grey p-1  cursor-pointer peer-checked:border-[#FDD05C]  peer-checked:bg-[#F6F0E1]`}
+        className={`flex flex-row items-center w-min sm:w-full  gap-2 border-2 rounded-md border-custom-dark-grey p-1  cursor-pointer peer-checked:border-[#FDD05C]  peer-checked:bg-[#F6F0E1]`}
       >
         <div className="relative w-28">
           <Image
@@ -32,8 +32,8 @@ export default function CardPayment({ id, name }) {
           />
         </div>
         <div>
-          <Text className="text-custom-dark_grey !text-sm">ShoppePay</Text>
-          <Text.small className="text-custom-dark_grey !text-xs">
+          <Text className="text-custom-dark-grey !text-sm">ShoppePay</Text>
+          <Text.small className="text-custom-dark-grey !text-xs">
             Pay With Shoppe
           </Text.small>
         </div>
