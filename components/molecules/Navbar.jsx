@@ -40,13 +40,14 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
     const query = router.query;
     setTabId(query.tabId ?? tabId);
     setOptions({
-      check_in: query.checkIn ?? options.check_in,
-      check_out: query.checkOut ?? options.check_out,
-      room_count: query.roomCount ?? options.room_count,
-      adult_count: query.adultCount ?? options.adult_count,
-      child_count: query.childCount ?? options.child_count,
+      check_in: query.in ?? options.check_in,
+      check_out: query.out ?? options.check_out,
+      room_count: query.room ?? options.room_count,
+      adult_count: query.adult ?? options.adult_count,
+      child_count: query.child ?? options.child_count,
     });
     setKeyword(query.keyword ?? keyword);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const doChangeKeyword = (e) => {
@@ -99,6 +100,16 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
     }
   };
 
+  const doSearch = () => {
+    if (tabId === "penginapan") {
+      router.push(
+        `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
+      );
+    } else {
+      router.push(`/discover?tabId=${tabId}&keyword=${keyword}`);
+    }
+  };
+
   const doExpandNavbar = () => {
     setExpandNavbar(true);
   };
@@ -116,10 +127,8 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   useEffect(() => {
     if (expandNavbar) {
       document.body.style.overflow = "hidden";
-      // document.body.style.paddingRight = "0.25rem";
       setAnimateExpand(true);
     } else {
-      // document.body.style.paddingRight = "0rem";
       document.body.style.overflow = "auto";
     }
   }, [expandNavbar]);
@@ -176,6 +185,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           doCloseNavbar={doCloseNavbar}
           keyword={keyword}
           animateExpand={animateExpand}
+          doSearch={doSearch}
         />
         <div
           tabIndex={1}
@@ -246,12 +256,13 @@ const TopNavBar = ({
   doExpandNavbar,
   doCloseNavbar,
   animateExpand,
+  doSearch,
 }) => {
   return (
     <div
       tabIndex={1}
       className={`${expandNavbar ? "border-transparent shadow-none " : ""}${
-        isDiscover ? "border-b-0 shadow-none" : "border-b shadow-sm"
+        isDiscover ? "border-b shadow-none" : "border-b shadow-sm"
       } bg-white sticky top-0 z-[1000] w-full transition-all`}
     >
       <div
@@ -295,13 +306,23 @@ const TopNavBar = ({
           <div className="absolute left-4 top-0 h-full flex flex-col items-center justify-center">
             <IconSearch className="h-5 w-5 text-neutral-400" />
           </div>
-          {keyword && (
-            <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
-              <button className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full">
-                Search
+          <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
+            {keyword ? (
+              <button
+                onClick={doSearch}
+                className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full"
+              >
+                Cari
               </button>
-            </div>
-          )}
+            ) : (
+              <Link
+                href="/discover"
+                className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full"
+              >
+                Jelajahi
+              </Link>
+            )}
+          </div>
         </div>
         <div>
           <NavbarMenu />
