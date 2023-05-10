@@ -1,0 +1,284 @@
+{
+    "status": 200,
+    "message": "Success",
+    "data": {
+        "id": 2,
+        "title": "Kaberaz Luxury By Amithya",
+        "description": "Kaberaz Luxury By Amithya",
+        "address": "Jl. Kenangan",
+        "city": "bangkalan",
+        "Price": "200000",
+        "package": {
+            "wisata": [
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                }
+            ],
+            "kuliner": [
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "address": "Jl. tes",
+                    "star": "0",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "address": "Jl. tes",
+                    "star": "0",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                }
+            ],
+            "penginapan": [
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "price": "50000",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "price": "50000",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                }
+            ],
+            "kerajinan": [
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                }
+            ],
+            "transportasi": [
+                {
+                    "id": 29,
+                    "title": "tes",
+                    "city": "tes",
+                    "star": "0",
+                    "address": "tes",
+                    "image": [
+                        {
+                            "id": 3,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        },
+                        {
+                            "id": 4,
+                            "nama_file": "1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.39.18.png",
+                            "kategori": "2",
+                            "id_tempat": "29",
+                            "created_at": "2023-02-14T02:27:23.000000Z",
+                            "updated_at": "2023-02-14T02:27:23.000000Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        "review": {
+            "star": "4.5",
+            "total_review": "100",
+            "count": {
+                "1": 0,
+                "2": 10,
+                "3": 20,
+                "4": 30,
+                "5": 40
+            },
+            "comment": [
+                {
+                    "name": "Rizky",
+                    "comment": "Keren",
+                    "star": "5",
+                    "profile_image": "https://www.amithyahotels.com/wp-content/uploads/2020/10/1-1.jpg",
+                    "created_at": "2023-02-14T02:27:23.000000Z"
+                },
+                {
+                    "name": "Rizky",
+                    "comment": "Keren",
+                    "star": "5",
+                    "profile_image": "https://www.amithyahotels.com/wp-content/uploads/2020/10/1-1.jpg",
+                    "created_at": "2023-02-14T02:27:23.000000Z"
+                }
+            ]
+        },
+        "image": [
+            {
+                "id": 3,
+                "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                "kategori": "2",
+                "id_tempat": "29",
+                "created_at": "2023-02-14T02:27:23.000000Z",
+                "updated_at": "2023-02-14T02:27:23.000000Z"
+            },
+            {
+                "id": 3,
+                "nama_file": "1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                "url": "uploads/1676341643.Screenshot 2023-02-11 at 21.34.40.png",
+                "kategori": "2",
+                "id_tempat": "29",
+                "created_at": "2023-02-14T02:27:23.000000Z",
+                "updated_at": "2023-02-14T02:27:23.000000Z"
+            }
+        ]
+    }
+}
