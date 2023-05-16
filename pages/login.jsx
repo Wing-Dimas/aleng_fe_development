@@ -85,7 +85,7 @@ export default function LoginPage({}) {
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
       <Head>
-        <title>Login | Lenjelen</title>
+        <title>Login | Lenjhelenan</title>
       </Head>
       <Navbar isFixed auth />
       {/* <div className={`max-w-full w-full relative bg-white`}>
@@ -100,14 +100,15 @@ export default function LoginPage({}) {
           />
         </div>
       </div> */}
-      <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem]">
-        <div className="w-1/2 z-50 relative justify-center flex  md:mt-10 ">
+      <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center  items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem] mb-52">
+        <div className="lg:w-1/2 z-50 relative justify-center flex w-full ">
           <Image
             src="/static_images/lanjalan_baner.png"
             width={600}
             height={50}
             alt="iconLanjalan"
             priority
+            className="w-1/2 lg:w-full"
           />
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
@@ -156,7 +157,7 @@ export default function LoginPage({}) {
             >
               Masuk
             </button>
-            <p className="text-xs md:text-sm">atau</p>
+            {/* <p className="text-xs md:text-sm">atau</p>
             <button
               className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
               onClick={handleSignIn}
@@ -174,7 +175,7 @@ export default function LoginPage({}) {
                   Masuk dengan Google
                 </span>
               </div>
-            </button>
+            </button> */}
             <br />
             <Text className="">
               Belum Punya Account ?{" "}

@@ -89,7 +89,7 @@ export default function RegisterPage({}) {
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
       <Head>
-        <title>Sign Up | Lenjelen</title>
+        <title>Sign Up | Lenjhelenan</title>
       </Head>
       <Navbar isFixed auth />
       {/* <div className={`max-w-full w-full relative`}>
@@ -104,14 +104,15 @@ export default function RegisterPage({}) {
           />
         </div>
       </div> */}
-      <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center items-center md:items-start w-full min-h-[calc(100vh-8rem)] font-semibold text-[2rem] my-[8rem]">
-        <div className="w-1/2 z-50 relative justify-center flex md:mt-10 ">
+      <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center items-center md:items-start w-full min-h-[calc(100vh-8rem)] font-semibold text-[2rem] my-[8rem] mb-52">
+        <div className="lg:w-1/2 z-50 relative justify-center flex w-full ">
           <Image
             src="/static_images/lanjalan_baner.png"
             width={600}
             height={50}
             alt="iconLanjalan"
             priority
+            className="w-1/2 lg:w-full"
           />
         </div>
         <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200  p-9  z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
@@ -175,7 +176,7 @@ export default function RegisterPage({}) {
               >
                 Register
               </button>
-              <p className="text-xs md:text-sm">atau</p>
+              {/* <p className="text-xs md:text-sm">atau</p>
               <button
                 onClick={handleSignIn}
                 className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
@@ -193,7 +194,8 @@ export default function RegisterPage({}) {
                     Masuk dengan Google
                   </span>
                 </div>
-              </button>
+              </button> */}
+              <br />
               <Text>
                 Sudah Punya Account ?{" "}
                 <span className="text-red-600 hover:text-red-800 cursor-pointer">

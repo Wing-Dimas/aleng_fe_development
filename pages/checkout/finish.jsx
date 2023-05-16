@@ -40,7 +40,7 @@ export default function Finish() {
         <br />
         <div className="flex flex-col gap-5">
           <Text.small className="!font-normal md:text-xs text-custom-dark_grey">
-            Terima kasih sudah melakukan pembelian pada Lenjelenan Madura
+            Terima kasih sudah melakukan pembelian pada Lenjhelenan Mhadure
           </Text.small>
           <div className="grid grid-cols-5  w-full  divide-x-2 divide-gray-300">
             <div className="flex flex-col items-center ">

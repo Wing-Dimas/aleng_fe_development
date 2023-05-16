@@ -290,7 +290,7 @@ const TopNavBar = ({
               height={48}
               alt="logo"
               src="/static_icons/logo.png"
-              className="drop-shadow-md max-w-[40px] w-full"
+              className="drop-shadow-md max-w-[45px] w-full"
             />
           </Link>
         </div>

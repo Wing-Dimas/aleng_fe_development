@@ -42,12 +42,12 @@ export default function Home({}) {
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">
       <Head>
-        <title>Lenjelen Madura | Beranda</title>
+        <title>Lenjhelenan Madura | Beranda</title>
       </Head>
       <Navbar />
       <div
         style={{
-          backgroundImage: "url('/static_images/hero.jpeg')",
+          backgroundImage: "url('/static_images/gili_labak.jpg')",
         }}
         className="pt-24 pb-12 bg-center bg-cover"
       >

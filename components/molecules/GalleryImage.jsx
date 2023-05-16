@@ -75,6 +75,7 @@ export default function GalleryImage({ images }) {
                     src={image}
                     height={1000}
                     width={1000}
+                    alt="Gambar"
                     className="rounded-md shadow-md w-full h-full object-cover"
                   />
                 </div>
