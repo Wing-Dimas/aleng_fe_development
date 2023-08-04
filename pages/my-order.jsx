@@ -53,7 +53,7 @@ export default function PesananSaya() {
           style={{ gridTemplateColumns: "minmax(14rem, 100%) 1fr" }}
         >
           <div>
-            <Container className="hidden lg:flex flex-col !border-none !shadow-none">
+            <Container className="hidden lg:flex flex-col">
               <p className="font-semibold text-base">Filter Pesanan</p>
               <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
               <div className="flex flex-col gap-4">
@@ -159,7 +159,7 @@ export default function PesananSaya() {
               </div>
             </FABSheet>
           )}
-          <div className="w-full flex flex-col gap-6">
+          <Container className="w-full flex flex-col gap-6">
             <div className="flex items-center gap-4 flex-nowrap overflow-x-auto">
               {tabStatus.map((title, i) => {
                 return (
@@ -187,7 +187,7 @@ export default function PesananSaya() {
                 />
               ))}
             </div>
-          </div>
+          </Container>
         </div>
         <ModalDetailOrder showModal={showModal} setShowModal={setShowModal} />
       </MainContent>

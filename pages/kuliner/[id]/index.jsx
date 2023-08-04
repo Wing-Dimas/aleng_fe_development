@@ -1,23 +1,15 @@
 import { useState } from "react";
 import Head from "next/head";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useBreakpoint } from "use-breakpoint";
-import { BREAKPOINTS } from "@constants/index";
-import "swiper/css";
-import BreadCrumbs from "@components/atomics/BreadCrumbs";
 import Button from "@components/atomics/Button";
 import Container from "@components/atomics/Container";
 import DateInput from "@components/atomics/DateInput";
-import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
 import Heading from "@components/atomics/Heading";
 import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/atomics/PopOver";
-import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
-import ReviewCard from "@components/molecules/ReviewCard";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
@@ -25,7 +17,6 @@ import Wrapper from "@components/atomics/Wrapper";
 import { IconMap, IconUser, IconMail, IconPhone } from "@tabler/icons-react";
 import ReviewVisitor from "@components/molecules/ReviewVisitor";
 export default function DetailKuliner({}) {
-  const { breakpoint } = useBreakpoint(BREAKPOINTS, "xs");
   const [openReview, setOpenReview] = useState(false);
   const [order, setOrder] = useState({
     date: new Date().toISOString().split("T")[0],
@@ -38,11 +29,6 @@ export default function DetailKuliner({}) {
       people: 1,
     },
   });
-  const [isOpen, setIsOpen] = useState(false);
-
-  const doOpen = () => {
-    setIsOpen(!isOpen);
-  };
 
   const doChangeOrder = ({ name, value }) => {
     setOrder({ ...order, [name]: value });
@@ -65,15 +51,7 @@ export default function DetailKuliner({}) {
       </Head>
       <Navbar />
       <MainContent>
-        <div className="flex flex-row md:flex-col items-center justify-between md:items-stretch w-full">
-          <BreadCrumbs
-            breads={[
-              { name: "Kuliner", link: "/kuliner" },
-              { name: "Soto Bekasi", link: "/kuliner/soto-bekasi" },
-            ]}
-          />
-        </div>
-
+        <br />
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
           style={{
@@ -199,41 +177,7 @@ export default function DetailKuliner({}) {
             setOpenReview={setOpenReview}
           />
         </div>
-        {/* Restoran Serupa */}
-        <div className="w-full mt-8">
-          <Heading.h2>Restoran Serupa</Heading.h2>
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={
-              breakpoint === "xs"
-                ? 1.5
-                : breakpoint === "sm"
-                ? 2.2
-                : breakpoint === "md"
-                ? 2.5
-                : breakpoint === "lg"
-                ? 3.2
-                : breakpoint === "xl"
-                ? 3.5
-                : breakpoint === "2xl"
-                ? 4.2
-                : 4.5
-            }
-          >
-            {[...Array(20)].map((v, i) => {
-              return (
-                <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="https://source.unsplash.com/random/?food"
-                    title="Bebek Sinjay"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
+        <br />
       </MainContent>
       <Footer />
     </Wrapper>

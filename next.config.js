@@ -9,7 +9,11 @@ const nextConfig = {
     NEXTAUTH_URL: "http://localhost:3000",
   },
   images: {
-    domains: ['source.unsplash.com'],
+    domains: [
+      "source.unsplash.com",
+      "www.amithyahotels.com",
+      "assets.ayobandung.com",
+    ],
   },
 };
 

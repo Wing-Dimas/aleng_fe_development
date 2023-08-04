@@ -2,19 +2,29 @@ import MainContent from "@components/atomics/MainContent";
 import Wrapper from "@components/atomics/Wrapper";
 import Navbar from "@components/molecules/Navbar";
 import {
-  IconArrowsDownUp,
   IconBookmark,
-  IconBoxMultiple,
+  IconCash,
+  IconMapPin,
+  IconSettings,
+  IconStar,
   IconStarFilled,
 } from "@tabler/icons-react";
 import Head from "next/head";
 import Heading from "@components/atomics/Heading";
 import Text from "@components/atomics/Text";
+import { useRouter as useNavigator } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import TextInput from "@components/atomics/TextInput";
+import Select from "@components/atomics/Select";
+import Button from "@components/atomics/Button";
 
 export default function Discover() {
+  const navigator = useNavigator();
   const router = useRouter();
+  const [tabId, setTabId] = useState("wisata");
+  const [expand, setExpand] = useState(false);
+  const [animate, setAnimate] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [options, setOptions] = useState({
     check_in: new Date(),
@@ -23,11 +33,18 @@ export default function Discover() {
     adult_count: 1,
     child_count: 0,
   });
-  const [tabId, setTabId] = useState("wisata");
+  const [advancedOptions, setAdvancedOptions] = useState({
+    city: "default",
+    min_star: "default",
+    max_price: "",
+  });
+
+  const doChangeAdvancedOptions = ({ name, value }) => {
+    setAdvancedOptions({ ...advancedOptions, [name]: value });
+  };
 
   useEffect(() => {
     const query = router.query;
-    setTabId(query.tabId ?? tabId);
     setOptions({
       check_in: query.in ?? options.check_in,
       check_out: query.out ?? options.check_out,
@@ -35,9 +52,64 @@ export default function Discover() {
       adult_count: query.adult ?? options.adult_count,
       child_count: query.child ?? options.child_count,
     });
+    setAdvancedOptions({
+      city: query.city ?? advancedOptions.city,
+      min_star: query.minStar ?? advancedOptions.min_star,
+      max_price: query.maxPrice ?? advancedOptions.max_price,
+    });
     setKeyword(query.keyword ?? keyword);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
+
+  const doExpand = () => {
+    setExpand(true);
+  };
+
+  const doShrink = () => {
+    setAnimate(false);
+  };
+
+  useEffect(() => {
+    if (expand) {
+      document.body.style.overflow = "hidden";
+      setAnimate(true);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [expand]);
+
+  useEffect(() => {
+    if (!animate) {
+      setTimeout(() => {
+        setExpand(false);
+      }, 500);
+    }
+  }, [animate]);
+
+  useEffect(() => {
+    const query = router.query;
+    setTabId(query.tabId ?? tabId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
+
+  const doSearchWithOptions = () => {
+    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`;
+    if (tabId === "penginapan") {
+      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`;
+    }
+    if (advancedOptions.city !== "default") {
+      newQuery = `${newQuery}&city=${advancedOptions.city}`;
+    }
+    if (advancedOptions.min_star !== "default") {
+      newQuery = `${newQuery}&minStar=${advancedOptions.min_star}`;
+    }
+    if (advancedOptions.max_price !== "") {
+      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`;
+    }
+    router.replace(newQuery).then(() => {
+      router.reload();
+    });
+  };
 
   return (
     <Wrapper>
@@ -47,23 +119,105 @@ export default function Discover() {
       <div className="sticky top-0 z-10">
         <Navbar isDiscover />
       </div>
+      {/* Drawer */}
+      <div
+        className={`${expand ? "block" : "hidden"} ${
+          animate ? "bg-opacity-25" : "bg-opacity-0"
+        } transition-all fixed h-full w-screen left-0 z-[1000] bg-black`}
+      >
+        <div
+          className="relative grid h-full"
+          style={{ gridTemplateColumns: "1fr auto" }}
+        >
+          <div onClick={doShrink}></div>
+          <div
+            className={`${
+              animate ? "translate-x-0" : "translate-x-full"
+            } flex flex-col gap-4 transition-transform duration-500 h-full bg-white p-8`}
+          >
+            <Heading.h3>Atur Pencarian</Heading.h3>
+            <TextInput
+              name="max_price"
+              leftIcon={<IconCash className="w-5 h-5" />}
+              onChange={doChangeAdvancedOptions}
+              value={advancedOptions.max_price}
+              placeholder="Maksimal harga"
+              type="number"
+            />
+            <Select
+              leftIcon={<IconMapPin className="w-5 h-5" />}
+              value={advancedOptions.city}
+              name="city"
+              onChange={doChangeAdvancedOptions}
+              options={[
+                {
+                  name: "Kota",
+                  value: "default",
+                },
+                {
+                  name: "Bangkalan",
+                  value: "bangkalan",
+                },
+                {
+                  name: "Pamekasan",
+                  value: "pamekasan",
+                },
+                {
+                  name: "Sumenep",
+                  value: "sumenep",
+                },
+                {
+                  name: "Sampanng",
+                  value: "sampang",
+                },
+              ]}
+            />
+            <Select
+              leftIcon={<IconStar className="w-5 h-5" />}
+              value={advancedOptions.min_star}
+              name="min_star"
+              onChange={doChangeAdvancedOptions}
+              options={[
+                {
+                  name: "Rating minimal",
+                  value: "default",
+                },
+                {
+                  name: "1",
+                  value: "1",
+                },
+                {
+                  name: "2",
+                  value: "2",
+                },
+                {
+                  name: "3",
+                  value: "3",
+                },
+                {
+                  name: "4",
+                  value: "4",
+                },
+                {
+                  name: "5",
+                  value: "5",
+                },
+              ]}
+            />
+            <Button onClick={doSearchWithOptions}>Atur Pencarian</Button>
+          </div>
+        </div>
+      </div>
       <MainContent isDiscover>
         <div className="fixed bottom-0 left-0 w-full flex items-center justify-center my-4">
-          <div className="p-1 w-fit bg-black bg-opacity-5 backdrop-blur-md rounded-full overflow-hidden">
-            <div
-              className="bg-white grid items-center rounded-full overflow-hidden"
-              style={{ gridTemplateColumns: "1fr auto 1fr" }}
+          <div className="p-1 w-fit bg-black bg-opacity-20 backdrop-blur-md rounded-full overflow-hidden">
+            <button
+              onClick={doExpand}
+              className="font-semibold bg-white p-3 flex items-center gap-2 rounded-full"
             >
-              <button className="font-semibold bg-white p-3 flex items-center gap-2">
-                <IconArrowsDownUp className="h-5 w-5" />
-                <span>Urutan</span>
-              </button>
-              <span>|</span>
-              <button className="font-semibold bg-white p-3 flex items-center gap-2">
-                <span>Filter</span>
-                <IconBoxMultiple className="h-5 w-5" />
-              </button>
-            </div>
+              <IconSettings className="h-5 w-5" />
+              <span>Atur Pencarian</span>
+            </button>
           </div>
         </div>
         <br />

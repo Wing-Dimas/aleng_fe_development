@@ -9,7 +9,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ReviewCard from "./ReviewCard";
 import Text from "@components/atomics/Text";
 
-export default function ReviewVisitor({ openReview, setOpenReview }) {
+export default function ReviewVisitor({
+  star,
+  total_review,
+  star_count,
+  comments,
+  openReview,
+  setOpenReview,
+}) {
   const { breakpoint } = useBreakpoint(BREAKPOINTS, "xs");
   return (
     <div>
@@ -30,12 +37,12 @@ export default function ReviewVisitor({ openReview, setOpenReview }) {
                 <Text className="flex gap-2 cursor-pointer">
                   Ulasan Pengguna
                 </Text>
-                <Rating.descripted rate={4.5} count={666} />
+                <Rating.descripted rate={star} count={total_review} />
               </div>
               <div className="w-full flex flex-col gap-6">
-                <RatingSlider />
+                <RatingSlider stars={star_count} />
                 <div className="flex flex-col gap-5 w-full h-full max-h-96 overflow-y-auto scrollbar pr-2">
-                  {[...Array(5)].map((v, i) => {
+                  {comments.map((comment, i) => {
                     return <ReviewCard open={true} key={i} />;
                   })}
                 </div>
@@ -55,8 +62,8 @@ export default function ReviewVisitor({ openReview, setOpenReview }) {
                 <IconArrowRight className="w-4 h-4 font-bold text-gray-600" />
               </div>
             </div>
-            <Rating.descripted rate={4.5} count={666} />
-            <RatingSlider />
+            <Rating.descripted rate={star} count={total_review} />
+            <RatingSlider stars={star_count} />
           </div>
           <div className="flex flex-col gap-2 w-full md:w-[80%]">
             <Text>Ulasan yang mungkin membantumu</Text>
@@ -78,7 +85,6 @@ export default function ReviewVisitor({ openReview, setOpenReview }) {
                     ? 3.6
                     : 1.6
                 }
-                // loop={loopUlasan}
               >
                 {[...Array(6)].map((item, i) => {
                   return (

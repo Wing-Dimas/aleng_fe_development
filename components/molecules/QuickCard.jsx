@@ -1,5 +1,5 @@
 import Heading from "@components/atomics/Heading";
-import { IconBookmark, IconThumbUpFilled } from "@tabler/icons-react";
+import { IconBookmark, IconStarFilled } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 
 export default function QuickCard({
@@ -23,8 +23,8 @@ export default function QuickCard({
       <div className="p-4 flex flex-col gap-1">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1 text-orange-400">
-            <IconThumbUpFilled className="h-4 w-4" />
-            <Text.small>{review_count} Reviews</Text.small>
+            <IconStarFilled className="h-4 w-4" />
+            <Text.small>{review_count}/5</Text.small>
           </div>
           {price && (
             <Text.small className="text-custom-primary-red">

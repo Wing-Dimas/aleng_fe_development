@@ -17,6 +17,7 @@ import {
   IconHorseToy,
   IconSoup,
 } from "@tabler/icons-react";
+import axios from "axios";
 
 export async function getServerSideProps(context) {
   return {
@@ -27,6 +28,11 @@ export default function Home({}) {
   const cookie = Cookies.get("token");
   const changeUserStore = useUserStore((state) => state.fetchUser);
   const [menuIndex, setMenuIndex] = useState(0);
+  const [populars, setPopulars] = useState({
+    wisata: [],
+    penginapan: [],
+    restoran: [],
+  });
 
   const doChangeTabIndex = (e) => {
     setMenuIndex(parseInt(e.currentTarget.value));
@@ -38,6 +44,23 @@ export default function Home({}) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cookie]);
+
+  const getPopulars = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:8000/api/popularSite");
+      setPopulars({
+        wisata: data.data.wisata,
+        penginapan: data.data.hotel,
+        restoran: data.data.restaurant,
+      });
+    } catch (error) {
+      console.log("Error Fetching Populars");
+    }
+  };
+
+  useEffect(() => {
+    getPopulars();
+  }, []);
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">
@@ -121,11 +144,11 @@ export default function Home({}) {
         <br />
       </div>
       {menuIndex === 0 ? (
-        <Wisata />
+        <Wisata populars={populars.wisata} />
       ) : menuIndex === 1 ? (
-        <Kuliner />
+        <Kuliner populars={populars.restoran} />
       ) : menuIndex === 2 ? (
-        <Penginapan />
+        <Penginapan populars={populars.penginapan} />
       ) : menuIndex === 3 ? (
         <Kerajinan />
       ) : (
@@ -136,7 +159,7 @@ export default function Home({}) {
   );
 }
 
-const Wisata = () => {
+const Wisata = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -149,23 +172,24 @@ const Wisata = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-1">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular, i) => {
               return (
                 <Carousel.item key={i.toString()}>
-                  <QuickCard
-                    imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                    title="Gili Genting Gili Genting Banget"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    link="/wisata1"
-                  />
+                  <Link href={"/wisata/" + popular.id}>
+                    <QuickCard
+                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
+                      title={popular.title}
+                      address={popular.city}
+                      review_count={popular.star}
+                    />
+                  </Link>
                 </Carousel.item>
               );
             })}
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Wisata" />
+      <PilihanKabupaten name="Wisata" url="wisata" />
       <div className="px-4 py-4 md:py-8">
         <Title className="text-center">
           Paket <span className="text-custom-primary-red">Wisata</span> Untukmu
@@ -175,19 +199,21 @@ const Wisata = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-2">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular, i) => {
               return (
                 <Carousel.item key={i.toString()}>
-                  <QuickCard
-                    imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                    title="Jelajah Gili Iyang"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                  >
-                    <Text.small className="text-custom-primary-red">
-                      500K/3 hari
-                    </Text.small>
-                  </QuickCard>
+                  <Link href={"/wisata/" + popular.id}>
+                    <QuickCard
+                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
+                      title={popular.title}
+                      address={popular.city}
+                      review_count={popular.star}
+                    >
+                      <Text.small className="text-custom-primary-red">
+                        {popular.price}/{popular.time}
+                      </Text.small>
+                    </QuickCard>
+                  </Link>
                 </Carousel.item>
               );
             })}
@@ -202,15 +228,15 @@ const Wisata = () => {
         <DottedUnderline />
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-3">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular, i) => {
               return (
                 <Carousel.item key={i.toString()}>
-                  <Link href="/wisata/1">
+                  <Link href={"/wisata/" + popular.id}>
                     <QuickCard
                       imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title="Gili Genting"
-                      address="Kab. Sumenep"
-                      review_count={666}
+                      title={popular.title}
+                      address={popular.city}
+                      review_count={popular.star}
                     />
                   </Link>
                 </Carousel.item>
@@ -223,7 +249,7 @@ const Wisata = () => {
   );
 };
 
-const Kuliner = () => {
+const Kuliner = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -236,15 +262,15 @@ const Kuliner = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kuliner-1">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular, i) => {
               return (
                 <Carousel.item key={i.toString()}>
-                  <Link href="/kuliner/1">
+                  <Link href={"/kuliner/" + popular.id}>
                     <QuickCard
                       imageUrl={`https://source.unsplash.com/random/?food&${i}`}
-                      title="Bebek Sinjay"
-                      address="Jl. Raya Ketengan, Bangkalan"
-                      review_count={666}
+                      title={popular.title}
+                      address={popular.city}
+                      review_count={popular.star}
                     />
                   </Link>
                 </Carousel.item>
@@ -253,12 +279,12 @@ const Kuliner = () => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Restoran" />
+      <PilihanKabupaten name="Restoran" url="kuliner" />
     </div>
   );
 };
 
-const Penginapan = () => {
+const Penginapan = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -271,16 +297,16 @@ const Penginapan = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="penginapan-1">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular, i) => {
               return (
                 <Carousel.item key={i.toString()}>
-                  <Link href="/penginapan/1">
+                  <Link href={"/penginapan/" + popular.id}>
                     <QuickCard
                       imageUrl={`https://source.unsplash.com/random/?homestay&${i}`}
-                      title="Home Stay Amanah"
-                      address="Kab. Sumenep"
-                      review_count={666}
-                      price="200"
+                      title={popular.title}
+                      address={popular.city}
+                      review_count={popular.star}
+                      price={popular.price}
                     />
                   </Link>
                 </Carousel.item>
@@ -289,7 +315,7 @@ const Penginapan = () => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Penginapan" />
+      <PilihanKabupaten name="Penginapan" url="penginapan" />
     </div>
   );
 };
@@ -324,7 +350,7 @@ const Kerajinan = () => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Kerajinan" />
+      <PilihanKabupaten name="Kerajinan" url="kerajinan" />
     </div>
   );
 };
@@ -360,12 +386,12 @@ const Transportasi = () => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Transportasi" />
+      <PilihanKabupaten name="Transportasi" url="transportasi" />
     </div>
   );
 };
 
-const PilihanKabupaten = ({ name }) => {
+const PilihanKabupaten = ({ name, url }) => {
   return (
     <div className="bg-[#F6F0E1] px-4 py-4 md:py-8">
       <Title className="text-center">
@@ -376,23 +402,33 @@ const PilihanKabupaten = ({ name }) => {
       <br />
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
         <KabupatenCard
+          url={url + "&city=bangkalan"}
           name="Bangkalan"
           bgImage="/static_images/bangkalan.png"
         />
         <KabupatenCard
+          url={url + "&city=pamekasan"}
           name="Pamekasan"
           bgImage="/static_images/pamekasan.png"
         />
-        <KabupatenCard name="Sampang" bgImage="/static_images/sampang.png" />
-        <KabupatenCard name="Sumenep" bgImage="/static_images/sumenep.png" />
+        <KabupatenCard
+          url={url + "&city=sampang"}
+          name="Sampang"
+          bgImage="/static_images/sampang.png"
+        />
+        <KabupatenCard
+          url={url + "&city=sumenep"}
+          name="Sumenep"
+          bgImage="/static_images/sumenep.png"
+        />
       </div>
     </div>
   );
 };
 
-const KabupatenCard = ({ bgImage, name }) => {
+const KabupatenCard = ({ bgImage, name, url }) => {
   return (
-    <Link href="/">
+    <Link href={"/discover?tabId=" + url}>
       <div
         className="h-16 sm:h-24 lg:h-48 bg-cover rounded-md flex items-center sm:items-start justify-center sm:justify-start p-0 sm:p-8 bg-center"
         style={{ backgroundImage: `url('${bgImage}')` }}

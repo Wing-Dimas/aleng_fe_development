@@ -102,11 +102,17 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
 
   const doSearch = () => {
     if (tabId === "penginapan") {
-      router.push(
-        `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
-      );
+      router
+        .push(
+          `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
+        )
+        .then(() => {
+          router.reload();
+        });
     } else {
-      router.push(`/discover?tabId=${tabId}&keyword=${keyword}`);
+      router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
+        router.reload();
+      });
     }
   };
 
@@ -178,6 +184,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
     >
       <div onBlur={doBlurNavbar} className="relative">
         <TopNavBar
+          tabId={tabId}
           isDiscover={isDiscover}
           doChangeKeyword={doChangeKeyword}
           doExpandNavbar={doExpandNavbar}
@@ -249,6 +256,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
 }
 
 const TopNavBar = ({
+  tabId,
   isDiscover,
   expandNavbar,
   keyword,
@@ -316,7 +324,7 @@ const TopNavBar = ({
               </button>
             ) : (
               <Link
-                href="/discover"
+                href={`/discover?tabId=${tabId}`}
                 className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full"
               >
                 Jelajahi

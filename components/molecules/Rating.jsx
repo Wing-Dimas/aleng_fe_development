@@ -1,9 +1,9 @@
 import { IconStar } from "@tabler/icons-react";
 
-const Rating = ({ count }) => {
+const Rating = ({ rate = 5, count }) => {
   return (
     <div className="flex items-center">
-      {[...Array(5)].map((v, i) => {
+      {[...Array(Math.round(rate))].map((v, i) => {
         return (
           <IconStar
             key={i}
@@ -18,11 +18,11 @@ const Rating = ({ count }) => {
   );
 };
 
-Rating.descripted = ({ rate, count }) => {
+Rating.descripted = ({ rate = 5, count }) => {
   return (
     <div>
       <div className="flex items-center">
-        {[...Array(5)].map((v, i) => {
+        {[...Array(Math.round(rate))].map((v, i) => {
           return (
             <IconStar
               key={i}
@@ -39,11 +39,11 @@ Rating.descripted = ({ rate, count }) => {
   );
 };
 
-Rating.comment = () => {
+Rating.comment = ({ rate = 5 }) => {
   return (
     <div>
       <div className="flex items-center">
-        {[...Array(5)].map((v, i) => {
+        {[...Array(Math.round(rate))].map((v, i) => {
           return (
             <IconStar
               key={i}

@@ -1,15 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useBreakpoint } from "use-breakpoint";
-import { BREAKPOINTS } from "@constants/index";
-import "swiper/css";
-import BreadCrumbs from "@components/atomics/BreadCrumbs";
 import Button from "@components/atomics/Button";
 import Checkbox from "@components/atomics/Checkbox";
 import Container from "@components/atomics/Container";
 import DateInput from "@components/atomics/DateInput";
-import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
 import Heading from "@components/atomics/Heading";
@@ -17,10 +11,7 @@ import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/atomics/PopOver";
 import PriceList from "@components/molecules/PriceList";
-import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
-import ReviewCard from "@components/molecules/ReviewCard";
-import RoomSuggestionCard from "@components/molecules/RoomSuggestionCard";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
@@ -29,7 +20,6 @@ import ReviewVisitor from "@components/molecules/ReviewVisitor";
 
 export default function DetailPenginapan({}) {
   const [openReview, setOpenReview] = useState(false);
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
   const [order, setOrder] = useState({
     date: {
       in: new Date().toISOString().split("T")[0],
@@ -41,11 +31,6 @@ export default function DetailPenginapan({}) {
       child: 1,
     },
   });
-  const [isOpen, setIsOpen] = useState(false);
-
-  const doOpen = () => {
-    setIsOpen(!isOpen);
-  };
 
   const doChangeOrderDate = ({ name, value }) => {
     setOrder({ ...order, date: { ...order.date, [name]: value } });
@@ -68,16 +53,7 @@ export default function DetailPenginapan({}) {
       </Head>
       <Navbar />
       <MainContent>
-        <div className="flex flex-row md:flex-col items-center justify-between md:items-stretch w-full">
-          <BreadCrumbs
-            pages="Penginapan"
-            breads={[
-              { link: "/penginapan", name: "Penginapan" },
-              { link: "/penginapan/detail", name: "Detail" },
-            ]}
-          />
-        </div>
-
+        <br />
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
           style={{ gridTemplateColumns: "1fr auto" }}
@@ -205,14 +181,6 @@ export default function DetailPenginapan({}) {
             </div>
           </Container>
         </div>
-        {/* Penawaran */}
-        <div className="w-full mt-8 flex flex-col gap-3">
-          <Heading.h2>Penawaran Tipe Kamar Lainnya</Heading.h2>
-          <div className="flex flex-col gap-4">
-            <RoomSuggestionCard />
-            <RoomSuggestionCard />
-          </div>
-        </div>
         {/* Ulasan */}
         <div className="w-full mt-8 flex flex-col gap-3">
           <Heading.h2>Ulasan Pengunjung</Heading.h2>
@@ -221,42 +189,7 @@ export default function DetailPenginapan({}) {
             setOpenReview={setOpenReview}
           />
         </div>
-        {/* Penginapan Serupa */}
-        <div className="mt-8">
-          <Heading.h2>Penginapan Serupa</Heading.h2>
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={
-              breakpoint === "xs"
-                ? 1.5
-                : breakpoint === "sm"
-                ? 2.2
-                : breakpoint === "md"
-                ? 2.5
-                : breakpoint === "lg"
-                ? 3.2
-                : breakpoint === "xl"
-                ? 3.5
-                : breakpoint === "2xl"
-                ? 4.2
-                : 4.5
-            }
-          >
-            {[...Array(20)].map((v, i) => {
-              return (
-                <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="https://source.unsplash.com/random/?homestay"
-                    title="Homestay Amanah"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    price="200.000"
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
+        <br />
       </MainContent>
       <Footer />
     </Wrapper>

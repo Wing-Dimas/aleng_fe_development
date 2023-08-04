@@ -1,13 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useBreakpoint } from "use-breakpoint";
-import { BREAKPOINTS } from "@constants/index";
-import "swiper/css";
-import BreadCrumbs from "@components/atomics/BreadCrumbs";
 import Button from "@components/atomics/Button";
 import Container from "@components/atomics/Container";
-import DetailSearchInput from "@components/molecules/DetailSearchInput";
 import Footer from "@components/molecules/Footer";
 import GalleryImage from "@components/molecules/GalleryImage";
 import Heading from "@components/atomics/Heading";
@@ -15,38 +9,15 @@ import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import ScheduleTravel from "@components/molecules/ScheduleTravel";
 import Select from "@components/atomics/Select";
-import QuickCard from "@components/molecules/QuickCard";
 import Rating from "@components/molecules/Rating";
-import ReviewCard from "@components/molecules/ReviewCard";
 import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
 import { IconCalendar, IconMapPin, IconUser } from "@tabler/icons-react";
+import ReviewVisitor from "@components/molecules/ReviewVisitor";
 export default function PaketWisata({}) {
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
-  const [order, setOrder] = useState({
-    date: new Date().toISOString().split("T")[0],
-    options: {
-      room: 1,
-      adult: 1,
-      child: 1,
-    },
-  });
-  const [isOpen, setIsOpen] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
 
-  const doOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const doChangeOrderOptions = (e) => {
-    setOrder({
-      ...order,
-      options: {
-        ...order.options,
-        [e.currentTarget.name]: parseInt(e.currentTarget.value),
-      },
-    });
-  };
   const [info, setInfo] = useState({
     date: {
       type: "tgl1",
@@ -71,22 +42,7 @@ export default function PaketWisata({}) {
       </Head>
       <Navbar />
       <MainContent>
-        <div className="flex flex-row md:flex-col items-center justify-between md:items-stretch w-full">
-          <BreadCrumbs
-            pages="Wisata"
-            breads={[
-              { link: "/wisata", name: "Wisata" },
-              { link: "/wisata/paket", name: "Paket" },
-            ]}
-          />
-          <div className="block md:hidden">
-            <Button onClick={doOpen}>Ubah Pencarian</Button>
-          </div>
-        </div>
-        <DetailSearchInput
-          isOpen={isOpen}
-          placeholder="Masukkan wisata yang dicari"
-        />
+        <br />
         <div
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
           style={{ gridTemplateColumns: "1fr auto" }}
@@ -104,7 +60,7 @@ export default function PaketWisata({}) {
             <Container className="mt-4">
               <Rating count={666} rate={4.5} />
               <div className="flex flex-row justify-between items-center">
-                <Heading.h2>Pantai Lon Malang</Heading.h2>
+                <Heading.h2>Paket Wisata Pantai Lon Malang</Heading.h2>
                 <Text className="font-semibold text-[10px] md:text-base text-custom-primary_red">
                   Paket 2 Hari 2 Malam
                 </Text>
@@ -216,80 +172,10 @@ export default function PaketWisata({}) {
         {/* Ulasan */}
         <div className="w-full mt-8 flex flex-col gap-3">
           <Heading.h2>Ulasan Pengunjung</Heading.h2>
-          <Container className="!flex !flex-col md:!flex-row !gap-3 md:!gap-6">
-            <div className="flex flex-col gap-2 w-1/2 md:w-[20%]">
-              <Text>Ulasan Pengguna</Text>
-              <Rating.descripted rate={4.5} count={666} />
-            </div>
-            <div className="flex flex-col gap-2 w-full md:w-[80%]">
-              <Text>Ulasan yang mungkin membantumu</Text>
-              <div className="flex flex-row gap-4 scrollbar-hide cursor-pointer overflow-x-scroll w-full">
-                <Swiper
-                  spaceBetween={20}
-                  slidesPerView={
-                    breakpoint === "xs"
-                      ? 1.3
-                      : breakpoint === "sm"
-                      ? 2.3
-                      : breakpoint === "md"
-                      ? 2.3
-                      : breakpoint === "lg"
-                      ? 2.8
-                      : breakpoint === "xl"
-                      ? 3.6
-                      : breakpoint === "2xl"
-                      ? 3.6
-                      : 1.6
-                  }
-                  // loop={loopUlasan}
-                >
-                  {[...Array(6)].map((item, i) => {
-                    return (
-                      <SwiperSlide key={i.toString()}>
-                        <ReviewCard />
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </div>
-            </div>
-          </Container>
-        </div>
-        {/* Wisata Serupa */}
-        <div className="mt-8">
-          <Heading.h2>Wisata Serupa</Heading.h2>
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={
-              breakpoint === "xs"
-                ? 1.5
-                : breakpoint === "sm"
-                ? 2.2
-                : breakpoint === "md"
-                ? 2.5
-                : breakpoint === "lg"
-                ? 3.2
-                : breakpoint === "xl"
-                ? 3.5
-                : breakpoint === "2xl"
-                ? 4.2
-                : 4.5
-            }
-          >
-            {[...Array(20)].map((v, i) => {
-              return (
-                <SwiperSlide key={i.toString()}>
-                  <QuickCard
-                    imageUrl="https://source.unsplash.com/random/?tour"
-                    title="Air Terjun Toroan"
-                    address="Kab. Sumenep"
-                    review_count={666}
-                    price="200.000"
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <ReviewVisitor
+            openReview={openReview}
+            setOpenReview={setOpenReview}
+          />
         </div>
       </MainContent>
       <Footer />
