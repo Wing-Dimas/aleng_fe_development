@@ -1,0 +1,72 @@
+{
+  "wisata": {
+    "status": 200,
+    "data": [
+      {
+        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
+        "name": "Pantai Horizon",
+        "address": "Banraas, Dungkek, Sumenep",
+        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "short_video_url": "/sample.mp4",
+        "price": 50000,
+        "star": 4.8
+      }
+    ]
+  },
+  "kuliner": {
+    "status": 200,
+    "data": [
+      {
+        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
+        "name": "Pantai Horizon",
+        "address": "Banraas, Dungkek, Sumenep",
+        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "short_video_url": "/sample.mp4",
+        "price": 50000,
+        "star": 4.8
+      }
+    ]
+  },
+  "penginapan": {
+    "status": 200,
+    "data": [
+      {
+        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
+        "name": "Pantai Horizon",
+        "address": "Banraas, Dungkek, Sumenep",
+        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "short_video_url": "/sample.mp4",
+        "price": 50000,
+        "star": 4.8
+      }
+    ]
+  },
+  "transportasi": {
+    "status": 200,
+    "data": [
+      {
+        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
+        "name": "Pantai Horizon",
+        "address": "Banraas, Dungkek, Sumenep",
+        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "short_video_url": "/sample.mp4",
+        "price": 50000,
+        "star": 4.8
+      }
+    ]
+  },
+  "kerajinan": {
+    "status": 200,
+    "data": [
+      {
+        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
+        "name": "Pantai Horizon",
+        "address": "Banraas, Dungkek, Sumenep",
+        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "short_video_url": "/sample.mp4",
+        "price": 50000,
+        "star": 4.8
+      }
+    ]
+  }
+}
