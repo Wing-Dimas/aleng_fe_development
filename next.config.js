@@ -11,6 +11,7 @@ const nextConfig = {
   images: {
     domains: [
       "source.unsplash.com",
+      "images.unsplash.com",
       "www.amithyahotels.com",
       "assets.ayobandung.com",
     ],
