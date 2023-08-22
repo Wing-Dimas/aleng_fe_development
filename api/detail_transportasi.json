@@ -1,0 +1,42 @@
+{
+  "status": 200,
+  "data": {
+    "id": "2b0ad7dc-2668-4c0c-84bb-95b76937c2e1",
+    "name": "Ojek Bangkalan",
+    "description": "Aliquip eiusmod mollit deserunt occaecat. Nostrud amet non ex Lorem qui ex. Laboris exercitation amet aliqua laborum minim in amet adipisicing veniam reprehenderit enim tempor reprehenderit consectetur. Magna nulla proident culpa labore labore enim elit cillum dolore ad velit deserunt. Ullamco eiusmod cillum aute exercitation amet exercitation deserunt id aute enim eu. Aliquip aute amet dolore amet labore nostrud velit aute enim est sit non magna incididunt. Pariatur reprehenderit labore nostrud do amet deserunt dolor mollit magna anim sit ut.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "address": "Jl. Siwalan Pangarangan, Sumenep, Pulau Madura 69417 Indonesia",
+    "open": "08:00",
+    "close": "22:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 15000,
+    "reviews": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+  }
+}

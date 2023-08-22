@@ -1,45 +1,66 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
 import Container from "@components/atomics/Container";
 import DateInput from "@components/atomics/DateInput";
-import Footer from "@components/molecules/Footer";
-import GalleryImage from "@components/molecules/GalleryImage";
 import Heading from "@components/atomics/Heading";
 import MainContent from "@components/atomics/MainContent";
-import Navbar from "@components/molecules/Navbar";
 import PopOver from "@components/atomics/PopOver";
-import Rating from "@components/molecules/Rating";
-import TabDesc from "@components/atomics/TabDesc";
 import Text from "@components/atomics/Text";
 import Wrapper from "@components/atomics/Wrapper";
-import { IconMapPin } from "@tabler/icons-react";
-import Link from "next/link";
-import ReviewVisitor from "@components/molecules/ReviewVisitor";
-import { useRouter } from "next/router";
+import Footer from "@components/molecules/Footer";
+import GalleryImage from "@components/molecules/GalleryImage";
+import Navbar from "@components/molecules/Navbar";
+import ShortReview from "@components/molecules/ShortReview";
+import TabDesc from "@components/molecules/TabDesc";
+import { toRupiah } from "@utils/libs";
 import axios from "axios";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-export default function DetailWisata({}) {
+export default function DetailWisata() {
   const router = useRouter();
-  const [wisata, setWisata] = useState({
-    id: "",
-    title: "",
-    description: "",
-    lat: "",
-    long: "",
+  const [data, setData] = useState({
+    id: "2b0ad7dc-2668-4c0c-84bb-95b76937c2e1",
+    name: "Wisata Pantai",
+    description:
+      "Aliquip eiusmod mollit deserunt occaecat. Nostrud amet non ex Lorem qui ex. Laboris exercitation amet aliqua laborum minim in amet adipisicing veniam reprehenderit enim tempor reprehenderit consectetur. Magna nulla proident culpa labore labore enim elit cillum dolore ad velit deserunt. Ullamco eiusmod cillum aute exercitation amet exercitation deserunt id aute enim eu. Aliquip aute amet dolore amet labore nostrud velit aute enim est sit non magna incididunt. Pariatur reprehenderit labore nostrud do amet deserunt dolor mollit magna anim sit ut.",
+    lat: -7.1299981954715035,
+    long: 112.72517694200859,
+    address: "Jl. Siwalan Pangarangan, Sumenep, Pulau Madura 69417 Indonesia",
     open: "",
-    address: "",
     close: "",
-    facility: [],
-    price: "",
-    review: {
-      star: "",
-      total_review: "",
-      count: [],
-      comment: [],
+    facilities: [
+      {
+        icon_url: "/temp/ac.png",
+        name: "AC",
+      },
+    ],
+    price: 50000,
+    reviews: {
+      star: 4.0,
+      total_review: 200,
+      stars: [0, 20, 40, 60, 80],
+      comments: [
+        {
+          name: "Oliver Sykez",
+          profile_pic_url:
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          date: "17 Nov 2022",
+          star: 5.0,
+          text: "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana",
+        },
+      ],
     },
-    image: [],
+    image_urls: [
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    ],
+    video_url: "/sample.mp4",
+    video_thumbnail_url:
+      "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
   });
-  const [openReview, setOpenReview] = useState(false);
   const [order, setOrder] = useState({
     date: new Date().toISOString().split("T")[0],
     options: {
@@ -61,32 +82,29 @@ export default function DetailWisata({}) {
     });
   };
 
-  const getWisata = async ({ id }) => {
+  const getData = async (id) => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:8000/api/wisata/show/" + id
+      const res = await axios.get(
+        "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/wisata/" +
+          id +
+          ".json"
       );
-      const res = data.data[0];
-      setWisata(res);
+      setData({ ...data, ...res.data.data });
     } catch (error) {
       console.log(error);
-      console.log("Error Fetching Wisata");
     }
   };
 
   useEffect(() => {
-    let { id } = router.query;
-    if (!id) {
-      return;
-    }
-    getWisata({ id });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!router.query["id"]) return;
+    let id = router.query["id"];
+    getData(id);
   }, [router]);
 
   return (
     <Wrapper>
       <Head>
-        <title>Detail Wisata</title>
+        <title>{`Lenjhelenan | ${data.name ?? ""}`}</title>
       </Head>
       <Navbar />
       <MainContent>
@@ -95,40 +113,35 @@ export default function DetailWisata({}) {
           className="flex flex-col md:grid md:grid-cols-2 gap-3 w-full h-full"
           style={{ gridTemplateColumns: "1fr auto" }}
         >
-          {/* Description */}
-          <div className="flex flex-col w-full h-full">
-            <GalleryImage images={wisata.image.map((im, i) => im.url)} />
-            <Container className="mt-4">
-              <Rating
-                count={wisata.review.total_review}
-                rate={wisata.review.star}
-              />
-              <Heading.h2>{wisata.title}</Heading.h2>
-              <div className="flex flex-row gap-1 items-center">
-                <IconMapPin size={18} strokeWidth={2} color={"#615A56"} />
-                <p className="md:text-[0.75rem] text-[0.5rem] font-normal">
-                  {wisata.address}
-                </p>
-              </div>
-              <br />
+          <div>
+            <GalleryImage
+              image_urls={data.image_urls}
+              alt="lenjhelenan"
+              video_url={data.video_url}
+              video_thumbnail_url={data.video_thumbnail_url}
+            />
+            <br />
+            <Container>
               <TabDesc
-                page="wisata"
-                desc={wisata.description}
-                lat={wisata.lat}
-                long={wisata.long}
-                facility={wisata.facility}
+                name={data.name}
+                address={data.address}
+                star={data.reviews.star}
+                total_review={data.reviews.total_review}
+                facilities={data.facilities}
+                lat={data.lat}
+                long={data.long}
+                description={data.description}
               />
             </Container>
           </div>
-          {/* Price Detail */}
           <Container className="!flex !flex-col !justify-between !gap-3 md:!gap-6">
             <div className="flex flex-col">
-              <p className="flex flex-row  font-semibold text-[1rem] text-[#D2001A]">
-                {wisata.price}
-                <span className="ml-1 font-normal text-[1rem] text-[#615A56]">
-                  /wisatawan
-                </span>
-              </p>
+              <div className="flex items-end gap-1">
+                <p className="font-semibold text-red-500">
+                  {toRupiah.format(data.price)}
+                </p>
+                <p className="text-xs sm:text-sm font-medium">/wisatawan</p>
+              </div>
               <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
               <div className="flex flex-col items-center gap-1 w-full">
                 <Text.label className="after:content-['*'] after:ml-0.5">
@@ -149,7 +162,6 @@ export default function DetailWisata({}) {
                   containerClassName="w-full"
                   options={order.options}
                   onChange={doChangeOrderOptions}
-                  pages="wisata"
                   name="Wisatawan"
                 />
               </div>
@@ -158,10 +170,7 @@ export default function DetailWisata({}) {
               <div className="flex flex-row justify-between items-center">
                 <p className="font-semibold text-[1rem]">Total</p>
                 <p className="flex flex-row  font-semibold text-[1rem] text-[#D2001A]">
-                  Rp
-                  <span className="ml-1 font-semibold">
-                    {order.options.people * wisata.price}.000
-                  </span>
+                  {toRupiah.format(order.options.people * data.price)}
                 </p>
               </div>
               <Link href="/checkout/confirm">
@@ -172,20 +181,16 @@ export default function DetailWisata({}) {
             </div>
           </Container>
         </div>
-        {/* Ulasan */}
-        <div className="w-full mt-8 flex flex-col gap-3">
-          <Heading.h2>Ulasan Pengunjung</Heading.h2>
-          <ReviewVisitor
-            star={wisata.review.star}
-            total_review={wisata.review.total_review}
-            comments={wisata.review.comment}
-            star_count={wisata.review.count}
-            openReview={openReview}
-            setOpenReview={setOpenReview}
-          />
-        </div>
         <br />
+        <Heading.h2 className="mb-2">Ulasan Pengunjung</Heading.h2>
+        <ShortReview
+          star={data.reviews.star}
+          stars={data.reviews.stars}
+          total_review={data.reviews.total_review}
+          comments={data.reviews.comments}
+        />
       </MainContent>
+      <br />
       <Footer />
     </Wrapper>
   );

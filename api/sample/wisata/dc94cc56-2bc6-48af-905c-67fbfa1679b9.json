@@ -1,0 +1,41 @@
+{
+  "status": 200,
+  "data": {
+    "id": "dc94cc56-2bc6-48af-905c-67fbfa1679b9",
+    "name": "Mangrove Kedatim",
+    "description": "Secuil surga di ujung Pulau Madura membuyarkan bayangan pulau yang panas dan bergaram. Justru, aksi konservasi mangrove pemuda Desa Kebundadap Timur, Saronggi, Sumenep, Jawa Timur, telah membuahkan wisata alam nan menawan. Wisatawan dapat menghirup udara sejuk dari hijaunya pepohonan, sembari jogging atau sekedar berjalan di titian kayu. Sepanjang titian disediakan spot menarik untuk berswafoto, duduk bersantai di gazebo, bahkan ada ruang temu dan diskusi di kedai kopi.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "address": "Sumenep",
+    "open": "08:00",
+    "close": "22:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 50000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://asset-2.tstatic.net/tribunnews/foto/bank/images/wisata-mangrove-kedatim.jpg",
+      "https://cdn-2.tstatic.net/tribunnews/foto/bank/images/pesona-sekeliling-mangrove-di-desa-kebundadap-timur-sumenep-1.jpg",
+      "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2022/10/09/2456983762.jpg"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2022/10/09/2456983762.jpg"
+  }
+}

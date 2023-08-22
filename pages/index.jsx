@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Cookies from "js-cookie";
-import { useUserStore } from "store/userstore";
 import Text from "@components/atomics/Text";
 import Title from "@components/atomics/Title";
 import Carousel from "@components/molecules/Carousel";
@@ -18,32 +16,90 @@ import {
   IconSoup,
 } from "@tabler/icons-react";
 import axios from "axios";
+import { toRupiah } from "@utils/libs";
 
-export async function getServerSideProps(context) {
-  return {
-    props: {},
-  };
-}
-export default function Home({}) {
-  const cookie = Cookies.get("token");
-  const changeUserStore = useUserStore((state) => state.fetchUser);
-  const [menuIndex, setMenuIndex] = useState(0);
+export default function Home() {
+  const [index, setIndex] = useState(0);
   const [populars, setPopulars] = useState({
-    wisata: [],
-    penginapan: [],
-    restoran: [],
+    wisata: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    paket_wisata: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+        day: 3,
+        night: 2,
+      },
+    ],
+    kuliner: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    penginapan: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    transportasi: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    kerajinan: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        city: "Bangkalan",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
   });
 
   const doChangeTabIndex = (e) => {
-    setMenuIndex(parseInt(e.currentTarget.value));
+    setIndex(parseInt(e.currentTarget.value));
   };
-
-  useEffect(() => {
-    if (cookie != undefined) {
-      changeUserStore(process.env.BASE_API + "/auth/user/profile", cookie);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cookie]);
 
   const getPopulars = async () => {
     try {
@@ -58,9 +114,9 @@ export default function Home({}) {
     }
   };
 
-  useEffect(() => {
-    getPopulars();
-  }, []);
+  // useEffect(() => {
+  //   getPopulars();
+  // }, []);
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">
@@ -70,7 +126,7 @@ export default function Home({}) {
       <Navbar />
       <div
         style={{
-          backgroundImage: "url('/static_images/gili_labak.jpg')",
+          backgroundImage: "url('/static_images/hero.jpg')",
         }}
         className="pt-24 pb-12 bg-center bg-cover"
       >
@@ -92,7 +148,7 @@ export default function Home({}) {
                 value={0}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 0 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 0 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBeach className="h-5 w-5" />
@@ -102,7 +158,7 @@ export default function Home({}) {
                 value={1}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 1 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 1 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconSoup className="h-5 w-5" />
@@ -112,7 +168,7 @@ export default function Home({}) {
                 value={2}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 2 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 2 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBuildingCottage className="h-5 w-5" />
@@ -122,7 +178,7 @@ export default function Home({}) {
                 value={3}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 3 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 3 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconHorseToy className="h-5 w-5" />
@@ -132,7 +188,7 @@ export default function Home({}) {
                 value={4}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 4 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 4 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBus className="h-5 w-5" />
@@ -143,23 +199,23 @@ export default function Home({}) {
         </div>
         <br />
       </div>
-      {menuIndex === 0 ? (
-        <Wisata populars={populars.wisata} />
-      ) : menuIndex === 1 ? (
-        <Kuliner populars={populars.restoran} />
-      ) : menuIndex === 2 ? (
+      {index === 0 ? (
+        <Wisata populars={populars.wisata} paket={populars.paket_wisata} />
+      ) : index === 1 ? (
+        <Kuliner populars={populars.kuliner} />
+      ) : index === 2 ? (
         <Penginapan populars={populars.penginapan} />
-      ) : menuIndex === 3 ? (
-        <Kerajinan />
+      ) : index === 3 ? (
+        <Kerajinan populars={populars.kerajinan} />
       ) : (
-        <Transportasi />
+        <Transportasi populars={populars.transportasi} />
       )}
       <Footer />
     </div>
   );
 }
 
-const Wisata = ({ populars }) => {
+const Wisata = ({ populars, paket }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -172,17 +228,17 @@ const Wisata = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-1">
-            {populars.map((popular, i) => {
+            {populars.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/wisata/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                  />
                 </Carousel.item>
               );
             })}
@@ -199,46 +255,24 @@ const Wisata = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-2">
-            {populars.map((popular, i) => {
+            {paket.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    >
-                      <Text.small className="text-custom-primary-red">
-                        {popular.price}/{popular.time}
-                      </Text.small>
-                    </QuickCard>
-                  </Link>
-                </Carousel.item>
-              );
-            })}
-          </Carousel>
-        </div>
-      </div>
-      <div className="bg-white px-4 py-4 md:py-8">
-        <Title className="text-center">
-          Wisata <span className="text-custom-primary-red">Religi</span> dan{" "}
-          <span className="text-custom-primary-red">Bersejarah</span>
-        </Title>
-        <DottedUnderline />
-        <div className="max-w-7xl mx-auto">
-          <Carousel id="wisata-3">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/wisata/paket-wisata/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                  >
+                    <Text.small className="text-custom-primary-red">
+                      {toRupiah.format(popular.price)}
+                      <span className="text-black text-xs">
+                        /{popular.day} hari {popular.night} malam
+                      </span>
+                    </Text.small>
+                  </QuickCard>
                 </Carousel.item>
               );
             })}
@@ -262,17 +296,17 @@ const Kuliner = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kuliner-1">
-            {populars.map((popular, i) => {
+            {populars.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/kuliner/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?food&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/kuliner/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                  />
                 </Carousel.item>
               );
             })}
@@ -297,18 +331,18 @@ const Penginapan = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="penginapan-1">
-            {populars.map((popular, i) => {
+            {populars.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/penginapan/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?homestay&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                      price={popular.price}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/penginapan/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                    price={popular.price}
+                  />
                 </Carousel.item>
               );
             })}
@@ -320,7 +354,7 @@ const Penginapan = ({ populars }) => {
   );
 };
 
-const Kerajinan = () => {
+const Kerajinan = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -333,17 +367,17 @@ const Kerajinan = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kerajinan-1">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href="/kerajinan/1">
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?handcraft&${i}`}
-                      title="Kerajinan Batok Kelapa"
-                      address="Jl. Raya Ketengan, Bangkalan"
-                      review_count={666}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/kerajinan/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                  />
                 </Carousel.item>
               );
             })}
@@ -355,7 +389,7 @@ const Kerajinan = () => {
   );
 };
 
-const Transportasi = () => {
+const Transportasi = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -369,17 +403,17 @@ const Transportasi = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="transportasi-1">
-            {[...Array(20)].map((v, i) => {
+            {populars.map((popular) => {
               return (
-                <Carousel.item key={i.toString()}>
-                  <Link href="/transportasi/1">
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?transportation&${i}`}
-                      title="Kapal Penyebrangan"
-                      address="Kab. Bangkalan"
-                      review_count={666}
-                    />
-                  </Link>
+                <Carousel.item key={popular.id}>
+                  <QuickCard
+                    url={"/transportasi/" + popular.id}
+                    image_url={popular.thumbnail_url}
+                    video_url={popular.short_video_url}
+                    name={popular.name}
+                    address={popular.city}
+                    star={popular.star}
+                  />
                 </Carousel.item>
               );
             })}
@@ -402,22 +436,22 @@ const PilihanKabupaten = ({ name, url }) => {
       <br />
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
         <KabupatenCard
-          url={url + "&city=bangkalan"}
+          url={url + "&address=bangkalan"}
           name="Bangkalan"
           bgImage="/static_images/bangkalan.png"
         />
         <KabupatenCard
-          url={url + "&city=pamekasan"}
+          url={url + "&address=pamekasan"}
           name="Pamekasan"
           bgImage="/static_images/pamekasan.png"
         />
         <KabupatenCard
-          url={url + "&city=sampang"}
+          url={url + "&address=sampang"}
           name="Sampang"
           bgImage="/static_images/sampang.png"
         />
         <KabupatenCard
-          url={url + "&city=sumenep"}
+          url={url + "&address=sumenep"}
           name="Sumenep"
           bgImage="/static_images/sumenep.png"
         />

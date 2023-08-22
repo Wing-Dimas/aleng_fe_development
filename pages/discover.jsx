@@ -4,6 +4,7 @@ import Navbar from "@components/molecules/Navbar";
 import {
   IconBookmark,
   IconCash,
+  IconLoader,
   IconMapPin,
   IconSettings,
   IconStar,
@@ -12,16 +13,80 @@ import {
 import Head from "next/head";
 import Heading from "@components/atomics/Heading";
 import Text from "@components/atomics/Text";
-import { useRouter as useNavigator } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import TextInput from "@components/atomics/TextInput";
 import Select from "@components/atomics/Select";
 import Button from "@components/atomics/Button";
+import { toRupiah } from "@utils/libs";
+import HoverPlayer from "@components/molecules/HoverPlayer";
+import Link from "next/link";
+import axios from "axios";
 
 export default function Discover() {
-  const navigator = useNavigator();
   const router = useRouter();
+  const [catalogue, setCatalogue] = useState({
+    wisata: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        address: "Banraas, Dungkek, Sumenep",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    kuliner: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        address: "Banraas, Dungkek, Sumenep",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    penginapan: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        address: "Banraas, Dungkek, Sumenep",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    transportasi: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        address: "Banraas, Dungkek, Sumenep",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+    kerajinan: [
+      {
+        id: "3804c746-911a-4317-856b-3bf3f47a8979",
+        name: "Pantai Horizon",
+        address: "Banraas, Dungkek, Sumenep",
+        thumbnail_url:
+          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        short_video_url: "/sample.mp4",
+        price: 50000,
+        star: 4.8,
+      },
+    ],
+  });
   const [tabId, setTabId] = useState("wisata");
   const [expand, setExpand] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -110,6 +175,21 @@ export default function Discover() {
       router.reload();
     });
   };
+
+  const getData = async () => {
+    try {
+      const res = await axios.get(
+        "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/wisata.json"
+      );
+      setCatalogue({ ...catalogue, wisata: res.data.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Wrapper>
@@ -222,51 +302,62 @@ export default function Discover() {
         </div>
         <br />
         <div className="grid grid-cols-1 exs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-6 gap-y-8">
-          {[...Array(24).keys()].map((v) => {
-            return <Card key={v} num={v} tabId={tabId} />;
+          {catalogue.wisata.map((wisata) => {
+            return (
+              <Card
+                key={wisata.id}
+                url={"/wisata/" + wisata.id}
+                thumbnail_url={wisata.thumbnail_url}
+                short_video_url={wisata.short_video_url}
+                name={wisata.name}
+                star={wisata.star}
+                price={wisata.price}
+                address={wisata.address}
+              />
+            );
           })}
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
       </MainContent>
     </Wrapper>
   );
 }
 
-const Card = ({ num, tabId }) => {
-  const id =
-    tabId === "kuliner"
-      ? "culinary"
-      : tabId === "penginapan"
-      ? "home stay"
-      : tabId === "kerajinan"
-      ? "handcraft"
-      : tabId === "transporatasi"
-      ? "transportation"
-      : "trip";
+const Card = ({
+  url,
+  thumbnail_url,
+  short_video_url,
+  name,
+  star,
+  price,
+  address,
+}) => {
   return (
-    <div>
-      <div
-        className="aspect-[9/10] bg-cover bg-center rounded-2xl flex justify-end p-4"
-        style={{
-          backgroundImage: `url('https://source.unsplash.com/random/?${id}&${num}')`,
-        }}
-      >
-        <IconBookmark className="h-8 w-8 text-white fill-[#00000050]" />
-      </div>
+    <Link href={url}>
+      <HoverPlayer
+        video_url={short_video_url}
+        thumbnail_url={thumbnail_url}
+        className="rounded-2xl overflow-hidden aspect-[9/10]"
+        alt="lenjhelenan"
+      />
       <div className="p-4 flex flex-col gap-1">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1 text-orange-400">
             <IconStarFilled className="h-4 w-4" />
-            <Text.small className="font-semibold">4.9</Text.small>
+            <Text.small className="font-semibold">{star}</Text.small>
           </div>
-          <Text.small className="text-custom-primary-red">70K/malam</Text.small>
+          <Text.small className="text-custom-primary-red">
+            {toRupiah.format(price)}/malam
+          </Text.small>
         </div>
-        <Heading.h3 className="!font-bold tracking-tight">
-          Pantai Ropet
-        </Heading.h3>
+        <Heading.h3 className="!font-bold tracking-tight">{name}</Heading.h3>
         <Text.label className="!font-medium !text-neutral-700">
-          Banraas, Dungkek, Sumenep
+          {address}
         </Text.label>
       </div>
-    </div>
+    </Link>
   );
 };

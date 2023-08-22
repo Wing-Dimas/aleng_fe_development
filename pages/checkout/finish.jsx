@@ -9,7 +9,7 @@ import Heading from "@components/atomics/Heading";
 import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
 import Radio from "@components/atomics/Radio";
-import Rating from "@components/molecules/Rating";
+import Rating from "@components/atomics/Rating";
 import Select from "@components/atomics/Select";
 import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";

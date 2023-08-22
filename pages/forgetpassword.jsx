@@ -1,18 +1,10 @@
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
 import axios from "axios";
-import Cookies from "js-cookie";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/atomics/Text";
-
-export async function getServerSideProps(context) {
-  return {
-    props: {},
-  };
-}
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState("");
@@ -30,8 +22,6 @@ export default function ForgetPassword() {
         setEmail("");
       }
       Router.push("/resetpassword");
-      Cookies.set("token", res.data.mailData.token);
-      Cookies.set("email", res.data.mailData.email);
     } catch (err) {
       console.log(err);
     }
@@ -45,20 +35,6 @@ export default function ForgetPassword() {
       </Head>
       <div className="flex flex-col items-center justify-start pt-20 relative w-full h-full">
         <div className=" w-4/5 md:w-1/4 flex flex-col gap-4 items-center justify-center">
-          {/* <div className="flex flex-row">
-            <div className="relative">
-              <Image
-                src="/static_icons/logo.png"
-                priority
-                width={48}
-                height={48}
-                alt="logo"
-              />
-            </div>
-            <Text.label className="!text-2xl font-jua text-red-500">
-              Lanjalan Madura
-            </Text.label>
-          </div> */}
           <Text className="!text-lg text-custom-black">Reset Password</Text>
           <div className="w-full">
             <div className="w-full">
@@ -83,12 +59,12 @@ export default function ForgetPassword() {
           <Text.small className="!font-normal !text-sm text-dark-grey">
             Kembali ke halaman{" "}
             <span className="text-red-500 hover:text-red-400 !font-medium">
-              <Link href="/login">login</Link>
+              <Link href="/login">Login</Link>
             </span>{" "}
             atau{" "}
             <span className="text-red-500 hover:text-red-400 !font-medium">
               {" "}
-              <Link href="/register">daftar</Link>
+              <Link href="/register">Daftar</Link>
             </span>
           </Text.small>
         </div>

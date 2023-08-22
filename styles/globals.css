@@ -208,3 +208,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   @apply !bg-red-600;
   @apply !text-white;
 }
+
+video::-webkit-media-controls-panel {
+  padding: 1rem;
+}
+
+.swiper-container {
+  width: 100%; /* Make sure it takes up the available width */
+  height: 100%; /* You can adjust this based on your design */
+}

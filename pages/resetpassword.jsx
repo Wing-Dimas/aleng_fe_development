@@ -3,7 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Cookies from "js-cookie";
 import LSTextInput from "@components/atomics/LSTextInput";
 import Navbar from "@components/molecules/Navbar";
 import Text from "@components/atomics/Text";
@@ -12,10 +11,9 @@ import validateResetPassword from "@validators/resetPasswordValidator";
 export default function ResetPassword() {
   const router = useRouter();
   useEffect(() => {
-    const email = Cookies.get("email");
-    const token = Cookies.get("token");
-    setCredentials({ ...credentials, email: email, token: token });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // const email = Cookies.get("email");
+    // const token = Cookies.get("token");
+    // setCredentials({ ...credentials, email: email, token: token });
   }, []);
 
   const [credentials, setCredentials] = useState({
@@ -46,8 +44,6 @@ export default function ResetPassword() {
         credentials
       );
       router.push("/login");
-      Cookies.remove("email");
-      Cookies.remove("token");
     } catch (err) {
       console.log(err);
     }

@@ -28,6 +28,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   const [keyword, setKeyword] = useState("");
   const [expandOptions, setExpandOptions] = useState(false);
   const [animateExpandOptions, setAnimateExpandOptions] = useState(false);
+  const [val, setVal] = useState(new Date());
   const [options, setOptions] = useState({
     check_in: new Date(),
     check_out: new Date(),
@@ -101,19 +102,21 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   };
 
   const doSearch = () => {
-    if (tabId === "penginapan") {
-      router
-        .push(
-          `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
-        )
-        .then(() => {
-          router.reload();
-        });
-    } else {
-      router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
-        router.reload();
-      });
-    }
+    console.log("Begin", val[0].toDate());
+    console.log("End", val[1].toDate());
+    // if (tabId === "penginapan") {
+    //   router
+    //     .push(
+    //       `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
+    //     )
+    //     .then(() => {
+    //       router.reload();
+    //     });
+    // } else {
+    //   router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
+    //     router.reload();
+    //   });
+    // }
   };
 
   const doExpandNavbar = () => {
@@ -227,8 +230,8 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
                   <Calendar
                     shadow={false}
                     className="font-semibold font-inter !block !w-full !border-none"
-                    // value={values}
-                    // onChange={setValues}
+                    value={val}
+                    onChange={setVal}
                     range
                     rangeHover
                     renderButton={renderButton}
@@ -296,7 +299,7 @@ const TopNavBar = ({
             <Image
               width={48}
               height={48}
-              alt="logo"
+              alt="lenjhelenan"
               src="/static_icons/logo.png"
               className="drop-shadow-md max-w-[45px] w-full"
             />

@@ -13,7 +13,7 @@ export default function ErrorPage({}) {
             src="/static_images/404.png"
             width={500}
             height={400}
-            alt="ImageError"
+            alt="lenjhelenan"
             className=""
           />
         </div>

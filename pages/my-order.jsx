@@ -3,8 +3,6 @@ import Navbar from "@components/molecules/Navbar";
 import { useState } from "react";
 import "swiper/css";
 import { useBreakpoint } from "use-breakpoint";
-import Image from "next/image";
-
 import Head from "next/head";
 import Button from "@components/atomics/Button";
 import { BREAKPOINTS } from "@constants/index";

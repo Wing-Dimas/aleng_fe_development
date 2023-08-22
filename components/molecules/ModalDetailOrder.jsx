@@ -1,7 +1,7 @@
 import { IconCopy, IconX } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
 import Image from "next/image";
-import Rating from "./Rating";
+import Rating from "@components/atomics/Rating";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";

@@ -8,12 +8,14 @@ export default function Footer() {
         <div className="flex justify-between gap-8">
           <div className="flex-shrink">
             <Link href="/" className="flex items-center gap-4 mb-8">
-              <Image
-                src="/static_icons/logo.png"
-                width={48}
-                height={48}
-                alt="logo"
-              />
+              <div className="relative h-12 w-12">
+                <Image
+                  src="/static_icons/logo.png"
+                  fill={true}
+                  sizes="auto"
+                  alt="lenjhelenan"
+                />
+              </div>
               <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>
             </Link>
             <p className="text-neutral-500 mb-8">
@@ -25,36 +27,36 @@ export default function Footer() {
               <a
                 href="#"
                 target="_blank"
-                className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
+                className="relative h-5 w-5 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
                   src="/static_icons/twitter.png"
-                  width={24}
-                  height={24}
+                  fill={true}
+                  sizes="auto"
                   alt="twitter"
                 />
               </a>
               <a
                 href="#"
                 target="_blank"
-                className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
+                className="relative h-5 w-5 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
                   src="/static_icons/instagram.png"
-                  width={24}
-                  height={24}
+                  fill={true}
+                  sizes="auto"
                   alt="instagram"
                 />
               </a>
               <a
                 href="#"
                 target="_blank"
-                className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center"
+                className="relative h-5 w-5 rounded-full bg-red-100 flex items-center justify-center"
               >
                 <Image
                   src="/static_icons/youtube.png"
-                  width={24}
-                  height={24}
+                  fill={true}
+                  sizes="auto"
                   alt="youtube"
                 />
               </a>
@@ -144,7 +146,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-yellow-400 text-center p-4 md:p-6">
-        Copyright © 2022 Lenjhelenan Madura
+        Copyright © 2023 Lenjhelenan Madura
       </div>
     </div>
   );

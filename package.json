@@ -1,5 +1,5 @@
 {
-  "name": "lanjalan-fe",
+  "name": "aleng_fe",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,34 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^13.0.4",
-    "@tabler/icons-react": "^2.17.0",
-    "axios": "^1.2.2",
-    "cors": "^2.8.5",
-    "eslint": "8.28.0",
-    "eslint-config-next": "13.0.4",
-    "fslightbox-react": "^1.6.2-2",
-    "js-cookie": "^3.0.1",
-    "next": "13.0.4",
-    "next-auth": "^4.18.8",
-    "next-cookies": "^2.0.3",
+    "@tabler/icons-react": "^2.30.0",
+    "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.13",
+    "fslightbox-react": "^1.7.6",
+    "next": "13.4.13",
+    "postcss": "8.4.27",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
-    "react-multi-date-picker": "^3.3.4",
+    "react-multi-date-picker": "^4.1.2",
     "react-responsive-carousel": "^3.2.23",
-    "react-toastify": "^9.1.1",
+    "react-toastify": "^9.1.3",
     "swiper": "^9.2.3",
-    "use-breakpoint": "^3.0.5",
-    "validator": "^13.7.0",
-    "yup": "^0.32.11",
-    "yup-locales": "^1.2.10",
-    "zustand": "^4.3.2"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.19",
-    "tailwind-scrollbar": "^3.0.0",
-    "tailwindcss": "^3.2.4"
+    "tailwind-scrollbar": "^3.0.5",
+    "tailwindcss": "3.3.3",
+    "use-breakpoint": "^3.1.1",
+    "yup": "^1.2.0"
   }
 }

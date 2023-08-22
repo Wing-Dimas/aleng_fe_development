@@ -1,0 +1,41 @@
+{
+  "status": 200,
+  "data": {
+    "id": "68b6d41a-b8dc-48cf-a2ad-9db354144577",
+    "name": "Bukit Kehi",
+    "description": "Bukit Kehi merupakan sebuah destinasi wisata yang berada Kota Pamekasan, Pulau Madura. Awalnya, tempat ini merupakan sebuah lapangan futsal, yang fungsinya berubah menjadi tempat wisata yang keren loh! Upaya ini tidak lepas dari ide cemerlang dari Kepala Desa Kertagena, yang memang bertanggung jawab terhadap area lokasi Bukit Kehi. Nama Kehi berasal dari istilah lahan kosong atau lahan tak bertuan. Spot selfie yang terdapat pada lokasi wisata yang unik ini, merupakan anjungan atau panggung, yang berlatar belakang perbukitan yang hijau mempesona.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "address": "Pamekasan",
+    "open": "08:00",
+    "close": "22:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 50000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://www.bangsaonline.com/images/uploads/berita/700/9944a18f0e3feaf3f4257133dee349f8.jpg",
+      "https://liburanyuk.co.id/wp-content/uploads/2022/02/@nurdin_rizqiansyah-1024x768.jpg",
+      "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/sinergimadura/2021/10/Murah-Meriah-Intip-Sunrise-dari-Bukit-Kehi-Pamekasan-Madura.jpg"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/sinergimadura/2021/10/Murah-Meriah-Intip-Sunrise-dari-Bukit-Kehi-Pamekasan-Madura.jpg"
+  }
+}

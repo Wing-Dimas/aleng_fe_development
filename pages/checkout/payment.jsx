@@ -8,7 +8,7 @@ import Footer from "@components/molecules/Footer";
 import Heading from "@components/atomics/Heading";
 import MainContent from "@components/atomics/MainContent";
 import Navbar from "@components/molecules/Navbar";
-import Rating from "@components/molecules/Rating";
+import Rating from "@components/atomics/Rating";
 import Text from "@components/atomics/Text";
 import TextInput from "@components/atomics/TextInput";
 import TextArea from "@components/atomics/TextArea";
