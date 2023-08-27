@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "e35e3bb2-5185-4de4-9cd4-7a4258ac183a",
+    "name": "Kaberaz Hotel Sumenep",
+    "description": "Hotel modern dengan fasilitas lengkap di Sumenep. Terletak di lokasi yang strategis, hotel ini memudahkan Anda untuk menjelajahi pesona Sumenep.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Sumenep",
+    "address": "Jl. Siwalan, Pangarangan, Kec. Kota Sumenep, Kabupaten Sumenep, Jawa Timur 69417",
+    "open": "00:00",
+    "close": "24:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 254000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipMZZw-SNdk4WhVn3_FZRHmrjJWSbsvF4q4W6d90=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNFh2gBK8yI-teSu4kux-zAGrruFNgOzOg8RTJ8=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMxN-VNoZO6unNLgIDD6zwHLCDQMrT62DZl3F7C=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMkbIM2gPsyi-KYvFQlJue54UmH5HpsFxyLQFQ4=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMZZw-SNdk4WhVn3_FZRHmrjJWSbsvF4q4W6d90=s0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": 200,
+  "data": {
+    "id": "3e3c00f0-b0a0-4f2b-b75c-26c0ff529c24",
+    "name": "Kerajinan Kayu Ramox",
+    "description": "Tempat di mana Anda dapat menemukan kerajinan kayu berkualitas dari Bangkalan. Karya-karya unik ini mencerminkan keterampilan tangan para pengrajin setempat.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "WPPJ+FJ9, Trogan, Bilaporah, Kec. Socah, Kabupaten Bangkalan, Jawa Timur 69161",
+    "open": "00:00",
+    "close": "24:00",
+    "price": 50000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipOX2Qz07OUOlDa5j36PHbDZS6NHAT_k9nR03emr=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipOqBSpMjDyHP1GnQX65tYNhFHCQNuNQIO4gcPhR=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipM9HaT_JNGihzwpYzJzgf9_KQez9pONaqbZViTB=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMSX8vJkulGRbM2i0IBRMMoL5TxIWNmSt9LkKGa=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipOX2Qz07OUOlDa5j36PHbDZS6NHAT_k9nR03emr=s0"
+  }
+}

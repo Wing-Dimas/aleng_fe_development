@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "036e8231-e0d9-4d42-943c-9e49ea70a4e0",
+    "name": "Bebek Songkem Pak Salim",
+    "description": "Menyajikan bebek dengan metode songkem yang memberikan rasa istimewa pada daging bebek. Lokasinya yang strategis membuatnya menjadi pilihan yang baik.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "Jl. Raya Ketegan No.85, Ketengan, Tunjung, Kec. Burneh, Kabupaten Bangkalan, Jawa Timur 69121",
+    "open": "07:00",
+    "close": "21:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipMkbkg3gZ_KbtSx-LqkwAbcXgkhzbG7SPo0Dg-0=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipP4kRyD3p3_Z1KBjjRFqKrgRtbghO5V-_falTmY=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPtalu9jcymYi7uygy6EzcSRKIKJzRqAX7Td7b-=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPjM3_ze7iS9XrRcdXLLu66DNz952ZAmEXRsVeP=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMkbkg3gZ_KbtSx-LqkwAbcXgkhzbG7SPo0Dg-0=s0"
+  }
+}

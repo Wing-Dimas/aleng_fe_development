@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "b8d88279-70c7-460f-bf0c-2894ab0d9c0d",
+    "name": "Kedai Adien",
+    "description": "Tempat makan dengan berbagai hidangan enak di Batuan, Sumenep. Nikmati makanan lezat dengan nuansa tradisional.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Sumenep",
+    "address": "XRQV+2XR, Jl. Jokotole, Dusun Toros, Babbalan, Kec. Batuan, Kabupaten Sumenep, Jawa Timur 69417",
+    "open": "10:00",
+    "close": "23:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipNKQC-BJfNmKQFhq8U1oZBr11blqPOp32CxiSIG=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMxb_0-Fk42W2kkTjU7hfmn-xHatyZ54Y-Op_Rr=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPB5r_97Orfr9WwZiOiOD5LZg-A20gXhInWv0Ww=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNGmBn8TK7K_ywWZ73zdfg5V3tTXf9MFZ1L_6-H=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipNKQC-BJfNmKQFhq8U1oZBr11blqPOp32CxiSIG=s0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": 200,
+  "data": {
+    "id": "c50d60c3-b1ce-4e5f-8b53-33be0b378c5d",
+    "name": "Ojek",
+    "description": "Ojek adalah sepeda motor yang digunakan untuk mengangkut penumpang dari satu tempat ke tempat lain. Ojek seringkali menjadi salah satu pilihan transportasi yang cepat dan fleksibel, terutama dalam kota-kota besar di Indonesia.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Madura",
+    "address": "",
+    "open": "07:00",
+    "close": "17:00",
+    "price": 15000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg",
+      "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg",
+      "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg",
+      "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg"
+  }
+}

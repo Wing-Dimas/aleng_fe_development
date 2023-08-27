@@ -1,0 +1,50 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "c50d60c3-b1ce-4e5f-8b53-33be0b378c5d",
+      "name": "Ojek",
+      "address": "Madura",
+      "thumbnail_url": "https://asset-2.tstatic.net/jateng/foto/bank/images/ojek-online-lokal-Salatiga.jpg",
+      "short_video_url": "/sample.mp4",
+      "price": 15000,
+      "star": 4.8
+    },
+    {
+      "id": "6cc3d4d9-c870-40c1-80c7-e2ab4066c39a",
+      "name": "Angkot",
+      "address": "Madura",
+      "thumbnail_url": "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200",
+      "short_video_url": "/sample.mp4",
+      "price": 5000,
+      "star": 4.8
+    },
+    {
+      "id": "49e831d9-6851-4d4e-9a78-5b7cb72a87b2",
+      "name": "Kapal",
+      "address": "Madura",
+      "thumbnail_url": "https://cloud.jpnn.com/photo/banten/news/normal/2022/10/26/berikut-ini-jadwal-keberangkatan-kapal-ferry-exspres-dari-de-6l8p.jpg",
+      "short_video_url": "/sample.mp4",
+      "price": 25000,
+      "star": 4.8
+    },
+    {
+      "id": "b1e06a69-3ce6-4c49-a893-1d2ef94698d0",
+      "name": "Becak",
+      "address": "Madura",
+      "thumbnail_url": "https://cdn.rri.co.id/berita/19/images/1669008905-IMG_0230%20copy.jpg",
+      "short_video_url": "/sample.mp4",
+      "price": 10000,
+      "star": 4.8
+    },
+    {
+      "id": "e2db7f6e-100e-44c5-b408-9ddad14b3e11",
+      "name": "Bus",
+      "address": "Madura",
+      "thumbnail_url": "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg",
+      "short_video_url": "/sample.mp4",
+      "price": 20000,
+      "star": 4.8
+    }
+  ]
+}

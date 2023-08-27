@@ -1,0 +1,37 @@
+{
+  "status": 200,
+  "data": {
+    "id": "e2db7f6e-100e-44c5-b408-9ddad14b3e11",
+    "name": "Bus",
+    "description": "Bus adalah kendaraan besar yang digunakan untuk mengangkut banyak penumpang sekaligus. Ada berbagai jenis bus, termasuk bus kota, bus antarkota, dan bus pariwisata, yang masing-masing memiliki tujuan dan fasilitas yang berbeda.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Madura",
+    "address": "",
+    "open": "07:00",
+    "close": "17:00",
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg",
+      "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg",
+      "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg",
+      "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://www.koranmadura.com/wp-content/uploads/2015/12/pmu.jpg"
+  }
+}

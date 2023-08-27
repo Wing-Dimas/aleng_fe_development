@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "d26ec376-7c1d-47f2-a744-3e5a442f343f",
+    "name": "Pantai Talang Siring",
+    "description": "Pantai dengan pasir putih yang lembut dan air laut yang tenang. Tempat yang sempurna untuk bersantai sambil menikmati pemandangan pantai yang memesona.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Pamekasan",
+    "address": "Pacanan, Montok, Larangan, Pamekasan Regency, East Java 69383",
+    "open": "07:00",
+    "close": "17:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 5000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipPvrfXOwvrLcacEI-F1b-ryP29j_4PuLu8_Vtpm=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNdW_oxWJ9CpSHq7ASsq52qQsPsf85h91epe6rq=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMt4TDNEpUTHQoQUJMHLrErGJyHg89uy71MyuHh=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipP8qVk7LZMn-3Od8W-mVAw8OFYbK6qez98C0IIi=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipPvrfXOwvrLcacEI-F1b-ryP29j_4PuLu8_Vtpm=s0"
+  }
+}

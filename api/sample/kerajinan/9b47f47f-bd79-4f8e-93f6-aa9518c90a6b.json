@@ -1,0 +1,37 @@
+{
+  "status": 200,
+  "data": {
+    "id": "9b47f47f-bd79-4f8e-93f6-aa9518c90a6b",
+    "name": "BATIK USRA",
+    "description": "Tempat yang menawarkan batik khas dengan sentuhan modern. Batik ini menggabungkan tradisi dengan desain yang menarik, menciptakan karya seni yang istimewa.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Sampang",
+    "address": "Jl. Pramuka No 03, RT/RW 004/002, Sampang-Madura, Rw. III, Gn. Sekar, Kec. Sampang, Kabupaten Sampang, Jawa Timur 69213",
+    "open": "00:00",
+    "close": "24:00",
+    "price": 50000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipMEgJkt2qHTtzz0wZQ2FKmno7d1rKgxgDrC_IWl=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNFQMRA2Kuif61p5PGpdC-_e8RvyoZ8M7rrsGoi=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPbpQsKH45ZC3o_5OOJAnM1f0H4T5xgSMkfmpYB=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipOP3xD9x1i7Drm85YGxHO2JvVskLjRVcyd495TQ=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMEgJkt2qHTtzz0wZQ2FKmno7d1rKgxgDrC_IWl=s0"
+  }
+}

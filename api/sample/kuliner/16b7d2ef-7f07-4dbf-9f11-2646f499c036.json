@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "16b7d2ef-7f07-4dbf-9f11-2646f499c036",
+    "name": "Lesehan Gledek Lanjeng",
+    "description": "Tempat lesehan yang nyaman untuk menikmati makanan tradisional Madura. Nikmati hidangan lezat sambil menikmati suasana alami.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "Lagundi, Ujung Piring, Bangkalan, Bangkalan Regency, East Java 69118",
+    "open": "07:00",
+    "close": "21:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipNSuOwnEXwaqVNSOdAiV24puhdyUD9K3z7_UCWf=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipO4xlycCFObbNIbkMB7-5C6UZuWSrhLMheNpdyK=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipOne4vpHrNwARdKda4sf3DC8ZUY7_KQM9qYgiv2=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNK0CcVL4NEggF6JL1rE3hTerNySBy_uq1Qwzb0=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipNSuOwnEXwaqVNSOdAiV24puhdyUD9K3z7_UCWf=s0"
+  }
+}

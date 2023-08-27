@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "f1f2a6f9-4971-4582-a82a-1b9742bb33b7",
+    "name": "Penginapan Semilir",
+    "description": "Penginapan yang menawarkan kenyamanan dan fasilitas lengkap di Sampang. Terletak di dekat lokasi-lokasi wisata, tempat ini cocok bagi wisatawan yang ingin menjelajahi daerah sekitar.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Sampang",
+    "address": "Jl. Syamsul Arifin depan samsat No.73, Rw. V, Polagan, Kec. Sampang, Kabupaten Sampang, Jawa Timur 69216",
+    "open": "00:00",
+    "close": "24:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 100000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipPTefKvRmEq92-2w3qf7ZHQPDyi3wpdzt5MrAFF=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipM_1EgCPu6MB7kkW9aWS4MSGxXtWSFsFv_pISwz=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMC3tntZpMs_KElroDhtiDgdR1ftgUqUyNPlk9v=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipOGvBwVQ5WpNXqR6nRCIe-RYhsBmkGrrA8ol4hO=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipPTefKvRmEq92-2w3qf7ZHQPDyi3wpdzt5MrAFF=s0"
+  }
+}

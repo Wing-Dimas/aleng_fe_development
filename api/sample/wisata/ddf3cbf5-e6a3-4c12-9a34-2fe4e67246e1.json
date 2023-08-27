@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "ddf3cbf5-e6a3-4c12-9a34-2fe4e67246e1",
+    "name": "Waterfall Kokop",
+    "description": "Air terjun yang menakjubkan tersembunyi di tengah kehijauan alam. Suara gemericik air dan semilir angin akan memberikan Anda sensasi kedamaian yang sempurna saat Anda menikmati keindahan alam yang alami.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "X4HC+RM3, Koalla, Durjan, Kec. Kokop, Kabupaten Bangkalan, Jawa Timur 69155",
+    "open": "07:00",
+    "close": "17:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 5000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipPp5FvzV167Qu-zz9d9jjjTOrwRAAPcdwH6Wg3a=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNeo3NX9YTnuLp_ogqj9359amoT9WUv2F5sFLv_=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPp5FvzV167Qu-zz9d9jjjTOrwRAAPcdwH6Wg3a=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNeo3NX9YTnuLp_ogqj9359amoT9WUv2F5sFLv_=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipPp5FvzV167Qu-zz9d9jjjTOrwRAAPcdwH6Wg3a=s0"
+  }
+}

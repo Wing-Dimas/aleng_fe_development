@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "f047a3ef-04e9-4e7f-848d-56c27ce27c60",
+    "name": "Rumah Makan Tera' Bulan",
+    "description": "Tempat yang cocok untuk menikmati Tera' Bulan, hidangan tradisional khas Madura. Rasakan cita rasa unik dari hidangan ini di suasana yang nyaman.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "Jl. Raya Ketengan No.69, Ketengan, Tunjung, Kec. Burneh, Kabupaten Bangkalan, Jawa Timur 69121",
+    "open": "09:00",
+    "close": "21:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipMTDNEpUTHQoQUJMHLrErGJyHg89uy71MyuHikr=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPd8qGLuiomIG1IK0ePH3ChD4Dx1Y0kG6nJqibl=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMasWlTvQ2QYMIVmJYxZkiYPZy5ZwYTz2AlHrx_=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNo3NzkJeCOuqhn5Y2IIHL2RllvbCcq_pLrhMPZ=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMTDNEpUTHQoQUJMHLrErGJyHg89uy71MyuHikr=s0"
+  }
+}

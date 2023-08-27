@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "1f71b6da-d251-4b1f-ba20-4a1ab106e5ea",
+    "name": "Hotel New Ramayana",
+    "description": "Hotel yang menawarkan kenyamanan dan layanan prima di Pamekasan. Terletak dekat dengan pusat kota, hotel ini menjadi basis yang bagus untuk menjelajahi daerah sekitar.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Pamekasan",
+    "address": "Jl. Trunojoyo No.88, Sekarputih, Laden, Kec. Pamekasan, Kabupaten Pamekasan, Jawa Timur 69351",
+    "open": "00:00",
+    "close": "24:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 230000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipMm7UfHqpF0mhCsovxcZ4OPhhYhjS5Mgxa13ETF=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPhIUKhwlbdgviqKuatBSzkU-_tbO7Xbipuqv37=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipO-vw8brESJZNAwm3mM_8_jIbaz1I_2Hnol3ZBc=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMpmG41pmD-1HbGwCwIfCkw-4YhW7COL818Jg49=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMm7UfHqpF0mhCsovxcZ4OPhhYhjS5Mgxa13ETF=s0"
+  }
+}

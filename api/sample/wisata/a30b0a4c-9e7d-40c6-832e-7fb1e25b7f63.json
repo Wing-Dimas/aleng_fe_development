@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "a30b0a4c-9e7d-40c6-832e-7fb1e25b7f63",
+    "name": "BUKIT LAMPION beramah",
+    "description": "Tempat yang cocok untuk melihat lampion-lampion yang menerangi langit malam. Bukit ini menjadi kanvas langit yang indah, dihiasi oleh berbagai warna lampion yang terang dan menciptakan suasana magis yang tak terlupakan.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Bangkalan",
+    "address": "Unnamed Road, Tengginah, Daleman, Kec. Galis, Kabupaten Bangkalan, Jawa Timur 69173",
+    "open": "07:00",
+    "close": "16:30",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 5000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipOvfXFPqkIUVr0Ihbyk28yjoKRfgPFfWvBZ8frq=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPMe31vNIAKbVOYJvISFHz3HuZcIZ09mckBPpU8=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPzq9gkXa5f3JWzL6jUM299COGsgTn7AtTIlfJ2=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipOSyjv3SqH1JJuO4lpa1JoFspvOvdsrVBdsMvkM=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipOvfXFPqkIUVr0Ihbyk28yjoKRfgPFfWvBZ8frq=s0"
+  }
+}

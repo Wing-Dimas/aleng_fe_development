@@ -1,0 +1,37 @@
+{
+  "status": 200,
+  "data": {
+    "id": "6cc3d4d9-c870-40c1-80c7-e2ab4066c39a",
+    "name": "Angkot",
+    "description": "Angkot adalah kendaraan umum berukuran kecil yang mengangkut penumpang dalam kota atau wilayah tertentu. Angkot biasanya memiliki rute tetap dan berhenti di tempat-tempat tertentu untuk menaikkan dan menurunkan penumpang.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Madura",
+    "address": "",
+    "open": "07:00",
+    "close": "17:00",
+    "price": 5000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200",
+      "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200",
+      "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200",
+      "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://awsimages.detik.net.id/community/media/visual/2023/05/19/angkot-denpasar_169.jpeg?w=1200"
+  }
+}

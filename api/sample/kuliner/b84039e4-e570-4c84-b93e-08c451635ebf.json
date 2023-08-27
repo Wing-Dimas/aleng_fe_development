@@ -1,0 +1,43 @@
+{
+  "status": 200,
+  "data": {
+    "id": "b84039e4-e570-4c84-b93e-08c451635ebf",
+    "name": "Rumah Makan Sae Salera Ning Lim",
+    "description": "Tempat makan yang menyajikan hidangan lezat dengan rasa autentik. Nikmati berbagai hidangan khas Madura di tempat yang nyaman.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "city": "Sampang",
+    "address": "Jl. Jaksa Agung Suprapto No.08, Pliyan, Tanggumong, Kec. Sampang, Kabupaten Sampang, Jawa Timur 69216",
+    "open": "09:00",
+    "close": "21:00",
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 20000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipOVbaUyz0IK1eyey_W6YTE-5vVfIMUZgAvx2twZ=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNhjmQ9L1dTf29nXKKt-rIRY5VcuDcpiqW7j8pd=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPLzkmVDh9DkFsfok9hPteFTyQHTUB1C_OF7jds=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNhjmQ9L1dTf29nXKKt-rIRY5VcuDcpiqW7j8pd=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipOVbaUyz0IK1eyey_W6YTE-5vVfIMUZgAvx2twZ=s0"
+  }
+}
