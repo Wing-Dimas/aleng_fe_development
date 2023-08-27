@@ -46,7 +46,7 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
         ref.current.currentTime = 0;
         ref.current.pause();
         setPresence(false);
-      }, 350);
+      }, 300);
     }
   }, [animate]);
 
@@ -54,15 +54,9 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
     if (!animateLoading) {
       setTimeout(() => {
         setPresence(false);
-      }, 350);
+      }, 300);
     }
   }, [animateLoading]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 7000);
-  }, []);
 
   return (
     <div
@@ -80,7 +74,6 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
         type="video/mp4"
         muted
         loop
-        preload="none"
         playsInline
         className={`${presence && !loading ? "block" : "hidden"} ${
           animate ? "opacity-100" : "opacity-0"

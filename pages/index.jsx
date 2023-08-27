@@ -21,80 +21,12 @@ import { toRupiah } from "@utils/libs";
 export default function Home() {
   const [index, setIndex] = useState(0);
   const [populars, setPopulars] = useState({
-    wisata: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    paket_wisata: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-        day: 3,
-        night: 2,
-      },
-    ],
-    kuliner: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    penginapan: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    transportasi: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    kerajinan: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        city: "Bangkalan",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
+    wisata: [],
+    paket_wisata: [],
+    kuliner: [],
+    penginapan: [],
+    transportasi: [],
+    kerajinan: [],
   });
 
   const doChangeTabIndex = (e) => {
@@ -103,20 +35,21 @@ export default function Home() {
 
   const getPopulars = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/popularSite");
-      setPopulars({
-        wisata: data.data.wisata,
-        penginapan: data.data.hotel,
-        restoran: data.data.restaurant,
-      });
+      const {
+        data: { data },
+      } = await axios.get(
+        "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/populars.json"
+      );
+      setPopulars(data);
+      console.log(data);
     } catch (error) {
       console.log("Error Fetching Populars");
     }
   };
 
-  // useEffect(() => {
-  //   getPopulars();
-  // }, []);
+  useEffect(() => {
+    getPopulars();
+  }, []);
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">

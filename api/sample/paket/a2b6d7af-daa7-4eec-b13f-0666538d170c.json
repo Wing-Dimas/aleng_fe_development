@@ -1,0 +1,46 @@
+{
+  "status": 200,
+  "data": {
+    "id": "a2b6d7af-daa7-4eec-b13f-0666538d170c",
+    "name": "Wisata Religi dan Alam Madura",
+    "description": "Jika Anda mencari kedamaian dan pengalaman spiritual, paket ini adalah pilihan tepat. Anda akan mengunjungi tempat-tempat bersejarah dan religius seperti Masjid Agung Bangkalan dan Air Terjun Ahatan. Sambil menikmati keindahan alam, Anda juga akan merasakan kedamaian batin.",
+    "lat": -7.1299981954715035,
+    "long": 112.72517694200859,
+    "route": "Bangkalan - Pamekasan - Sampang - Bangkalan",
+    "day": 2,
+    "night": 1,
+    "rundown": [
+      "08.00: Berkumpul di Bangkalan\n09.00: Kunjungi Masjid Agung Bangkalan\n12.00: Makan siang di Lesehan Gledek Lanjeng\n13.30: Perjalanan ke Pamekasan\n14.30: Explore Pantai Talang Siring\n17.00: Check-in di Hotel Front One Madura",
+      "07.00: Sarapan di hotel\n08.00: Perjalanan ke Sampang\n09.00: Kunjungi Air Terjun Ahatan\n12.00: Makan siang di Warung Asela\n14.00: Explore Pantai Camplong\n16.00: Kembali ke Bangkalan\n18.00: Berakhirnya perjalanan"
+    ],
+    "facilities": [
+      {
+        "icon_url": "/temp/ac.png",
+        "name": "AC"
+      }
+    ],
+    "price": 1000000,
+    "review": {
+      "star": 4.0,
+      "total_review": 200,
+      "stars": [0, 20, 40, 60, 80],
+      "comments": [
+        {
+          "name": "Oliver Sykez",
+          "profile_pic_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+          "date": "17 Nov 2022",
+          "star": 5.0,
+          "text": "Mantap tempatnya sangat artistik hehe ada ada saja ini dia mah hehe aaku aja disini sangat bahagia sekali hehe sampai jeumpa kawan kawan ku disana"
+        }
+      ]
+    },
+    "image_urls": [
+      "https://lh3.googleusercontent.com/p/AF1QipPWZHvsrD8ctuKQnQ-oFTmt3s5KDug_dbtrIDIj=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipPaQKzRqHOL1ylSBWF_CfJYjl-O4HSbKNQZtrwZ=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipMTBb29MPd9UEXDlOZP40JS8iGJgvrLooZRaqsc=s0",
+      "https://lh3.googleusercontent.com/p/AF1QipNXtoGQOtGWo25fAA-GcHOtlM40JUIE_XR1dgo=s0"
+    ],
+    "video_url": "/sample.mp4",
+    "video_thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipPWZHvsrD8ctuKQnQ-oFTmt3s5KDug_dbtrIDIj=s0"
+  }
+}

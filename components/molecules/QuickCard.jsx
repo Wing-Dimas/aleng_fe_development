@@ -16,7 +16,7 @@ export default function QuickCard({
   children,
 }) {
   return (
-    <Link href={url} className="m-4 whitespace-nowrap">
+    <Link href={url} className="block m-4 whitespace-nowrap">
       <HoverPlayer
         video_url={video_url}
         thumbnail_url={image_url}
