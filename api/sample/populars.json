@@ -77,15 +77,48 @@
     ],
     "paket_wisata": [
       {
-        "id": "3804c746-911a-4317-856b-3bf3f47a8979",
-        "name": "Pantai Horizon",
-        "city": "Bangkalan",
-        "thumbnail_url": "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "id": "6bbc2780-f2d8-4c62-9237-7ae02b1f12b0",
+        "name": "Eksplorasi Alam dan Kuliner Madura",
+        "city": "Madura",
+        "thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipMqlOEWyJkmOdFtv1JHzGHobJMr7h69Tow6qz4e=s0",
         "short_video_url": "/sample.mp4",
-        "price": 50000,
+        "price": 1000000,
+        "star": 4.8,
+        "day": 2,
+        "night": 1
+      },
+      {
+        "id": "8ebc9331-5dd9-40cf-a8f1-ecc0617dab51",
+        "name": "Pengalaman Budaya dan Sejarah Madura",
+        "city": "Madura",
+        "thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipPp5FvzV167Qu-zz9d9jjjTOrwRAAPcdwH6Wg3a=s0",
+        "short_video_url": "/sample.mp4",
+        "price": 1000000,
+        "star": 4.8,
+        "day": 2,
+        "night": 1
+      },
+      {
+        "id": "817c2c81-6d2c-4cc5-8391-09084eaa0aa9",
+        "name": "Wisata Madura Utara Penuh",
+        "city": "Madura",
+        "thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipNtGjnDXjxVC5CO3cyxyDK5nrrm5AzNrUolw_DK=s0",
+        "short_video_url": "/sample.mp4",
+        "price": 1000000,
         "star": 4.8,
         "day": 3,
         "night": 2
+      },
+      {
+        "id": "6887b3b4-6114-457e-b5a9-1f7f781821fa",
+        "name": "Wisata Budaya dan Alam Madura",
+        "city": "Madura",
+        "thumbnail_url": "https://lh3.googleusercontent.com/p/AF1QipOcIhrKyaLIeKJFUKtXLxLxZ8P5srGK5g-CWVc2=s0",
+        "short_video_url": "/sample.mp4",
+        "price": 1000000,
+        "star": 4.8,
+        "day": 2,
+        "night": 1
       }
     ],
     "kuliner": [
