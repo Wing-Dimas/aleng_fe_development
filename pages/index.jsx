@@ -14,9 +14,11 @@ import {
   IconBus,
   IconHorseToy,
   IconSoup,
+  IconStar,
 } from "@tabler/icons-react";
 import axios from "axios";
 import { toRupiah } from "@utils/libs";
+import Skeleton from "react-loading-skeleton";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -41,7 +43,6 @@ export default function Home() {
         "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/populars.json"
       );
       setPopulars(data);
-      console.log(data);
     } catch (error) {
       console.log("Error Fetching Populars");
     }
@@ -70,10 +71,10 @@ export default function Home() {
           </p>
         </div>
         <div className="px-4 my-2 sm:my-8">
-          <div className="font-medium max-w-3xl mx-auto">
+          <div className="font-medium max-w-5xl mx-auto whitespace-nowrap">
             <div
               style={{
-                gridTemplateColumns: "repeat(5, 1fr)",
+                gridTemplateColumns: "repeat(6, 1fr)",
               }}
               className="scrollbar-custom text-xs sm:text-base grid bg-neutral-200 rounded-full border-2 border-neutral-200"
             >
@@ -84,8 +85,8 @@ export default function Home() {
                   index === 0 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
-                <IconBeach className="h-5 w-5" />
-                <p>Wisata</p>
+                <IconStar className="h-5 w-5" />
+                <p>Paket Wisata</p>
               </button>
               <button
                 value={1}
@@ -94,8 +95,8 @@ export default function Home() {
                   index === 1 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
-                <IconSoup className="h-5 w-5" />
-                <p>Kuliner</p>
+                <IconBeach className="h-5 w-5" />
+                <p>Wisata</p>
               </button>
               <button
                 value={2}
@@ -104,8 +105,8 @@ export default function Home() {
                   index === 2 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
-                <IconBuildingCottage className="h-5 w-5" />
-                <p>Penginapan</p>
+                <IconSoup className="h-5 w-5" />
+                <p>Kuliner</p>
               </button>
               <button
                 value={3}
@@ -114,14 +115,24 @@ export default function Home() {
                   index === 3 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
-                <IconHorseToy className="h-5 w-5" />
-                <p>Kerajinan</p>
+                <IconBuildingCottage className="h-5 w-5" />
+                <p>Penginapan</p>
               </button>
               <button
                 value={4}
                 onClick={doChangeTabIndex}
                 className={`${
                   index === 4 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconHorseToy className="h-5 w-5" />
+                <p>Kerajinan</p>
+              </button>
+              <button
+                value={5}
+                onClick={doChangeTabIndex}
+                className={`${
+                  index === 5 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBus className="h-5 w-5" />
@@ -133,12 +144,14 @@ export default function Home() {
         <br />
       </div>
       {index === 0 ? (
-        <Wisata populars={populars.wisata} paket={populars.paket_wisata} />
+        <PaketWisata populars={populars.paket_wisata} />
       ) : index === 1 ? (
-        <Kuliner populars={populars.kuliner} />
+        <Wisata populars={populars.wisata} />
       ) : index === 2 ? (
-        <Penginapan populars={populars.penginapan} />
+        <Kuliner populars={populars.kuliner} />
       ) : index === 3 ? (
+        <Penginapan populars={populars.penginapan} />
+      ) : index === 4 ? (
         <Kerajinan populars={populars.kerajinan} />
       ) : (
         <Transportasi populars={populars.transportasi} />
@@ -148,7 +161,66 @@ export default function Home() {
   );
 }
 
-const Wisata = ({ populars, paket }) => {
+const PaketWisata = ({ populars }) => {
+  return (
+    <div>
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Paket Wisata <span className="text-custom-primary-red">Populer</span>{" "}
+          di Madura
+        </Title>
+        <Text className="text-center">
+          Kami menawarkan wisata disekitar madura untuk menemani liburanmu
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Carousel id="wisata-1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/wisata/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
+          </Carousel>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Wisata = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -161,57 +233,49 @@ const Wisata = ({ populars, paket }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-1">
-            {populars.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/wisata/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                  />
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/wisata/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
       <PilihanKabupaten name="Wisata" url="wisata" />
-      <div className="px-4 py-4 md:py-8">
-        <Title className="text-center">
-          Paket <span className="text-custom-primary-red">Wisata</span> Untukmu
-        </Title>
-        <Text className="text-center">
-          Kami bisa memilihkanmu beberapa paket wisata agar kamu merasa nyaman
-        </Text>
-        <div className="max-w-7xl mx-auto">
-          <Carousel id="wisata-2">
-            {paket.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/wisata/paket-wisata/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                  >
-                    <Text.small className="text-custom-primary-red">
-                      {toRupiah.format(popular.price)}
-                      <span className="text-black text-xs">
-                        /{popular.day} hari {popular.night} malam
-                      </span>
-                    </Text.small>
-                  </QuickCard>
-                </Carousel.item>
-              );
-            })}
-          </Carousel>
-        </div>
-      </div>
     </div>
   );
 };
@@ -229,20 +293,45 @@ const Kuliner = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kuliner-1">
-            {populars.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/kuliner/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                  />
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/kuliner/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
@@ -264,21 +353,46 @@ const Penginapan = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="penginapan-1">
-            {populars.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/penginapan/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                    price={popular.price}
-                  />
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/penginapan/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                      price={popular.price}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
@@ -300,20 +414,45 @@ const Kerajinan = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kerajinan-1">
-            {populars.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/kerajinan/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                  />
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/kerajinan/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
@@ -336,20 +475,45 @@ const Transportasi = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="transportasi-1">
-            {populars.map((popular) => {
-              return (
-                <Carousel.item key={popular.id}>
-                  <QuickCard
-                    url={"/transportasi/" + popular.id}
-                    image_url={popular.thumbnail_url}
-                    video_url={popular.short_video_url}
-                    name={popular.name}
-                    address={popular.city}
-                    star={popular.star}
-                  />
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.id}>
+                    <QuickCard
+                      url={"/transportasi/" + popular.id}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      address={popular.city}
+                      star={popular.star}
+                    />
+                  </Carousel.item>
+                );
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>

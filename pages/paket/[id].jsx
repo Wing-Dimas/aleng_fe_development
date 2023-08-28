@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 
-export default function DetailPenginapan() {
+export default function DetailWisata() {
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState({
@@ -27,16 +27,10 @@ export default function DetailPenginapan() {
     description: "",
     lat: -7.1299981954715035,
     long: 112.72517694200859,
-    city: "",
-    address: "",
-    open: "00:00",
-    close: "24:00",
-    facilities: [
-      {
-        icon_url: "",
-        name: "",
-      },
-    ],
+    route: "",
+    day: 0,
+    night: 0,
+    rundown: [],
     price: 0,
     reviews: {
       star: 0,
@@ -57,19 +51,14 @@ export default function DetailPenginapan() {
     video_thumbnail_url: "",
   });
   const [order, setOrder] = useState({
-    date: {
-      in: new Date().toISOString().split("T")[0],
-      out: new Date().toISOString().split("T")[0],
-    },
+    date: new Date().toISOString().split("T")[0],
     options: {
-      room: 1,
-      adult: 1,
-      child: 1,
+      people: 1,
     },
   });
 
   const doChangeDate = ({ name, value }) => {
-    setOrder({ ...order, date: { ...order.date, [name]: value } });
+    setOrder({ ...order, [name]: value });
   };
 
   const doChangeOrderOptions = (e) => {
@@ -87,7 +76,7 @@ export default function DetailPenginapan() {
       const {
         data: { data },
       } = await axios.get(
-        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/penginapan/${id}.json`
+        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/paket/${id}.json`
       );
       setData(data);
       setLoaded(true);
@@ -120,7 +109,7 @@ export default function DetailPenginapan() {
             <GalleryImage
               loaded={loaded}
               image_urls={data.image_urls}
-              alt={data.name ?? ""}
+              alt="lenjhelenan"
               video_url={data.video_url}
               video_thumbnail_url={data.video_thumbnail_url}
             />
@@ -128,10 +117,12 @@ export default function DetailPenginapan() {
             <TabDesc
               loaded={loaded}
               name={data.name}
-              address={data.address}
+              day={data.day}
+              night={data.night}
+              rundown={data.rundown}
+              address={data.route}
               star={data.reviews.star}
               total_review={data.reviews.total_review}
-              facilities={data.facilities}
               lat={data.lat}
               long={data.long}
               description={data.description}
@@ -151,42 +142,29 @@ export default function DetailPenginapan() {
                   <p className="font-semibold text-red-500">
                     {toRupiah.format(data.price)}
                   </p>
-                  <p className="text-xs sm:text-sm font-medium">/malam</p>
+                  <p className="text-xs sm:text-sm font-medium">/orang</p>
                 </div>
                 <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-3">
-                  <div className="flex flex-col items-center gap-1 w-full">
-                    <Text.label className="after:content-['*'] after:ml-0.5">
-                      Check-In
-                    </Text.label>
-                    <DateInput
-                      name="in"
-                      value={order.date.in}
-                      onChange={doChangeDate}
-                      containerClassName="!w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col items-center gap-1 w-full">
-                    <Text.label className="after:content-['*'] after:ml-0.5">
-                      Check-Out
-                    </Text.label>
-                    <DateInput
-                      name="out"
-                      value={order.date.out}
-                      onChange={doChangeDate}
-                      containerClassName="!w-full"
-                    />
-                  </div>
+                <div className="flex flex-col items-center gap-1 w-full">
+                  <Text.label className="after:content-['*'] after:ml-0.5">
+                    Tanggal Tiket
+                  </Text.label>
+                  <DateInput
+                    name="date"
+                    value={order.date}
+                    onChange={doChangeDate}
+                    containerClassName="w-full"
+                  />
                 </div>
                 <div className="flex flex-col items-center gap-1 w-full mt-3">
                   <Text.label className="after:content-['*'] after:ml-0.5">
-                    Tamu
+                    Wisatawan
                   </Text.label>
                   <PopOver
-                    containerClassName="!w-full"
+                    containerClassName="w-full"
                     options={order.options}
                     onChange={doChangeOrderOptions}
-                    pages="penginapan"
+                    name="Wisatawan"
                   />
                 </div>
               </div>
@@ -194,9 +172,7 @@ export default function DetailPenginapan() {
                 <div className="flex flex-row justify-between items-center">
                   <p className="font-semibold text-[1rem]">Total</p>
                   <p className="flex flex-row  font-semibold text-[1rem] text-[#D2001A]">
-                    {toRupiah.format(
-                      order.options.adult * order.options.room * data.price
-                    )}
+                    {toRupiah.format(order.options.people * data.price)}
                   </p>
                 </div>
                 <Link href="/checkout/confirm">

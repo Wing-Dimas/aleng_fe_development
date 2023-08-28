@@ -61,7 +61,7 @@ export default function Select({
           animate ? "opacity-100 translate-y-0 " : "opacity-0 translate-y-2 "
         }${
           childClassName ? childClassName + " " : ""
-        }max-h-96 overflow-y-auto transition-all text-left absolute top-16 w-full rounded-md bg-white shadow-custom p-2 border z-[99]`}
+        }max-h-96 overflow-y-auto transition-all text-left absolute top-16 w-full rounded-md bg-white shadow-custom p-2 border z-[2]`}
       >
         {options.map((o, i) => {
           return (

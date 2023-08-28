@@ -62,6 +62,7 @@ export default function ResetPassword() {
               <Image
                 src="/static_icons/logo.png"
                 priority
+                priority
                 width={48}
                 height={48}
                 alt="logo"

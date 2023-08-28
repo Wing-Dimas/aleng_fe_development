@@ -35,18 +35,18 @@ export default function FABSheet({ className, icon, children }) {
         onClick={doToggleSheet}
         className={`${show ? "block" : "hidden"} ${
           animate ? "bg-opacity-25" : "bg-opacity-0"
-        } z-[998] bg-black fixed top-0 left-0 h-screen w-screen transition-all`}
+        } z-[50] bg-black fixed top-0 left-0 h-screen w-screen transition-all`}
       />
       <div
         className={`${show ? "block" : "hidden"} ${
           animate ? "translate-y-0" : "translate-y-full"
         } ${
           className ? className + " " : ""
-        }transition-all z-[999] max-h-screen w-screen fixed left-0 bottom-0 bg-white p-4 rounded-t-3xl`}
+        }transition-all z-[51] max-h-screen w-screen fixed left-0 bottom-0 bg-white p-4 rounded-t-3xl`}
       >
         {children}
       </div>
-      <div className="fixed z-[998] right-8 bottom-8">
+      <div className="fixed z-[50] right-8 bottom-8">
         <button
           onClick={doToggleSheet}
           className="p-2 rounded-full shadow bg-custom-secondary-yellow text-custom-primary-red"

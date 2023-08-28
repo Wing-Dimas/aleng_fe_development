@@ -71,7 +71,7 @@ export default function PopOver({
                 : "opacity-0 translate-y-2 "
             }${
               childClassName ? childClassName + " " : ""
-            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[99]`}
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
           >
             {/* Kamar */}
             <div className="mb-2 flex items-center justify-between gap-4">
@@ -184,7 +184,7 @@ export default function PopOver({
                 : "opacity-0 translate-y-2 "
             }${
               childClassName ? childClassName + " " : ""
-            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[99]`}
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
           >
             {/* Item */}
             <div className="mb-2 flex items-center justify-between gap-4">
@@ -237,7 +237,7 @@ export default function PopOver({
                 : "opacity-0 translate-y-2 "
             }${
               childClassName ? childClassName + " " : ""
-            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[99]`}
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
           >
             {/* People */}
             <div className="mb-2 flex items-center justify-between gap-4">

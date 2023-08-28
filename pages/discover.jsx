@@ -26,68 +26,14 @@ import axios from "axios";
 export default function Discover() {
   const router = useRouter();
   const [catalogue, setCatalogue] = useState({
-    wisata: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        address: "Banraas, Dungkek, Sumenep",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    kuliner: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        address: "Banraas, Dungkek, Sumenep",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    penginapan: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        address: "Banraas, Dungkek, Sumenep",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    transportasi: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        address: "Banraas, Dungkek, Sumenep",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
-    kerajinan: [
-      {
-        id: "3804c746-911a-4317-856b-3bf3f47a8979",
-        name: "Pantai Horizon",
-        address: "Banraas, Dungkek, Sumenep",
-        thumbnail_url:
-          "https://images.unsplash.com/photo-1520942702018-0862200e6873?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        short_video_url: "/sample.mp4",
-        price: 50000,
-        star: 4.8,
-      },
-    ],
+    paket: [],
+    wisata: [],
+    kuliner: [],
+    penginapan: [],
+    transportasi: [],
+    kerajinan: [],
   });
-  const [tabId, setTabId] = useState("wisata");
+  const [tabId, setTabId] = useState("paket");
   const [expand, setExpand] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -151,12 +97,6 @@ export default function Discover() {
     }
   }, [animate]);
 
-  useEffect(() => {
-    const query = router.query;
-    setTabId(query.tabId ?? tabId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
-
   const doSearchWithOptions = () => {
     let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`;
     if (tabId === "penginapan") {
@@ -176,34 +116,39 @@ export default function Discover() {
     });
   };
 
-  const getData = async () => {
+  const getData = async (id) => {
     try {
-      const res = await axios.get(
-        "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/wisata.json"
+      const {
+        data: { data },
+      } = await axios.get(
+        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/${id}.json`
       );
-      setCatalogue({ ...catalogue, wisata: res.data.data });
+      setCatalogue({ ...catalogue, [id]: data });
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    const query = router.query;
+    setTabId(query.tabId ?? tabId);
+    getData(query.tabId ?? tabId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
   return (
     <Wrapper>
       <Head>
         <title>Discover | Lanjalan</title>
       </Head>
-      <div className="sticky top-0 z-10">
+      <div className="sticky top-0 z-[90]">
         <Navbar isDiscover />
       </div>
       {/* Drawer */}
       <div
         className={`${expand ? "block" : "hidden"} ${
           animate ? "bg-opacity-25" : "bg-opacity-0"
-        } transition-all fixed h-full w-screen left-0 z-[1000] bg-black`}
+        } transition-all fixed h-full w-screen left-0 z-[90] bg-black`}
       >
         <div
           className="relative grid h-full"
@@ -288,36 +233,44 @@ export default function Discover() {
           </div>
         </div>
       </div>
-      <MainContent isDiscover>
-        <div className="fixed bottom-0 left-0 w-full flex items-center justify-center my-4">
-          <div className="p-1 w-fit bg-black bg-opacity-20 backdrop-blur-md rounded-full overflow-hidden">
-            <button
-              onClick={doExpand}
-              className="font-semibold bg-white p-3 flex items-center gap-2 rounded-full"
-            >
-              <IconSettings className="h-5 w-5" />
-              <span>Atur Pencarian</span>
-            </button>
-          </div>
+      <div className="z-[50] fixed bottom-0 left-0 w-full flex items-center justify-center my-4">
+        <div className="p-1 w-fit bg-black bg-opacity-20 backdrop-blur-md rounded-full overflow-hidden">
+          <button
+            onClick={doExpand}
+            className="font-semibold bg-white p-3 flex items-center gap-2 rounded-full"
+          >
+            <IconSettings className="h-5 w-5" />
+            <span>Atur Pencarian</span>
+          </button>
         </div>
+      </div>
+      <MainContent isDiscover>
         <br />
         <div className="grid grid-cols-1 exs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-6 gap-y-8">
-          {catalogue.wisata.map((wisata) => {
+          {catalogue[tabId].map((item) => {
             return (
               <Card
-                key={wisata.id}
-                url={"/wisata/" + wisata.id}
-                thumbnail_url={wisata.thumbnail_url}
-                short_video_url={wisata.short_video_url}
-                name={wisata.name}
-                star={wisata.star}
-                price={wisata.price}
-                address={wisata.address}
+                key={item.id}
+                url={"/" + tabId + "/" + item.id}
+                thumbnail_url={item.thumbnail_url}
+                short_video_url={item.short_video_url}
+                name={item.name}
+                star={item.star}
+                price={item.price}
+                address={item.address}
+                unit={
+                  ["paket", "penginapan", "transportasi"].includes(tabId)
+                    ? "orang"
+                    : tabId === "wisata"
+                    ? "wisatawan"
+                    : tabId === "kuliner"
+                    ? "reservasi"
+                    : "item"
+                }
               />
             );
           })}
         </div>
-        <br />
         <br />
         <br />
         <br />
@@ -334,6 +287,7 @@ const Card = ({
   star,
   price,
   address,
+  unit = "malam",
 }) => {
   return (
     <Link href={url}>
@@ -350,7 +304,7 @@ const Card = ({
             <Text.small className="font-semibold">{star}</Text.small>
           </div>
           <Text.small className="text-custom-primary-red">
-            {toRupiah.format(price)}/malam
+            {toRupiah.format(price)}/{unit}
           </Text.small>
         </div>
         <Heading.h3 className="!font-bold tracking-tight">{name}</Heading.h3>

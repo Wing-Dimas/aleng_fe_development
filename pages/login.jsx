@@ -75,7 +75,7 @@ export default function LoginPage() {
       </Head>
       <Navbar isFixed auth />
       <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center  items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem] mb-52">
-        <div className="lg:w-1/2 z-50 relative justify-center flex w-full ">
+        <div className="lg:w-1/2 z-[3] relative justify-center flex w-full ">
           <Image
             src="/static_images/lenjhelenan.png"
             width={600}
@@ -85,7 +85,7 @@ export default function LoginPage() {
             className="w-1/2 lg:w-full"
           />
         </div>
-        <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
+        <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-[3] bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
           <Text className="md:text-[2rem] text-center">
             Selamat Datang Kembali
           </Text>
@@ -154,7 +154,7 @@ export default function LoginPage() {
             />
           </div>
         </div>
-        <div className="bottom-8 md:bottom-7 absolute w-full z-40 md:left-8">
+        <div className="bottom-8 md:bottom-7 absolute w-full z-[2] md:left-8">
           <div className="relative md:w-1/2">
             <Image
               priority
@@ -165,7 +165,7 @@ export default function LoginPage() {
             />
           </div>
         </div>
-        <div className="relative z-50">
+        <div className="relative z-[3]">
           <p className="w-full absolute bg-[#FFF4E8] p-2 bottom-0 text-[#615A56] font-medium text-[0.60rem] md:text-[0.75] text-center">
             Copyright © 2023 Lenjhelenan Madura
           </p>

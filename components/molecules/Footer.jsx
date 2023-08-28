@@ -14,6 +14,7 @@ export default function Footer() {
                   fill={true}
                   sizes="auto"
                   alt="lenjhelenan"
+                  priority
                 />
               </div>
               <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>

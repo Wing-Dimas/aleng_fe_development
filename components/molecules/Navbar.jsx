@@ -14,6 +14,7 @@ import {
   IconPlus,
   IconSearch,
   IconSoup,
+  IconStar,
   IconUser,
 } from "@tabler/icons-react";
 import Text from "@components/atomics/Text";
@@ -22,7 +23,7 @@ import { useRouter } from "next/router";
 
 export default function Navbar({ isFixed = false, isDiscover = false }) {
   const router = useRouter();
-  const [tabId, setTabId] = useState("wisata");
+  const [tabId, setTabId] = useState("paket");
   const [expandNavbar, setExpandNavbar] = useState(false);
   const [animateExpand, setAnimateExpand] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -181,9 +182,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
 
   return (
     <div
-      className={
-        isFixed ? "fixed w-full top-0 z-[1000]" : "sticky top-0 z-[1000]"
-      }
+      className={isFixed ? "fixed w-full top-0 z-[90]" : "sticky top-0 z-[90]"}
     >
       <div onBlur={doBlurNavbar} className="relative">
         <TopNavBar
@@ -201,7 +200,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           tabIndex={1}
           className={`${expandNavbar ? "block" : "hidden"} ${
             animateExpand ? "translate-y-0" : "-translate-y-full"
-          } font-medium transition-transform duration-500 z-[999] absolute top-full w-full`}
+          } font-medium transition-transform duration-500 z-[96] absolute top-full w-full`}
         >
           <div className="relative">
             <TabMenu doChangeTabId={doChangeTabId} tabId={tabId} />
@@ -213,7 +212,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
                 animateExpandOptions && animateExpand
                   ? "translate-y-0"
                   : "-translate-y-full"
-              } transition-transform duration-500 fixed md:absolute z-[-1] left-0 right-0 -top-full md:top-auto max-w-3xl mx-auto bg-white md:rounded-b-3xl overflow-hidden pb-4 md:pb-0`}
+              } transition-transform duration-500 fixed md:absolute z-[96] left-0 right-0 -top-full md:top-auto max-w-3xl mx-auto bg-white md:rounded-b-3xl overflow-hidden pb-4 md:pb-0`}
             >
               <div className="scrollbar-custom relative flex flex-col md:grid grid-cols-2 gap-4 px-4 pt-44 md:pt-2 pb-4 md:pb-0 overflow-y-scroll md:overflow-y-hidden h-screen md:h-auto">
                 {/* Dates */}
@@ -252,7 +251,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
       <div
         className={`${expandNavbar ? "block" : "hidden"} ${
           animateExpand ? "opacity-25" : "opacity-0"
-        } transition-opacity duration-500 z-[997] absolute top-0 bg-black w-full h-screen`}
+        } transition-opacity duration-500 z-[91] absolute top-0 bg-black w-full h-screen`}
       />
     </div>
   );
@@ -274,13 +273,13 @@ const TopNavBar = ({
       tabIndex={1}
       className={`${expandNavbar ? "border-transparent shadow-none " : ""}${
         isDiscover ? "border-b shadow-none" : "border-b shadow-sm"
-      } bg-white sticky top-0 z-[1000] w-full transition-all`}
+      } bg-white sticky top-0 z-[98] w-full transition-all`}
     >
       <div
         style={{ gridTemplateColumns: "1fr auto 1fr" }}
         className={`${
           isDiscover ? "max-w-[112rem]" : "max-w-7xl"
-        } z-[1000] m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8`}
+        } m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8`}
       >
         <div
           className={`${expandNavbar ? "flex" : "hidden"} ${
@@ -302,6 +301,7 @@ const TopNavBar = ({
               alt="lenjhelenan"
               src="/static_icons/logo.png"
               className="drop-shadow-md max-w-[45px] w-full"
+              priority
             />
           </Link>
         </div>
@@ -378,7 +378,7 @@ const NavbarMenu = () => {
   return (
     <div
       onBlur={doBlur}
-      className="relative z-[1000] flex items-center justify-end"
+      className="relative z-[99] flex items-center justify-end"
     >
       <button
         onClick={doFocus}
@@ -438,13 +438,25 @@ const NavbarMenu = () => {
 
 const TabMenu = ({ tabId, doChangeTabId }) => {
   return (
-    <div className="z-[999] w-full bg-white pt-0 pb-0 md:pb-4 px-0 md:px-4 border-b md:border-b-0 relative">
+    <div className="z-[97] w-full bg-white pt-0 pb-0 md:pb-4 px-0 md:px-4 border-b md:border-b-0 relative">
       <div className="pointer-events-none absolute md:hidden top-0 right-0 h-full w-8 bg-gradient-to-r from-transparent to-white"></div>
       <div className="pointer-events-none absolute md:hidden top-0 left-0 h-full w-8 bg-gradient-to-r from-white to-transparent"></div>
       <div
-        style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
-        className="bg-white md:bg-neutral-200 md:rounded-full scrollbar-custom py-4 md:py-0 px-4 md:px-0 max-w-3xl mx-auto whitespace-nowrap grid gap-4 md:gap-0 md:border-2 md:border-neutral-200"
+        style={{ gridTemplateColumns: "repeat(6, 1fr)" }}
+        className="bg-white md:bg-neutral-200 md:rounded-full scrollbar-custom py-4 md:py-0 px-8 md:px-0 max-w-4xl mx-auto whitespace-nowrap grid gap-4 md:gap-0 md:border-2 md:border-neutral-200"
       >
+        <button
+          value="paket"
+          onClick={doChangeTabId}
+          className={`${
+            tabId === "paket"
+              ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
+              : "border-transparent"
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
+        >
+          <IconStar className="h-5 w-5" />
+          <p>Paket Wisata</p>
+        </button>
         <button
           value="wisata"
           onClick={doChangeTabId}
@@ -452,7 +464,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "wisata"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBeach className="h-5 w-5" />
           <p>Wisata</p>
@@ -464,7 +476,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "kuliner"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconSoup className="h-5 w-5" />
           <p>Kuliner</p>
@@ -476,7 +488,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "penginapan"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBuildingCottage className="h-5 w-5" />
           <p>Penginapan</p>
@@ -488,7 +500,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "kerajinan"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconHorseToy className="h-5 w-5" />
           <p>Kerajinan</p>
@@ -500,7 +512,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "transportasi"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBus className="h-5 w-5" />
           <p>Transportasi</p>
