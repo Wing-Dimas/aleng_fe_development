@@ -11,7 +11,7 @@
     "open": "00:00",
     "close": "24:00",
     "price": 50000,
-    "review": {
+    "reviews": {
       "star": 4.0,
       "total_review": 200,
       "stars": [0, 20, 40, 60, 80],
