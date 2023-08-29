@@ -393,7 +393,7 @@ const NavbarMenu = () => {
           animate ? "opacity-100 scale-100" : "opacity-0 scale-95"
         } transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
       >
-        <Link
+        {/* <Link
           href="/unduh-aplikasi"
           className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
         >
@@ -404,7 +404,7 @@ const NavbarMenu = () => {
           className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
         >
           Koleksi Kamu
-        </Link>
+        </Link> */}
         <Link
           href="/my-order"
           className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
