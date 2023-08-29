@@ -144,7 +144,7 @@ HoverPlayer.unhovered = ({
             sizes="auto"
             fill={true}
             alt={alt}
-            className="pointer-events-none"
+            className="pointer-events-none object-cover"
           />
           <div className="z-[10] absolute top-0 left-0 w-full h-full flex gap-4 items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-50 transition-all">
             <div className="rounded-full p-2 bg-white">
