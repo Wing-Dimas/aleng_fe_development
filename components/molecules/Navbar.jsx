@@ -314,7 +314,7 @@ const TopNavBar = ({
             placeholder="Mau cari apa nih?"
             className="border transition-all w-full focus:ring-1 focus:ring-red-300 border-neutral-300 bg-neutral-50 hover:bg-neutral-100 focus:bg-neutral-100 rounded-full outline-none pl-12 pr-20 placeholder-shown:pl-9 placeholder-shown:pr-9 py-2.5 placeholder-shown:text-neutral-300 placeholder-shown:text-center"
           />
-          <div className="absolute left-4 top-0 h-full flex flex-col items-center justify-center">
+          <div className="pointer-events-none absolute left-4 top-0 h-full flex flex-col items-center justify-center">
             <IconSearch className="h-5 w-5 text-neutral-400" />
           </div>
           <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">

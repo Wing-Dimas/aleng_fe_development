@@ -19,7 +19,7 @@ export default function Footer() {
               </div>
               <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>
             </Link>
-            <p className="text-neutral-500 mb-8">
+            <p className="text-neutral-500 mb-8 max-w-lg">
               Lanjalan Madura adalah sebuah platform untuk menemani liburanmu,
               jelajahi wisata madura yang tidak pernah kamu temui sebelumnnya
               dan menginap di beberapa penginapan yang ada
@@ -63,7 +63,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="flex-grow flex-shrink-0 lg:flex justify-end gap-16 hidden">
+          {/* <div className="flex-grow flex-shrink-0 lg:flex justify-end gap-16 hidden">
             <div>
               <p className="block text-neutral-700 text-xl font-semibold mb-4">
                 Tentang
@@ -143,7 +143,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="bg-yellow-400 text-center p-4 md:p-6">
