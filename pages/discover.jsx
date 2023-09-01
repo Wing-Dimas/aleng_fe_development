@@ -22,6 +22,7 @@ import { toRupiah } from "@utils/libs";
 import HoverPlayer from "@components/molecules/HoverPlayer";
 import Link from "next/link";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
 
 export default function Discover() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function Discover() {
     transportasi: [],
     kerajinan: [],
   });
+  const [loaded, setLoaded] = useState(false);
   const [tabId, setTabId] = useState("paket");
   const [expand, setExpand] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -118,19 +120,22 @@ export default function Discover() {
 
   const getData = async (id) => {
     try {
+      setLoaded(false);
       const {
         data: { data },
       } = await axios.get(
         `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/${id}.json`
       );
       setCatalogue({ ...catalogue, [id]: data });
+      setLoaded(true);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    const query = router.query;
+    const { query, isReady } = router;
+    if (!isReady) return;
     setTabId(query.tabId ?? tabId);
     getData(query.tabId ?? tabId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -247,29 +252,40 @@ export default function Discover() {
       <MainContent isDiscover>
         <br />
         <div className="grid grid-cols-1 exs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-6 gap-y-8">
-          {catalogue[tabId].map((item) => {
-            return (
-              <Card
-                key={item.id}
-                url={"/" + tabId + "/" + item.id}
-                thumbnail_url={item.thumbnail_url}
-                short_video_url={item.short_video_url}
-                name={item.name}
-                star={item.star}
-                price={item.price}
-                address={item.address}
-                unit={
-                  ["paket", "penginapan", "transportasi"].includes(tabId)
-                    ? "orang"
-                    : tabId === "wisata"
-                    ? "wisatawan"
-                    : tabId === "kuliner"
-                    ? "reservasi"
-                    : "item"
-                }
-              />
-            );
-          })}
+          {loaded
+            ? catalogue[tabId].map((item) => {
+                return (
+                  <Card
+                    key={item.id}
+                    url={"/" + tabId + "/" + item.id}
+                    thumbnail_url={item.thumbnail_url}
+                    short_video_url={item.short_video_url}
+                    name={item.name}
+                    star={item.star}
+                    price={item.price}
+                    address={item.address}
+                    unit={
+                      ["paket", "penginapan", "transportasi"].includes(tabId)
+                        ? "orang"
+                        : tabId === "wisata"
+                        ? "wisatawan"
+                        : tabId === "kuliner"
+                        ? "reservasi"
+                        : "item"
+                    }
+                  />
+                );
+              })
+            : [...Array(12)].map((v, i) => {
+                return (
+                  <div key={i}>
+                    <Skeleton className="w-full aspect-square mb-2" />
+                    <Skeleton className="max-w-[75%]" />
+                    <Skeleton className="h-8" />
+                    <Skeleton className="h-8 max-w-[50%]" />
+                  </div>
+                );
+              })}
         </div>
         <br />
         <br />
