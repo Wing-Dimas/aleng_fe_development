@@ -1,6 +1,6 @@
-import MainContent from "@components/atomics/MainContent";
-import Wrapper from "@components/atomics/Wrapper";
-import Navbar from "@components/molecules/Navbar";
+import MainContent from "@components/atomics/MainContent"
+import Wrapper from "@components/atomics/Wrapper"
+import Navbar from "@components/molecules/Navbar"
 import {
   IconBookmark,
   IconCash,
@@ -9,23 +9,23 @@ import {
   IconSettings,
   IconStar,
   IconStarFilled,
-} from "@tabler/icons-react";
-import Head from "next/head";
-import Heading from "@components/atomics/Heading";
-import Text from "@components/atomics/Text";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import TextInput from "@components/atomics/TextInput";
-import Select from "@components/atomics/Select";
-import Button from "@components/atomics/Button";
-import { toRupiah } from "@utils/libs";
-import HoverPlayer from "@components/molecules/HoverPlayer";
-import Link from "next/link";
-import axios from "axios";
-import Skeleton from "react-loading-skeleton";
+} from "@tabler/icons-react"
+import Head from "next/head"
+import Heading from "@components/atomics/Heading"
+import Text from "@components/atomics/Text"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import TextInput from "@components/atomics/TextInput"
+import Select from "@components/atomics/Select"
+import Button from "@components/atomics/Button"
+import { toRupiah } from "@utils/libs"
+import HoverPlayer from "@components/molecules/HoverPlayer"
+import Link from "next/link"
+import axios from "axios"
+import Skeleton from "react-loading-skeleton"
 
 export default function Discover() {
-  const router = useRouter();
+  const router = useRouter()
   const [catalogue, setCatalogue] = useState({
     paket: [],
     wisata: [],
@@ -33,113 +33,113 @@ export default function Discover() {
     penginapan: [],
     transportasi: [],
     kerajinan: [],
-  });
-  const [loaded, setLoaded] = useState(false);
-  const [tabId, setTabId] = useState("paket");
-  const [expand, setExpand] = useState(false);
-  const [animate, setAnimate] = useState(false);
-  const [keyword, setKeyword] = useState("");
+  })
+  const [loaded, setLoaded] = useState(false)
+  const [tabId, setTabId] = useState("paket")
+  const [expand, setExpand] = useState(false)
+  const [animate, setAnimate] = useState(false)
+  const [keyword, setKeyword] = useState("")
   const [options, setOptions] = useState({
     check_in: new Date(),
     check_out: new Date(),
     room_count: 1,
     adult_count: 1,
     child_count: 0,
-  });
+  })
   const [advancedOptions, setAdvancedOptions] = useState({
     city: "default",
     min_star: "default",
     max_price: "",
-  });
+  })
 
   const doChangeAdvancedOptions = ({ name, value }) => {
-    setAdvancedOptions({ ...advancedOptions, [name]: value });
-  };
+    setAdvancedOptions({ ...advancedOptions, [name]: value })
+  }
 
   useEffect(() => {
-    const query = router.query;
+    const query = router.query
     setOptions({
       check_in: query.in ?? options.check_in,
       check_out: query.out ?? options.check_out,
       room_count: query.room ?? options.room_count,
       adult_count: query.adult ?? options.adult_count,
       child_count: query.child ?? options.child_count,
-    });
+    })
     setAdvancedOptions({
       city: query.city ?? advancedOptions.city,
       min_star: query.minStar ?? advancedOptions.min_star,
       max_price: query.maxPrice ?? advancedOptions.max_price,
-    });
-    setKeyword(query.keyword ?? keyword);
+    })
+    setKeyword(query.keyword ?? keyword)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   const doExpand = () => {
-    setExpand(true);
-  };
+    setExpand(true)
+  }
 
   const doShrink = () => {
-    setAnimate(false);
-  };
+    setAnimate(false)
+  }
 
   useEffect(() => {
     if (expand) {
-      document.body.style.overflow = "hidden";
-      setAnimate(true);
+      document.body.style.overflow = "hidden"
+      setAnimate(true)
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
-  }, [expand]);
+  }, [expand])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setExpand(false);
-      }, 500);
+        setExpand(false)
+      }, 500)
     }
-  }, [animate]);
+  }, [animate])
 
   const doSearchWithOptions = () => {
-    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`;
+    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`
     if (tabId === "penginapan") {
-      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`;
+      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
     }
     if (advancedOptions.city !== "default") {
-      newQuery = `${newQuery}&city=${advancedOptions.city}`;
+      newQuery = `${newQuery}&city=${advancedOptions.city}`
     }
     if (advancedOptions.min_star !== "default") {
-      newQuery = `${newQuery}&minStar=${advancedOptions.min_star}`;
+      newQuery = `${newQuery}&minStar=${advancedOptions.min_star}`
     }
     if (advancedOptions.max_price !== "") {
-      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`;
+      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`
     }
     router.replace(newQuery).then(() => {
-      router.reload();
-    });
-  };
+      router.reload()
+    })
+  }
 
   const getData = async (id) => {
     try {
-      setLoaded(false);
+      setLoaded(false)
       const {
         data: { data },
       } = await axios.get(
         `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/${id}.json`
-      );
-      setCatalogue({ ...catalogue, [id]: data });
-      setLoaded(true);
+      )
+      setCatalogue({ ...catalogue, [id]: data })
+      setLoaded(true)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    const { query, isReady } = router;
-    if (!isReady) return;
-    setTabId(query.tabId ?? tabId);
-    getData(query.tabId ?? tabId);
+    const { query, isReady } = router
+    if (!isReady) return
+    setTabId(query.tabId ?? tabId)
+    getData(query.tabId ?? tabId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   return (
     <Wrapper>
@@ -274,7 +274,7 @@ export default function Discover() {
                         : "item"
                     }
                   />
-                );
+                )
               })
             : [...Array(12)].map((v, i) => {
                 return (
@@ -284,7 +284,7 @@ export default function Discover() {
                     <Skeleton className="h-8" />
                     <Skeleton className="h-8 max-w-[50%]" />
                   </div>
-                );
+                )
               })}
         </div>
         <br />
@@ -292,7 +292,7 @@ export default function Discover() {
         <br />
       </MainContent>
     </Wrapper>
-  );
+  )
 }
 
 const Card = ({
@@ -329,5 +329,5 @@ const Card = ({
         </Text.label>
       </div>
     </Link>
-  );
-};
+  )
+}

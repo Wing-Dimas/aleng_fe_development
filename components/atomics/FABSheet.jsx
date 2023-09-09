@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 export default function FABSheet({ className, icon, children }) {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
 
   const doToggleSheet = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
-      document.body.style.overflow = "hidden";
+      setAnimate(true)
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <>
@@ -55,5 +55,5 @@ export default function FABSheet({ className, icon, children }) {
         </button>
       </div>
     </>
-  );
+  )
 }

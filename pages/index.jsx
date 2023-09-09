@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Text from "@components/atomics/Text";
-import Title from "@components/atomics/Title";
-import Carousel from "@components/molecules/Carousel";
-import DottedUnderline from "@components/molecules/DottedUnderline";
-import Footer from "@components/molecules/Footer";
-import Navbar from "@components/molecules/Navbar";
-import QuickCard from "@components/molecules/QuickCard";
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import Text from "@components/atomics/Text"
+import Title from "@components/atomics/Title"
+import Carousel from "@components/molecules/Carousel"
+import DottedUnderline from "@components/molecules/DottedUnderline"
+import Footer from "@components/molecules/Footer"
+import Navbar from "@components/molecules/Navbar"
+import QuickCard from "@components/molecules/QuickCard"
 import {
   IconBeach,
   IconBuildingCottage,
@@ -15,13 +15,12 @@ import {
   IconHorseToy,
   IconSoup,
   IconStar,
-} from "@tabler/icons-react";
-import axios from "axios";
-import { toRupiah } from "@utils/libs";
-import Skeleton from "react-loading-skeleton";
+} from "@tabler/icons-react"
+import axios from "axios"
+import Skeleton from "react-loading-skeleton"
 
 export default function Home() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0)
   const [populars, setPopulars] = useState({
     wisata: [],
     paket_wisata: [],
@@ -29,11 +28,11 @@ export default function Home() {
     penginapan: [],
     transportasi: [],
     kerajinan: [],
-  });
+  })
 
   const doChangeTabIndex = (e) => {
-    setIndex(parseInt(e.currentTarget.value));
-  };
+    setIndex(parseInt(e.currentTarget.value))
+  }
 
   const getPopulars = async () => {
     try {
@@ -41,16 +40,16 @@ export default function Home() {
         data: { data },
       } = await axios.get(
         "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/populars.json"
-      );
-      setPopulars(data);
+      )
+      setPopulars(data)
     } catch (error) {
-      console.log("Error Fetching Populars");
+      console.log("Error Fetching Populars")
     }
-  };
+  }
 
   useEffect(() => {
-    getPopulars();
-  }, []);
+    getPopulars()
+  }, [])
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">
@@ -158,7 +157,7 @@ export default function Home() {
       )}
       <Footer />
     </div>
-  );
+  )
 }
 
 const PaketWisata = ({ populars }) => {
@@ -187,7 +186,7 @@ const PaketWisata = ({ populars }) => {
                       star={popular.star}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -217,8 +216,8 @@ const PaketWisata = ({ populars }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Wisata = ({ populars }) => {
   return (
@@ -246,7 +245,7 @@ const Wisata = ({ populars }) => {
                       star={popular.star}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -277,8 +276,8 @@ const Wisata = ({ populars }) => {
       </div>
       <PilihanKabupaten name="Wisata" url="wisata" />
     </div>
-  );
-};
+  )
+}
 
 const Kuliner = ({ populars }) => {
   return (
@@ -306,7 +305,7 @@ const Kuliner = ({ populars }) => {
                       star={popular.star}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -337,8 +336,8 @@ const Kuliner = ({ populars }) => {
       </div>
       <PilihanKabupaten name="Restoran" url="kuliner" />
     </div>
-  );
-};
+  )
+}
 
 const Penginapan = ({ populars }) => {
   return (
@@ -367,7 +366,7 @@ const Penginapan = ({ populars }) => {
                       price={popular.price}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -398,8 +397,8 @@ const Penginapan = ({ populars }) => {
       </div>
       <PilihanKabupaten name="Penginapan" url="penginapan" />
     </div>
-  );
-};
+  )
+}
 
 const Kerajinan = ({ populars }) => {
   return (
@@ -427,7 +426,7 @@ const Kerajinan = ({ populars }) => {
                       star={popular.star}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -458,8 +457,8 @@ const Kerajinan = ({ populars }) => {
       </div>
       <PilihanKabupaten name="Kerajinan" url="kerajinan" />
     </div>
-  );
-};
+  )
+}
 
 const Transportasi = ({ populars }) => {
   return (
@@ -488,7 +487,7 @@ const Transportasi = ({ populars }) => {
                       star={popular.star}
                     />
                   </Carousel.item>
-                );
+                )
               })
             ) : (
               <>
@@ -519,8 +518,8 @@ const Transportasi = ({ populars }) => {
       </div>
       <PilihanKabupaten name="Transportasi" url="transportasi" />
     </div>
-  );
-};
+  )
+}
 
 const PilihanKabupaten = ({ name, url }) => {
   return (
@@ -554,8 +553,8 @@ const PilihanKabupaten = ({ name, url }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 const KabupatenCard = ({ bgImage, name, url }) => {
   return (
@@ -567,5 +566,5 @@ const KabupatenCard = ({ bgImage, name, url }) => {
         {name}
       </div>
     </Link>
-  );
-};
+  )
+}

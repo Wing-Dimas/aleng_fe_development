@@ -1,10 +1,10 @@
-import Container from "@components/atomics/Container";
-import Rating from "@components/atomics/Rating";
-import RatingSlider from "@components/atomics/RatingSlider";
-import Text from "@components/atomics/Text";
-import { IconArrowRight, IconStar } from "@tabler/icons-react";
-import Carousel from "@components/molecules/Carousel";
-import Image from "next/image";
+import Container from "@components/atomics/Container"
+import Rating from "@components/atomics/Rating"
+import RatingSlider from "@components/atomics/RatingSlider"
+import Text from "@components/atomics/Text"
+import { IconArrowRight, IconStar } from "@tabler/icons-react"
+import Carousel from "@components/molecules/Carousel"
+import Image from "next/image"
 
 const ShortReview = ({ star, stars, total_review, comments }) => {
   return (
@@ -26,7 +26,7 @@ const ShortReview = ({ star, stars, total_review, comments }) => {
             <div className="mt-2">
               <RatingSlider
                 percentages={stars.map((star) => {
-                  return `${Math.abs(star / total_review) * 100}%`;
+                  return `${Math.abs(star / total_review) * 100}%`
                 })}
                 stars={stars}
               />
@@ -46,15 +46,15 @@ const ShortReview = ({ star, stars, total_review, comments }) => {
                       text={comment.text}
                     />
                   </Carousel.item>
-                );
+                )
               })}
             </Carousel>
           </div>
         </div>
       </Container>
     </div>
-  );
-};
+  )
+}
 
 const Comments = ({ name, profile_pic_url, date, star, text }) => {
   return (
@@ -85,7 +85,7 @@ const Comments = ({ name, profile_pic_url, date, star, text }) => {
         {text}
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default ShortReview;
+export default ShortReview

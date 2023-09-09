@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import Navbar from "@components/molecules/Navbar";
-import Text from "@components/atomics/Text";
+import Image from "next/image"
+import Link from "next/link"
+import Navbar from "@components/molecules/Navbar"
+import Text from "@components/atomics/Text"
 
 export default function ErrorPage({}) {
   return (
@@ -24,5 +24,5 @@ export default function ErrorPage({}) {
         </Link>
       </div>
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import { IconPhoto } from "@tabler/icons-react";
-import FsLightbox from "fslightbox-react";
-import Image from "next/image";
-import { useState } from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import HoverPlayer from "@components/molecules/HoverPlayer";
-import Skeleton from "react-loading-skeleton";
+import { IconPhoto } from "@tabler/icons-react"
+import FsLightbox from "fslightbox-react"
+import Image from "next/image"
+import { useState } from "react"
+import { Carousel } from "react-responsive-carousel"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import HoverPlayer from "@components/molecules/HoverPlayer"
+import Skeleton from "react-loading-skeleton"
 
 export default function GalleryImage({
   loaded = false,
@@ -14,26 +14,26 @@ export default function GalleryImage({
   video_url,
   video_thumbnail_url,
 }) {
-  const [played, setPlayed] = useState(false);
+  const [played, setPlayed] = useState(false)
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
-  });
+  })
 
   const doOpenLightBox = (e) => {
     setLightboxController({
       toggler: !lightboxController.toggler,
       slide: parseInt(e.currentTarget.getAttribute("name")),
-    });
-  };
+    })
+  }
 
   const doPlay = () => {
-    setPlayed(true);
-  };
+    setPlayed(true)
+  }
 
   const doPause = () => {
-    setPlayed(false);
-  };
+    setPlayed(false)
+  }
   return (
     <div>
       <FsLightbox
@@ -136,7 +136,7 @@ export default function GalleryImage({
                     </p>
                   </div>
                 </div>
-              );
+              )
             })}
             <HoverPlayer.unhovered
               video_url={video_url}
@@ -150,5 +150,5 @@ export default function GalleryImage({
         </div>
       )}
     </div>
-  );
+  )
 }

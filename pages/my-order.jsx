@@ -1,22 +1,22 @@
-import Footer from "@components/molecules/Footer";
-import Navbar from "@components/molecules/Navbar";
-import { useState } from "react";
-import "swiper/css";
-import { useBreakpoint } from "use-breakpoint";
-import Head from "next/head";
-import Button from "@components/atomics/Button";
-import { BREAKPOINTS } from "@constants/index";
-import FABSheet from "@components/atomics/FABSheet";
-import { IconChevronLeft, IconFilter } from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import Heading from "@components/atomics/Heading";
-import ModalDetailOrder from "@components/molecules/ModalDetailOrder";
-import Link from "next/link";
-import Wrapper from "@components/atomics/Wrapper";
-import MainContent from "@components/atomics/MainContent";
-import Container from "@components/atomics/Container";
-import OrderCard from "@components/molecules/OrderCard";
-import Checkbox from "@components/atomics/Checkbox";
+import Footer from "@components/molecules/Footer"
+import Navbar from "@components/molecules/Navbar"
+import { useState } from "react"
+import "swiper/css"
+import { useBreakpoint } from "use-breakpoint"
+import Head from "next/head"
+import Button from "@components/atomics/Button"
+import { BREAKPOINTS } from "@constants/index"
+import FABSheet from "@components/atomics/FABSheet"
+import { IconChevronLeft, IconFilter } from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import Heading from "@components/atomics/Heading"
+import ModalDetailOrder from "@components/molecules/ModalDetailOrder"
+import Link from "next/link"
+import Wrapper from "@components/atomics/Wrapper"
+import MainContent from "@components/atomics/MainContent"
+import Container from "@components/atomics/Container"
+import OrderCard from "@components/molecules/OrderCard"
+import Checkbox from "@components/atomics/Checkbox"
 
 export default function PesananSaya() {
   const tabStatus = [
@@ -24,13 +24,13 @@ export default function PesananSaya() {
     "Sudah Dibayar",
     "Pembayaran Expired",
     "Refund",
-  ];
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs");
-  const [index, setIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  ]
+  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs")
+  const [index, setIndex] = useState(0)
+  const [showModal, setShowModal] = useState(false)
   const doChangeIndex = (e) => {
-    setIndex(parseInt(e.currentTarget.value));
-  };
+    setIndex(parseInt(e.currentTarget.value))
+  }
   return (
     <Wrapper>
       <Head>
@@ -173,7 +173,7 @@ export default function PesananSaya() {
                   >
                     {title}
                   </Button>
-                );
+                )
               })}
             </div>
             <div className="flex flex-col gap-2 rounded-xl">
@@ -192,5 +192,5 @@ export default function PesananSaya() {
       <br />
       <Footer />
     </Wrapper>
-  );
+  )
 }

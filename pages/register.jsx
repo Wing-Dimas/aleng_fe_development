@@ -1,25 +1,25 @@
-import { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "axios";
+import { useState } from "react"
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import axios from "axios"
 import LSTextInput, {
   ObscuredLSTextInput,
-} from "@components/atomics/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
-import validateRegister from "@validators/registerValidator";
-import Text from "@components/atomics/Text";
+} from "@components/atomics/LSTextInput"
+import Navbar from "@components/molecules/Navbar"
+import validateRegister from "@validators/registerValidator"
+import Text from "@components/atomics/Text"
 
 export default function RegisterPage({}) {
-  const router = useRouter();
+  const router = useRouter()
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
     phoneNumber: "",
     password: "",
     password_confirmation: "",
-  });
+  })
 
   const [messages, setMessages] = useState({
     name: { isError: false, message: "" },
@@ -27,19 +27,19 @@ export default function RegisterPage({}) {
     phoneNumber: { isError: false, message: "" },
     password: { isError: false, message: "" },
     password_confirmation: { isError: false, message: "" },
-  });
+  })
 
   const doChange = ({ name, value }) => {
-    setCredentials({ ...credentials, [name]: value });
-  };
+    setCredentials({ ...credentials, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const validated = await validateRegister(credentials);
+      const validated = await validateRegister(credentials)
       if (validated.isError) {
-        setMessages(validated.form);
-        return;
+        setMessages(validated.form)
+        return
       }
       await axios
         .post(process.env.BASE_API + "/auth/register", {
@@ -50,8 +50,8 @@ export default function RegisterPage({}) {
           phoneNumber: credentials.phoneNumber,
         })
         .then((_) => {
-          router.push("/login");
-        });
+          router.push("/login")
+        })
     } catch (err) {
       setCredentials({
         name: "",
@@ -59,18 +59,18 @@ export default function RegisterPage({}) {
         phoneNumber: "",
         password: "",
         password_confirmation: "",
-      });
+      })
       setMessages({
         name: { isError: false, message: "" },
         email: { isError: false, message: "" },
         phoneNumber: { isError: false, message: "" },
         password: { isError: false, message: "" },
         password_confirmation: { isError: false, message: "" },
-      });
+      })
     }
-  };
+  }
 
-  const handleSignIn = () => {};
+  const handleSignIn = () => {}
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">
@@ -190,5 +190,5 @@ export default function RegisterPage({}) {
         </div>
       </div>
     </div>
-  );
+  )
 }

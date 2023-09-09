@@ -1,7 +1,7 @@
-import Badge from "@components/atomics/Badge";
-import Heading from "@components/atomics/Heading";
-import Text from "@components/atomics/Text";
-import Container from "@components/atomics/Container";
+import Badge from "@components/atomics/Badge"
+import Heading from "@components/atomics/Heading"
+import Text from "@components/atomics/Text"
+import Container from "@components/atomics/Container"
 
 export default function OrderCard({ showModal, setShowModal }) {
   return (
@@ -39,5 +39,5 @@ export default function OrderCard({ showModal, setShowModal }) {
         </div>
       </div>
     </Container>
-  );
+  )
 }

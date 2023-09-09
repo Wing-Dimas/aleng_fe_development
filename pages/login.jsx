@@ -1,72 +1,72 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import axios from "axios";
-import Checkbox from "@components/atomics/Checkbox";
+import { useState } from "react"
+import { useRouter } from "next/router"
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
+import axios from "axios"
+import Checkbox from "@components/atomics/Checkbox"
 import LSTextInput, {
   ObscuredLSTextInput,
-} from "@components/atomics/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
-import validateLogin from "@validators/loginValidator";
-import Text from "@components/atomics/Text";
+} from "@components/atomics/LSTextInput"
+import Navbar from "@components/molecules/Navbar"
+import validateLogin from "@validators/loginValidator"
+import Text from "@components/atomics/Text"
 
 export default function LoginPage() {
-  const router = useRouter();
+  const router = useRouter()
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
     rememberme: false,
-  });
+  })
   const [messages, setMessages] = useState({
     email: { isError: false, message: "" },
     password: { isError: false, message: "" },
-  });
+  })
 
   const doChange = ({ name, value }) => {
-    setCredentials({ ...credentials, [name]: value });
-  };
+    setCredentials({ ...credentials, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (credentials.rememberme == true) {
       try {
-        const validated = await validateLogin(credentials);
+        const validated = await validateLogin(credentials)
         if (validated.isError) {
-          setMessages(validated.form);
-          return;
+          setMessages(validated.form)
+          return
         }
         const res = await axios.post(process.env.BASE_API + "/auth/login", {
           email: credentials.email,
           password: credentials.password,
-        });
+        })
         if (!!res.data.access_token) {
-          Cookies.set("token", res.data.access_token);
-          router.push("/");
+          Cookies.set("token", res.data.access_token)
+          router.push("/")
         }
-        setCredentials({ email: "", password: "", rememberme: false });
+        setCredentials({ email: "", password: "", rememberme: false })
         setMessages({
           email: { isError: false, message: "" },
           password: { isError: false, message: "" },
-        });
+        })
       } catch (err) {
-        setCredentials({ email: "", password: "", rememberme: false });
+        setCredentials({ email: "", password: "", rememberme: false })
         setMessages({
           email: { isError: false, message: "" },
           password: { isError: false, message: "" },
-        });
+        })
       }
     } else {
-      setCredentials({ email: "", password: "", rememberme: false });
+      setCredentials({ email: "", password: "", rememberme: false })
       setMessages({
         email: { isError: false, message: "" },
         password: { isError: false, message: "" },
-      });
+      })
     }
-  };
+  }
 
-  const handleSignIn = () => {};
+  const handleSignIn = () => {}
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
@@ -172,5 +172,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

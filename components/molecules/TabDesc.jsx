@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Tab from "@components/atomics/Tab";
-import Heading from "@components/atomics/Heading";
-import Rating from "@components/atomics/Rating";
-import { IconMapPin } from "@tabler/icons-react";
-import Image from "next/image";
-import Skeleton from "react-loading-skeleton";
-import Container from "@components/atomics/Container";
+import { useState } from "react"
+import Tab from "@components/atomics/Tab"
+import Heading from "@components/atomics/Heading"
+import Rating from "@components/atomics/Rating"
+import { IconMapPin } from "@tabler/icons-react"
+import Image from "next/image"
+import Skeleton from "react-loading-skeleton"
+import Container from "@components/atomics/Container"
 
 export default function TabDesc({
   loaded = false,
@@ -21,7 +21,7 @@ export default function TabDesc({
   lat,
   long,
 }) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0)
   return !loaded ? (
     <>
       <Skeleton className="max-w-[8rem]" />
@@ -104,7 +104,7 @@ export default function TabDesc({
                       {facility.name}
                     </p>
                   </div>
-                );
+                )
               })}
             </div>
           ) : (
@@ -113,5 +113,5 @@ export default function TabDesc({
         </>
       )}
     </Container>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { IconCalendarEvent, IconChevronDown } from "@tabler/icons-react";
+import { IconCalendarEvent, IconChevronDown } from "@tabler/icons-react"
 
 export default function DateInput({
   isTime,
@@ -13,8 +13,8 @@ export default function DateInput({
   onChange,
 }) {
   const doChange = (e) => {
-    onChange({ name: name, value: e.currentTarget.value });
-  };
+    onChange({ name: name, value: e.currentTarget.value })
+  }
   return (
     <div
       className={`relative${
@@ -49,5 +49,5 @@ export default function DateInput({
         <IconChevronDown className="w-5 h-5" />
       </label>
     </div>
-  );
+  )
 }

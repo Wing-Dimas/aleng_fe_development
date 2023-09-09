@@ -1,9 +1,9 @@
-import Heading from "@components/atomics/Heading";
-import { IconBookmark, IconStarFilled } from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import { toRupiah } from "@utils/libs";
-import Link from "next/link";
-import HoverPlayer from "./HoverPlayer";
+import Heading from "@components/atomics/Heading"
+import { IconBookmark, IconStarFilled } from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import { toRupiah } from "@utils/libs"
+import Link from "next/link"
+import HoverPlayer from "./HoverPlayer"
 
 export default function QuickCard({
   url,
@@ -44,5 +44,5 @@ export default function QuickCard({
         {children}
       </div>
     </Link>
-  );
+  )
 }

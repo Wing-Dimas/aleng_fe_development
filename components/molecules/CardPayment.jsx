@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Text from "@components/atomics/Text";
-import { useState } from "react";
+import Image from "next/image"
+import Text from "@components/atomics/Text"
+import { useState } from "react"
 
 export default function CardPayment({ id, name }) {
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState(null)
 
   const handleClick = (event) => {
-    console.log(event.currentTarget.checked);
+    console.log(event.currentTarget.checked)
     // setStatus(event.currentTarget.value);
-  };
+  }
 
   return (
     <div className="">
@@ -39,5 +39,5 @@ export default function CardPayment({ id, name }) {
         </div>
       </label>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { IconCircle } from "@tabler/icons-react";
+import { IconCircle } from "@tabler/icons-react"
 
 export default function Radio({
   containerClassName,
@@ -11,8 +11,8 @@ export default function Radio({
   onChange,
 }) {
   const doCheck = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
-  };
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
+  }
 
   return (
     <div
@@ -42,5 +42,5 @@ export default function Radio({
         {label}
       </label>
     </div>
-  );
+  )
 }

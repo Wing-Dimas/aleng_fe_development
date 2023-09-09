@@ -7,5 +7,5 @@ export default function Title({ className, children }) {
     >
       {children}
     </p>
-  );
+  )
 }

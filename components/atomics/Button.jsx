@@ -9,5 +9,5 @@ export default function Button({ value, onClick, className, children }) {
     >
       {children}
     </button>
-  );
+  )
 }

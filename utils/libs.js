@@ -1,6 +1,6 @@
-const toRupiah = new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
+const toRupiah = new Intl.NumberFormat("id-ID", {
+  style: "currency",
+  currency: "IDR",
 })
 
-export {toRupiah}
+export { toRupiah }

@@ -7,5 +7,5 @@ export default function Container({ className, children }) {
     >
       {children}
     </div>
-  );
+  )
 }

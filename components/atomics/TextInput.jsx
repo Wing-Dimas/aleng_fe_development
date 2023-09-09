@@ -1,5 +1,5 @@
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
-import { useState } from "react";
+import { IconEye, IconEyeOff } from "@tabler/icons-react"
+import { useState } from "react"
 const TextInput = ({
   type = "text",
   containerClassName,
@@ -21,12 +21,12 @@ const TextInput = ({
   const doChange = (e) => {
     if (e.currentTarget.name == "no_hp") {
       if (!isNaN(e.target.value)) {
-        onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+        onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
       }
     } else {
-      onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
+      onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
     }
-  };
+  }
 
   return (
     <div
@@ -70,8 +70,8 @@ const TextInput = ({
         </label>
       )}
     </div>
-  );
-};
+  )
+}
 
 TextInput.obscure = ({
   containerClassName,
@@ -89,15 +89,15 @@ TextInput.obscure = ({
   readonly,
 }) => {
   const doChange = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
-  };
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
+  }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   const doToggleShow = () => {
-    setShow(!show);
-  };
+    setShow(!show)
+  }
 
   return (
     <div
@@ -142,7 +142,7 @@ TextInput.obscure = ({
         )}
       </label>
     </div>
-  );
-};
+  )
+}
 
-export default TextInput;
+export default TextInput

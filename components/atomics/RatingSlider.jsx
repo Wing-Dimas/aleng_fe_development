@@ -1,6 +1,6 @@
-import { IconStarFilled } from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import { Fragment } from "react";
+import { IconStarFilled } from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import { Fragment } from "react"
 
 export default function RatingSlider({ percentages, stars }) {
   return (
@@ -23,8 +23,8 @@ export default function RatingSlider({ percentages, stars }) {
             </div>
             <Text className="!text-xs">{star}</Text>
           </Fragment>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

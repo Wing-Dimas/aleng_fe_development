@@ -1,60 +1,60 @@
-import { IconLoader2, IconPlayerPlayFilled } from "@tabler/icons-react";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { IconLoader2, IconPlayerPlayFilled } from "@tabler/icons-react"
+import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
-  const ref = useRef(null);
-  const [presence, setPresence] = useState(false);
-  const [animate, setAnimate] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [animateLoading, setAnimateLoading] = useState(false);
+  const ref = useRef(null)
+  const [presence, setPresence] = useState(false)
+  const [animate, setAnimate] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [animateLoading, setAnimateLoading] = useState(false)
 
   const doFinishLoad = () => {
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const doPlay = () => {
     if (ref) {
-      setPresence(true);
+      setPresence(true)
     }
-  };
+  }
 
   const doPause = () => {
     if (loading) {
-      setAnimateLoading(false);
-      return;
+      setAnimateLoading(false)
+      return
     }
     if (ref) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (presence) {
       if (loading) {
-        setAnimateLoading(true);
+        setAnimateLoading(true)
       } else {
-        setAnimate(true);
-        ref.current.play();
+        setAnimate(true)
+        ref.current.play()
       }
     }
-  }, [presence, loading]);
+  }, [presence, loading])
 
   useEffect(() => {
     if (!animate) {
       if (ref) {
-        ref.current.currentTime = 0;
-        ref.current.pause();
+        ref.current.currentTime = 0
+        ref.current.pause()
       }
-      setPresence(false);
+      setPresence(false)
     }
-  }, [animate]);
+  }, [animate])
 
   useEffect(() => {
     if (!animateLoading) {
-      setPresence(false);
+      setPresence(false)
     }
-  }, [animateLoading]);
+  }, [animateLoading])
 
   return (
     <div
@@ -95,10 +95,10 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
         className="pointer-events-none object-cover"
       />
     </div>
-  );
-};
+  )
+}
 
-HoverPlayer.unhovered = ({
+const Unhovered = ({
   className,
   video_url,
   thumbnail_url,
@@ -106,15 +106,15 @@ HoverPlayer.unhovered = ({
   onPlay = () => {},
   onPause = () => {},
 }) => {
-  const [presence, setPresence] = useState(false);
-  const ref = useRef(null);
+  const [presence, setPresence] = useState(false)
+  const ref = useRef(null)
 
   const doPlay = () => {
     if (ref) {
-      ref.current.play();
-      setPresence(true);
+      ref.current.play()
+      setPresence(true)
     }
-  };
+  }
 
   return (
     <div
@@ -155,7 +155,9 @@ HoverPlayer.unhovered = ({
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default HoverPlayer;
+HoverPlayer.Unhovered = Unhovered
+HoverPlayer.displayName = "HoverPlayer"
+export default HoverPlayer

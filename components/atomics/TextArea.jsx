@@ -6,8 +6,8 @@ export default function TextArea({
   onChange,
 }) {
   const doChange = (e) => {
-    onChange({ name, value: e.currentTarget.value });
-  };
+    onChange({ name, value: e.currentTarget.value })
+  }
 
   return (
     <textarea
@@ -21,5 +21,5 @@ export default function TextArea({
       value={value}
       placeholder={placeholder}
     ></textarea>
-  );
+  )
 }

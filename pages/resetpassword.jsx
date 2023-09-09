@@ -1,53 +1,53 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import axios from "axios";
-import LSTextInput from "@components/atomics/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
-import Text from "@components/atomics/Text";
-import validateResetPassword from "@validators/resetPasswordValidator";
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Image from "next/image"
+import { useRouter } from "next/router"
+import axios from "axios"
+import LSTextInput from "@components/atomics/LSTextInput"
+import Navbar from "@components/molecules/Navbar"
+import Text from "@components/atomics/Text"
+import validateResetPassword from "@validators/resetPasswordValidator"
 
 export default function ResetPassword() {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
     // const email = Cookies.get("email");
     // const token = Cookies.get("token");
     // setCredentials({ ...credentials, email: email, token: token });
-  }, []);
+  }, [])
 
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
     password_confirmation: "",
     token: "",
-  });
+  })
 
   const [messages, setMessages] = useState({
     password: { isError: false, message: "" },
     password_confirmation: { isError: false, message: "" },
-  });
+  })
 
   const doChange = ({ name, value }) => {
-    setCredentials({ ...credentials, [name]: value });
-  };
+    setCredentials({ ...credentials, [name]: value })
+  }
 
   const handleClick = async () => {
     try {
-      const validated = await validateResetPassword(credentials);
+      const validated = await validateResetPassword(credentials)
       if (validated.isError) {
-        setMessages(validated.form);
-        return;
+        setMessages(validated.form)
+        return
       }
       const _ = await axios.post(
         process.env.BASE_API + "/resetPassword",
         credentials
-      );
-      router.push("/login");
+      )
+      router.push("/login")
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
@@ -114,5 +114,5 @@ export default function ResetPassword() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -6,8 +6,8 @@ import {
   IconPlus,
   IconUser,
   IconUsers,
-} from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+} from "@tabler/icons-react"
+import { useEffect, useState } from "react"
 
 export default function PopOver({
   className,
@@ -18,36 +18,36 @@ export default function PopOver({
   pages,
   name,
 }) {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
   // console.log(options);
   const doFocus = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
+      setAnimate(true)
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <div
@@ -282,5 +282,5 @@ export default function PopOver({
         </div>
       )}
     </div>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   return (
@@ -150,5 +150,5 @@ export default function Footer() {
         Copyright © 2023 Lenjhelenan Madura
       </div>
     </div>
-  );
+  )
 }

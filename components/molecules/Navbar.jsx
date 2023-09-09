@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
 import {
   IconBeach,
   IconBuildingCottage,
@@ -16,70 +16,70 @@ import {
   IconSoup,
   IconStar,
   IconUser,
-} from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import { Calendar } from "react-multi-date-picker";
-import { useRouter } from "next/router";
+} from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import { Calendar } from "react-multi-date-picker"
+import { useRouter } from "next/router"
 
 export default function Navbar({ isFixed = false, isDiscover = false }) {
-  const router = useRouter();
-  const [tabId, setTabId] = useState("paket");
-  const [expandNavbar, setExpandNavbar] = useState(false);
-  const [animateExpand, setAnimateExpand] = useState(false);
-  const [keyword, setKeyword] = useState("");
-  const [expandOptions, setExpandOptions] = useState(false);
-  const [animateExpandOptions, setAnimateExpandOptions] = useState(false);
-  const [val, setVal] = useState(new Date());
+  const router = useRouter()
+  const [tabId, setTabId] = useState("paket")
+  const [expandNavbar, setExpandNavbar] = useState(false)
+  const [animateExpand, setAnimateExpand] = useState(false)
+  const [keyword, setKeyword] = useState("")
+  const [expandOptions, setExpandOptions] = useState(false)
+  const [animateExpandOptions, setAnimateExpandOptions] = useState(false)
+  const [val, setVal] = useState(new Date())
   const [options, setOptions] = useState({
     check_in: new Date(),
     check_out: new Date(),
     room_count: 1,
     adult_count: 1,
     child_count: 0,
-  });
+  })
 
   useEffect(() => {
-    const query = router.query;
-    setTabId(query.tabId ?? tabId);
+    const query = router.query
+    setTabId(query.tabId ?? tabId)
     setOptions({
       check_in: query.in ?? options.check_in,
       check_out: query.out ?? options.check_out,
       room_count: query.room ?? options.room_count,
       adult_count: query.adult ?? options.adult_count,
       child_count: query.child ?? options.child_count,
-    });
-    setKeyword(query.keyword ?? keyword);
+    })
+    setKeyword(query.keyword ?? keyword)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   const doChangeKeyword = (e) => {
-    setKeyword(e.currentTarget.value);
-  };
+    setKeyword(e.currentTarget.value)
+  }
 
   const doChangeTabId = (e) => {
     if (e.currentTarget.value == "penginapan") {
-      setExpandOptions(true);
+      setExpandOptions(true)
     } else {
-      setAnimateExpandOptions(false);
+      setAnimateExpandOptions(false)
     }
-    setTabId(e.currentTarget.value);
-  };
+    setTabId(e.currentTarget.value)
+  }
 
   const doChangeRoomCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, room_count: options.room_count + 1 });
+      setOptions({ ...options, room_count: options.room_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
         room_count:
           options.room_count <= 1 ? options.room_count : options.room_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doChangeAdultCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, adult_count: options.adult_count + 1 });
+      setOptions({ ...options, adult_count: options.adult_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
@@ -87,24 +87,24 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           options.adult_count <= 1
             ? options.adult_count
             : options.adult_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doChangeChildCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, child_count: options.child_count + 1 });
+      setOptions({ ...options, child_count: options.child_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
         child_count: options.child_count <= 0 ? 0 : options.child_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doSearch = () => {
-    console.log("Begin", val[0].toDate());
-    console.log("End", val[1].toDate());
+    console.log("Begin", val[0].toDate())
+    console.log("End", val[1].toDate())
     // if (tabId === "penginapan") {
     //   router
     //     .push(
@@ -118,52 +118,52 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
     //     router.reload();
     //   });
     // }
-  };
+  }
 
   const doExpandNavbar = () => {
-    setExpandNavbar(true);
-  };
+    setExpandNavbar(true)
+  }
 
   const doCloseNavbar = () => {
-    setAnimateExpand(false);
-  };
+    setAnimateExpand(false)
+  }
 
   const doBlurNavbar = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimateExpand(false);
+      setAnimateExpand(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (expandNavbar) {
-      document.body.style.overflow = "hidden";
-      setAnimateExpand(true);
+      document.body.style.overflow = "hidden"
+      setAnimateExpand(true)
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
-  }, [expandNavbar]);
+  }, [expandNavbar])
 
   useEffect(() => {
     if (!animateExpand) {
       setTimeout(() => {
-        setExpandNavbar(false);
-      }, 500);
+        setExpandNavbar(false)
+      }, 500)
     }
-  }, [animateExpand]);
+  }, [animateExpand])
 
   useEffect(() => {
     if (expandOptions) {
-      setAnimateExpandOptions(true);
+      setAnimateExpandOptions(true)
     }
-  }, [expandOptions]);
+  }, [expandOptions])
 
   useEffect(() => {
     if (!animateExpandOptions) {
       setTimeout(() => {
-        setExpandOptions(false);
-      }, 500);
+        setExpandOptions(false)
+      }, 500)
     }
-  }, [animateExpandOptions]);
+  }, [animateExpandOptions])
 
   const renderButton = (direction, handleClick) => {
     return (
@@ -177,8 +177,8 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           <IconChevronLeft className="h-5 w-5" />
         )}
       </button>
-    );
-  };
+    )
+  }
 
   return (
     <div
@@ -254,7 +254,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
         } transition-opacity duration-500 z-[91] absolute top-0 bg-black w-full h-screen`}
       />
     </div>
-  );
+  )
 }
 
 const TopNavBar = ({
@@ -340,40 +340,40 @@ const TopNavBar = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const NavbarMenu = () => {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
 
   const doFocus = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
+      setAnimate(true)
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <div
@@ -433,8 +433,8 @@ const NavbarMenu = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const TabMenu = ({ tabId, doChangeTabId }) => {
   return (
@@ -519,8 +519,8 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const StayOptions = ({
   options,
@@ -615,5 +615,5 @@ const StayOptions = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

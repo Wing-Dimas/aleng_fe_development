@@ -1,26 +1,26 @@
-import { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import Button from "@components/atomics/Button";
-import Checkbox from "@components/atomics/Checkbox";
-import Container from "@components/atomics/Container";
-import Footer from "@components/molecules/Footer";
-import Heading from "@components/atomics/Heading";
-import MainContent from "@components/atomics/MainContent";
-import Navbar from "@components/molecules/Navbar";
-import Rating from "@components/atomics/Rating";
-import Text from "@components/atomics/Text";
-import TextInput from "@components/atomics/TextInput";
-import TextArea from "@components/atomics/TextArea";
-import Wrapper from "@components/atomics/Wrapper";
-import { IconChevronLeft } from "@tabler/icons-react";
-import Stepper from "@components/molecules/Stepper";
-import Link from "next/link";
-import CardPayment from "@components/molecules/CardPayment";
+import { useState } from "react"
+import Head from "next/head"
+import Image from "next/image"
+import Button from "@components/atomics/Button"
+import Checkbox from "@components/atomics/Checkbox"
+import Container from "@components/atomics/Container"
+import Footer from "@components/molecules/Footer"
+import Heading from "@components/atomics/Heading"
+import MainContent from "@components/atomics/MainContent"
+import Navbar from "@components/molecules/Navbar"
+import Rating from "@components/atomics/Rating"
+import Text from "@components/atomics/Text"
+import TextInput from "@components/atomics/TextInput"
+import TextArea from "@components/atomics/TextArea"
+import Wrapper from "@components/atomics/Wrapper"
+import { IconChevronLeft } from "@tabler/icons-react"
+import Stepper from "@components/molecules/Stepper"
+import Link from "next/link"
+import CardPayment from "@components/molecules/CardPayment"
 export default function Payment() {
   const doChangeInfo = ({ name, value }) => {
-    setInfo({ ...info, [name]: value });
-  };
+    setInfo({ ...info, [name]: value })
+  }
   return (
     <Wrapper>
       <Head>
@@ -187,5 +187,5 @@ export default function Payment() {
       <br />
       <Footer />
     </Wrapper>
-  );
+  )
 }

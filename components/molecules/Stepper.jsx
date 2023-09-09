@@ -40,5 +40,5 @@ export default function Stepper({ status }) {
         </ol>
       </nav>
     </div>
-  );
+  )
 }

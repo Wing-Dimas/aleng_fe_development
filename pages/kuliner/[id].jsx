@@ -1,26 +1,26 @@
-import Container from "@components/atomics/Container";
-import DateInput from "@components/atomics/DateInput";
-import Heading from "@components/atomics/Heading";
-import MainContent from "@components/atomics/MainContent";
-import PopOver from "@components/atomics/PopOver";
-import Text from "@components/atomics/Text";
-import Wrapper from "@components/atomics/Wrapper";
-import Footer from "@components/molecules/Footer";
-import GalleryImage from "@components/molecules/GalleryImage";
-import Navbar from "@components/molecules/Navbar";
-import ShortReview from "@components/molecules/ShortReview";
-import TabDesc from "@components/molecules/TabDesc";
-import { toRupiah } from "@utils/libs";
-import axios from "axios";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
+import Container from "@components/atomics/Container"
+import DateInput from "@components/atomics/DateInput"
+import Heading from "@components/atomics/Heading"
+import MainContent from "@components/atomics/MainContent"
+import PopOver from "@components/atomics/PopOver"
+import Text from "@components/atomics/Text"
+import Wrapper from "@components/atomics/Wrapper"
+import Footer from "@components/molecules/Footer"
+import GalleryImage from "@components/molecules/GalleryImage"
+import Navbar from "@components/molecules/Navbar"
+import ShortReview from "@components/molecules/ShortReview"
+import TabDesc from "@components/molecules/TabDesc"
+import { toRupiah } from "@utils/libs"
+import axios from "axios"
+import Head from "next/head"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 
 export default function DetailKuliner() {
-  const router = useRouter();
-  const [loaded, setLoaded] = useState(false);
+  const router = useRouter()
+  const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
     id: "",
     name: "",
@@ -54,18 +54,18 @@ export default function DetailKuliner() {
     image_urls: [],
     video_url: "",
     video_thumbnail_url: "",
-  });
+  })
   const [order, setOrder] = useState({
     date: new Date().toISOString().split("T")[0],
     time: new Date().toISOString().substr(11, 5),
     options: {
       people: 1,
     },
-  });
+  })
 
   const doChangeOrder = ({ name, value }) => {
-    setOrder({ ...order, [name]: value });
-  };
+    setOrder({ ...order, [name]: value })
+  }
 
   const doChangeOrderOptions = (e) => {
     setOrder({
@@ -74,8 +74,8 @@ export default function DetailKuliner() {
         ...order.options,
         [e.currentTarget.name]: parseInt(e.currentTarget.value),
       },
-    });
-  };
+    })
+  }
 
   const getData = async (id) => {
     try {
@@ -83,21 +83,21 @@ export default function DetailKuliner() {
         data: { data },
       } = await axios.get(
         `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/kuliner/${id}.json`
-      );
-      setData(data);
-      setLoaded(true);
+      )
+      setData(data)
+      setLoaded(true)
     } catch (err) {
-      console.log("Error");
-      console.log(err);
+      console.log("Error")
+      console.log(err)
     }
-  };
+  }
 
   useEffect(() => {
-    const query = router.query;
-    if (!query.id) return;
-    getData(query.id);
+    const query = router.query
+    if (!query.id) return
+    getData(query.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   return (
     <Wrapper>
@@ -221,5 +221,5 @@ export default function DetailKuliner() {
       <br />
       <Footer />
     </Wrapper>
-  );
+  )
 }

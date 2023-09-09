@@ -1,31 +1,31 @@
-import { useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Router from "next/router";
-import axios from "axios";
-import Navbar from "@components/molecules/Navbar";
-import Text from "@components/atomics/Text";
+import { useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import Router from "next/router"
+import axios from "axios"
+import Navbar from "@components/molecules/Navbar"
+import Text from "@components/atomics/Text"
 
 export default function ForgetPassword() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("")
   const handleChange = (e) => {
-    setEmail(e.currentTarget.value);
-  };
+    setEmail(e.currentTarget.value)
+  }
 
   const handleClick = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const res = await axios.post(process.env.BASE_API + "/password/email", {
         email,
-      });
+      })
       if (!!res.data.mailData.token) {
-        setEmail("");
+        setEmail("")
       }
-      Router.push("/resetpassword");
+      Router.push("/resetpassword")
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
@@ -70,5 +70,5 @@ export default function ForgetPassword() {
         </div>
       </div>
     </div>
-  );
+  )
 }
