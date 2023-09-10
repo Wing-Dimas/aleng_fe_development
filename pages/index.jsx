@@ -172,13 +172,13 @@ const PaketWisata = ({ populars }) => {
           Kami menawarkan wisata disekitar madura untuk menemani liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
-          <Carousel id="wisata-1">
+          <Carousel id="paket-1">
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
                   <Carousel.item key={popular.id}>
                     <QuickCard
-                      url={"/wisata/" + popular.id}
+                      url={"/paket/" + popular.id}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}

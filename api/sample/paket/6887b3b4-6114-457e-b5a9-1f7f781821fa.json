@@ -9,10 +9,7 @@
     "route": "Sampang - Pamekasan - Sumenep - Sampang",
     "day": 2,
     "night": 1,
-    "rundown": [
-      "08.00: Berkumpul di Sampang\n09.00: Kunjungi Bukit Masegit\n12.00: Makan siang di Warung Asela\n13.30: Perjalanan ke Pamekasan\n14.30: Explore Pantai Talang Siring\n17.00: Check-in di Hotel SMKN 3",
-      "07.00: Sarapan di hotel\n08.00: Perjalanan ke Sumenep\n09.00: Kunjungi Museum Keraton Sumenep\n12.00: Makan siang di Warung ikan bakar OSYFUT\n14.00: Explore Madura Pusaka\n16.00: Kembali ke Sampang\n18.00: Berakhirnya perjalanan"
-    ],
+    "rundown": "-   Hari 1\n    -   08.00: Berkumpul di Sampang\n    -   09.00: Kunjungi Bukit Masegit\n    -   12.00: Makan siang di Warung Asela\n    -   13.30: Perjalanan ke Pamekasan\n    -   14.30: Explore Pantai Talang Siring\n    -   17.00: Check-in di Hotel SMKN 3\n-   Hari 2\n    -   07.00: Sarapan di hotel\n    -   08.00: Perjalanan ke Sumenep\n    -   09.00: Kunjungi Museum Keraton Sumenep\n    -   12.00: Makan siang di Warung ikan bakar OSYFUT\n    -   14.00: Explore Madura Pusaka\n    -   16.00: Kembali ke Sampang\n    -   18.00: Berakhirnya perjalanan",
     "facilities": [
       {
         "icon_url": "/temp/ac.png",

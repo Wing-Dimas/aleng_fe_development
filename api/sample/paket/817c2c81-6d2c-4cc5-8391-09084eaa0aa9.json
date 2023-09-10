@@ -9,11 +9,7 @@
     "route": "Bangkalan - Sampang - Pamekasan - Sumenep - Bangkalan",
     "day": 3,
     "night": 2,
-    "rundown": [
-      "08.00: Berkumpul di Bangkalan\n09.00: Kunjungi Jaddih Hill Madura di Bangkalan\n12.00: Makan siang di Rumah Makan Tera' Bulan\n14.00: Perjalanan ke Sampang\n15.00: Explore Air Terjun Toroan di Sampang\n18.00: Check-in di Hotel Rahmat\n20.00: Makan malam di Resto Ayam Brewok Sakera",
-      "07.00: Sarapan di hotel\n08.00: Perjalanan ke Pamekasan\n09.00: Kunjungi Pantai Talang Siring\n12.00: Makan siang di Lesehan Juko' Tonoh\n14.00: Explore Museum Mandhilaras di Pamekasan\n17.00: Kembali ke Sampang\n18.00: Check-in di Hotel Panglima",
-      "07.00: Sarapan di hotel\n08.00: Perjalanan ke Sumenep\n09.00: Kunjungi Pantai Sembilan\n12.00: Makan siang di Warung ikan bakar OSYFUT\n14.00: Explore Kerajinan Kayu Ramox\n16.00: Kembali ke Bangkalan\n17.00: Berakhirnya perjalanan"
-    ],
+    "rundown": "-   Hari 1\n    -   08.00: Berkumpul di Bangkalan\n    -   09.00: Kunjungi Jaddih Hill Madura di Bangkalan\n    -   12.00: Makan siang di Rumah Makan Tera\u2019 Bulan\n    -   14.00: Perjalanan ke Sampang\n    -   15.00: Explore Air Terjun Toroan di Sampang\n    -   18.00: Check-in di Hotel Rahmat\n    -   20.00: Makan malam di Resto Ayam Brewok Sakera\n-   Hari 2\n    -   07.00: Sarapan di hotel\n    -   08.00: Perjalanan ke Pamekasan\n    -   09.00: Kunjungi Pantai Talang Siring\n    -   12.00: Makan siang di Lesehan Juko\u2019 Tonoh\n    -   14.00: Explore Museum Mandhilaras di Pamekasan\n    -   17.00: Kembali ke Sampang\n    -   18.00: Check-in di Hotel Panglima\n-   Hari 3\n    -   07.00: Sarapan di hotel\n    -   08.00: Perjalanan ke Sumenep\n    -   09.00: Kunjungi Pantai Sembilan\n    -   12.00: Makan siang di Warung ikan bakar OSYFUT\n    -   14.00: Explore Kerajinan Kayu Ramox\n    -   16.00: Kembali ke Bangkalan\n    -   17.00: Berakhirnya perjalanan",
     "facilities": [
       {
         "icon_url": "/temp/ac.png",

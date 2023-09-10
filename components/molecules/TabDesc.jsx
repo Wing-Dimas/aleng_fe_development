@@ -6,6 +6,7 @@ import { IconMapPin } from "@tabler/icons-react"
 import Image from "next/image"
 import Skeleton from "react-loading-skeleton"
 import Container from "@components/atomics/Container"
+import ReactMarkdown from "react-markdown"
 
 export default function TabDesc({
   loaded = false,
@@ -81,9 +82,7 @@ export default function TabDesc({
               )}
             </div>
           ) : rundown ? (
-            <p className="text-justify font-medium sm:font-normal text-base">
-              {rundown}
-            </p>
+            <ReactMarkdown>{rundown}</ReactMarkdown>
           ) : facilities ? (
             <div className="p-4 grid grid-cols-4 items-center place-items-center">
               {facilities.map((facility, i) => {
