@@ -14,19 +14,22 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
   }
 
   const doPlay = () => {
+    clearTimeout()
     if (ref) {
       setPresence(true)
     }
   }
 
   const doPause = () => {
-    if (loading) {
-      setAnimateLoading(false)
-      return
-    }
-    if (ref) {
-      setAnimate(false)
-    }
+    setTimeout(() => {
+      if (loading) {
+        setAnimateLoading(false)
+        return
+      }
+      if (ref) {
+        setAnimate(false)
+      }
+    }, 100)
   }
 
   useEffect(() => {
