@@ -54,7 +54,7 @@ export default function GalleryImage({
           </>
         ) : (
           <>
-            <HoverPlayer.unhovered
+            <HoverPlayer.Unhovered
               video_url={video_url}
               alt="video"
               thumbnail_url={video_thumbnail_url}
@@ -138,7 +138,7 @@ export default function GalleryImage({
                 </div>
               )
             })}
-            <HoverPlayer.unhovered
+            <HoverPlayer.Unhovered
               video_url={video_url}
               alt="video"
               thumbnail_url={video_thumbnail_url}
