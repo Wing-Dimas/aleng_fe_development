@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -20,6 +20,7 @@ import {
 import Text from "@components/atomics/Text"
 import { Calendar } from "react-multi-date-picker"
 import { useRouter } from "next/router"
+import { UserContext } from "@utils/useUser"
 
 export default function Navbar({ isFixed = false, isDiscover = false }) {
   const router = useRouter()
@@ -344,6 +345,7 @@ const TopNavBar = ({
 }
 
 const NavbarMenu = () => {
+  const user = useContext(UserContext)
   const [show, setShow] = useState(false)
   const [animate, setAnimate] = useState(false)
 
@@ -391,20 +393,8 @@ const NavbarMenu = () => {
         tabIndex={1}
         className={`${show ? "" : "hidden "}${
           animate ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
+        } overflow-hidden transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
       >
-        {/* <Link
-          href="/unduh-aplikasi"
-          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
-        >
-          Unduh Aplikasi
-        </Link>
-        <Link
-          href="/collection"
-          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
-        >
-          Koleksi Kamu
-        </Link> */}
         <Link
           href="/my-order"
           className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
@@ -417,20 +407,22 @@ const NavbarMenu = () => {
         >
           Profile
         </Link>
-        <div className="grid grid-cols-2 p-2 gap-2">
-          <Link
-            className="text-center bg-gradient-to-br from-custom-gradient1 to-custom-gradient2 text-white rounded-md transition-all p-2"
-            href="/login"
-          >
-            Login
-          </Link>
-          <Link
-            className="text-center bg-custom-gradient1 rounded-md transition-all p-2"
-            href="/register"
-          >
-            Sign Up
-          </Link>
-        </div>
+        {!user.isSigned && (
+          <div className="grid grid-cols-2 p-2 gap-2">
+            <Link
+              className="text-center bg-gradient-to-br from-custom-gradient1 to-custom-gradient2 text-white rounded-md transition-all p-2"
+              href="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className="text-center bg-custom-gradient1 rounded-md transition-all p-2"
+              href="/register"
+            >
+              Sign Up
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

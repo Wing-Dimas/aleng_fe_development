@@ -59,7 +59,7 @@ export default function Home() {
       <Navbar />
       <div
         style={{
-          backgroundImage: "url('/static_images/hero.jpg')",
+          backgroundImage: "url('/static_images/hero.png')",
         }}
         className="pt-24 pb-12 bg-center bg-cover"
       >

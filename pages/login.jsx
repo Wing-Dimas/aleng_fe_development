@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useRouter } from "next/router"
 import Head from "next/head"
 import Image from "next/image"
@@ -11,9 +11,14 @@ import LSTextInput, {
 import Navbar from "@components/molecules/Navbar"
 import validateLogin from "@validators/loginValidator"
 import Text from "@components/atomics/Text"
+import { UserContext } from "@utils/useUser"
+import withAuth from "@utils/withAuth"
+import toast from "react-hot-toast"
 
-export default function LoginPage() {
+const LoginPage = () => {
   const router = useRouter()
+  const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -29,44 +34,43 @@ export default function LoginPage() {
   }
 
   const handleSubmit = async (e) => {
+    if (isLoading) return
     e.preventDefault()
-    if (credentials.rememberme == true) {
-      try {
-        const validated = await validateLogin(credentials)
-        if (validated.isError) {
-          setMessages(validated.form)
-          return
-        }
-        const res = await axios.post(process.env.BASE_API + "/auth/login", {
-          email: credentials.email,
-          password: credentials.password,
-        })
-        if (!!res.data.access_token) {
-          Cookies.set("token", res.data.access_token)
-          router.push("/")
-        }
-        setCredentials({ email: "", password: "", rememberme: false })
-        setMessages({
-          email: { isError: false, message: "" },
-          password: { isError: false, message: "" },
-        })
-      } catch (err) {
-        setCredentials({ email: "", password: "", rememberme: false })
-        setMessages({
-          email: { isError: false, message: "" },
-          password: { isError: false, message: "" },
-        })
-      }
-    } else {
-      setCredentials({ email: "", password: "", rememberme: false })
-      setMessages({
-        email: { isError: false, message: "" },
-        password: { isError: false, message: "" },
+    const validated = await validateLogin(credentials)
+    if (validated.isError) {
+      setMessages(validated.form)
+      return
+    }
+    const loadingToast = toast.loading("Sedang login...")
+    try {
+      setIsLoading(true)
+      const { data } = await axios.post(process.env.MOCK_API + "/auth/login", {
+        email: credentials.email,
+        password: credentials.password,
       })
+      if (
+        typeof data.access_token === "undefined" ||
+        data.access_token === null ||
+        data.access_token === ""
+      ) {
+        setIsLoading(false)
+        toast.error(data.message, { id: loadingToast })
+        return
+      }
+      toast.success("Berhasil login", { id: loadingToast })
+      user.setToken(data.access_token)
+      user.setIsSigned(true)
+      localStorage.setItem("lenjhelenan", data.access_token)
+      setIsLoading(false)
+    } catch (err) {
+      if (err.response.data.error) {
+        toast.error(err.response.data.error, { id: loadingToast })
+      } else {
+        console.log("Error on Login")
+      }
+      setIsLoading(false)
     }
   }
-
-  const handleSignIn = () => {}
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
@@ -174,3 +178,5 @@ export default function LoginPage() {
     </div>
   )
 }
+
+export default withAuth(LoginPage, "portal")

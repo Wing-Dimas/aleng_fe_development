@@ -2,10 +2,14 @@ import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@components/molecules/Navbar"
 import Text from "@components/atomics/Text"
+import Head from "next/head"
 
 export default function ErrorPage({}) {
   return (
     <div className="w-screen h-screen font-inter overflow-hidden text-[#252525] bg-white">
+      <Head>
+        <title>404 Not Found</title>
+      </Head>
       <Navbar />
       <div className="flex flex-col items-center justify-center relative w-full ">
         <div className="relative">

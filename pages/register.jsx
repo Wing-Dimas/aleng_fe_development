@@ -10,9 +10,12 @@ import LSTextInput, {
 import Navbar from "@components/molecules/Navbar"
 import validateRegister from "@validators/registerValidator"
 import Text from "@components/atomics/Text"
+import toast from "react-hot-toast"
+import withAuth from "@utils/withAuth"
 
-export default function RegisterPage({}) {
+const RegisterPage = () => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -34,24 +37,29 @@ export default function RegisterPage({}) {
   }
 
   const handleSubmit = async (e) => {
+    if (isLoading) return
     e.preventDefault()
+    const validated = await validateRegister(credentials)
+    if (validated.isError) {
+      setMessages(validated.form)
+      return
+    }
+    const loadingToast = toast.loading("Mendaftarkan dirimu...")
     try {
-      const validated = await validateRegister(credentials)
-      if (validated.isError) {
-        setMessages(validated.form)
-        return
-      }
-      await axios
-        .post(process.env.BASE_API + "/auth/register", {
+      setIsLoading(true)
+      const { data } = await axios.post(
+        process.env.MOCK_API + "/auth/register",
+        {
           name: credentials.name,
           email: credentials.email,
           password: credentials.password,
           password_confirmation: credentials.password_confirmation,
           phoneNumber: credentials.phoneNumber,
-        })
-        .then((_) => {
-          router.push("/login")
-        })
+        }
+      )
+      setIsLoading(false)
+      toast.success("Berhasil mendaftar", { id: loadingToast })
+      router.push("/login")
     } catch (err) {
       setCredentials({
         name: "",
@@ -67,6 +75,12 @@ export default function RegisterPage({}) {
         password: { isError: false, message: "" },
         password_confirmation: { isError: false, message: "" },
       })
+      setIsLoading(false)
+      if (err.response.data.error) {
+        toast.error(err.response.data.error, { id: loadingToast })
+      } else {
+        console.log("Error on Register")
+      }
     }
   }
 
@@ -192,3 +206,5 @@ export default function RegisterPage({}) {
     </div>
   )
 }
+
+export default withAuth(RegisterPage, "portal")
