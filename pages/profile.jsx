@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react"
 import Head from "next/head"
+import Image from "next/image"
 import Link from "next/link"
 import { useBreakpoint } from "use-breakpoint"
 import Button from "@components/atomics/Button"
@@ -17,9 +18,9 @@ import Wrapper from "@components/atomics/Wrapper"
 import { BREAKPOINTS } from "@constants/index"
 import {
   IconChevronLeft,
-  IconHelp,
   IconLock,
   IconSettings,
+  IconUpload,
   IconUser,
 } from "@tabler/icons-react"
 import axios from "axios"
@@ -31,21 +32,26 @@ import toast from "react-hot-toast"
 import validateResetPassword from "@validators/resetPasswordValidator"
 
 const ProfilePage = () => {
+  const { breakpoint, _, __ } = useBreakpoint(BREAKPOINTS, "xs")
   const router = useRouter()
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS, "xs")
   const user = useContext(UserContext)
   const [index, setIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [isUpdating, setIsUpdating] = useState(false)
   const [profile, setProfile] = useState({
-    foto: "",
+    foto: null,
     nama: "",
     jenis_kelamin: "",
     alamat: "",
     no_hp: "",
     tanggal_lahir: "",
   })
-  const [name, setName] = useState("")
+  const [displayProfile, setDisplayProfile] = useState({
+    nama: "",
+    email: "",
+    foto: "",
+    new_foto_url: "",
+  })
 
   const [secret, setSecret] = useState({
     password: "",
@@ -54,6 +60,15 @@ const ProfilePage = () => {
 
   const doChangeProfile = ({ name, value }) => {
     setProfile({ ...profile, [name]: value })
+  }
+
+  const doChangePhoto = (event) => {
+    const selectedFile = event.target.files[0]
+    if (selectedFile) {
+      setProfile({ ...profile, foto: selectedFile })
+      const objectURL = URL.createObjectURL(selectedFile)
+      setDisplayProfile({ ...displayProfile, new_foto_url: objectURL })
+    }
   }
 
   const doChangePassword = ({ name, value }) => {
@@ -69,15 +84,24 @@ const ProfilePage = () => {
       },
     }
     try {
+      const formData = new FormData()
+      for (const key in profile) {
+        if (profile.hasOwnProperty(key)) {
+          const value = profile[key]
+          if (value !== null && value !== undefined && value !== "") {
+            formData.append(key, value)
+          }
+        }
+      }
       setIsUpdating(true)
       const { data } = await axios.post(
-        process.env.MOCK_API + "/auth/user/edit-profile",
-        profile,
+        process.env.BASE_API + "/auth/user/edit-profile",
+        formData,
         config
       )
-      setName(profile.nama)
       setIsUpdating(false)
       toast.success("Berhasil mengubah profile", { id: loadingToast })
+      getUserData()
     } catch (error) {
       setIsUpdating(false)
       toast.error("Gagal mengubah profile", { id: loadingToast })
@@ -100,7 +124,7 @@ const ProfilePage = () => {
     try {
       setIsUpdating(true)
       const { data } = await axios.post(
-        process.env.MOCK_API + "/auth/user/change-password",
+        process.env.BASE_API + "/auth/user/change-password",
         secret,
         config
       )
@@ -122,16 +146,28 @@ const ProfilePage = () => {
       },
     }
     try {
-      console.log(user.token)
+      setIsLoading(true)
       const { data } = await axios.get(
-        process.env.MOCK_API + "/auth/user/profile",
+        process.env.BASE_API + "/auth/user/profile",
         config
       )
-      setProfile({ ...profile, ...data.profile, email: data.user.email })
-      setName(data.profile.nama)
+      setProfile({
+        foto: data.data.profile.foto,
+        nama: data.data.profile.nama,
+        jenis_kelamin: data.data.profile.jenis_kelamin,
+        alamat: data.data.profile.alamat,
+        no_hp: data.data.profile.no_hp,
+        tanggal_lahir: data.data.profile.tanggal_lahir,
+      })
+      setDisplayProfile({
+        email: data.data.user.email,
+        foto: data.data.profile.foto,
+        nama: data.data.profile.nama,
+        new_foto_url: "",
+      })
       setIsLoading(false)
     } catch (error) {
-      console.log("Error Getting User Data")
+      toast.error("Error Getting User Data")
     }
   }
 
@@ -147,6 +183,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUserData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -171,17 +208,25 @@ const ProfilePage = () => {
           <div className="hidden lg:block">
             <Container className="w-80">
               <div className="flex items-start gap-2">
-                <div className="h-12 w-12 rounded-full bg-red-500" />
+                <div className="h-12 w-12 rounded-full bg-white relative">
+                  <Image
+                    src={process.env.BASE_STORAGE + displayProfile.foto}
+                    sizes="auto"
+                    className="rounded-full bg-cover object-cover"
+                    alt="profile image"
+                    fill
+                  />
+                </div>
                 <div className="flex-grow">
                   {isLoading ? (
                     <Skeleton className="w-full" />
                   ) : (
-                    <Text>{name}</Text>
+                    <Text>{displayProfile.nama}</Text>
                   )}
                   {isLoading ? (
                     <Skeleton className="w-full" />
                   ) : (
-                    <Text.small>{profile.email}</Text.small>
+                    <Text.small>{displayProfile.email}</Text.small>
                   )}
                 </div>
               </div>
@@ -209,16 +254,6 @@ const ProfilePage = () => {
                     <span>Ubah Password</span>
                   </Text.small>
                 </div>
-                <div onClick={() => setIndex(2)} className="cursor-pointer">
-                  <Text.small
-                    className={`flex items-center gap-2 ${
-                      index == 2 ? "text-red-600" : null
-                    }`}
-                  >
-                    <IconHelp className="w-5 h-5" />
-                    <span>Bantuan</span>
-                  </Text.small>
-                </div>
               </div>
               <br />
               <Button
@@ -237,17 +272,25 @@ const ProfilePage = () => {
               }
             >
               <div className="flex items-center gap-2">
-                <div className="h-12 w-12 rounded-full bg-red-500" />
+                <div className="h-12 w-12 rounded-full bg-white relative">
+                  <Image
+                    src={process.env.BASE_STORAGE + displayProfile.foto}
+                    sizes="auto"
+                    className="rounded-full bg-cover object-cover"
+                    alt="profile image"
+                    fill
+                  />
+                </div>
                 <div className="flex-grow">
                   {isLoading ? (
                     <Skeleton className="w-full" />
                   ) : (
-                    <Text>{name}</Text>
+                    <Text>{displayProfile.nama}</Text>
                   )}
                   {isLoading ? (
                     <Skeleton className="w-full" />
                   ) : (
-                    <Text.small>{profile.email}</Text.small>
+                    <Text.small>{displayProfile.email}</Text.small>
                   )}
                 </div>
               </div>
@@ -275,16 +318,6 @@ const ProfilePage = () => {
                     <span>Ubah Password</span>
                   </Text.small>
                 </div>
-                <div className="cursor-pointer" onClick={() => setIndex(2)}>
-                  <Text.small
-                    className={`flex items-center gap-2 cursor-pointer ${
-                      index == 2 ? "text-red-600" : null
-                    }`}
-                  >
-                    <IconHelp className="w-5 h-5" />
-                    <span>Bantuan</span>
-                  </Text.small>
-                </div>
               </div>
               <br />
               <Button
@@ -303,6 +336,33 @@ const ProfilePage = () => {
                 yang diperlukan. Pembaruan akan muncul setelah kurang lebih 5
                 menit mulai dari kamu edit.
               </Text.small>
+              <br />
+              <Text>Foto</Text>
+              <div
+                className="relative outline-none bg-cover rounded-lg shadow-custom max-h-64 aspect-square flex gap-2 items-center justify-center group transition-all cursor-pointer"
+                style={{
+                  backgroundImage: `url(${
+                    displayProfile.new_foto_url !== ""
+                      ? displayProfile.new_foto_url
+                      : process.env.BASE_STORAGE + displayProfile.foto
+                  })`,
+                }}
+              >
+                <label
+                  htmlFor="fotoInput"
+                  className="flex items-center bg-black bg-opacity-50 h-full w-full cursor-pointer rounded-lg justify-center gap-2 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-all"
+                >
+                  <IconUpload className="h-4 w-4" />
+                  <span>Upload Foto Baru</span>
+                </label>
+                <input
+                  id="fotoInput"
+                  type="file"
+                  className="hidden"
+                  onChange={doChangePhoto}
+                  accept=".jpg, .jpeg, .png"
+                />
+              </div>
               <br />
               <Text>Nama Lengkap</Text>
               {isLoading ? (
@@ -390,7 +450,7 @@ const ProfilePage = () => {
                 </Button>
               )}
             </Container>
-          ) : index == 1 ? (
+          ) : (
             <Container>
               <Heading.h3>Ubah Password</Heading.h3>
               <Text.small>Pada halaman ini kamu bisa Ubah Password</Text.small>
@@ -426,10 +486,6 @@ const ProfilePage = () => {
                   Perbarui Password
                 </Button>
               )}
-            </Container>
-          ) : (
-            <Container>
-              <Heading.h3>Bantuan</Heading.h3>
             </Container>
           )}
         </div>

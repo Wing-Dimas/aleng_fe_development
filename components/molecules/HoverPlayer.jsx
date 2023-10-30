@@ -85,7 +85,7 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
         <div
           className={`${
             animateLoading ? "opacity-100" : "opacity-0"
-          } absolute top-00 left-0 z-[10] bg-black bg-opacity-20 transition-opacity duration-300 pointer-events-none w-full h-full flex items-center justify-center`}
+          } absolute top-0 left-0 z-[10] bg-black bg-opacity-20 transition-opacity duration-300 pointer-events-none w-full h-full flex items-center justify-center`}
         >
           <IconLoader2 className="h-8 w-8 text-white animate-spin" />
         </div>

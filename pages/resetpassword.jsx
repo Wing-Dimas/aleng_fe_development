@@ -62,14 +62,13 @@ export default function ResetPassword() {
               <Image
                 src="/static_icons/logo.png"
                 priority
-                priority
                 width={48}
                 height={48}
                 alt="logo"
               />
             </div>
             <Text.label className="!text-2xl font-jua text-red-500">
-              Lanjalan Madura
+              Lenjhelenan Madura
             </Text.label>
           </div>
           <Text className="!text-lg text-custom-black">Reset Password</Text>
@@ -103,7 +102,7 @@ export default function ResetPassword() {
             />
             <Text.small className="!text-xs text-dark-grey mt-1">
               Reset Password menggunakan alamat E-Mail yang terdaftar di
-              Lanjalan
+              Lenjhelenan
             </Text.small>
           </div>
           <div className="w-full" onClick={handleClick}>

@@ -17,12 +17,14 @@ export default function Footer() {
                   priority
                 />
               </div>
-              <p className="font-jua text-red-500 text-2xl">Lanjalan Madura</p>
+              <p className="font-jua text-red-500 text-2xl">
+                Lenjhelenan Madura
+              </p>
             </Link>
             <p className="text-neutral-500 mb-8 max-w-lg">
-              Lanjalan Madura adalah sebuah platform untuk menemani liburanmu,
-              jelajahi wisata madura yang tidak pernah kamu temui sebelumnnya
-              dan menginap di beberapa penginapan yang ada
+              Lenjhelenan Madura adalah sebuah platform untuk menemani
+              liburanmu, jelajahi wisata madura yang tidak pernah kamu temui
+              sebelumnnya dan menginap di beberapa penginapan yang ada
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -91,7 +93,7 @@ export default function Footer() {
                 <Link href="/produk/tiket-wisata" className="block">
                   Tiket Wisata
                 </Link>
-                <Link href="/produk/booking-hotel" className="block">
+                <Link href="/produk/booking-penginapan" className="block">
                   Booking Hotel
                 </Link>
                 <Link href="/produk/paket-wisata" className="block">

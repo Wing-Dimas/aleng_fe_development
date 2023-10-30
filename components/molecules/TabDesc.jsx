@@ -7,6 +7,10 @@ import Image from "next/image"
 import Skeleton from "react-loading-skeleton"
 import Container from "@components/atomics/Container"
 import ReactMarkdown from "react-markdown"
+import dynamic from "next/dynamic"
+const Map = dynamic(() => import("@components/atomics/Map"), {
+  ssr: false,
+})
 
 export default function TabDesc({
   loaded = false,
@@ -72,15 +76,7 @@ export default function TabDesc({
               <br />
             </div>
           ) : index === 1 ? (
-            <div>
-              {lat && long && (
-                <iframe
-                  src={`http://maps.google.com/?q=${lat},${long}`}
-                  className="w-full h-72 border-[1px] border-[#ABACAC] shadow-md rounded-md"
-                  loading="lazy"
-                ></iframe>
-              )}
-            </div>
+            <Map lat={lat} long={long} />
           ) : rundown ? (
             <ReactMarkdown>{rundown}</ReactMarkdown>
           ) : facilities ? (

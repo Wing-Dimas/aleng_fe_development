@@ -22,7 +22,6 @@ const LoginPage = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    rememberme: false,
   })
   const [messages, setMessages] = useState({
     email: { isError: false, message: "" },
@@ -44,29 +43,29 @@ const LoginPage = () => {
     const loadingToast = toast.loading("Sedang login...")
     try {
       setIsLoading(true)
-      const { data } = await axios.post(process.env.MOCK_API + "/auth/login", {
+      const { data } = await axios.post(process.env.BASE_API + "/auth/login", {
         email: credentials.email,
         password: credentials.password,
       })
       if (
-        typeof data.access_token === "undefined" ||
-        data.access_token === null ||
-        data.access_token === ""
+        typeof data.data.access_token === "undefined" ||
+        data.data.access_token === null ||
+        data.data.access_token === ""
       ) {
         setIsLoading(false)
-        toast.error(data.message, { id: loadingToast })
+        toast.error(data.meta.message, { id: loadingToast })
         return
       }
       toast.success("Berhasil login", { id: loadingToast })
-      user.setToken(data.access_token)
+      user.setToken(data.data.access_token)
       user.setIsSigned(true)
-      localStorage.setItem("lenjhelenan", data.access_token)
+      localStorage.setItem("lenjhelenan", data.data.access_token)
       setIsLoading(false)
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error, { id: loadingToast })
       } else {
-        console.log("Error on Login")
+        toast.error("Login Error", { id: loadingToast })
       }
       setIsLoading(false)
     }
@@ -116,12 +115,6 @@ const LoginPage = () => {
               message={messages.password}
             />
             <div className="flex flex-row justify-between w-full">
-              <Checkbox
-                name="rememberme"
-                value={credentials.rememberme}
-                onChange={doChange}
-                label="Ingat aku"
-              />
               <Link href="/forgetpassword">
                 <p className="font-medium text-[12px] hover:text-blue-500">
                   Lupa password?

@@ -48,7 +48,7 @@ export default function ForgetPassword() {
             </div>
             <Text.small className="!text-xs text-dark-grey mt-1">
               Reset Password menggunakan alamat E-Mail yang terdaftar di
-              Lanjalan
+              Lenjhelenan
             </Text.small>
           </div>
           <div onClick={handleClick} className="w-full cursor-pointer">
