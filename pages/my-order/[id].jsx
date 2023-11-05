@@ -140,19 +140,17 @@ const MyOrderDetail = () => {
               </Text>
               <Text
                 className={`!font-normal ${
-                  order.status == "selesai_dibayar"
+                  order.status == "verified"
                     ? "text-green-500"
-                    : order.status == "pembayaran_expired"
+                    : order.status == "menunggu_pembayaran"
                     ? "text-red-500"
                     : "text-yellow-500"
                 }`}
               >
-                {order.status == "selesai_dibayar"
-                  ? "Selesai Dibayar"
-                  : order.status == "pembayaran_expired"
-                  ? "Pembayaran Expired"
+                {order.status == "verified"
+                  ? "Verified"
                   : order.status == "proses"
-                  ? "Sedang diverifikasi"
+                  ? "Sedang Diproses"
                   : "Menunggu Pembayaran"}
               </Text>
             </div>

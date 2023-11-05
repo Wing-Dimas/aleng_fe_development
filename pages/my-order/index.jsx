@@ -19,10 +19,9 @@ const MyOrder = () => {
   const [orders, setOrders] = useState([])
   const tabStatus = [
     { name: "Semua Order", value: "semua_order" },
-    { name: "Selesai Dibayar", value: "selesai_dibayar" },
+    { name: "Verified", value: "verified" },
     { name: "Menunggu Pembayaran", value: "menunggu_pembayaran" },
-    { name: "Sedang Diverifikasi", value: "proses" },
-    { name: "Pembayaran Expired", value: "pembayaran_expired" },
+    { name: "Sedang Diproses", value: "proses" },
   ]
   const [filter, setFilter] = useState("semua_order")
 
@@ -32,12 +31,10 @@ const MyOrder = () => {
 
   const formatStatus = (status) => {
     switch (status) {
-      case "pembayaran_expired":
-        return "Pembayaran Expired"
-      case "selesai_dibayar":
-        return "Selesai Dibayar"
+      case "verified":
+        return "Verified"
       case "proses":
-        return "Sedang Diverifikasi"
+        return "Sedang Diproses"
       default:
         return "Menunggu Pembayaran"
     }
@@ -124,9 +121,9 @@ const MyOrder = () => {
                       <p>{toRupiah.format(order.total_price)}</p>
                       <p
                         className={`${
-                          order.status == "pembayaran_expired"
+                          order.status == "menunggu_pembayaran"
                             ? "text-red-500"
-                            : order.status == "selesai_dibayar"
+                            : order.status == "verified"
                             ? "text-green-500"
                             : "text-yellow-500"
                         } whitespace-nowrap`}

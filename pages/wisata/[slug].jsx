@@ -103,16 +103,11 @@ export default function DetailWisata() {
     }
     const loadingToast = toast.loading("Sedang membuat order")
     try {
-      console.log(user)
-      console.log(process.env.BASE_API)
-      console.log(isLoading)
-      setIsLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       }
-      console.log(config)
       const createOrder = await axios.post(
         process.env.BASE_API + "/auth/order/createOrder",
         {
