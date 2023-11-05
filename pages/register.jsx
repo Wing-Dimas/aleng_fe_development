@@ -4,12 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import Navbar from "@components/molecules/Navbar"
 import LSTextInput, {
   ObscuredLSTextInput,
 } from "@components/atomics/LSTextInput"
-import Navbar from "@components/molecules/Navbar"
-import validateRegister from "@validators/registerValidator"
 import Text from "@components/atomics/Text"
+import validateRegister from "@validators/registerValidator"
 import toast from "react-hot-toast"
 import withAuth from "@utils/withAuth"
 
@@ -76,15 +76,9 @@ const RegisterPage = () => {
         password_confirmation: { isError: false, message: "" },
       })
       setIsLoading(false)
-      if (err.response.data.error) {
-        toast.error(err.response.data.error, { id: loadingToast })
-      } else {
-        console.log("Error on Register")
-      }
+      toast.error("Registrasi gagal\nCoba ulangi lagi.")
     }
   }
-
-  const handleSignIn = () => {}
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525]">

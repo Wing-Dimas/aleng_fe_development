@@ -1,3 +1,7 @@
+import { useEffect, useState, useContext } from "react"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import axios from "axios"
 import Container from "@components/atomics/Container"
 import DateInput from "@components/atomics/DateInput"
 import Heading from "@components/atomics/Heading"
@@ -11,37 +15,43 @@ import Navbar from "@components/molecules/Navbar"
 import ShortReview from "@components/molecules/ShortReview"
 import TabDesc from "@components/molecules/TabDesc"
 import { toRupiah } from "@utils/libs"
-import axios from "axios"
-import Head from "next/head"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 import Skeleton from "react-loading-skeleton"
+import TextArea from "@components/atomics/TextArea"
+import Button from "@components/atomics/Button"
+import { UserContext } from "@utils/useUser"
 
 export default function DetailWisata() {
+  const user = useContext(UserContext)
   const router = useRouter()
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
-    id: "",
+    id: 1,
+    slug: "",
     name: "",
     description: "",
-    lat: -7.1299981954715035,
-    long: 112.72517694200859,
-    route: "",
-    day: 0,
-    night: 0,
-    rundown: [],
+    lat: 0,
+    long: 0,
+    address: "",
+    open: "",
+    close: "",
+    facilities: [
+      {
+        icon_url: "",
+        name: "",
+      },
+    ],
     price: 0,
     reviews: {
-      star: 0,
+      rating: 0,
       total_review: 0,
-      stars: [0, 0, 0, 0, 0],
+      total_rating: [0, 0, 0, 0, 0],
       comments: [
         {
           name: "",
           profile_pic_url: "",
           date: "",
-          star: 0,
+          rating: 0,
           text: "",
         },
       ],
@@ -51,13 +61,14 @@ export default function DetailWisata() {
     video_thumbnail_url: "",
   })
   const [order, setOrder] = useState({
+    catatan: "",
     date: new Date().toISOString().split("T")[0],
     options: {
       people: 1,
     },
   })
 
-  const doChangeDate = ({ name, value }) => {
+  const doChangeOrder = ({ name, value }) => {
     setOrder({ ...order, [name]: value })
   }
 
@@ -71,25 +82,62 @@ export default function DetailWisata() {
     })
   }
 
-  const getData = async (id) => {
+  const getData = async (slug) => {
     try {
       const {
         data: { data },
-      } = await axios.get(
-        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/paket/${id}.json`
-      )
+      } = await axios.get(`${process.env.BASE_API}/wisata/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
     } catch (err) {
-      console.log("Error")
-      console.log(err)
+      toast.error("Gagal menampilkan wisata\nCoba untuk memuat ulang")
+    }
+  }
+
+  const doOrder = async () => {
+    if (!user.isSigned) {
+      router.push("/login")
+      return
+    }
+    const loadingToast = toast.loading("Sedang membuat order")
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const createOrder = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrder",
+        {
+          user_id: user.userId,
+          jumlah_pemesan: order.options.people,
+          tanggal_checkin: order.date,
+          catatan: order.catatan,
+        },
+        config
+      )
+      const createOrderDetail = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderDetail",
+        {
+          tipe: "wisata",
+          id_destinasi: data.id,
+          catatan: order.catatan,
+          harga: data.id * order.options.people,
+          order_id: createOrder.data.data.id,
+        },
+        config
+      )
+      toast.success("Berhasil membuat order", { id: loadingToast })
+      router.push("/my-order/" + createOrder.data.data.id)
+    } catch (error) {
+      toast.error("Gagal membuat order", { id: loadingToast })
     }
   }
 
   useEffect(() => {
     const query = router.query
-    if (!query.id) return
-    getData(query.id)
+    if (!query.slug) return
+    getData(query.slug)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
 
@@ -109,20 +157,17 @@ export default function DetailWisata() {
             <GalleryImage
               loaded={loaded}
               image_urls={data.image_urls}
-              alt="lenjhelenan"
+              alt={data.name ?? ""}
               video_url={data.video_url}
-              video_thumbnail_url={data.video_thumbnail_url}
             />
             <br />
             <TabDesc
               loaded={loaded}
               name={data.name}
-              day={data.day}
-              night={data.night}
-              rundown={data.rundown}
-              address={data.route}
-              star={data.reviews.star}
+              address={data.address}
+              star={data.reviews.star ?? 0}
               total_review={data.reviews.total_review}
+              facilities={data.facilities}
               lat={data.lat}
               long={data.long}
               description={data.description}
@@ -142,7 +187,7 @@ export default function DetailWisata() {
                   <p className="font-semibold text-red-500">
                     {toRupiah.format(data.price)}
                   </p>
-                  <p className="text-xs sm:text-sm font-medium">/orang</p>
+                  <p className="text-xs sm:text-sm font-medium">/wisatawan</p>
                 </div>
                 <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
                 <div className="flex flex-col items-center gap-1 w-full">
@@ -152,7 +197,7 @@ export default function DetailWisata() {
                   <DateInput
                     name="date"
                     value={order.date}
-                    onChange={doChangeDate}
+                    onChange={doChangeOrder}
                     containerClassName="w-full"
                   />
                 </div>
@@ -167,6 +212,17 @@ export default function DetailWisata() {
                     name="Wisatawan"
                   />
                 </div>
+                <div className="flex flex-col items-center gap-1 w-full mt-3">
+                  <Text.label className="after:content-['*'] after:ml-0.5">
+                    Catatan
+                  </Text.label>
+                  <TextArea
+                    name="catatan"
+                    onChange={doChangeOrder}
+                    value={order.catatan}
+                    placeholder="Catatan"
+                  />
+                </div>
               </div>
               <div className="flex flex-col">
                 <div className="flex flex-row justify-between items-center">
@@ -175,11 +231,9 @@ export default function DetailWisata() {
                     {toRupiah.format(order.options.people * data.price)}
                   </p>
                 </div>
-                <Link href="/checkout/confirm">
-                  <p className="font-medium text-center mt-3 hover:bg-secondary-yellow/80 text-base text-black bg-[#FDD05C] py-3 px-14 rounded-md shadow-md cursor-pointer">
-                    Pesan Sekarang
-                  </p>
-                </Link>
+                <Button className="mt-4" onClick={doOrder}>
+                  Pesan Sekarang
+                </Button>
               </div>
             </Container>
           )}

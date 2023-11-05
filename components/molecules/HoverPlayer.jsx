@@ -71,7 +71,7 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
     >
       <video
         ref={ref}
-        src={video_url}
+        src={process.env.BASE_STORAGE + video_url}
         type="video/mp4"
         muted
         loop
@@ -91,7 +91,7 @@ const HoverPlayer = ({ className, video_url, thumbnail_url, alt }) => {
         </div>
       )}
       <Image
-        src={thumbnail_url}
+        src={process.env.BASE_STORAGE + thumbnail_url}
         sizes="auto"
         fill={true}
         alt={alt}
@@ -130,7 +130,7 @@ const Unhovered = ({
     >
       <video
         ref={ref}
-        src={video_url}
+        src={process.env.BASE_STORAGE + video_url}
         type="video/mp4"
         controls
         preload="none"
@@ -143,7 +143,7 @@ const Unhovered = ({
       {!presence && (
         <>
           <Image
-            src={thumbnail_url}
+            src={process.env.BASE_STORAGE + thumbnail_url}
             sizes="auto"
             fill={true}
             alt={alt}

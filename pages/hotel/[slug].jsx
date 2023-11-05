@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import axios from "axios"
 import Container from "@components/atomics/Container"
 import DateInput from "@components/atomics/DateInput"
 import Heading from "@components/atomics/Heading"
@@ -11,26 +16,24 @@ import Navbar from "@components/molecules/Navbar"
 import ShortReview from "@components/molecules/ShortReview"
 import TabDesc from "@components/molecules/TabDesc"
 import { toRupiah } from "@utils/libs"
-import axios from "axios"
-import Head from "next/head"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
+import TextArea from "@components/atomics/TextArea"
+import Button from "@components/atomics/Button"
 
-export default function DetailPenginapan() {
+export default function DetailHotel() {
   const router = useRouter()
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
-    id: "",
+    slug: "",
     name: "",
     description: "",
-    lat: -7.1299981954715035,
-    long: 112.72517694200859,
+    lat: 0,
+    long: 0,
     city: "",
     address: "",
-    open: "00:00",
-    close: "24:00",
+    open: "",
+    close: "",
     facilities: [
       {
         icon_url: "",
@@ -39,15 +42,15 @@ export default function DetailPenginapan() {
     ],
     price: 0,
     reviews: {
-      star: 0,
+      rating: 0,
       total_review: 0,
-      stars: [0, 0, 0, 0, 0],
+      total_rating: [0, 0, 0, 0, 0],
       comments: [
         {
           name: "",
           profile_pic_url: "",
           date: "",
-          star: 0,
+          rating: 0,
           text: "",
         },
       ],
@@ -57,6 +60,7 @@ export default function DetailPenginapan() {
     video_thumbnail_url: "",
   })
   const [order, setOrder] = useState({
+    catatan: "",
     date: {
       in: new Date().toISOString().split("T")[0],
       out: new Date().toISOString().split("T")[0],
@@ -72,6 +76,10 @@ export default function DetailPenginapan() {
     setOrder({ ...order, date: { ...order.date, [name]: value } })
   }
 
+  const doChangeOrder = ({ name, value }) => {
+    setOrder({ ...order, [name]: value })
+  }
+
   const doChangeOrderOptions = (e) => {
     setOrder({
       ...order,
@@ -82,25 +90,24 @@ export default function DetailPenginapan() {
     })
   }
 
-  const getData = async (id) => {
+  const getData = async (slug) => {
     try {
       const {
         data: { data },
-      } = await axios.get(
-        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/penginapan/${id}.json`
-      )
+      } = await axios.get(`${process.env.BASE_API}/hotel/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
     } catch (err) {
-      console.log("Error")
-      console.log(err)
+      toast.error("Gagal menampilkan hotel\nCoba untuk memuat ulang")
     }
   }
 
+  const doOrder = async () => {}
+
   useEffect(() => {
     const query = router.query
-    if (!query.id) return
-    getData(query.id)
+    if (!query.slug) return
+    getData(query.slug)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
 
@@ -122,14 +129,13 @@ export default function DetailPenginapan() {
               image_urls={data.image_urls}
               alt={data.name ?? ""}
               video_url={data.video_url}
-              video_thumbnail_url={data.video_thumbnail_url}
             />
             <br />
             <TabDesc
               loaded={loaded}
               name={data.name}
               address={data.address}
-              star={data.reviews.star}
+              star={data.reviews.star ?? 0}
               total_review={data.reviews.total_review}
               facilities={data.facilities}
               lat={data.lat}
@@ -186,7 +192,18 @@ export default function DetailPenginapan() {
                     containerClassName="!w-full"
                     options={order.options}
                     onChange={doChangeOrderOptions}
-                    pages="penginapan"
+                    pages="hotel"
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-1 w-full mt-3">
+                  <Text.label className="after:content-['*'] after:ml-0.5">
+                    Catatan
+                  </Text.label>
+                  <TextArea
+                    name="catatan"
+                    onChange={doChangeOrder}
+                    value={order.catatan}
+                    placeholder="Catatan"
                   />
                 </div>
               </div>
@@ -199,11 +216,9 @@ export default function DetailPenginapan() {
                     )}
                   </p>
                 </div>
-                <Link href="/checkout/confirm">
-                  <p className="font-medium text-center mt-3 hover:bg-secondary-yellow/80 text-base text-black bg-[#FDD05C] py-3 px-14 rounded-md shadow-md cursor-pointer">
-                    Pesan Sekarang
-                  </p>
-                </Link>
+                <Button className="mt-4" onClick={doOrder}>
+                  Pesan Sekarang
+                </Button>
               </div>
             </Container>
           )}

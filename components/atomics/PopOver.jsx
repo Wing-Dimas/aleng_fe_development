@@ -61,7 +61,7 @@ export default function PopOver({
         className="w-full h-full absolute z-[3] opacity-0 cursor-pointer"
         onClick={doFocus}
       />
-      {pages == "penginapan" ? (
+      {pages == "hotel" ? (
         <div>
           <div
             tabIndex={0}

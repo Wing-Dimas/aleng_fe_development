@@ -100,11 +100,13 @@ const ProfilePage = () => {
         config
       )
       setIsUpdating(false)
-      toast.success("Berhasil mengubah profile", { id: loadingToast })
+      toast.success("Berhasil mengubah profil", { id: loadingToast })
       getUserData()
     } catch (error) {
       setIsUpdating(false)
-      toast.error("Gagal mengubah profile", { id: loadingToast })
+      toast.error("Gagal mengubah profil\nCoba ulangi lagi", {
+        id: loadingToast,
+      })
     }
   }
 
@@ -113,7 +115,9 @@ const ProfilePage = () => {
     const loadingToast = toast.loading("Mengubah password...")
     const validated = await validateResetPassword(secret)
     if (validated.isError) {
-      toast.error("Password tidak sama", { id: loadingToast })
+      toast.error("Password tidak sama\nPastikan passwordmu sama ya", {
+        id: loadingToast,
+      })
       return
     }
     const config = {
@@ -135,7 +139,9 @@ const ProfilePage = () => {
       }, 1000)
     } catch (error) {
       setIsUpdating(false)
-      toast.error("Gagal mengubah password", { id: loadingToast })
+      toast.error("Gagal mengubah password\nCoba ulangi lagi", {
+        id: loadingToast,
+      })
     }
   }
 
@@ -167,7 +173,7 @@ const ProfilePage = () => {
       })
       setIsLoading(false)
     } catch (error) {
-      toast.error("Error Getting User Data")
+      toast.error("Gagal menampilkan profil\nCoba untuk memuat ulang")
     }
   }
 

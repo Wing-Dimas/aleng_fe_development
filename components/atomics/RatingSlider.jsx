@@ -8,7 +8,7 @@ export default function RatingSlider({ percentages, stars }) {
       className="grid gap-x-2 items-center"
       style={{ gridTemplateColumns: "auto 1fr auto" }}
     >
-      {stars.map((star, i) => {
+      {stars.map((rating, i) => {
         return (
           <Fragment key={i}>
             <div className="flex items-center gap-1">
@@ -21,7 +21,7 @@ export default function RatingSlider({ percentages, stars }) {
                 style={{ width: percentages[i] }}
               />
             </div>
-            <Text className="!text-xs">{star}</Text>
+            <Text className="!text-xs">{rating}</Text>
           </Fragment>
         )
       })}

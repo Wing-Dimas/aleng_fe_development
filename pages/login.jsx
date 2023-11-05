@@ -1,22 +1,19 @@
 import { useState, useContext } from "react"
-import { useRouter } from "next/router"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
-import Checkbox from "@components/atomics/Checkbox"
+import Navbar from "@components/molecules/Navbar"
 import LSTextInput, {
   ObscuredLSTextInput,
 } from "@components/atomics/LSTextInput"
-import Navbar from "@components/molecules/Navbar"
-import validateLogin from "@validators/loginValidator"
 import Text from "@components/atomics/Text"
+import validateLogin from "@validators/loginValidator"
 import { UserContext } from "@utils/useUser"
 import withAuth from "@utils/withAuth"
 import toast from "react-hot-toast"
 
 const LoginPage = () => {
-  const router = useRouter()
   const user = useContext(UserContext)
   const [isLoading, setIsLoading] = useState(false)
   const [credentials, setCredentials] = useState({
@@ -57,16 +54,13 @@ const LoginPage = () => {
         return
       }
       toast.success("Berhasil login", { id: loadingToast })
+      user.setUserId(data.data.user.id)
       user.setToken(data.data.access_token)
       user.setIsSigned(true)
       localStorage.setItem("lenjhelenan", data.data.access_token)
       setIsLoading(false)
     } catch (err) {
-      if (err.response.data.error) {
-        toast.error(err.response.data.error, { id: loadingToast })
-      } else {
-        toast.error("Login Error", { id: loadingToast })
-      }
+      toast.error("Gagal login\nCoba ulangi lagi", { id: loadingToast })
       setIsLoading(false)
     }
   }

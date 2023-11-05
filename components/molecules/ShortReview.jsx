@@ -2,7 +2,7 @@ import Container from "@components/atomics/Container"
 import Rating from "@components/atomics/Rating"
 import RatingSlider from "@components/atomics/RatingSlider"
 import Text from "@components/atomics/Text"
-import { IconArrowRight, IconStar } from "@tabler/icons-react"
+import { IconStar } from "@tabler/icons-react"
 import Carousel from "@components/molecules/Carousel"
 import Image from "next/image"
 
@@ -57,6 +57,11 @@ const ShortReview = ({ star, stars, total_review, comments }) => {
 }
 
 const Comments = ({ name, profile_pic_url, date, star, text }) => {
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  })
   return (
     <div className="mx-2.5 flex flex-col border p-4 shadow-md rounded-md aspect-video">
       <div className="flex items-center justify-between">
@@ -72,7 +77,9 @@ const Comments = ({ name, profile_pic_url, date, star, text }) => {
           </div>
           <div className="flex flex-col items-start">
             <p className="text-xs font-medium">{name}</p>
-            <p className="text-[0.6rem] font-normal text-neutral-500">{date}</p>
+            <p className="text-[0.6rem] font-normal text-neutral-500">
+              {formattedDate}
+            </p>
           </div>
         </div>
         <div className="flex items-center bg-yellow-100 p-1 gap-1 rounded-md">

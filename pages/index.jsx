@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
 import Link from "next/link"
+import axios from "axios"
 import Text from "@components/atomics/Text"
 import Title from "@components/atomics/Title"
 import Carousel from "@components/molecules/Carousel"
@@ -16,16 +17,16 @@ import {
   IconSoup,
   IconStar,
 } from "@tabler/icons-react"
-import axios from "axios"
 import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
 
 export default function Home() {
   const [index, setIndex] = useState(0)
   const [populars, setPopulars] = useState({
     wisata: [],
     paket_wisata: [],
-    kuliner: [],
-    penginapan: [],
+    restaurant: [],
+    hotel: [],
     transportasi: [],
     kerajinan: [],
   })
@@ -38,12 +39,10 @@ export default function Home() {
     try {
       const {
         data: { data },
-      } = await axios.get(
-        "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/populars.json"
-      )
+      } = await axios.get(`${process.env.BASE_API}/popularSite`)
       setPopulars(data)
     } catch (error) {
-      console.log("Error Fetching Populars")
+      toast.error("Gagal menampilkan data\nCoba untuk memuat ulang")
     }
   }
 
@@ -105,7 +104,7 @@ export default function Home() {
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconSoup className="h-5 w-5" />
-                <p>Kuliner</p>
+                <p>Restaurant</p>
               </button>
               <button
                 value={3}
@@ -115,7 +114,7 @@ export default function Home() {
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBuildingCottage className="h-5 w-5" />
-                <p>Penginapan</p>
+                <p>Hotel</p>
               </button>
               <button
                 value={4}
@@ -147,9 +146,9 @@ export default function Home() {
       ) : index === 1 ? (
         <Wisata populars={populars.wisata} />
       ) : index === 2 ? (
-        <Kuliner populars={populars.kuliner} />
+        <Restaurant populars={populars.restaurant} />
       ) : index === 3 ? (
-        <Penginapan populars={populars.penginapan} />
+        <Hotel populars={populars.hotel} />
       ) : index === 4 ? (
         <Kerajinan populars={populars.kerajinan} />
       ) : (
@@ -176,14 +175,14 @@ const PaketWisata = ({ populars }) => {
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/paket/" + popular.id}
+                      url={"/paket/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
                   </Carousel.item>
                 )
@@ -235,14 +234,14 @@ const Wisata = ({ populars }) => {
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/wisata/" + popular.id}
+                      url={"/wisata/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
                   </Carousel.item>
                 )
@@ -279,7 +278,7 @@ const Wisata = ({ populars }) => {
   )
 }
 
-const Kuliner = ({ populars }) => {
+const Restaurant = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -291,18 +290,18 @@ const Kuliner = ({ populars }) => {
           Kami menawarkan restoran disekitar madura untuk menunjang liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
-          <Carousel id="kuliner-1">
+          <Carousel id="restaurant-1">
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/kuliner/" + popular.id}
+                      url={"/restaurant/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
                   </Carousel.item>
                 )
@@ -334,35 +333,35 @@ const Kuliner = ({ populars }) => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Restoran" url="kuliner" />
+      <PilihanKabupaten name="Restoran" url="restaurant" />
     </div>
   )
 }
 
-const Penginapan = ({ populars }) => {
+const Hotel = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
         <Title className="text-center">
-          Penginapan <span className="text-custom-primary-red">Populer</span> di
+          Hotel <span className="text-custom-primary-red">Populer</span> di
           Madura
         </Title>
         <Text className="text-center">
-          Kami menawarkan penginapan disekitar madura untuk menunjang liburanmu
+          Kami menawarkan hotel disekitar madura untuk menunjang liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
-          <Carousel id="penginapan-1">
+          <Carousel id="hotel-1">
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/penginapan/" + popular.id}
+                      url={"/hotel/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                       price={popular.price}
                     />
                   </Carousel.item>
@@ -395,7 +394,7 @@ const Penginapan = ({ populars }) => {
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Penginapan" url="penginapan" />
+      <PilihanKabupaten name="Hotel" url="hotel" />
     </div>
   )
 }
@@ -416,14 +415,14 @@ const Kerajinan = ({ populars }) => {
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/kerajinan/" + popular.id}
+                      url={"/kerajinan/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
                   </Carousel.item>
                 )
@@ -477,14 +476,14 @@ const Transportasi = ({ populars }) => {
             {populars.length > 0 ? (
               populars.map((popular) => {
                 return (
-                  <Carousel.item key={popular.id}>
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      url={"/transportasi/" + popular.id}
+                      url={"/transportasi/" + popular.slug}
                       image_url={popular.thumbnail_url}
                       video_url={popular.short_video_url}
                       name={popular.name}
-                      address={popular.city}
-                      star={popular.star}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
                   </Carousel.item>
                 )
@@ -532,22 +531,22 @@ const PilihanKabupaten = ({ name, url }) => {
       <br />
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-4 text-white font-body1 text-body1 sm:font-heading3 sm:text-heading3">
         <KabupatenCard
-          url={url + "&address=bangkalan"}
+          url={url + "&city=bangkalan"}
           name="Bangkalan"
           bgImage="/static_images/bangkalan.png"
         />
         <KabupatenCard
-          url={url + "&address=pamekasan"}
+          url={url + "&city=pamekasan"}
           name="Pamekasan"
           bgImage="/static_images/pamekasan.png"
         />
         <KabupatenCard
-          url={url + "&address=sampang"}
+          url={url + "&city=sampang"}
           name="Sampang"
           bgImage="/static_images/sampang.png"
         />
         <KabupatenCard
-          url={url + "&address=sumenep"}
+          url={url + "&city=sumenep"}
           name="Sumenep"
           bgImage="/static_images/sumenep.png"
         />

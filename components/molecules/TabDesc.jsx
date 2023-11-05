@@ -81,26 +81,28 @@ export default function TabDesc({
             <ReactMarkdown>{rundown}</ReactMarkdown>
           ) : facilities ? (
             <div className="p-4 grid grid-cols-4 items-center place-items-center">
-              {facilities.map((facility, i) => {
-                return (
-                  <div
-                    key={i.toString()}
-                    className="flex flex-col items-center justify-start"
-                  >
-                    <div className="relative h-8 w-8">
-                      <Image
-                        src={facility.icon_url}
-                        alt={facility.name}
-                        fill
-                        sizes="auto"
-                      />
+              {facilities.length > 0 &&
+                !facilities.includes(null) &&
+                facilities.map((facility, i) => {
+                  return (
+                    <div
+                      key={i.toString()}
+                      className="flex flex-col items-center justify-start"
+                    >
+                      <div className="relative h-8 w-8">
+                        <Image
+                          src={facility.icon_url}
+                          alt={facility.name}
+                          fill
+                          sizes="auto"
+                        />
+                      </div>
+                      <p className="text-xs sm:text-sm font-medium mt-1">
+                        {facility.name}
+                      </p>
                     </div>
-                    <p className="text-xs sm:text-sm font-medium mt-1">
-                      {facility.name}
-                    </p>
-                  </div>
-                )
-              })}
+                  )
+                })}
             </div>
           ) : (
             ""

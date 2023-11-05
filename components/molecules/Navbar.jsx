@@ -58,7 +58,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   }
 
   const doChangeTabId = (e) => {
-    if (e.currentTarget.value == "penginapan") {
+    if (e.currentTarget.value == "hotel") {
       setExpandOptions(true)
     } else {
       setAnimateExpandOptions(false)
@@ -106,7 +106,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   const doSearch = () => {
     console.log("Begin", val[0].toDate())
     console.log("End", val[1].toDate())
-    // if (tabId === "penginapan") {
+    // if (tabId === "hotel") {
     //   router
     //     .push(
     //       `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
@@ -462,28 +462,28 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
           <p>Wisata</p>
         </button>
         <button
-          value="kuliner"
+          value="restaurant"
           onClick={doChangeTabId}
           className={`${
-            tabId === "kuliner"
+            tabId === "restaurant"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
           } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconSoup className="h-5 w-5" />
-          <p>Kuliner</p>
+          <p>Restaurant</p>
         </button>
         <button
-          value="penginapan"
+          value="hotel"
           onClick={doChangeTabId}
           className={`${
-            tabId === "penginapan"
+            tabId === "hotel"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
           } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBuildingCottage className="h-5 w-5" />
-          <p>Penginapan</p>
+          <p>Hotel</p>
         </button>
         <button
           value="kerajinan"

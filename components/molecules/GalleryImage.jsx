@@ -12,7 +12,6 @@ export default function GalleryImage({
   image_urls,
   alt,
   video_url,
-  video_thumbnail_url,
 }) {
   const [played, setPlayed] = useState(false)
   const [lightboxController, setLightboxController] = useState({
@@ -37,8 +36,9 @@ export default function GalleryImage({
   return (
     <div>
       <FsLightbox
+        type="image"
         toggler={lightboxController.toggler}
-        sources={image_urls}
+        sources={image_urls.map((url) => process.env.BASE_STORAGE + url)}
         slide={lightboxController.slide}
       />
       <div className="hidden md:grid grid-cols-3 gap-4">
@@ -57,7 +57,7 @@ export default function GalleryImage({
             <HoverPlayer.Unhovered
               video_url={video_url}
               alt="video"
-              thumbnail_url={video_thumbnail_url}
+              thumbnail_url={image_urls[0]}
               className="rounded-lg shadow-lg overflow-hidden col-span-3 aspect-video"
             />
             <div
@@ -69,7 +69,7 @@ export default function GalleryImage({
                 className="object-cover"
                 sizes="auto"
                 priority
-                src={image_urls[0]}
+                src={process.env.BASE_STORAGE + image_urls[0]}
                 fill
                 alt={alt}
               />
@@ -83,7 +83,7 @@ export default function GalleryImage({
                 className="object-cover"
                 sizes="auto"
                 priority
-                src={image_urls[1]}
+                src={process.env.BASE_STORAGE + image_urls[1]}
                 fill
                 alt={alt}
               />
@@ -92,7 +92,7 @@ export default function GalleryImage({
               <Image
                 sizes="auto"
                 priority
-                src={image_urls[2]}
+                src={process.env.BASE_STORAGE + image_urls[2]}
                 fill
                 alt={alt}
                 className="object-cover pointer-events-none"
@@ -124,7 +124,7 @@ export default function GalleryImage({
                       sizes="auto"
                       className="object-cover"
                       priority
-                      src={image_url}
+                      src={process.env.BASE_STORAGE + image_url}
                       alt={alt}
                       fill={true}
                     />
@@ -141,7 +141,7 @@ export default function GalleryImage({
             <HoverPlayer.Unhovered
               video_url={video_url}
               alt="video"
-              thumbnail_url={video_thumbnail_url}
+              thumbnail_url={image_urls[0]}
               className="block rounded-lg shadow-lg overflow-hidden col-span-3 aspect-video"
               onPlay={doPlay}
               onPause={doPause}

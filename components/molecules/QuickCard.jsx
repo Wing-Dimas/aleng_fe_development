@@ -10,8 +10,8 @@ export default function QuickCard({
   image_url,
   video_url,
   name,
-  star,
-  address,
+  rating = 0,
+  city,
   price,
   children,
 }) {
@@ -27,7 +27,7 @@ export default function QuickCard({
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1 text-orange-400">
             <IconStarFilled className="h-4 w-4" />
-            <Text.small>{star}/5</Text.small>
+            <Text.small>{rating}/5</Text.small>
           </div>
           {price && (
             <Text.small className="text-custom-primary-red">
@@ -39,7 +39,7 @@ export default function QuickCard({
           {name}
         </Heading.h3>
         <Text.label className="!font-medium !text-neutral-700">
-          {address}
+          {city}
         </Text.label>
         {children}
       </div>

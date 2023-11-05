@@ -8,7 +8,7 @@ export default function OrderCard({ showModal, setShowModal }) {
     <Container className="!p-0 !border-none !shadow-none">
       <div className="flex items-center gap-4 p-4">
         <div className="w-10 h-10 rounded-full bg-yellow-400" />
-        <Text>Penginapan</Text>
+        <Text>Hotel</Text>
       </div>
       <hr />
       <div className="p-4 flex justify-between">

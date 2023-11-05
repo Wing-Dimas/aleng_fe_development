@@ -1,36 +1,35 @@
-import MainContent from "@components/atomics/MainContent"
-import Wrapper from "@components/atomics/Wrapper"
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import axios from "axios"
+import { useRouter } from "next/router"
+import HoverPlayer from "@components/molecules/HoverPlayer"
 import Navbar from "@components/molecules/Navbar"
+import Button from "@components/atomics/Button"
+import MainContent from "@components/atomics/MainContent"
+import Heading from "@components/atomics/Heading"
+import Select from "@components/atomics/Select"
+import Text from "@components/atomics/Text"
+import TextInput from "@components/atomics/TextInput"
+import Wrapper from "@components/atomics/Wrapper"
 import {
-  IconBookmark,
   IconCash,
-  IconLoader,
   IconMapPin,
   IconSettings,
   IconStar,
   IconStarFilled,
 } from "@tabler/icons-react"
-import Head from "next/head"
-import Heading from "@components/atomics/Heading"
-import Text from "@components/atomics/Text"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import TextInput from "@components/atomics/TextInput"
-import Select from "@components/atomics/Select"
-import Button from "@components/atomics/Button"
-import { toRupiah } from "@utils/libs"
-import HoverPlayer from "@components/molecules/HoverPlayer"
-import Link from "next/link"
-import axios from "axios"
 import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
+import { toRupiah } from "@utils/libs"
 
 export default function Discover() {
   const router = useRouter()
   const [catalogue, setCatalogue] = useState({
     paket: [],
     wisata: [],
-    kuliner: [],
-    penginapan: [],
+    restaurant: [],
+    hotel: [],
     transportasi: [],
     kerajinan: [],
   })
@@ -48,7 +47,7 @@ export default function Discover() {
   })
   const [advancedOptions, setAdvancedOptions] = useState({
     city: "default",
-    min_star: "default",
+    min_rating: "default",
     max_price: "",
   })
 
@@ -67,7 +66,7 @@ export default function Discover() {
     })
     setAdvancedOptions({
       city: query.city ?? advancedOptions.city,
-      min_star: query.minStar ?? advancedOptions.min_star,
+      min_rating: query.minRating ?? advancedOptions.min_rating,
       max_price: query.maxPrice ?? advancedOptions.max_price,
     })
     setKeyword(query.keyword ?? keyword)
@@ -101,14 +100,14 @@ export default function Discover() {
 
   const doSearchWithOptions = () => {
     let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`
-    if (tabId === "penginapan") {
+    if (tabId === "hotel") {
       newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
     }
     if (advancedOptions.city !== "default") {
       newQuery = `${newQuery}&city=${advancedOptions.city}`
     }
-    if (advancedOptions.min_star !== "default") {
-      newQuery = `${newQuery}&minStar=${advancedOptions.min_star}`
+    if (advancedOptions.min_rating !== "default") {
+      newQuery = `${newQuery}&minRating=${advancedOptions.min_rating}`
     }
     if (advancedOptions.max_price !== "") {
       newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`
@@ -122,14 +121,14 @@ export default function Discover() {
     try {
       setLoaded(false)
       const {
-        data: { data },
-      } = await axios.get(
-        `https://raw.githubusercontent.com/afifcodes/sample-api/main/sample/discover/${id}.json`
-      )
+        data: {
+          data: { data },
+        },
+      } = await axios.get(`${process.env.BASE_API}/${id}/showAll`)
       setCatalogue({ ...catalogue, [id]: data })
       setLoaded(true)
     } catch (error) {
-      console.log(error)
+      toast.error("Gagal menampilkan data\nCoba untuk memuat ulang")
     }
   }
 
@@ -144,7 +143,7 @@ export default function Discover() {
   return (
     <Wrapper>
       <Head>
-        <title>Discover | Lanjalan</title>
+        <title>Discover | Lenjhelenan</title>
       </Head>
       <div className="sticky top-0 z-[90]">
         <Navbar isDiscover />
@@ -204,8 +203,8 @@ export default function Discover() {
             />
             <Select
               leftIcon={<IconStar className="w-5 h-5" />}
-              value={advancedOptions.min_star}
-              name="min_star"
+              value={advancedOptions.min_rating}
+              name="min_rating"
               onChange={doChangeAdvancedOptions}
               options={[
                 {
@@ -256,20 +255,20 @@ export default function Discover() {
             ? catalogue[tabId].map((item) => {
                 return (
                   <Card
-                    key={item.id}
-                    url={"/" + tabId + "/" + item.id}
+                    key={item.slug}
+                    url={"/" + tabId + "/" + item.slug}
                     thumbnail_url={item.thumbnail_url}
                     short_video_url={item.short_video_url}
                     name={item.name}
                     star={item.star}
                     price={item.price}
-                    address={item.address}
+                    city={item.address}
                     unit={
-                      ["paket", "penginapan", "transportasi"].includes(tabId)
+                      ["paket", "hotel", "transportasi"].includes(tabId)
                         ? "orang"
                         : tabId === "wisata"
                         ? "wisatawan"
-                        : tabId === "kuliner"
+                        : tabId === "restaurant"
                         ? "reservasi"
                         : "item"
                     }
@@ -302,7 +301,7 @@ const Card = ({
   name,
   star,
   price,
-  address,
+  city,
   unit = "malam",
 }) => {
   return (
@@ -325,7 +324,7 @@ const Card = ({
         </div>
         <Heading.h3 className="!font-bold tracking-tight">{name}</Heading.h3>
         <Text.label className="!font-medium !text-neutral-700">
-          {address}
+          {city}
         </Text.label>
       </div>
     </Link>
