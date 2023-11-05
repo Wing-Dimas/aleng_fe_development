@@ -2,20 +2,20 @@
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    BASE_API: "http://api.lenjelenanmadura.id/api",
-    GOOGLE_CLIENT_ID:
-      "281996152491-vvhjselprkkeehk4u39rmmh92emjckkr.apps.googleusercontent.com",
-    GOOGLE_CLIENT_SECRET: "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",
-    NEXTAUTH_URL: "http://localhost:3000",
+    BASE_API: "https://server.lenjelenanmadura.id/api",
+    BASE_STORAGE: "https://server.lenjelenanmadura.id/storage/",
+    MOCK_API: "https://raw.githubusercontent.com/afifcodes/sample-api/main/sample",
+    JWT_SECRET:
+      "QwGJkFcp3bzNz242mtmy4zrgROBTGE0A6GuApawpAxI1XsHMO6wVIKq9MT26G5vT",
   },
   images: {
-    domains: [
-      "source.unsplash.com",
-      "images.unsplash.com",
-      "www.amithyahotels.com",
-      "assets.ayobandung.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

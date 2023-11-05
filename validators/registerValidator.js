@@ -1,4 +1,4 @@
-const { object, string, number, ref, transform } = require("yup");
+const { object, string, number, ref, transform } = require("yup")
 
 let registerSchema = object().shape({
   name: string("Nama tidak valid").required("Nama tidak boleh kosong"),
@@ -21,24 +21,24 @@ let registerSchema = object().shape({
     [ref("password"), null],
     "Password tidak sama"
   ),
-});
+})
 
 const validateRegister = async (form) => {
   try {
-    const res = await registerSchema.validate(form, { abortEarly: false });
+    const res = await registerSchema.validate(form, { abortEarly: false })
     // return back form
-    return { isError: false, form };
+    return { isError: false, form }
   } catch (err) {
-    let paths = [];
-    let errors = {};
+    let paths = []
+    let errors = {}
     err.inner.forEach((e) => {
       if (!paths.includes(e.path)) {
-        paths.push(e.path);
-        errors[e.path] = { isError: true, message: e.message };
+        paths.push(e.path)
+        errors[e.path] = { isError: true, message: e.message }
       }
-    });
-    return { isError: true, form: errors };
+    })
+    return { isError: true, form: errors }
   }
-};
+}
 
-export default validateRegister;
+export default validateRegister

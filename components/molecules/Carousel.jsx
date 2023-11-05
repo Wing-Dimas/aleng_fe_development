@@ -1,14 +1,19 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { useBreakpoint } from "use-breakpoint";
-import { BREAKPOINTS } from "@constants/index";
-import { Navigation } from "swiper";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { useBreakpoint } from "use-breakpoint"
+import { Navigation } from "swiper"
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
+import { BREAKPOINTS } from "@constants/index"
 
-export default function Carousel({ id, spaceBetween = 0, children }) {
-  const { breakpoint, _, __ } = useBreakpoint(BREAKPOINTS, "xs");
+export default function Carousel({
+  id,
+  spaceBetween = 0,
+  className,
+  children,
+}) {
+  const { breakpoint, _, __ } = useBreakpoint(BREAKPOINTS, "xs")
   return (
-    <div className="relative">
+    <div className={`${className ? className + " " : ""}relative`}>
       <div className="absolute z-10 top-0 -right-4 h-full flex items-center justify-center">
         <IconChevronRight
           className={`h-8 w-8 text-neutral-500 cursor-pointer swiper-button-next-${id}`}
@@ -46,10 +51,10 @@ export default function Carousel({ id, spaceBetween = 0, children }) {
         {children}
       </Swiper>
     </div>
-  );
+  )
 }
 
 Carousel.item = ({ children }) => {
-  return <SwiperSlide>{children}</SwiperSlide>;
-};
-Carousel.item.displayName = "SwiperSlide";
+  return <SwiperSlide>{children}</SwiperSlide>
+}
+Carousel.item.displayName = "SwiperSlide"

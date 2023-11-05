@@ -1,7 +1,7 @@
 export default function Tab({ options, className, index, setIndex }) {
   const doChangeIndex = (e) => {
-    setIndex(parseInt(e.currentTarget.value));
-  };
+    setIndex(parseInt(e.currentTarget.value))
+  }
 
   return (
     <div
@@ -23,8 +23,8 @@ export default function Tab({ options, className, index, setIndex }) {
           >
             {option}
           </button>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

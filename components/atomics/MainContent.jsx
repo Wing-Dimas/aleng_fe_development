@@ -7,5 +7,5 @@ export default function MainContent({ isDiscover, children }) {
     >
       {children}
     </div>
-  );
+  )
 }

@@ -7,8 +7,8 @@ const Text = ({ className, children }) => {
     >
       {children}
     </p>
-  );
-};
+  )
+}
 
 Text.small = ({ className, children }) => {
   return (
@@ -19,8 +19,8 @@ Text.small = ({ className, children }) => {
     >
       {children}
     </p>
-  );
-};
+  )
+}
 
 Text.label = ({ className, children }) => {
   return (
@@ -31,7 +31,7 @@ Text.label = ({ className, children }) => {
     >
       {children}
     </p>
-  );
-};
+  )
+}
 
-export default Text;
+export default Text

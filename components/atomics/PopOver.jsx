@@ -6,8 +6,8 @@ import {
   IconPlus,
   IconUser,
   IconUsers,
-} from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+} from "@tabler/icons-react"
+import { useEffect, useState } from "react"
 
 export default function PopOver({
   className,
@@ -18,36 +18,36 @@ export default function PopOver({
   pages,
   name,
 }) {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
   // console.log(options);
   const doFocus = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
+      setAnimate(true)
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <div
@@ -61,7 +61,7 @@ export default function PopOver({
         className="w-full h-full absolute z-[3] opacity-0 cursor-pointer"
         onClick={doFocus}
       />
-      {pages == "penginapan" ? (
+      {pages == "hotel" ? (
         <div>
           <div
             tabIndex={0}
@@ -71,7 +71,7 @@ export default function PopOver({
                 : "opacity-0 translate-y-2 "
             }${
               childClassName ? childClassName + " " : ""
-            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[99]`}
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
           >
             {/* Kamar */}
             <div className="mb-2 flex items-center justify-between gap-4">
@@ -174,6 +174,59 @@ export default function PopOver({
             </div>
           </div>
         </div>
+      ) : pages === "kerajinan" ? (
+        <div>
+          <div
+            tabIndex={0}
+            className={`${show ? "" : "hidden "}${
+              animate
+                ? "opacity-100 translate-y-0 "
+                : "opacity-0 translate-y-2 "
+            }${
+              childClassName ? childClassName + " " : ""
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
+          >
+            {/* Item */}
+            <div className="mb-2 flex items-center justify-between gap-4">
+              <div className="flex items-center justify-start gap-2">
+                <IconUser className="text-custom-dark-grey w-5 h-5" />
+                <p className="font-medium text-xs text-custom-black">{name}</p>
+              </div>
+              <div className="flex items-center justify-end gap-2">
+                <button
+                  onClick={onChange}
+                  name="item"
+                  value={options.item != 0 ? options.item - 1 : 0}
+                  className="w-5 h-5 flex items-center justify-center rounded bg-yellow-400 text-white"
+                >
+                  <IconMinus className="w-4 h-4" />
+                </button>
+                <p className="font-medium text-xs text-custom-black">
+                  {options.item}
+                </p>
+                <button
+                  onClick={onChange}
+                  name="item"
+                  value={options.item + 1}
+                  className="w-5 h-5 flex items-center justify-center rounded bg-yellow-400 text-white"
+                >
+                  <IconPlus className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`${
+              className ? className + " " : ""
+            }bg-white px-12 py-5 text-xs font-medium rounded-lg shadow-custom w-full text-custom-black`}
+          >
+            {`${options.item} ${name} `}
+            <div className="absolute z-[2] top-0 left-0 px-4 h-full w-full flex items-center justify-between gap-4 text-xs font-medium text-custom-dark-grey">
+              <IconUsers className="w-5 h-5" />
+              <IconChevronDown className="w-5 h-5 text-custom-primary-red" />
+            </div>
+          </div>
+        </div>
       ) : (
         <div>
           <div
@@ -184,7 +237,7 @@ export default function PopOver({
                 : "opacity-0 translate-y-2 "
             }${
               childClassName ? childClassName + " " : ""
-            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[99]`}
+            }transition-all text-xs absolute top-16 w-full rounded-lg bg-white shadow p-5 border z-[4]`}
           >
             {/* People */}
             <div className="mb-2 flex items-center justify-between gap-4">
@@ -229,5 +282,5 @@ export default function PopOver({
         </div>
       )}
     </div>
-  );
+  )
 }

@@ -1,129 +1,158 @@
-import MainContent from "@components/atomics/MainContent";
-import Wrapper from "@components/atomics/Wrapper";
-import Navbar from "@components/molecules/Navbar";
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import axios from "axios"
+import { useRouter } from "next/router"
+import HoverPlayer from "@components/molecules/HoverPlayer"
+import Navbar from "@components/molecules/Navbar"
+import Button from "@components/atomics/Button"
+import MainContent from "@components/atomics/MainContent"
+import Heading from "@components/atomics/Heading"
+import Select from "@components/atomics/Select"
+import Text from "@components/atomics/Text"
+import TextInput from "@components/atomics/TextInput"
+import Wrapper from "@components/atomics/Wrapper"
 import {
-  IconBookmark,
   IconCash,
   IconMapPin,
   IconSettings,
   IconStar,
   IconStarFilled,
-} from "@tabler/icons-react";
-import Head from "next/head";
-import Heading from "@components/atomics/Heading";
-import Text from "@components/atomics/Text";
-import { useRouter as useNavigator } from "next/navigation";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import TextInput from "@components/atomics/TextInput";
-import Select from "@components/atomics/Select";
-import Button from "@components/atomics/Button";
+} from "@tabler/icons-react"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
+import { toRupiah } from "@utils/libs"
 
 export default function Discover() {
-  const navigator = useNavigator();
-  const router = useRouter();
-  const [tabId, setTabId] = useState("wisata");
-  const [expand, setExpand] = useState(false);
-  const [animate, setAnimate] = useState(false);
-  const [keyword, setKeyword] = useState("");
+  const router = useRouter()
+  const [catalogue, setCatalogue] = useState({
+    paket: [],
+    wisata: [],
+    restaurant: [],
+    hotel: [],
+    transportasi: [],
+    kerajinan: [],
+  })
+  const [loaded, setLoaded] = useState(false)
+  const [tabId, setTabId] = useState("paket")
+  const [expand, setExpand] = useState(false)
+  const [animate, setAnimate] = useState(false)
+  const [keyword, setKeyword] = useState("")
   const [options, setOptions] = useState({
     check_in: new Date(),
     check_out: new Date(),
     room_count: 1,
     adult_count: 1,
     child_count: 0,
-  });
+  })
   const [advancedOptions, setAdvancedOptions] = useState({
     city: "default",
-    min_star: "default",
+    min_rating: "default",
     max_price: "",
-  });
+  })
 
   const doChangeAdvancedOptions = ({ name, value }) => {
-    setAdvancedOptions({ ...advancedOptions, [name]: value });
-  };
+    setAdvancedOptions({ ...advancedOptions, [name]: value })
+  }
 
   useEffect(() => {
-    const query = router.query;
+    const query = router.query
     setOptions({
       check_in: query.in ?? options.check_in,
       check_out: query.out ?? options.check_out,
       room_count: query.room ?? options.room_count,
       adult_count: query.adult ?? options.adult_count,
       child_count: query.child ?? options.child_count,
-    });
+    })
     setAdvancedOptions({
       city: query.city ?? advancedOptions.city,
-      min_star: query.minStar ?? advancedOptions.min_star,
+      min_rating: query.minRating ?? advancedOptions.min_rating,
       max_price: query.maxPrice ?? advancedOptions.max_price,
-    });
-    setKeyword(query.keyword ?? keyword);
+    })
+    setKeyword(query.keyword ?? keyword)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   const doExpand = () => {
-    setExpand(true);
-  };
+    setExpand(true)
+  }
 
   const doShrink = () => {
-    setAnimate(false);
-  };
+    setAnimate(false)
+  }
 
   useEffect(() => {
     if (expand) {
-      document.body.style.overflow = "hidden";
-      setAnimate(true);
+      document.body.style.overflow = "hidden"
+      setAnimate(true)
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
-  }, [expand]);
+  }, [expand])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setExpand(false);
-      }, 500);
+        setExpand(false)
+      }, 500)
     }
-  }, [animate]);
-
-  useEffect(() => {
-    const query = router.query;
-    setTabId(query.tabId ?? tabId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [animate])
 
   const doSearchWithOptions = () => {
-    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`;
-    if (tabId === "penginapan") {
-      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`;
+    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`
+    if (tabId === "hotel") {
+      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
     }
     if (advancedOptions.city !== "default") {
-      newQuery = `${newQuery}&city=${advancedOptions.city}`;
+      newQuery = `${newQuery}&city=${advancedOptions.city}`
     }
-    if (advancedOptions.min_star !== "default") {
-      newQuery = `${newQuery}&minStar=${advancedOptions.min_star}`;
+    if (advancedOptions.min_rating !== "default") {
+      newQuery = `${newQuery}&minRating=${advancedOptions.min_rating}`
     }
     if (advancedOptions.max_price !== "") {
-      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`;
+      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`
     }
     router.replace(newQuery).then(() => {
-      router.reload();
-    });
-  };
+      router.reload()
+    })
+  }
+
+  const getData = async (id) => {
+    try {
+      setLoaded(false)
+      const {
+        data: {
+          data: { data },
+        },
+      } = await axios.get(`${process.env.BASE_API}/${id}/showAll`)
+      setCatalogue({ ...catalogue, [id]: data })
+      setLoaded(true)
+    } catch (error) {
+      toast.error("Gagal menampilkan data\nCoba untuk memuat ulang")
+    }
+  }
+
+  useEffect(() => {
+    const { query, isReady } = router
+    if (!isReady) return
+    setTabId(query.tabId ?? tabId)
+    getData(query.tabId ?? tabId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router])
 
   return (
     <Wrapper>
       <Head>
-        <title>Discover | Lanjalan</title>
+        <title>Discover | Lenjhelenan</title>
       </Head>
-      <div className="sticky top-0 z-10">
+      <div className="sticky top-0 z-[90]">
         <Navbar isDiscover />
       </div>
       {/* Drawer */}
       <div
         className={`${expand ? "block" : "hidden"} ${
           animate ? "bg-opacity-25" : "bg-opacity-0"
-        } transition-all fixed h-full w-screen left-0 z-[1000] bg-black`}
+        } transition-all fixed h-full w-screen left-0 z-[90] bg-black`}
       >
         <div
           className="relative grid h-full"
@@ -174,8 +203,8 @@ export default function Discover() {
             />
             <Select
               leftIcon={<IconStar className="w-5 h-5" />}
-              value={advancedOptions.min_star}
-              name="min_star"
+              value={advancedOptions.min_rating}
+              name="min_rating"
               onChange={doChangeAdvancedOptions}
               options={[
                 {
@@ -208,65 +237,96 @@ export default function Discover() {
           </div>
         </div>
       </div>
-      <MainContent isDiscover>
-        <div className="fixed bottom-0 left-0 w-full flex items-center justify-center my-4">
-          <div className="p-1 w-fit bg-black bg-opacity-20 backdrop-blur-md rounded-full overflow-hidden">
-            <button
-              onClick={doExpand}
-              className="font-semibold bg-white p-3 flex items-center gap-2 rounded-full"
-            >
-              <IconSettings className="h-5 w-5" />
-              <span>Atur Pencarian</span>
-            </button>
-          </div>
+      <div className="z-[50] fixed bottom-0 left-0 w-full flex items-center justify-center my-4">
+        <div className="p-1 w-fit bg-black bg-opacity-20 backdrop-blur-md rounded-full overflow-hidden">
+          <button
+            onClick={doExpand}
+            className="font-semibold bg-white p-3 flex items-center gap-2 rounded-full"
+          >
+            <IconSettings className="h-5 w-5" />
+            <span>Atur Pencarian</span>
+          </button>
         </div>
+      </div>
+      <MainContent isDiscover>
         <br />
         <div className="grid grid-cols-1 exs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-6 gap-y-8">
-          {[...Array(24).keys()].map((v) => {
-            return <Card key={v} num={v} tabId={tabId} />;
-          })}
+          {loaded
+            ? catalogue[tabId].map((item) => {
+                return (
+                  <Card
+                    key={item.slug}
+                    url={"/" + tabId + "/" + item.slug}
+                    thumbnail_url={item.thumbnail_url}
+                    short_video_url={item.short_video_url}
+                    name={item.name}
+                    star={item.star}
+                    price={item.price}
+                    city={item.address}
+                    unit={
+                      ["paket", "hotel", "transportasi"].includes(tabId)
+                        ? "orang"
+                        : tabId === "wisata"
+                        ? "wisatawan"
+                        : tabId === "restaurant"
+                        ? "reservasi"
+                        : "item"
+                    }
+                  />
+                )
+              })
+            : [...Array(12)].map((v, i) => {
+                return (
+                  <div key={i}>
+                    <Skeleton className="w-full aspect-square mb-2" />
+                    <Skeleton className="max-w-[75%]" />
+                    <Skeleton className="h-8" />
+                    <Skeleton className="h-8 max-w-[50%]" />
+                  </div>
+                )
+              })}
         </div>
+        <br />
+        <br />
+        <br />
       </MainContent>
     </Wrapper>
-  );
+  )
 }
 
-const Card = ({ num, tabId }) => {
-  const id =
-    tabId === "kuliner"
-      ? "culinary"
-      : tabId === "penginapan"
-      ? "home stay"
-      : tabId === "kerajinan"
-      ? "handcraft"
-      : tabId === "transporatasi"
-      ? "transportation"
-      : "trip";
+const Card = ({
+  url,
+  thumbnail_url,
+  short_video_url,
+  name,
+  star,
+  price,
+  city,
+  unit = "malam",
+}) => {
   return (
-    <div>
-      <div
-        className="aspect-[9/10] bg-cover bg-center rounded-2xl flex justify-end p-4"
-        style={{
-          backgroundImage: `url('https://source.unsplash.com/random/?${id}&${num}')`,
-        }}
-      >
-        <IconBookmark className="h-8 w-8 text-white fill-[#00000050]" />
-      </div>
+    <Link href={url}>
+      <HoverPlayer
+        video_url={short_video_url}
+        thumbnail_url={thumbnail_url}
+        className="rounded-2xl overflow-hidden aspect-[9/10]"
+        alt="lenjhelenan"
+      />
       <div className="p-4 flex flex-col gap-1">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1 text-orange-400">
             <IconStarFilled className="h-4 w-4" />
-            <Text.small className="font-semibold">4.9</Text.small>
+            <Text.small className="font-semibold">{star}</Text.small>
           </div>
-          <Text.small className="text-custom-primary-red">70K/malam</Text.small>
+          <Text.small className="text-custom-primary-red">
+            {toRupiah.format(price)}/{unit}
+          </Text.small>
         </div>
-        <Heading.h3 className="!font-bold tracking-tight">
-          Pantai Ropet
-        </Heading.h3>
+        <Heading.h3 className="!font-bold tracking-tight">{name}</Heading.h3>
         <Text.label className="!font-medium !text-neutral-700">
-          Banraas, Dungkek, Sumenep
+          {city}
         </Text.label>
       </div>
-    </div>
-  );
-};
+    </Link>
+  )
+}

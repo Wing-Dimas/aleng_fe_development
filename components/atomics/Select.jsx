@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { IconChevronDown } from "@tabler/icons-react";
+import { useEffect, useState } from "react"
+import { IconChevronDown } from "@tabler/icons-react"
 
 export default function Select({
   containerClassName,
@@ -12,41 +12,41 @@ export default function Select({
   onChange,
   options,
 }) {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
 
   const doFocus = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doChange = (e) => {
-    onChange({ name, value: e.currentTarget.value });
-    doFocus();
-  };
+    onChange({ name, value: e.currentTarget.value })
+    doFocus()
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
+      setAnimate(true)
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <div
@@ -61,7 +61,7 @@ export default function Select({
           animate ? "opacity-100 translate-y-0 " : "opacity-0 translate-y-2 "
         }${
           childClassName ? childClassName + " " : ""
-        }max-h-96 overflow-y-auto transition-all text-left absolute top-16 w-full rounded-md bg-white shadow-custom p-2 border z-[99]`}
+        }max-h-96 overflow-y-auto transition-all text-left absolute top-16 w-full rounded-md bg-white shadow-custom p-2 border z-[2]`}
       >
         {options.map((o, i) => {
           return (
@@ -75,7 +75,7 @@ export default function Select({
             >
               {o.name}
             </button>
-          );
+          )
         })}
       </div>
       <button
@@ -91,5 +91,5 @@ export default function Select({
         <IconChevronDown className="h-5 w-5 text-custom-primary-red" />
       </div>
     </div>
-  );
+  )
 }

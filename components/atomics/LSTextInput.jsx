@@ -1,5 +1,5 @@
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
-import { useState } from "react";
+import { IconEye, IconEyeOff } from "@tabler/icons-react"
+import { useState } from "react"
 
 const LSTextInput = ({
   value,
@@ -12,8 +12,8 @@ const LSTextInput = ({
   readonly,
 }) => {
   const doChange = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
-  };
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
+  }
   return (
     <label htmlFor={name} className="w-full">
       <span className="block font-semibold mb-1 after:content-['*'] after:ml-0.5">
@@ -37,8 +37,8 @@ const LSTextInput = ({
         {message?.message}
       </p>
     </label>
-  );
-};
+  )
+}
 
 const ObscuredLSTextInput = ({
   value,
@@ -52,13 +52,13 @@ const ObscuredLSTextInput = ({
   readonly,
 }) => {
   const doChange = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.value });
-  };
-  const [show, setShow] = useState(false);
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.value })
+  }
+  const [show, setShow] = useState(false)
 
   const doToggleShow = () => {
-    setShow(!show);
-  };
+    setShow(!show)
+  }
   return (
     <label htmlFor={name} className="w-full">
       <span className="block font-semibold mb-1 after:content-['*'] after:ml-0.5">
@@ -91,8 +91,8 @@ const ObscuredLSTextInput = ({
         {message?.message}
       </p>
     </label>
-  );
-};
+  )
+}
 
-export { ObscuredLSTextInput };
-export default LSTextInput;
+export { ObscuredLSTextInput }
+export default LSTextInput

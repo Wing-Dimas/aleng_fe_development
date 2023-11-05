@@ -5,5 +5,5 @@ export default function DottedUnderline() {
       <div className="h-1 w-8 rounded-full bg-custom-primary-red" />
       <div className="h-1 w-20 rounded-full bg-custom-primary-red" />
     </div>
-  );
+  )
 }

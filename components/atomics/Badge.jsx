@@ -7,5 +7,5 @@ export default function Badge({ className, name }) {
     >
       {name}
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-const { object, string, ref } = require("yup");
+const { object, string, ref } = require("yup")
 
 let resetPasswordSchema = object().shape({
   password: string("Password tidak valid")
@@ -8,24 +8,24 @@ let resetPasswordSchema = object().shape({
     [ref("password"), null],
     "Password tidak sama"
   ),
-});
+})
 
 const validateResetPassword = async (form) => {
   try {
-    const res = await resetPasswordSchema.validate(form, { abortEarly: false });
+    const res = await resetPasswordSchema.validate(form, { abortEarly: false })
     // return back form
-    return { isError: false, form };
+    return { isError: false, form }
   } catch (err) {
-    let paths = [];
-    let errors = {};
+    let paths = []
+    let errors = {}
     err.inner.forEach((e) => {
       if (!paths.includes(e.path)) {
-        paths.push(e.path);
-        errors[e.path] = { isError: true, message: e.message };
+        paths.push(e.path)
+        errors[e.path] = { isError: true, message: e.message }
       }
-    });
-    return { isError: true, form: errors };
+    })
+    return { isError: true, form: errors }
   }
-};
+}
 
-export default validateResetPassword;
+export default validateResetPassword

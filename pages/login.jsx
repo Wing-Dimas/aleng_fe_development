@@ -1,117 +1,88 @@
-/* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import axios from "axios";
-import Cookies from "js-cookie";
-import Checkbox from "@components/atomics/Checkbox";
+import { useState, useContext } from "react"
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
+import axios from "axios"
+import Navbar from "@components/molecules/Navbar"
 import LSTextInput, {
   ObscuredLSTextInput,
-} from "@components/atomics/LSTextInput";
-import Navbar from "@components/molecules/Navbar";
-import validateLogin from "@validators/loginValidator";
-// import { signIn, useSession } from "next-auth/react";
-import { unauthPage } from "protectedRoute/authentication";
-import Text from "@components/atomics/Text";
+} from "@components/atomics/LSTextInput"
+import Text from "@components/atomics/Text"
+import validateLogin from "@validators/loginValidator"
+import { UserContext } from "@utils/useUser"
+import withAuth from "@utils/withAuth"
+import toast from "react-hot-toast"
 
-export async function getServerSideProps(context) {
-  await unauthPage(context);
-  return {
-    props: {},
-  };
-}
-
-export default function LoginPage({}) {
-  // const { data: session, status } = useSession();
-  const router = useRouter();
+const LoginPage = () => {
+  const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    rememberme: false,
-  });
+  })
   const [messages, setMessages] = useState({
     email: { isError: false, message: "" },
     password: { isError: false, message: "" },
-  });
+  })
 
   const doChange = ({ name, value }) => {
-    setCredentials({ ...credentials, [name]: value });
-  };
+    setCredentials({ ...credentials, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (credentials.rememberme == true) {
-      try {
-        const validated = await validateLogin(credentials);
-        if (validated.isError) {
-          setMessages(validated.form);
-          return;
-        }
-        const res = await axios.post(process.env.BASE_API + "/auth/login", {
-          email: credentials.email,
-          password: credentials.password,
-        });
-        if (!!res.data.access_token) {
-          Cookies.set("token", res.data.access_token);
-          router.push("/");
-        }
-        setCredentials({ email: "", password: "", rememberme: false });
-        setMessages({
-          email: { isError: false, message: "" },
-          password: { isError: false, message: "" },
-        });
-      } catch (err) {
-        setCredentials({ email: "", password: "", rememberme: false });
-        setMessages({
-          email: { isError: false, message: "" },
-          password: { isError: false, message: "" },
-        });
-      }
-    } else {
-      setCredentials({ email: "", password: "", rememberme: false });
-      setMessages({
-        email: { isError: false, message: "" },
-        password: { isError: false, message: "" },
-      });
+    if (isLoading) return
+    e.preventDefault()
+    const validated = await validateLogin(credentials)
+    if (validated.isError) {
+      setMessages(validated.form)
+      return
     }
-  };
-
-  const handleSignIn = () => {
-    signIn();
-  };
+    const loadingToast = toast.loading("Sedang login...")
+    try {
+      setIsLoading(true)
+      const { data } = await axios.post(process.env.BASE_API + "/auth/login", {
+        email: credentials.email,
+        password: credentials.password,
+      })
+      if (
+        typeof data.data.access_token === "undefined" ||
+        data.data.access_token === null ||
+        data.data.access_token === ""
+      ) {
+        setIsLoading(false)
+        toast.error(data.meta.message, { id: loadingToast })
+        return
+      }
+      toast.success("Berhasil login", { id: loadingToast })
+      user.setUserId(data.data.user.id)
+      user.setToken(data.data.access_token)
+      user.setIsSigned(true)
+      localStorage.setItem("lenjhelenan", data.data.access_token)
+      setIsLoading(false)
+    } catch (err) {
+      toast.error("Gagal login\nCoba ulangi lagi", { id: loadingToast })
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen min-w-screen max-w-screen font-inter overflow-x-hidden text-[#252525] ">
       <Head>
-        <title>Login | Lenjhelenan</title>
+        <title>Lenjhelenan | Login</title>
       </Head>
       <Navbar isFixed auth />
-      {/* <div className={`max-w-full w-full relative bg-white`}>
-        <div className="absolute top-0 w-full md:top-[2rem]">
-          <Image
-            src="/icons/batik_footer.png"
-            width={1000}
-            height={50}
-            alt="gambarLanjalan"
-            className="drop-shadow-md w-full opacity-80"
-            priority
-          />
-        </div>
-      </div> */}
       <div className="flex flex-col gap-2 md:gap-16 p-4 lg:flex-row justify-center  items-center md:items-start w-full min-h-[calc(100vh-16rem)] h-full font-semibold text-[2rem] my-[8rem] mb-52">
-        <div className="lg:w-1/2 z-50 relative justify-center flex w-full ">
+        <div className="lg:w-1/2 z-[3] relative justify-center flex w-full ">
           <Image
-            src="/static_images/lanjalan_baner.png"
+            src="/static_images/lenjhelenan.png"
             width={600}
             height={50}
-            alt="iconLanjalan"
+            alt="lenjhelenan"
             priority
             className="w-1/2 lg:w-full"
           />
         </div>
-        <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-50 bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
+        <div className=" rounded-md border-solid shadow-lg border-2 border-gray-200 p-9 z-[3] bg-white w-full lg:w-1/3 flex flex-col justify-center items-center">
           <Text className="md:text-[2rem] text-center">
             Selamat Datang Kembali
           </Text>
@@ -138,12 +109,6 @@ export default function LoginPage({}) {
               message={messages.password}
             />
             <div className="flex flex-row justify-between w-full">
-              <Checkbox
-                name="rememberme"
-                value={credentials.rememberme}
-                onChange={doChange}
-                label="Ingat aku"
-              />
               <Link href="/forgetpassword">
                 <p className="font-medium text-[12px] hover:text-blue-500">
                   Lupa password?
@@ -157,28 +122,9 @@ export default function LoginPage({}) {
             >
               Masuk
             </button>
-            {/* <p className="text-xs md:text-sm">atau</p>
-            <button
-              className="p-3 w-full rounded-md border-2 border-[#5B5B5B] hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200"
-              onClick={handleSignIn}
-            >
-              <div className="flex gap-4 justify-center max-w-sm items-center">
-                <div className="relative w-5 h-5">
-                  <Image
-                    src="/static_icons/google.svg"
-                    priority
-                    fill
-                    alt="google"
-                  />
-                </div>
-                <span className="block w-max font-semibold tracking-wide text-xs md:text-sm ">
-                  Masuk dengan Google
-                </span>
-              </div>
-            </button> */}
             <br />
             <Text className="">
-              Belum Punya Account ?{" "}
+              Belum Punya Akun?{" "}
               <span className="text-red-600 hover:text-red-800 cursor-pointer">
                 <Link href="/register">Register</Link>
               </span>
@@ -194,28 +140,30 @@ export default function LoginPage({}) {
               width={1000}
               height={1000}
               src="/static_images/batik_footer.png"
-              alt="logo"
+              alt="lenjhelenan"
               className="w-full opacity-80"
             />
           </div>
         </div>
-        <div className="bottom-8 md:bottom-7 absolute w-full z-40 md:left-8">
+        <div className="bottom-8 md:bottom-7 absolute w-full z-[2] md:left-8">
           <div className="relative md:w-1/2">
             <Image
               priority
               width={1000}
               height={1000}
               src="/static_images/characters_madura.png"
-              alt="logo"
+              alt="lenjhelenan"
             />
           </div>
         </div>
-        <div className="relative z-50">
+        <div className="relative z-[3]">
           <p className="w-full absolute bg-[#FFF4E8] p-2 bottom-0 text-[#615A56] font-medium text-[0.60rem] md:text-[0.75] text-center">
-            Copyright © 2022 Lenjhelenan Madura
+            Copyright © 2023 Lenjhelenan Madura
           </p>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default withAuth(LoginPage, "portal")

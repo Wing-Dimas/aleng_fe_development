@@ -1,15 +1,15 @@
-import { IconCopy, IconX } from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import Image from "next/image";
-import Rating from "./Rating";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { IconCopy, IconX } from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import Image from "next/image"
+import Rating from "@components/atomics/Rating"
+import { CopyToClipboard } from "react-copy-to-clipboard"
+import { useState } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export default function ModalDetailOrder({ showModal, setShowModal }) {
-  const [copied, setCopied] = useState(false);
-  let num = 131233122;
+  const [copied, setCopied] = useState(false)
+  let num = 131233122
   const toastNotif = () => {
     toast.success("Copied", {
       position: "bottom-center",
@@ -20,8 +20,8 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
       draggable: true,
       progress: undefined,
       theme: "dark",
-    });
-  };
+    })
+  }
   return (
     <div>
       {showModal ? (
@@ -132,7 +132,7 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
                           Rp.10.000
                         </Text.small>
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -157,5 +157,5 @@ export default function ModalDetailOrder({ showModal, setShowModal }) {
         false
       )}
     </div>
-  );
+  )
 }

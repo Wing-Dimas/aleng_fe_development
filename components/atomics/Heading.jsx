@@ -3,8 +3,8 @@ const Heading = ({ className, children }) => {
     <h1 className={`font-bold text-5xl${className ? " " + className : ""}`}>
       {children}
     </h1>
-  );
-};
+  )
+}
 
 Heading.h2 = ({ className, children }) => {
   return (
@@ -15,8 +15,8 @@ Heading.h2 = ({ className, children }) => {
     >
       {children}
     </h2>
-  );
-};
+  )
+}
 
 Heading.h3 = ({ className, children }) => {
   return (
@@ -27,7 +27,7 @@ Heading.h3 = ({ className, children }) => {
     >
       {children}
     </h3>
-  );
-};
+  )
+}
 
-export default Heading;
+export default Heading

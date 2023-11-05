@@ -1,66 +1,54 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Cookies from "js-cookie";
-import { useUserStore } from "store/userstore";
-import Text from "@components/atomics/Text";
-import Title from "@components/atomics/Title";
-import Carousel from "@components/molecules/Carousel";
-import DottedUnderline from "@components/molecules/DottedUnderline";
-import Footer from "@components/molecules/Footer";
-import Navbar from "@components/molecules/Navbar";
-import QuickCard from "@components/molecules/QuickCard";
+import { useEffect, useState } from "react"
+import Head from "next/head"
+import Link from "next/link"
+import axios from "axios"
+import Text from "@components/atomics/Text"
+import Title from "@components/atomics/Title"
+import Carousel from "@components/molecules/Carousel"
+import DottedUnderline from "@components/molecules/DottedUnderline"
+import Footer from "@components/molecules/Footer"
+import Navbar from "@components/molecules/Navbar"
+import QuickCard from "@components/molecules/QuickCard"
 import {
   IconBeach,
   IconBuildingCottage,
   IconBus,
   IconHorseToy,
   IconSoup,
-} from "@tabler/icons-react";
-import axios from "axios";
+  IconStar,
+} from "@tabler/icons-react"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
 
-export async function getServerSideProps(context) {
-  return {
-    props: {},
-  };
-}
-export default function Home({}) {
-  const cookie = Cookies.get("token");
-  const changeUserStore = useUserStore((state) => state.fetchUser);
-  const [menuIndex, setMenuIndex] = useState(0);
+export default function Home() {
+  const [index, setIndex] = useState(0)
   const [populars, setPopulars] = useState({
     wisata: [],
-    penginapan: [],
-    restoran: [],
-  });
+    paket_wisata: [],
+    restaurant: [],
+    hotel: [],
+    transportasi: [],
+    kerajinan: [],
+  })
 
   const doChangeTabIndex = (e) => {
-    setMenuIndex(parseInt(e.currentTarget.value));
-  };
-
-  useEffect(() => {
-    if (cookie != undefined) {
-      changeUserStore(process.env.BASE_API + "/auth/user/profile", cookie);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cookie]);
+    setIndex(parseInt(e.currentTarget.value))
+  }
 
   const getPopulars = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/popularSite");
-      setPopulars({
-        wisata: data.data.wisata,
-        penginapan: data.data.hotel,
-        restoran: data.data.restaurant,
-      });
+      const {
+        data: { data },
+      } = await axios.get(`${process.env.BASE_API}/popularSite`)
+      setPopulars(data)
     } catch (error) {
-      console.log("Error Fetching Populars");
+      toast.error("Gagal menampilkan data\nCoba untuk memuat ulang")
     }
-  };
+  }
 
   useEffect(() => {
-    getPopulars();
-  }, []);
+    getPopulars()
+  }, [])
 
   return (
     <div className="font-inter min-h-screen min-w-screen max-w-screen">
@@ -70,7 +58,7 @@ export default function Home({}) {
       <Navbar />
       <div
         style={{
-          backgroundImage: "url('/static_images/gili_labak.jpg')",
+          backgroundImage: "url('/static_images/hero.png')",
         }}
         className="pt-24 pb-12 bg-center bg-cover"
       >
@@ -81,10 +69,10 @@ export default function Home({}) {
           </p>
         </div>
         <div className="px-4 my-2 sm:my-8">
-          <div className="font-medium max-w-3xl mx-auto">
+          <div className="font-medium max-w-5xl mx-auto whitespace-nowrap">
             <div
               style={{
-                gridTemplateColumns: "repeat(5, 1fr)",
+                gridTemplateColumns: "repeat(6, 1fr)",
               }}
               className="scrollbar-custom text-xs sm:text-base grid bg-neutral-200 rounded-full border-2 border-neutral-200"
             >
@@ -92,47 +80,57 @@ export default function Home({}) {
                 value={0}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 0 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 0 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconStar className="h-5 w-5" />
+                <p>Paket Wisata</p>
+              </button>
+              <button
+                value={1}
+                onClick={doChangeTabIndex}
+                className={`${
+                  index === 1 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBeach className="h-5 w-5" />
                 <p>Wisata</p>
               </button>
               <button
-                value={1}
-                onClick={doChangeTabIndex}
-                className={`${
-                  menuIndex === 1 ? "bg-white shadow-custom" : "bg-transparent"
-                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
-              >
-                <IconSoup className="h-5 w-5" />
-                <p>Kuliner</p>
-              </button>
-              <button
                 value={2}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 2 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 2 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
-                <IconBuildingCottage className="h-5 w-5" />
-                <p>Penginapan</p>
+                <IconSoup className="h-5 w-5" />
+                <p>Restaurant</p>
               </button>
               <button
                 value={3}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 3 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 3 ? "bg-white shadow-custom" : "bg-transparent"
+                } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
+              >
+                <IconBuildingCottage className="h-5 w-5" />
+                <p>Hotel</p>
+              </button>
+              <button
+                value={4}
+                onClick={doChangeTabIndex}
+                className={`${
+                  index === 4 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconHorseToy className="h-5 w-5" />
                 <p>Kerajinan</p>
               </button>
               <button
-                value={4}
+                value={5}
                 onClick={doChangeTabIndex}
                 className={`${
-                  menuIndex === 4 ? "bg-white shadow-custom" : "bg-transparent"
+                  index === 5 ? "bg-white shadow-custom" : "bg-transparent"
                 } transition-all font-medium border-2 rounded-full p-2.5 flex items-center justify-center gap-2`}
               >
                 <IconBus className="h-5 w-5" />
@@ -143,20 +141,81 @@ export default function Home({}) {
         </div>
         <br />
       </div>
-      {menuIndex === 0 ? (
+      {index === 0 ? (
+        <PaketWisata populars={populars.paket_wisata} />
+      ) : index === 1 ? (
         <Wisata populars={populars.wisata} />
-      ) : menuIndex === 1 ? (
-        <Kuliner populars={populars.restoran} />
-      ) : menuIndex === 2 ? (
-        <Penginapan populars={populars.penginapan} />
-      ) : menuIndex === 3 ? (
-        <Kerajinan />
+      ) : index === 2 ? (
+        <Restaurant populars={populars.restaurant} />
+      ) : index === 3 ? (
+        <Hotel populars={populars.hotel} />
+      ) : index === 4 ? (
+        <Kerajinan populars={populars.kerajinan} />
       ) : (
-        <Transportasi />
+        <Transportasi populars={populars.transportasi} />
       )}
       <Footer />
     </div>
-  );
+  )
+}
+
+const PaketWisata = ({ populars }) => {
+  return (
+    <div>
+      <div className="px-4 py-4 md:py-8">
+        <Title className="text-center">
+          Paket Wisata <span className="text-custom-primary-red">Populer</span>{" "}
+          di Madura
+        </Title>
+        <Text className="text-center">
+          Kami menawarkan wisata disekitar madura untuk menemani liburanmu
+        </Text>
+        <div className="max-w-7xl mx-auto">
+          <Carousel id="paket-1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
+                    <QuickCard
+                      url={"/paket/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
+                    />
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
+          </Carousel>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const Wisata = ({ populars }) => {
@@ -172,84 +231,54 @@ const Wisata = ({ populars }) => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="wisata-1">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
+                      url={"/wisata/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
-                  </Link>
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
       <PilihanKabupaten name="Wisata" url="wisata" />
-      <div className="px-4 py-4 md:py-8">
-        <Title className="text-center">
-          Paket <span className="text-custom-primary-red">Wisata</span> Untukmu
-        </Title>
-        <Text className="text-center">
-          Kami bisa memilihkanmu beberapa paket wisata agar kamu merasa nyaman
-        </Text>
-        <div className="max-w-7xl mx-auto">
-          <Carousel id="wisata-2">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    >
-                      <Text.small className="text-custom-primary-red">
-                        {popular.price}/{popular.time}
-                      </Text.small>
-                    </QuickCard>
-                  </Link>
-                </Carousel.item>
-              );
-            })}
-          </Carousel>
-        </div>
-      </div>
-      <div className="bg-white px-4 py-4 md:py-8">
-        <Title className="text-center">
-          Wisata <span className="text-custom-primary-red">Religi</span> dan{" "}
-          <span className="text-custom-primary-red">Bersejarah</span>
-        </Title>
-        <DottedUnderline />
-        <div className="max-w-7xl mx-auto">
-          <Carousel id="wisata-3">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/wisata/" + popular.id}>
-                    <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?tour&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
-                    />
-                  </Link>
-                </Carousel.item>
-              );
-            })}
-          </Carousel>
-        </div>
-      </div>
     </div>
-  );
-};
+  )
+}
 
-const Kuliner = ({ populars }) => {
+const Restaurant = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -261,66 +290,116 @@ const Kuliner = ({ populars }) => {
           Kami menawarkan restoran disekitar madura untuk menunjang liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
-          <Carousel id="kuliner-1">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/kuliner/" + popular.id}>
+          <Carousel id="restaurant-1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?food&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
+                      url={"/restaurant/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
-                  </Link>
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Restoran" url="kuliner" />
+      <PilihanKabupaten name="Restoran" url="restaurant" />
     </div>
-  );
-};
+  )
+}
 
-const Penginapan = ({ populars }) => {
+const Hotel = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
         <Title className="text-center">
-          Penginapan <span className="text-custom-primary-red">Populer</span> di
+          Hotel <span className="text-custom-primary-red">Populer</span> di
           Madura
         </Title>
         <Text className="text-center">
-          Kami menawarkan penginapan disekitar madura untuk menunjang liburanmu
+          Kami menawarkan hotel disekitar madura untuk menunjang liburanmu
         </Text>
         <div className="max-w-7xl mx-auto">
-          <Carousel id="penginapan-1">
-            {populars.map((popular, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href={"/penginapan/" + popular.id}>
+          <Carousel id="hotel-1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?homestay&${i}`}
-                      title={popular.title}
-                      address={popular.city}
-                      review_count={popular.star}
+                      url={"/hotel/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
                       price={popular.price}
                     />
-                  </Link>
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
-      <PilihanKabupaten name="Penginapan" url="penginapan" />
+      <PilihanKabupaten name="Hotel" url="hotel" />
     </div>
-  );
-};
+  )
+}
 
-const Kerajinan = () => {
+const Kerajinan = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -333,29 +412,54 @@ const Kerajinan = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="kerajinan-1">
-            {[...Array(20)].map((v, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href="/kerajinan/1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?handcraft&${i}`}
-                      title="Kerajinan Batok Kelapa"
-                      address="Jl. Raya Ketengan, Bangkalan"
-                      review_count={666}
+                      url={"/kerajinan/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
-                  </Link>
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
       <PilihanKabupaten name="Kerajinan" url="kerajinan" />
     </div>
-  );
-};
+  )
+}
 
-const Transportasi = () => {
+const Transportasi = ({ populars }) => {
   return (
     <div>
       <div className="px-4 py-4 md:py-8">
@@ -369,27 +473,52 @@ const Transportasi = () => {
         </Text>
         <div className="max-w-7xl mx-auto">
           <Carousel id="transportasi-1">
-            {[...Array(20)].map((v, i) => {
-              return (
-                <Carousel.item key={i.toString()}>
-                  <Link href="/transportasi/1">
+            {populars.length > 0 ? (
+              populars.map((popular) => {
+                return (
+                  <Carousel.item key={popular.slug}>
                     <QuickCard
-                      imageUrl={`https://source.unsplash.com/random/?transportation&${i}`}
-                      title="Kapal Penyebrangan"
-                      address="Kab. Bangkalan"
-                      review_count={666}
+                      url={"/transportasi/" + popular.slug}
+                      image_url={popular.thumbnail_url}
+                      video_url={popular.short_video_url}
+                      name={popular.name}
+                      city={popular.city}
+                      rating={popular.rating}
                     />
-                  </Link>
+                  </Carousel.item>
+                )
+              })
+            ) : (
+              <>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
                 </Carousel.item>
-              );
-            })}
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+                <Carousel.item>
+                  <div className="m-4">
+                    <Skeleton className="h-96" />
+                  </div>
+                </Carousel.item>
+              </>
+            )}
           </Carousel>
         </div>
       </div>
       <PilihanKabupaten name="Transportasi" url="transportasi" />
     </div>
-  );
-};
+  )
+}
 
 const PilihanKabupaten = ({ name, url }) => {
   return (
@@ -423,8 +552,8 @@ const PilihanKabupaten = ({ name, url }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 const KabupatenCard = ({ bgImage, name, url }) => {
   return (
@@ -436,5 +565,5 @@ const KabupatenCard = ({ bgImage, name, url }) => {
         {name}
       </div>
     </Link>
-  );
-};
+  )
+}

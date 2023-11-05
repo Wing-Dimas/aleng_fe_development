@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState, useContext } from "react"
+import Image from "next/image"
+import Link from "next/link"
 import {
   IconBeach,
   IconBuildingCottage,
@@ -14,70 +14,73 @@ import {
   IconPlus,
   IconSearch,
   IconSoup,
+  IconStar,
   IconUser,
-} from "@tabler/icons-react";
-import Text from "@components/atomics/Text";
-import { Calendar } from "react-multi-date-picker";
-import { useRouter } from "next/router";
+} from "@tabler/icons-react"
+import Text from "@components/atomics/Text"
+import { Calendar } from "react-multi-date-picker"
+import { useRouter } from "next/router"
+import { UserContext } from "@utils/useUser"
 
 export default function Navbar({ isFixed = false, isDiscover = false }) {
-  const router = useRouter();
-  const [tabId, setTabId] = useState("wisata");
-  const [expandNavbar, setExpandNavbar] = useState(false);
-  const [animateExpand, setAnimateExpand] = useState(false);
-  const [keyword, setKeyword] = useState("");
-  const [expandOptions, setExpandOptions] = useState(false);
-  const [animateExpandOptions, setAnimateExpandOptions] = useState(false);
+  const router = useRouter()
+  const [tabId, setTabId] = useState("paket")
+  const [expandNavbar, setExpandNavbar] = useState(false)
+  const [animateExpand, setAnimateExpand] = useState(false)
+  const [keyword, setKeyword] = useState("")
+  const [expandOptions, setExpandOptions] = useState(false)
+  const [animateExpandOptions, setAnimateExpandOptions] = useState(false)
+  const [val, setVal] = useState(new Date())
   const [options, setOptions] = useState({
     check_in: new Date(),
     check_out: new Date(),
     room_count: 1,
     adult_count: 1,
     child_count: 0,
-  });
+  })
 
   useEffect(() => {
-    const query = router.query;
-    setTabId(query.tabId ?? tabId);
+    const query = router.query
+    setTabId(query.tabId ?? tabId)
     setOptions({
       check_in: query.in ?? options.check_in,
       check_out: query.out ?? options.check_out,
       room_count: query.room ?? options.room_count,
       adult_count: query.adult ?? options.adult_count,
       child_count: query.child ?? options.child_count,
-    });
-    setKeyword(query.keyword ?? keyword);
+    })
+    setKeyword(query.keyword ?? keyword)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router])
 
   const doChangeKeyword = (e) => {
-    setKeyword(e.currentTarget.value);
-  };
+    setKeyword(e.currentTarget.value)
+  }
 
   const doChangeTabId = (e) => {
-    if (e.currentTarget.value == "penginapan") {
-      setExpandOptions(true);
+    if (e.currentTarget.value == "hotel") {
+      setExpandOptions(true)
     } else {
-      setAnimateExpandOptions(false);
+      setAnimateExpandOptions(false)
     }
-    setTabId(e.currentTarget.value);
-  };
+    setTabId(e.currentTarget.value)
+  }
 
   const doChangeRoomCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, room_count: options.room_count + 1 });
+      setOptions({ ...options, room_count: options.room_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
         room_count:
           options.room_count <= 1 ? options.room_count : options.room_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doChangeAdultCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, adult_count: options.adult_count + 1 });
+      setOptions({ ...options, adult_count: options.adult_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
@@ -85,81 +88,83 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           options.adult_count <= 1
             ? options.adult_count
             : options.adult_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doChangeChildCount = (e) => {
     if (e.currentTarget.name === "add") {
-      setOptions({ ...options, child_count: options.child_count + 1 });
+      setOptions({ ...options, child_count: options.child_count + 1 })
     } else if (e.currentTarget.name === "subtract") {
       setOptions({
         ...options,
         child_count: options.child_count <= 0 ? 0 : options.child_count - 1,
-      });
+      })
     }
-  };
+  }
 
   const doSearch = () => {
-    if (tabId === "penginapan") {
-      router
-        .push(
-          `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
-        )
-        .then(() => {
-          router.reload();
-        });
-    } else {
-      router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
-        router.reload();
-      });
-    }
-  };
+    console.log("Begin", val[0].toDate())
+    console.log("End", val[1].toDate())
+    // if (tabId === "hotel") {
+    //   router
+    //     .push(
+    //       `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
+    //     )
+    //     .then(() => {
+    //       router.reload();
+    //     });
+    // } else {
+    //   router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
+    //     router.reload();
+    //   });
+    // }
+  }
 
   const doExpandNavbar = () => {
-    setExpandNavbar(true);
-  };
+    setExpandNavbar(true)
+  }
 
   const doCloseNavbar = () => {
-    setAnimateExpand(false);
-  };
+    setAnimateExpand(false)
+  }
 
   const doBlurNavbar = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimateExpand(false);
+      setAnimateExpand(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (expandNavbar) {
-      document.body.style.overflow = "hidden";
-      setAnimateExpand(true);
+      document.body.style.overflow = "hidden"
+      setAnimateExpand(true)
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
-  }, [expandNavbar]);
+  }, [expandNavbar])
 
   useEffect(() => {
     if (!animateExpand) {
       setTimeout(() => {
-        setExpandNavbar(false);
-      }, 500);
+        setExpandNavbar(false)
+      }, 500)
     }
-  }, [animateExpand]);
+  }, [animateExpand])
 
   useEffect(() => {
     if (expandOptions) {
-      setAnimateExpandOptions(true);
+      setAnimateExpandOptions(true)
     }
-  }, [expandOptions]);
+  }, [expandOptions])
 
   useEffect(() => {
     if (!animateExpandOptions) {
       setTimeout(() => {
-        setExpandOptions(false);
-      }, 500);
+        setExpandOptions(false)
+      }, 500)
     }
-  }, [animateExpandOptions]);
+  }, [animateExpandOptions])
 
   const renderButton = (direction, handleClick) => {
     return (
@@ -173,14 +178,12 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           <IconChevronLeft className="h-5 w-5" />
         )}
       </button>
-    );
-  };
+    )
+  }
 
   return (
     <div
-      className={
-        isFixed ? "fixed w-full top-0 z-[1000]" : "sticky top-0 z-[1000]"
-      }
+      className={isFixed ? "fixed w-full top-0 z-[90]" : "sticky top-0 z-[90]"}
     >
       <div onBlur={doBlurNavbar} className="relative">
         <TopNavBar
@@ -198,7 +201,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
           tabIndex={1}
           className={`${expandNavbar ? "block" : "hidden"} ${
             animateExpand ? "translate-y-0" : "-translate-y-full"
-          } font-medium transition-transform duration-500 z-[999] absolute top-full w-full`}
+          } font-medium transition-transform duration-500 z-[96] absolute top-full w-full`}
         >
           <div className="relative">
             <TabMenu doChangeTabId={doChangeTabId} tabId={tabId} />
@@ -210,7 +213,7 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
                 animateExpandOptions && animateExpand
                   ? "translate-y-0"
                   : "-translate-y-full"
-              } transition-transform duration-500 fixed md:absolute z-[-1] left-0 right-0 -top-full md:top-auto max-w-3xl mx-auto bg-white md:rounded-b-3xl overflow-hidden pb-4 md:pb-0`}
+              } transition-transform duration-500 fixed md:absolute z-[96] left-0 right-0 -top-full md:top-auto max-w-3xl mx-auto bg-white md:rounded-b-3xl overflow-hidden pb-4 md:pb-0`}
             >
               <div className="scrollbar-custom relative flex flex-col md:grid grid-cols-2 gap-4 px-4 pt-44 md:pt-2 pb-4 md:pb-0 overflow-y-scroll md:overflow-y-hidden h-screen md:h-auto">
                 {/* Dates */}
@@ -227,8 +230,8 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
                   <Calendar
                     shadow={false}
                     className="font-semibold font-inter !block !w-full !border-none"
-                    // value={values}
-                    // onChange={setValues}
+                    value={val}
+                    onChange={setVal}
                     range
                     rangeHover
                     renderButton={renderButton}
@@ -249,10 +252,10 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
       <div
         className={`${expandNavbar ? "block" : "hidden"} ${
           animateExpand ? "opacity-25" : "opacity-0"
-        } transition-opacity duration-500 z-[997] absolute top-0 bg-black w-full h-screen`}
+        } transition-opacity duration-500 z-[91] absolute top-0 bg-black w-full h-screen`}
       />
     </div>
-  );
+  )
 }
 
 const TopNavBar = ({
@@ -271,13 +274,13 @@ const TopNavBar = ({
       tabIndex={1}
       className={`${expandNavbar ? "border-transparent shadow-none " : ""}${
         isDiscover ? "border-b shadow-none" : "border-b shadow-sm"
-      } bg-white sticky top-0 z-[1000] w-full transition-all`}
+      } bg-white sticky top-0 z-[98] w-full transition-all`}
     >
       <div
         style={{ gridTemplateColumns: "1fr auto 1fr" }}
         className={`${
           isDiscover ? "max-w-[112rem]" : "max-w-7xl"
-        } z-[1000] m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8`}
+        } m-auto px-4 md:px-8 py-2 md:py-4 flex justify-between md:grid items-center w-full gap-4 md:gap-8`}
       >
         <div
           className={`${expandNavbar ? "flex" : "hidden"} ${
@@ -296,9 +299,10 @@ const TopNavBar = ({
             <Image
               width={48}
               height={48}
-              alt="logo"
+              alt="lenjhelenan"
               src="/static_icons/logo.png"
               className="drop-shadow-md max-w-[45px] w-full"
+              priority
             />
           </Link>
         </div>
@@ -311,7 +315,7 @@ const TopNavBar = ({
             placeholder="Mau cari apa nih?"
             className="border transition-all w-full focus:ring-1 focus:ring-red-300 border-neutral-300 bg-neutral-50 hover:bg-neutral-100 focus:bg-neutral-100 rounded-full outline-none pl-12 pr-20 placeholder-shown:pl-9 placeholder-shown:pr-9 py-2.5 placeholder-shown:text-neutral-300 placeholder-shown:text-center"
           />
-          <div className="absolute left-4 top-0 h-full flex flex-col items-center justify-center">
+          <div className="pointer-events-none absolute left-4 top-0 h-full flex flex-col items-center justify-center">
             <IconSearch className="h-5 w-5 text-neutral-400" />
           </div>
           <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
@@ -337,45 +341,46 @@ const TopNavBar = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const NavbarMenu = () => {
-  const [show, setShow] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const user = useContext(UserContext)
+  const [show, setShow] = useState(false)
+  const [animate, setAnimate] = useState(false)
 
   const doFocus = () => {
     if (!show) {
-      setShow(true);
+      setShow(true)
     } else {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   const doBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
-      setAnimate(false);
+      setAnimate(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (show) {
-      setAnimate(true);
+      setAnimate(true)
     }
-  }, [show]);
+  }, [show])
 
   useEffect(() => {
     if (!animate) {
       setTimeout(() => {
-        setShow(false);
-      }, 150);
+        setShow(false)
+      }, 150)
     }
-  }, [animate]);
+  }, [animate])
 
   return (
     <div
       onBlur={doBlur}
-      className="relative z-[1000] flex items-center justify-end"
+      className="relative z-[99] flex items-center justify-end"
     >
       <button
         onClick={doFocus}
@@ -388,20 +393,8 @@ const NavbarMenu = () => {
         tabIndex={1}
         className={`${show ? "" : "hidden "}${
           animate ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
+        } overflow-hidden transition-all origin-top-right text-sm font-medium absolute flex flex-col top-12 right-0 bg-white shadow-xl border rounded-xl w-64`}
       >
-        <Link
-          href="/unduh-aplikasi"
-          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
-        >
-          Unduh Aplikasi
-        </Link>
-        <Link
-          href="/collection"
-          className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
-        >
-          Koleksi Kamu
-        </Link>
         <Link
           href="/my-order"
           className="bg-white hover:bg-neutral-100 transition-all py-3 px-4"
@@ -414,34 +407,48 @@ const NavbarMenu = () => {
         >
           Profile
         </Link>
-        <div className="grid grid-cols-2 p-2 gap-2">
-          <Link
-            className="text-center bg-gradient-to-br from-custom-gradient1 to-custom-gradient2 text-white rounded-md transition-all p-2"
-            href="/login"
-          >
-            Login
-          </Link>
-          <Link
-            className="text-center bg-custom-gradient1 rounded-md transition-all p-2"
-            href="/register"
-          >
-            Sign Up
-          </Link>
-        </div>
+        {!user.isSigned && (
+          <div className="grid grid-cols-2 p-2 gap-2">
+            <Link
+              className="text-center bg-gradient-to-br from-custom-gradient1 to-custom-gradient2 text-white rounded-md transition-all p-2"
+              href="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className="text-center bg-custom-gradient1 rounded-md transition-all p-2"
+              href="/register"
+            >
+              Sign Up
+            </Link>
+          </div>
+        )}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const TabMenu = ({ tabId, doChangeTabId }) => {
   return (
-    <div className="z-[999] w-full bg-white pt-0 pb-0 md:pb-4 px-0 md:px-4 border-b md:border-b-0 relative">
+    <div className="z-[97] w-full bg-white pt-0 pb-0 md:pb-4 px-0 md:px-4 border-b md:border-b-0 relative">
       <div className="pointer-events-none absolute md:hidden top-0 right-0 h-full w-8 bg-gradient-to-r from-transparent to-white"></div>
       <div className="pointer-events-none absolute md:hidden top-0 left-0 h-full w-8 bg-gradient-to-r from-white to-transparent"></div>
       <div
-        style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
-        className="bg-white md:bg-neutral-200 md:rounded-full scrollbar-custom py-4 md:py-0 px-4 md:px-0 max-w-3xl mx-auto whitespace-nowrap grid gap-4 md:gap-0 md:border-2 md:border-neutral-200"
+        style={{ gridTemplateColumns: "repeat(6, 1fr)" }}
+        className="bg-white md:bg-neutral-200 md:rounded-full scrollbar-custom py-4 md:py-0 px-8 md:px-0 max-w-4xl mx-auto whitespace-nowrap grid gap-4 md:gap-0 md:border-2 md:border-neutral-200"
       >
+        <button
+          value="paket"
+          onClick={doChangeTabId}
+          className={`${
+            tabId === "paket"
+              ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
+              : "border-transparent"
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
+        >
+          <IconStar className="h-5 w-5" />
+          <p>Paket Wisata</p>
+        </button>
         <button
           value="wisata"
           onClick={doChangeTabId}
@@ -449,34 +456,34 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "wisata"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBeach className="h-5 w-5" />
           <p>Wisata</p>
         </button>
         <button
-          value="kuliner"
+          value="restaurant"
           onClick={doChangeTabId}
           className={`${
-            tabId === "kuliner"
+            tabId === "restaurant"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconSoup className="h-5 w-5" />
-          <p>Kuliner</p>
+          <p>Restaurant</p>
         </button>
         <button
-          value="penginapan"
+          value="hotel"
           onClick={doChangeTabId}
           className={`${
-            tabId === "penginapan"
+            tabId === "hotel"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBuildingCottage className="h-5 w-5" />
-          <p>Penginapan</p>
+          <p>Hotel</p>
         </button>
         <button
           value="kerajinan"
@@ -485,7 +492,7 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "kerajinan"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconHorseToy className="h-5 w-5" />
           <p>Kerajinan</p>
@@ -497,15 +504,15 @@ const TabMenu = ({ tabId, doChangeTabId }) => {
             tabId === "transportasi"
               ? "bg-neutral-200 md:bg-neutral-100 border-neutral-300 shadow-custom"
               : "border-transparent"
-          } border rounded-full p-2.5 flex items-center justify-center gap-2`}
+          } border rounded-full py-2.5 px-3 md:px-0 flex items-center justify-center gap-2`}
         >
           <IconBus className="h-5 w-5" />
           <p>Transportasi</p>
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const StayOptions = ({
   options,
@@ -600,5 +607,5 @@ const StayOptions = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

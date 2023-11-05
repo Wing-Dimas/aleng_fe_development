@@ -1,4 +1,4 @@
-import { IconCheck } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react"
 
 export default function Checkbox({
   containerClassName,
@@ -10,8 +10,8 @@ export default function Checkbox({
   onChange,
 }) {
   const doCheck = (e) => {
-    onChange({ name: e.currentTarget.name, value: e.currentTarget.checked });
-  };
+    onChange({ name: e.currentTarget.name, value: e.currentTarget.checked })
+  }
 
   return (
     <div
@@ -45,5 +45,5 @@ export default function Checkbox({
         {label}
       </label>
     </div>
-  );
+  )
 }

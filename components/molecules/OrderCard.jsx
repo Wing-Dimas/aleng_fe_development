@@ -1,14 +1,14 @@
-import Badge from "@components/atomics/Badge";
-import Heading from "@components/atomics/Heading";
-import Text from "@components/atomics/Text";
-import Container from "@components/atomics/Container";
+import Badge from "@components/atomics/Badge"
+import Heading from "@components/atomics/Heading"
+import Text from "@components/atomics/Text"
+import Container from "@components/atomics/Container"
 
 export default function OrderCard({ showModal, setShowModal }) {
   return (
     <Container className="!p-0 !border-none !shadow-none">
       <div className="flex items-center gap-4 p-4">
         <div className="w-10 h-10 rounded-full bg-yellow-400" />
-        <Text>Penginapan</Text>
+        <Text>Hotel</Text>
       </div>
       <hr />
       <div className="p-4 flex justify-between">
@@ -39,5 +39,5 @@ export default function OrderCard({ showModal, setShowModal }) {
         </div>
       </div>
     </Container>
-  );
+  )
 }
