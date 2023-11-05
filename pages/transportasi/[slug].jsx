@@ -1,28 +1,30 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
+import Footer from "@components/molecules/Footer"
+import GalleryImage from "@components/molecules/GalleryImage"
+import Navbar from "@components/molecules/Navbar"
+import ShortReview from "@components/molecules/ShortReview"
+import TabDesc from "@components/molecules/TabDesc"
+import Button from "@components/atomics/Button"
 import Container from "@components/atomics/Container"
 import DateInput from "@components/atomics/DateInput"
 import Heading from "@components/atomics/Heading"
 import MainContent from "@components/atomics/MainContent"
 import PopOver from "@components/atomics/PopOver"
 import Text from "@components/atomics/Text"
-import Wrapper from "@components/atomics/Wrapper"
-import Footer from "@components/molecules/Footer"
-import GalleryImage from "@components/molecules/GalleryImage"
-import Navbar from "@components/molecules/Navbar"
-import ShortReview from "@components/molecules/ShortReview"
-import TabDesc from "@components/molecules/TabDesc"
-import { toRupiah } from "@utils/libs"
-import Skeleton from "react-loading-skeleton"
-import toast from "react-hot-toast"
 import TextArea from "@components/atomics/TextArea"
-import Button from "@components/atomics/Button"
+import Wrapper from "@components/atomics/Wrapper"
+import { toRupiah } from "@utils/libs"
+import { UserContext } from "@utils/useUser"
 
 export default function DetailTransportasi() {
   const router = useRouter()
+  const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
     slug: "",
@@ -91,7 +93,49 @@ export default function DetailTransportasi() {
     }
   }
 
-  const doOrder = async () => {}
+  const doOrder = async () => {
+    if (isLoading) return
+    if (!user.isSigned) {
+      router.push("/login")
+      return
+    }
+    const loadingToast = toast.loading("Sedang membuat order")
+    try {
+      setIsLoading(true)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const createOrder = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrder",
+        {
+          user_id: user.userId,
+          jumlah_pemesan: order.options.people,
+          tanggal_checkin: order.date,
+          catatan: order.catatan,
+        },
+        config
+      )
+      const createOrderDetail = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderDetail",
+        {
+          tipe: "transportasi",
+          id_destinasi: data.id,
+          catatan: order.catatan,
+          harga: data.price * order.options.people,
+          order_id: createOrder.data.data.id,
+        },
+        config
+      )
+      toast.success("Berhasil membuat order", { id: loadingToast })
+      setIsLoading(false)
+      router.push("/my-order/" + createOrder.data.data.id)
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Gagal membuat order", { id: loadingToast })
+    }
+  }
 
   useEffect(() => {
     const query = router.query

@@ -3,6 +3,7 @@ import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
+import toast from "react-hot-toast"
 import Navbar from "@components/molecules/Navbar"
 import LSTextInput, {
   ObscuredLSTextInput,
@@ -11,7 +12,6 @@ import Text from "@components/atomics/Text"
 import validateLogin from "@validators/loginValidator"
 import { UserContext } from "@utils/useUser"
 import withAuth from "@utils/withAuth"
-import toast from "react-hot-toast"
 
 const LoginPage = () => {
   const user = useContext(UserContext)

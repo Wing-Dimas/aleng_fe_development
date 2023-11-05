@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import Head from "next/head"
 import Link from "next/link"
 import axios from "axios"
-import { useRouter } from "next/router"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
 import HoverPlayer from "@components/molecules/HoverPlayer"
 import Navbar from "@components/molecules/Navbar"
 import Button from "@components/atomics/Button"
@@ -19,8 +21,6 @@ import {
   IconStar,
   IconStarFilled,
 } from "@tabler/icons-react"
-import Skeleton from "react-loading-skeleton"
-import toast from "react-hot-toast"
 import { toRupiah } from "@utils/libs"
 
 export default function Discover() {
@@ -37,41 +37,16 @@ export default function Discover() {
   const [tabId, setTabId] = useState("paket")
   const [expand, setExpand] = useState(false)
   const [animate, setAnimate] = useState(false)
-  const [keyword, setKeyword] = useState("")
+  const [search, setSearch] = useState("")
   const [options, setOptions] = useState({
-    check_in: new Date(),
-    check_out: new Date(),
-    room_count: 1,
-    adult_count: 1,
-    child_count: 0,
-  })
-  const [advancedOptions, setAdvancedOptions] = useState({
     city: "default",
-    min_rating: "default",
     max_price: "",
+    min_price: "",
   })
 
-  const doChangeAdvancedOptions = ({ name, value }) => {
-    setAdvancedOptions({ ...advancedOptions, [name]: value })
+  const doChangeOptions = ({ name, value }) => {
+    setOptions({ ...options, [name]: value })
   }
-
-  useEffect(() => {
-    const query = router.query
-    setOptions({
-      check_in: query.in ?? options.check_in,
-      check_out: query.out ?? options.check_out,
-      room_count: query.room ?? options.room_count,
-      adult_count: query.adult ?? options.adult_count,
-      child_count: query.child ?? options.child_count,
-    })
-    setAdvancedOptions({
-      city: query.city ?? advancedOptions.city,
-      min_rating: query.minRating ?? advancedOptions.min_rating,
-      max_price: query.maxPrice ?? advancedOptions.max_price,
-    })
-    setKeyword(query.keyword ?? keyword)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router])
 
   const doExpand = () => {
     setExpand(true)
@@ -99,32 +74,40 @@ export default function Discover() {
   }, [animate])
 
   const doSearchWithOptions = () => {
-    let newQuery = `/discover?tabId=${tabId}&keyword=${keyword}`
-    if (tabId === "hotel") {
-      newQuery = `${newQuery}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
+    let newQuery = `/discover?tabId=${tabId}&search=${search}`
+    if (options.city !== "default") {
+      newQuery = `${newQuery}&city=${options.city}`
     }
-    if (advancedOptions.city !== "default") {
-      newQuery = `${newQuery}&city=${advancedOptions.city}`
+    if (options.min_price !== "") {
+      newQuery = `${newQuery}&maxPrice=${options.min_price}`
     }
-    if (advancedOptions.min_rating !== "default") {
-      newQuery = `${newQuery}&minRating=${advancedOptions.min_rating}`
+    if (options.max_price !== "") {
+      newQuery = `${newQuery}&maxPrice=${options.max_price}`
     }
-    if (advancedOptions.max_price !== "") {
-      newQuery = `${newQuery}&maxPrice=${advancedOptions.max_price}`
-    }
-    router.replace(newQuery).then(() => {
-      router.reload()
-    })
+    router.replace(newQuery)
   }
 
   const getData = async (id) => {
     try {
       setLoaded(false)
+      const { query, isReady } = router
+      let params = {}
+      if (query.search && query.search != "") {
+        params.search = query.search
+      }
+      if (query.city && query.city !== "default") {
+        params.kota = query.city
+      }
+      if (query.maxPrice && query.max_price !== "") {
+        params.maxPrice = query.maxPrice
+      }
       const {
         data: {
           data: { data },
         },
-      } = await axios.get(`${process.env.BASE_API}/${id}/showAll`)
+      } = await axios.get(`${process.env.BASE_API}/${id}/showAll`, {
+        params: params,
+      })
       setCatalogue({ ...catalogue, [id]: data })
       setLoaded(true)
     } catch (error) {
@@ -135,6 +118,12 @@ export default function Discover() {
   useEffect(() => {
     const { query, isReady } = router
     if (!isReady) return
+    setOptions({
+      city: query.city ?? options.city,
+      min_price: query.maxPrice ?? options.min_price,
+      max_price: query.maxPrice ?? options.max_price,
+    })
+    setSearch(query.search ?? search)
     setTabId(query.tabId ?? tabId)
     getData(query.tabId ?? tabId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,18 +155,26 @@ export default function Discover() {
           >
             <Heading.h3>Atur Pencarian</Heading.h3>
             <TextInput
+              name="min_price"
+              leftIcon={<IconCash className="w-5 h-5" />}
+              onChange={doChangeOptions}
+              value={options.min_price}
+              placeholder="Minimal harga"
+              type="number"
+            />
+            <TextInput
               name="max_price"
               leftIcon={<IconCash className="w-5 h-5" />}
-              onChange={doChangeAdvancedOptions}
-              value={advancedOptions.max_price}
+              onChange={doChangeOptions}
+              value={options.max_price}
               placeholder="Maksimal harga"
               type="number"
             />
             <Select
               leftIcon={<IconMapPin className="w-5 h-5" />}
-              value={advancedOptions.city}
+              value={options.city}
               name="city"
-              onChange={doChangeAdvancedOptions}
+              onChange={doChangeOptions}
               options={[
                 {
                   name: "Kota",
@@ -198,38 +195,6 @@ export default function Discover() {
                 {
                   name: "Sampanng",
                   value: "sampang",
-                },
-              ]}
-            />
-            <Select
-              leftIcon={<IconStar className="w-5 h-5" />}
-              value={advancedOptions.min_rating}
-              name="min_rating"
-              onChange={doChangeAdvancedOptions}
-              options={[
-                {
-                  name: "Rating minimal",
-                  value: "default",
-                },
-                {
-                  name: "1",
-                  value: "1",
-                },
-                {
-                  name: "2",
-                  value: "2",
-                },
-                {
-                  name: "3",
-                  value: "3",
-                },
-                {
-                  name: "4",
-                  value: "4",
-                },
-                {
-                  name: "5",
-                  value: "5",
                 },
               ]}
             />

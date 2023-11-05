@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import toast from "react-hot-toast"
+import Skeleton from "react-loading-skeleton"
+import GalleryImage from "@components/molecules/GalleryImage"
+import Navbar from "@components/molecules/Navbar"
+import ShortReview from "@components/molecules/ShortReview"
+import TabDesc from "@components/molecules/TabDesc"
+import Button from "@components/atomics/Button"
 import Container from "@components/atomics/Container"
 import DateInput from "@components/atomics/DateInput"
 import Heading from "@components/atomics/Heading"
@@ -11,18 +17,14 @@ import PopOver from "@components/atomics/PopOver"
 import Text from "@components/atomics/Text"
 import Wrapper from "@components/atomics/Wrapper"
 import Footer from "@components/molecules/Footer"
-import GalleryImage from "@components/molecules/GalleryImage"
-import Navbar from "@components/molecules/Navbar"
-import ShortReview from "@components/molecules/ShortReview"
-import TabDesc from "@components/molecules/TabDesc"
-import { toRupiah } from "@utils/libs"
-import toast from "react-hot-toast"
-import Skeleton from "react-loading-skeleton"
 import TextArea from "@components/atomics/TextArea"
-import Button from "@components/atomics/Button"
+import { toRupiah } from "@utils/libs"
+import { UserContext } from "@utils/useUser"
 
 export default function DetailRestaurant() {
   const router = useRouter()
+  const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
     slug: "",
@@ -61,7 +63,6 @@ export default function DetailRestaurant() {
   const [order, setOrder] = useState({
     catatan: "",
     date: new Date().toISOString().split("T")[0],
-    time: new Date().toISOString().substr(11, 5),
     options: {
       people: 1,
     },
@@ -95,7 +96,49 @@ export default function DetailRestaurant() {
     }
   }
 
-  const doOrder = async () => {}
+  const doOrder = async () => {
+    if (isLoading) return
+    if (!user.isSigned) {
+      router.push("/login")
+      return
+    }
+    const loadingToast = toast.loading("Sedang membuat order")
+    try {
+      setIsLoading(true)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const createOrder = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrder",
+        {
+          user_id: user.userId,
+          jumlah_pemesan: order.options.people,
+          tanggal_checkin: order.date,
+          catatan: order.catatan,
+        },
+        config
+      )
+      const createOrderDetail = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderDetail",
+        {
+          tipe: "restaurant",
+          id_destinasi: data.id,
+          catatan: order.catatan,
+          harga: data.price * order.options.people,
+          order_id: createOrder.data.data.id,
+        },
+        config
+      )
+      toast.success("Berhasil membuat order", { id: loadingToast })
+      setIsLoading(false)
+      router.push("/my-order/" + createOrder.data.data.id)
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Gagal membuat order", { id: loadingToast })
+    }
+  }
 
   useEffect(() => {
     const query = router.query
@@ -173,18 +216,6 @@ export default function DetailRestaurant() {
                     options={order.options}
                     onChange={doChangeOrderOptions}
                     name="Orang"
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-1 w-full mt-3">
-                  <Text.label className="after:content-['*'] after:ml-0.5">
-                    Waktu Reservasi
-                  </Text.label>
-                  <DateInput
-                    name="time"
-                    value={order.time}
-                    onChange={doChangeOrder}
-                    containerClassName="!w-full"
-                    isTime
                   />
                 </div>
                 <div className="flex flex-col items-center gap-1 w-full mt-3">

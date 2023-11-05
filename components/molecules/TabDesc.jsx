@@ -8,6 +8,7 @@ import Skeleton from "react-loading-skeleton"
 import Container from "@components/atomics/Container"
 import ReactMarkdown from "react-markdown"
 import dynamic from "next/dynamic"
+import Text from "@components/atomics/Text"
 const Map = dynamic(() => import("@components/atomics/Map"), {
   ssr: false,
 })
@@ -78,7 +79,25 @@ export default function TabDesc({
           ) : index === 1 ? (
             <Map lat={lat} long={long} />
           ) : rundown ? (
-            <ReactMarkdown>{rundown}</ReactMarkdown>
+            rundown.map((r, i) => {
+              return (
+                <div key={i} className="pb-4">
+                  <Text>{r.rute}</Text>
+                  <div className="flex items-center justify-between">
+                    <Text>{r.judul}</Text>
+                    <Text>
+                      {r.hari}{" "}
+                      {new Date(r.tanggal).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </Text>
+                  </div>
+                  <ReactMarkdown>{r.kegiatan}</ReactMarkdown>
+                </div>
+              )
+            })
           ) : facilities ? (
             <div className="p-4 grid grid-cols-4 items-center place-items-center">
               {facilities.length > 0 &&

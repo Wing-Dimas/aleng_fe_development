@@ -1,25 +1,27 @@
 import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import Navbar from "@components/molecules/Navbar"
+import Footer from "@components/molecules/Footer"
+import Button from "@components/atomics/Button"
 import Heading from "@components/atomics/Heading"
 import MainContent from "@components/atomics/MainContent"
 import Text from "@components/atomics/Text"
 import Wrapper from "@components/atomics/Wrapper"
-import Navbar from "@components/molecules/Navbar"
 import { IconChevronLeft, IconUpload } from "@tabler/icons-react"
 import { toRupiah } from "@utils/libs"
 import { UserContext } from "@utils/useUser"
 import withAuth from "@utils/withAuth"
 import toast from "react-hot-toast"
-import Image from "next/image"
-import Button from "@components/atomics/Button"
-import Footer from "@components/molecules/Footer"
+import Skeleton from "react-loading-skeleton"
 
 const MyOrderDetail = () => {
   const router = useRouter()
   const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [photo, setPhoto] = useState({
     file: null,
@@ -48,6 +50,34 @@ const MyOrderDetail = () => {
     }
   }
 
+  const doAskVerify = async () => {
+    if (isLoading) return
+    const loadingToast = toast.loading("Mengunggah bukti transfer")
+    try {
+      setIsLoading(true)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const formData = new FormData()
+      formData.append("jumlah_bayar", order.total_price)
+      formData.append("order_id", order.id)
+      formData.append("bukti_bayar", photo.file)
+      const { data } = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderPayment",
+        formData,
+        config
+      )
+      toast.success("Berhasil mengunggah bukti transfer", { id: loadingToast })
+      setIsLoading(false)
+      router.reload()
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Gagal mengunggah bukti transfer", { id: loadingToast })
+    }
+  }
+
   const getOrder = async (id) => {
     try {
       const config = {
@@ -62,7 +92,6 @@ const MyOrderDetail = () => {
       setOrder(data.data)
       setLoaded(true)
     } catch (error) {
-      console.log(error)
       toast.error("Gagal mendapatkan detail order")
     }
   }
@@ -205,14 +234,20 @@ const MyOrderDetail = () => {
               </div>
               {order.status != "proses" && (
                 <div>
-                  <Button>Minta Verifikasi</Button>
+                  <Button onClick={doAskVerify}>Minta Verifikasi</Button>
                 </div>
               )}
             </div>
           </div>
         </MainContent>
       ) : (
-        <MainContent></MainContent>
+        <MainContent>
+          <Skeleton className="w-full h-12" />
+          <div className="grid grid-cols-2">
+            <Skeleton className="w-full h-48" />
+            <Skeleton className="w-full h-48" />
+          </div>
+        </MainContent>
       )}
       <br />
       <br />

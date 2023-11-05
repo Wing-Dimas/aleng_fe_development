@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
-import Container from "@components/atomics/Container"
-import DateInput from "@components/atomics/DateInput"
-import Heading from "@components/atomics/Heading"
-import MainContent from "@components/atomics/MainContent"
-import PopOver from "@components/atomics/PopOver"
-import Text from "@components/atomics/Text"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
 import Wrapper from "@components/atomics/Wrapper"
 import Footer from "@components/molecules/Footer"
 import GalleryImage from "@components/molecules/GalleryImage"
 import Navbar from "@components/molecules/Navbar"
 import ShortReview from "@components/molecules/ShortReview"
 import TabDesc from "@components/molecules/TabDesc"
-import { toRupiah } from "@utils/libs"
-import Skeleton from "react-loading-skeleton"
-import toast from "react-hot-toast"
-import TextArea from "@components/atomics/TextArea"
 import Button from "@components/atomics/Button"
+import Container from "@components/atomics/Container"
+import DateInput from "@components/atomics/DateInput"
+import Heading from "@components/atomics/Heading"
+import MainContent from "@components/atomics/MainContent"
+import PopOver from "@components/atomics/PopOver"
+import Text from "@components/atomics/Text"
+import TextArea from "@components/atomics/TextArea"
+import { toRupiah } from "@utils/libs"
+import { UserContext } from "@utils/useUser"
 
 export default function DetailHotel() {
   const router = useRouter()
+  const user = useContext(UserContext)
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
     slug: "",
@@ -61,20 +62,13 @@ export default function DetailHotel() {
   })
   const [order, setOrder] = useState({
     catatan: "",
-    date: {
-      in: new Date().toISOString().split("T")[0],
-      out: new Date().toISOString().split("T")[0],
-    },
+    date: new Date().toISOString().split("T")[0],
     options: {
       room: 1,
       adult: 1,
       child: 1,
     },
   })
-
-  const doChangeDate = ({ name, value }) => {
-    setOrder({ ...order, date: { ...order.date, [name]: value } })
-  }
 
   const doChangeOrder = ({ name, value }) => {
     setOrder({ ...order, [name]: value })
@@ -102,7 +96,49 @@ export default function DetailHotel() {
     }
   }
 
-  const doOrder = async () => {}
+  const doOrder = async () => {
+    if (isLoading) return
+    if (!user.isSigned) {
+      router.push("/login")
+      return
+    }
+    const loadingToast = toast.loading("Sedang membuat order")
+    try {
+      setIsLoading(true)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const createOrder = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrder",
+        {
+          user_id: user.userId,
+          jumlah_pemesan: order.options.people.adult,
+          tanggal_checkin: order.date,
+          catatan: order.catatan,
+        },
+        config
+      )
+      const createOrderDetail = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderDetail",
+        {
+          tipe: "hotel",
+          id_destinasi: data.id,
+          catatan: order.catatan,
+          harga: data.price * order.options.people.room,
+          order_id: createOrder.data.data.id,
+        },
+        config
+      )
+      toast.success("Berhasil membuat order", { id: loadingToast })
+      setIsLoading(false)
+      router.push("/my-order/" + createOrder.data.data.id)
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Gagal membuat order", { id: loadingToast })
+    }
+  }
 
   useEffect(() => {
     const query = router.query
@@ -160,29 +196,16 @@ export default function DetailHotel() {
                   <p className="text-xs sm:text-sm font-medium">/malam</p>
                 </div>
                 <hr className="border-[0.5px]/30 border-[#ABACAC] my-3" />
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-3">
-                  <div className="flex flex-col items-center gap-1 w-full">
-                    <Text.label className="after:content-['*'] after:ml-0.5">
-                      Check-In
-                    </Text.label>
-                    <DateInput
-                      name="in"
-                      value={order.date.in}
-                      onChange={doChangeDate}
-                      containerClassName="!w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col items-center gap-1 w-full">
-                    <Text.label className="after:content-['*'] after:ml-0.5">
-                      Check-Out
-                    </Text.label>
-                    <DateInput
-                      name="out"
-                      value={order.date.out}
-                      onChange={doChangeDate}
-                      containerClassName="!w-full"
-                    />
-                  </div>
+                <div className="flex flex-col items-center gap-1 w-full">
+                  <Text.label className="after:content-['*'] after:ml-0.5">
+                    Tanggal Order
+                  </Text.label>
+                  <DateInput
+                    name="date"
+                    value={order.date}
+                    onChange={doChangeOrder}
+                    containerClassName="!w-full"
+                  />
                 </div>
                 <div className="flex flex-col items-center gap-1 w-full mt-3">
                   <Text.label className="after:content-['*'] after:ml-0.5">

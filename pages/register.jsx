@@ -4,13 +4,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import toast from "react-hot-toast"
 import Navbar from "@components/molecules/Navbar"
 import LSTextInput, {
   ObscuredLSTextInput,
 } from "@components/atomics/LSTextInput"
 import Text from "@components/atomics/Text"
 import validateRegister from "@validators/registerValidator"
-import toast from "react-hot-toast"
 import withAuth from "@utils/withAuth"
 
 const RegisterPage = () => {

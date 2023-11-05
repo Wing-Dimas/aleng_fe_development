@@ -5,9 +5,7 @@ import {
   IconBeach,
   IconBuildingCottage,
   IconBus,
-  IconCalendarEvent,
   IconChevronLeft,
-  IconChevronRight,
   IconHorseToy,
   IconMenu,
   IconMinus,
@@ -18,7 +16,6 @@ import {
   IconUser,
 } from "@tabler/icons-react"
 import Text from "@components/atomics/Text"
-import { Calendar } from "react-multi-date-picker"
 import { useRouter } from "next/router"
 import { UserContext } from "@utils/useUser"
 
@@ -27,98 +24,27 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
   const [tabId, setTabId] = useState("paket")
   const [expandNavbar, setExpandNavbar] = useState(false)
   const [animateExpand, setAnimateExpand] = useState(false)
-  const [keyword, setKeyword] = useState("")
-  const [expandOptions, setExpandOptions] = useState(false)
-  const [animateExpandOptions, setAnimateExpandOptions] = useState(false)
-  const [val, setVal] = useState(new Date())
-  const [options, setOptions] = useState({
-    check_in: new Date(),
-    check_out: new Date(),
-    room_count: 1,
-    adult_count: 1,
-    child_count: 0,
-  })
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     const query = router.query
     setTabId(query.tabId ?? tabId)
-    setOptions({
-      check_in: query.in ?? options.check_in,
-      check_out: query.out ?? options.check_out,
-      room_count: query.room ?? options.room_count,
-      adult_count: query.adult ?? options.adult_count,
-      child_count: query.child ?? options.child_count,
-    })
-    setKeyword(query.keyword ?? keyword)
+    setSearch(query.search ?? search)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
 
-  const doChangeKeyword = (e) => {
-    setKeyword(e.currentTarget.value)
+  const doChangeSearch = (e) => {
+    setSearch(e.currentTarget.value)
   }
 
   const doChangeTabId = (e) => {
-    if (e.currentTarget.value == "hotel") {
-      setExpandOptions(true)
-    } else {
-      setAnimateExpandOptions(false)
-    }
     setTabId(e.currentTarget.value)
   }
 
-  const doChangeRoomCount = (e) => {
-    if (e.currentTarget.name === "add") {
-      setOptions({ ...options, room_count: options.room_count + 1 })
-    } else if (e.currentTarget.name === "subtract") {
-      setOptions({
-        ...options,
-        room_count:
-          options.room_count <= 1 ? options.room_count : options.room_count - 1,
-      })
-    }
-  }
-
-  const doChangeAdultCount = (e) => {
-    if (e.currentTarget.name === "add") {
-      setOptions({ ...options, adult_count: options.adult_count + 1 })
-    } else if (e.currentTarget.name === "subtract") {
-      setOptions({
-        ...options,
-        adult_count:
-          options.adult_count <= 1
-            ? options.adult_count
-            : options.adult_count - 1,
-      })
-    }
-  }
-
-  const doChangeChildCount = (e) => {
-    if (e.currentTarget.name === "add") {
-      setOptions({ ...options, child_count: options.child_count + 1 })
-    } else if (e.currentTarget.name === "subtract") {
-      setOptions({
-        ...options,
-        child_count: options.child_count <= 0 ? 0 : options.child_count - 1,
-      })
-    }
-  }
-
   const doSearch = () => {
-    console.log("Begin", val[0].toDate())
-    console.log("End", val[1].toDate())
-    // if (tabId === "hotel") {
-    //   router
-    //     .push(
-    //       `/discover?tabId=${tabId}&keyword=${keyword}&room=${options.room_count}&adult=${options.adult_count}&child=${options.child_count}`
-    //     )
-    //     .then(() => {
-    //       router.reload();
-    //     });
-    // } else {
-    //   router.push(`/discover?tabId=${tabId}&keyword=${keyword}`).then(() => {
-    //     router.reload();
-    //   });
-    // }
+    router.push(`/discover?tabId=${tabId}&search=${search}`).then(() => {
+      router.reload()
+    })
   }
 
   const doExpandNavbar = () => {
@@ -152,35 +78,6 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
     }
   }, [animateExpand])
 
-  useEffect(() => {
-    if (expandOptions) {
-      setAnimateExpandOptions(true)
-    }
-  }, [expandOptions])
-
-  useEffect(() => {
-    if (!animateExpandOptions) {
-      setTimeout(() => {
-        setExpandOptions(false)
-      }, 500)
-    }
-  }, [animateExpandOptions])
-
-  const renderButton = (direction, handleClick) => {
-    return (
-      <button
-        onClick={handleClick}
-        className="transition-all p-2 rounded-full bg-neutral-100 hover:bg-neutral-200"
-      >
-        {direction === "right" ? (
-          <IconChevronRight className="h-5 w-5" />
-        ) : (
-          <IconChevronLeft className="h-5 w-5" />
-        )}
-      </button>
-    )
-  }
-
   return (
     <div
       className={isFixed ? "fixed w-full top-0 z-[90]" : "sticky top-0 z-[90]"}
@@ -189,11 +86,11 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
         <TopNavBar
           tabId={tabId}
           isDiscover={isDiscover}
-          doChangeKeyword={doChangeKeyword}
+          doChangeSearch={doChangeSearch}
           doExpandNavbar={doExpandNavbar}
           expandNavbar={expandNavbar}
           doCloseNavbar={doCloseNavbar}
-          keyword={keyword}
+          search={search}
           animateExpand={animateExpand}
           doSearch={doSearch}
         />
@@ -205,46 +102,6 @@ export default function Navbar({ isFixed = false, isDiscover = false }) {
         >
           <div className="relative">
             <TabMenu doChangeTabId={doChangeTabId} tabId={tabId} />
-            <div
-              tabIndex={1}
-              className={`${
-                expandOptions && expandNavbar ? "block" : "hidden"
-              } ${
-                animateExpandOptions && animateExpand
-                  ? "translate-y-0"
-                  : "-translate-y-full"
-              } transition-transform duration-500 fixed md:absolute z-[96] left-0 right-0 -top-full md:top-auto max-w-3xl mx-auto bg-white md:rounded-b-3xl overflow-hidden pb-4 md:pb-0`}
-            >
-              <div className="scrollbar-custom relative flex flex-col md:grid grid-cols-2 gap-4 px-4 pt-44 md:pt-2 pb-4 md:pb-0 overflow-y-scroll md:overflow-y-hidden h-screen md:h-auto">
-                {/* Dates */}
-                <div>
-                  <div className="flex items-center gap-4">
-                    <IconCalendarEvent className="w-12 h-12 p-3 rounded-full bg-neutral-100 text-custom-primary-red" />
-                    <div>
-                      <p className="">Kapan nih?</p>
-                      <p className="text-xs text-neutral-400">
-                        Tanggal check in dan check out
-                      </p>
-                    </div>
-                  </div>
-                  <Calendar
-                    shadow={false}
-                    className="font-semibold font-inter !block !w-full !border-none"
-                    value={val}
-                    onChange={setVal}
-                    range
-                    rangeHover
-                    renderButton={renderButton}
-                  />
-                </div>
-                <StayOptions
-                  doChangeAdultCount={doChangeAdultCount}
-                  doChangeChildCount={doChangeChildCount}
-                  doChangeRoomCount={doChangeRoomCount}
-                  options={options}
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -262,8 +119,8 @@ const TopNavBar = ({
   tabId,
   isDiscover,
   expandNavbar,
-  keyword,
-  doChangeKeyword,
+  search,
+  doChangeSearch,
   doExpandNavbar,
   doCloseNavbar,
   animateExpand,
@@ -309,8 +166,8 @@ const TopNavBar = ({
         <div className="relative w-full md:w-96">
           <input
             type="text"
-            value={keyword}
-            onChange={doChangeKeyword}
+            value={search}
+            onChange={doChangeSearch}
             onFocus={doExpandNavbar}
             placeholder="Mau cari apa nih?"
             className="border transition-all w-full focus:ring-1 focus:ring-red-300 border-neutral-300 bg-neutral-50 hover:bg-neutral-100 focus:bg-neutral-100 rounded-full outline-none pl-12 pr-20 placeholder-shown:pl-9 placeholder-shown:pr-9 py-2.5 placeholder-shown:text-neutral-300 placeholder-shown:text-center"
@@ -319,7 +176,7 @@ const TopNavBar = ({
             <IconSearch className="h-5 w-5 text-neutral-400" />
           </div>
           <div className="absolute right-2 top-0 h-full flex flex-col items-center justify-center">
-            {keyword ? (
+            {search ? (
               <button
                 onClick={doSearch}
                 className="text-sm bg-custom-secondary-yellow px-2 py-1.5 font-medium rounded-full"

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Head from "next/head"
 import Link from "next/link"
 import axios from "axios"
+import Skeleton from "react-loading-skeleton"
+import toast from "react-hot-toast"
 import Text from "@components/atomics/Text"
 import Title from "@components/atomics/Title"
 import Carousel from "@components/molecules/Carousel"
@@ -17,8 +19,6 @@ import {
   IconSoup,
   IconStar,
 } from "@tabler/icons-react"
-import Skeleton from "react-loading-skeleton"
-import toast from "react-hot-toast"
 
 export default function Home() {
   const [index, setIndex] = useState(0)

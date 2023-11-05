@@ -1,3 +1,14 @@
+import { useContext, useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import Head from "next/head"
+import axios from "axios"
+import toast from "react-hot-toast"
+import Skeleton from "react-loading-skeleton"
+import Footer from "@components/molecules/Footer"
+import GalleryImage from "@components/molecules/GalleryImage"
+import Navbar from "@components/molecules/Navbar"
+import ShortReview from "@components/molecules/ShortReview"
+import TabDesc from "@components/molecules/TabDesc"
 import Button from "@components/atomics/Button"
 import Container from "@components/atomics/Container"
 import DateInput from "@components/atomics/DateInput"
@@ -7,22 +18,13 @@ import PopOver from "@components/atomics/PopOver"
 import Text from "@components/atomics/Text"
 import TextArea from "@components/atomics/TextArea"
 import Wrapper from "@components/atomics/Wrapper"
-import Footer from "@components/molecules/Footer"
-import GalleryImage from "@components/molecules/GalleryImage"
-import Navbar from "@components/molecules/Navbar"
-import ShortReview from "@components/molecules/ShortReview"
-import TabDesc from "@components/molecules/TabDesc"
 import { toRupiah } from "@utils/libs"
-import axios from "axios"
-import Head from "next/head"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
-import Skeleton from "react-loading-skeleton"
+import { UserContext } from "@utils/useUser"
 
-export default function DetailWisata() {
+export default function DetailPaket() {
   const router = useRouter()
+  const user = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [data, setData] = useState({
     slug: "",
@@ -78,9 +80,7 @@ export default function DetailWisata() {
   const getData = async (slug) => {
     try {
       const {
-        data: {
-          data: { data },
-        },
+        data: { data },
       } = await axios.get(`${process.env.BASE_API}/paket/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
@@ -89,7 +89,49 @@ export default function DetailWisata() {
     }
   }
 
-  const doOrder = async () => {}
+  const doOrder = async () => {
+    if (isLoading) return
+    if (!user.isSigned) {
+      router.push("/login")
+      return
+    }
+    const loadingToast = toast.loading("Sedang membuat order")
+    try {
+      setIsLoading(true)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+      const createOrder = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrder",
+        {
+          user_id: user.userId,
+          jumlah_pemesan: order.options.people,
+          tanggal_checkin: order.date,
+          catatan: order.catatan,
+        },
+        config
+      )
+      const createOrderDetail = await axios.post(
+        process.env.BASE_API + "/auth/order/createOrderDetail",
+        {
+          tipe: "paket",
+          id_destinasi: data.id,
+          catatan: order.catatan,
+          harga: data.price * order.options.people,
+          order_id: createOrder.data.data.id,
+        },
+        config
+      )
+      toast.success("Berhasil membuat order", { id: loadingToast })
+      setIsLoading(false)
+      router.push("/my-order/" + createOrder.data.data.id)
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Gagal membuat order", { id: loadingToast })
+    }
+  }
 
   useEffect(() => {
     const query = router.query
@@ -124,9 +166,9 @@ export default function DetailWisata() {
               name={data.name}
               day={data.day}
               night={data.night}
-              rundown={data.rundown}
+              rundown={data.kegiatan}
               address={data.route}
-              star={data.reviews.star}
+              star={data.reviews.star ?? 0}
               total_review={data.reviews.total_review}
               lat={data.lat}
               long={data.long}
