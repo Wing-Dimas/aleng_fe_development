@@ -78,7 +78,7 @@ const MyOrder = () => {
           </Heading.h2>
         </Link>
         <br />
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 whitespace-nowrap overflow-x-auto scrollbar-thin py-1">
           {tabStatus.map((tab, i) => {
             return (
               <button
