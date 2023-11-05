@@ -126,7 +126,7 @@ export default function DetailHotel() {
           tipe: "hotel",
           id_destinasi: data.id,
           catatan: order.catatan,
-          harga: data.price * order.options.people.room,
+          harga: data.price,
           order_id: createOrder.data.data.id,
         },
         config

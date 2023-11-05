@@ -123,7 +123,7 @@ export default function DetailTransportasi() {
           tipe: "transportasi",
           id_destinasi: data.id,
           catatan: order.catatan,
-          harga: data.price * order.options.people,
+          harga: data.price,
           order_id: createOrder.data.data.id,
         },
         config

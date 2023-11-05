@@ -126,7 +126,7 @@ export default function DetailKerajinan() {
           tipe: "kerajinan",
           id_destinasi: data.id,
           catatan: order.catatan,
-          harga: data.price * order.options.item,
+          harga: data.price,
           order_id: createOrder.data.data.id,
         },
         config
