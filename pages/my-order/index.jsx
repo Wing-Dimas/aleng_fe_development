@@ -97,7 +97,7 @@ const MyOrder = () => {
           })}
         </div>
         <br />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {orders
             .filter((order) => {
               if (filter == "semua_order") return true
@@ -107,9 +107,9 @@ const MyOrder = () => {
               return (
                 <div
                   key={i}
-                  className="border transition-all hover:shadow-md rounded-md font-medium text-xs sm:text-sm"
+                  className="border flex flex-col transition-all hover:shadow-md rounded-md font-medium text-xs sm:text-sm"
                 >
-                  <div className="p-4 border-b">
+                  <div className="p-4 flex-grow flex flex-col justify-between border-b">
                     <div className="flex items-start justify-between">
                       <p>{order.destination_name}</p>
                       <p className="text-neutral-500 whitespace-nowrap">

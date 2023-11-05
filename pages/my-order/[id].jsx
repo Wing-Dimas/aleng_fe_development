@@ -119,7 +119,7 @@ const MyOrderDetail = () => {
             </Heading.h2>
           </Link>
           <br />
-          <div className="grid grid-cols-4 py-6 border-y">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 py-6 border-y">
             <div>
               <Text className="!font-normal text-neutral-500">
                 Tanggal Order
@@ -155,7 +155,7 @@ const MyOrderDetail = () => {
               </Text>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-6 divide-x">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:divide-x">
             <div className="py-6 flex flex-col gap-2">
               <div className="h-64 w-64 rounded-md relative">
                 <Image
@@ -183,9 +183,9 @@ const MyOrderDetail = () => {
                 <Text>{toRupiah.format(order.total_price)}</Text>
               </div>
             </div>
-            <div className="py-6 px-4 flex flex-col gap-2">
+            <div className="py-6 sm:px-4 flex flex-col gap-2">
               <div>
-                {order.status == "proses" ? (
+                {order.status == "verified" ? (
                   <div className="h-64 w-64 rounded-md relative">
                     <Image
                       priority
@@ -199,6 +199,10 @@ const MyOrderDetail = () => {
                       sizes="auto"
                       className="rounded-md bg-cover object-cover"
                     />
+                  </div>
+                ) : order.status == "proses" ? (
+                  <div className="flex items-center justify-center w-full h-full">
+                    Sedang Diproses
                   </div>
                 ) : (
                   <div
@@ -224,16 +228,32 @@ const MyOrderDetail = () => {
                   </div>
                 )}
               </div>
-              <div>
-                <Text className="!font-normal text-neutral-500">
-                  Transfer Pada Nomor Rekening Berikut
-                </Text>
-                <Text>5409-1920-4582-9021 (BCA)</Text>
-              </div>
-              {order.status != "proses" && (
-                <div>
-                  <Button onClick={doAskVerify}>Minta Verifikasi</Button>
-                </div>
+              {order.status == "menunggu_pembayaran" && (
+                <>
+                  <div>
+                    <Text className="!font-normal text-neutral-500">
+                      Transfer Pada Nomor Rekening Berikut
+                    </Text>
+                    <Text>5409-1920-4582-9021 (BCA)</Text>
+                  </div>
+                  <div>
+                    <Button onClick={doAskVerify}>Minta Verifikasi</Button>
+                  </div>
+                </>
+              )}{" "}
+              {order.status == "verified" && (
+                <>
+                  <div>
+                    <Text className="!font-normal text-neutral-500">
+                      Detail
+                    </Text>
+                    <Text>Bukti Pembayaran</Text>
+                  </div>
+                  <div>
+                    <Text className="!font-normal text-neutral-500">Tiket</Text>
+                    <Text>{order.ticket_number}</Text>
+                  </div>
+                </>
               )}
             </div>
           </div>
