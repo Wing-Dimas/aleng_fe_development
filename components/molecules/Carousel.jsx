@@ -11,7 +11,7 @@ export default function Carousel({
   className,
   children,
 }) {
-  const { breakpoint, _, __ } = useBreakpoint(BREAKPOINTS, "xs")
+  const { breakpoint} = useBreakpoint(BREAKPOINTS, "xs")
   return (
     <div className={`${className ? className + " " : ""}relative`}>
       <div className="absolute z-10 top-0 -right-4 h-full flex items-center justify-center">
