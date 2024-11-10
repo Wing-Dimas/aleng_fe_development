@@ -15,7 +15,7 @@ export default function ForgetPassword() {
   const handleClick = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(process.env.BASE_API + "/password/email", {
+      const res = await axios.post(process.env.NEXT_PUBLIC_BASE_API + "/password/email", {
         email,
       })
       if (!!res.data.mailData.token) {

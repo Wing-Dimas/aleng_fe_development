@@ -38,7 +38,7 @@ export default function GalleryImage({
       <FsLightbox
         type="image"
         toggler={lightboxController.toggler}
-        sources={image_urls.map((url) => process.env.BASE_STORAGE + url)}
+        sources={image_urls.map((url) => process.env.NEXT_PUBLIC_BASE_STORAGE + url)}
         slide={lightboxController.slide}
       />
       <div className="hidden md:grid grid-cols-3 gap-4">
@@ -69,7 +69,7 @@ export default function GalleryImage({
                 className="object-cover"
                 sizes="auto"
                 priority
-                src={process.env.BASE_STORAGE + image_urls[0]}
+                src={process.env.NEXT_PUBLIC_BASE_STORAGE + image_urls[0]}
                 fill
                 alt={alt}
               />
@@ -83,7 +83,7 @@ export default function GalleryImage({
                 className="object-cover"
                 sizes="auto"
                 priority
-                src={process.env.BASE_STORAGE + image_urls[1]}
+                src={process.env.NEXT_PUBLIC_BASE_STORAGE + image_urls[1]}
                 fill
                 alt={alt}
               />
@@ -92,7 +92,7 @@ export default function GalleryImage({
               <Image
                 sizes="auto"
                 priority
-                src={process.env.BASE_STORAGE + image_urls[2]}
+                src={process.env.NEXT_PUBLIC_BASE_STORAGE + image_urls[2]}
                 fill
                 alt={alt}
                 className="object-cover pointer-events-none"
@@ -124,7 +124,7 @@ export default function GalleryImage({
                       sizes="auto"
                       className="object-cover"
                       priority
-                      src={process.env.BASE_STORAGE + image_url}
+                      src={process.env.NEXT_PUBLIC_BASE_STORAGE + image_url}
                       alt={alt}
                       fill={true}
                     />

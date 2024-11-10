@@ -87,7 +87,7 @@ export default function DetailRestaurant() {
       const {
         data: { data },
       } = await axios.get(
-        `${process.env.BASE_API}/restaurant/showBySlug/${slug}`
+        `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/showBySlug/${slug}`
       )
       setData(data)
       setLoaded(true)
@@ -111,7 +111,7 @@ export default function DetailRestaurant() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people,
@@ -121,7 +121,7 @@ export default function DetailRestaurant() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "restaurant",
           id_destinasi: data.id,

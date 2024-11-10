@@ -88,7 +88,7 @@ export default function DetailHotel() {
     try {
       const {
         data: { data },
-      } = await axios.get(`${process.env.BASE_API}/hotel/showBySlug/${slug}`)
+      } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/hotel/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
     } catch (err) {
@@ -111,7 +111,7 @@ export default function DetailHotel() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people.adult,
@@ -121,7 +121,7 @@ export default function DetailHotel() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "hotel",
           id_destinasi: data.id,

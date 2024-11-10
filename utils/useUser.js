@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
         },
       }
       const { data } = await axios.get(
-        process.env.BASE_API + "/auth/user/profile",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/user/profile",
         config
       )
       setToken(token)

@@ -48,7 +48,7 @@ const RegisterPage = () => {
     try {
       setIsLoading(true)
       const { data } = await axios.post(
-        process.env.BASE_API + "/auth/register",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/register",
         {
           name: credentials.name,
           email: credentials.email,

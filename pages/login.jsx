@@ -40,7 +40,7 @@ const LoginPage = () => {
     const loadingToast = toast.loading("Sedang login...")
     try {
       setIsLoading(true)
-      const { data } = await axios.post(process.env.BASE_API + "/auth/login", {
+      const { data } = await axios.post(process.env.NEXT_PUBLIC_BASE_API + "/auth/login", {
         email: credentials.email,
         password: credentials.password,
       })

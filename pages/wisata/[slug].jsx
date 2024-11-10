@@ -87,7 +87,7 @@ export default function DetailWisata() {
     try {
       const {
         data: { data },
-      } = await axios.get(`${process.env.BASE_API}/wisata/showBySlug/${slug}`)
+      } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/wisata/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
     } catch (err) {
@@ -109,7 +109,7 @@ export default function DetailWisata() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people,
@@ -119,7 +119,7 @@ export default function DetailWisata() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "wisata",
           id_destinasi: data.id,

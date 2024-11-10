@@ -48,7 +48,7 @@ const MyOrder = () => {
         },
       }
       const { data } = await axios.get(
-        process.env.BASE_API +
+        process.env.NEXT_PUBLIC_BASE_API +
           "/auth/order/getOrdersBySpecifiedUser/" +
           user.userId,
         config

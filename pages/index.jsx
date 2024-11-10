@@ -39,7 +39,7 @@ export default function Home() {
     try {
       const {
         data: { data },
-      } = await axios.get(`${process.env.BASE_API}/popularSite`)
+      } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/popularSite`)
       setPopulars(data)
     } catch (error) {
       toast.error("Gagal menampilkan data\nCoba untuk memuat ulang")

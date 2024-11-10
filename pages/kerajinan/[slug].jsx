@@ -87,7 +87,7 @@ export default function DetailKerajinan() {
       const {
         data: { data },
       } = await axios.get(
-        `${process.env.BASE_API}/kerajinan/showBySlug/${slug}`
+        `${process.env.NEXT_PUBLIC_BASE_API}/kerajinan/showBySlug/${slug}`
       )
       setData(data)
       setLoaded(true)
@@ -111,7 +111,7 @@ export default function DetailKerajinan() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people,
@@ -121,7 +121,7 @@ export default function DetailKerajinan() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "kerajinan",
           id_destinasi: data.id,

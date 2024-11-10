@@ -95,7 +95,7 @@ const ProfilePage = () => {
       }
       setIsUpdating(true)
       const { data } = await axios.post(
-        process.env.BASE_API + "/auth/user/edit-profile",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/user/edit-profile",
         formData,
         config
       )
@@ -128,7 +128,7 @@ const ProfilePage = () => {
     try {
       setIsUpdating(true)
       const { data } = await axios.post(
-        process.env.BASE_API + "/auth/user/change-password",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/user/change-password",
         secret,
         config
       )
@@ -154,7 +154,7 @@ const ProfilePage = () => {
     try {
       setIsLoading(true)
       const { data } = await axios.get(
-        process.env.BASE_API + "/auth/user/profile",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/user/profile",
         config
       )
       setProfile({
@@ -216,7 +216,7 @@ const ProfilePage = () => {
               <div className="flex items-start gap-2">
                 <div className="h-12 w-12 rounded-full bg-white relative">
                   <Image
-                    src={process.env.BASE_STORAGE + displayProfile.foto}
+                    src={process.env.NEXT_PUBLIC_BASE_STORAGE + displayProfile.foto}
                     sizes="auto"
                     className="rounded-full bg-cover object-cover"
                     alt="profile image"
@@ -280,7 +280,7 @@ const ProfilePage = () => {
               <div className="flex items-center gap-2">
                 <div className="h-12 w-12 rounded-full bg-white relative">
                   <Image
-                    src={process.env.BASE_STORAGE + displayProfile.foto}
+                    src={process.env.NEXT_PUBLIC_BASE_STORAGE + displayProfile.foto}
                     sizes="auto"
                     className="rounded-full bg-cover object-cover"
                     alt="profile image"
@@ -350,7 +350,7 @@ const ProfilePage = () => {
                   backgroundImage: `url(${
                     displayProfile.new_foto_url !== ""
                       ? displayProfile.new_foto_url
-                      : process.env.BASE_STORAGE + displayProfile.foto
+                      : process.env.NEXT_PUBLIC_BASE_STORAGE + displayProfile.foto
                   })`,
                 }}
               >

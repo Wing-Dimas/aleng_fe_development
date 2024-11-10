@@ -81,7 +81,7 @@ export default function DetailPaket() {
     try {
       const {
         data: { data },
-      } = await axios.get(`${process.env.BASE_API}/paket/showBySlug/${slug}`)
+      } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/paket/showBySlug/${slug}`)
       setData(data)
       setLoaded(true)
     } catch (err) {
@@ -104,7 +104,7 @@ export default function DetailPaket() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people,
@@ -114,7 +114,7 @@ export default function DetailPaket() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "paket",
           id_destinasi: data.id,

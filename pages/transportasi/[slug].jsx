@@ -84,7 +84,7 @@ export default function DetailTransportasi() {
       const {
         data: { data },
       } = await axios.get(
-        `${process.env.BASE_API}/transportasi/showBySlug/${slug}`
+        `${process.env.NEXT_PUBLIC_BASE_API}/transportasi/showBySlug/${slug}`
       )
       setData(data)
       setLoaded(true)
@@ -108,7 +108,7 @@ export default function DetailTransportasi() {
         },
       }
       const createOrder = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrder",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrder",
         {
           user_id: user.userId,
           jumlah_pemesan: order.options.people,
@@ -118,7 +118,7 @@ export default function DetailTransportasi() {
         config
       )
       const createOrderDetail = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderDetail",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderDetail",
         {
           tipe: "transportasi",
           id_destinasi: data.id,

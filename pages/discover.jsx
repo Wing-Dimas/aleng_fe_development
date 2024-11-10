@@ -105,7 +105,7 @@ export default function Discover() {
         data: {
           data: { data },
         },
-      } = await axios.get(`${process.env.BASE_API}/${id}/showAll`, {
+      } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/${id}/showAll`, {
         params: params,
       })
       setCatalogue({ ...catalogue, [id]: data })

@@ -40,7 +40,7 @@ export default function ResetPassword() {
         return
       }
       const _ = await axios.post(
-        process.env.BASE_API + "/resetPassword",
+        process.env.NEXT_PUBLIC_BASE_API + "/resetPassword",
         credentials
       )
       router.push("/login")

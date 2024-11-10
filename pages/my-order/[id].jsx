@@ -65,7 +65,7 @@ const MyOrderDetail = () => {
       formData.append("order_id", order.id)
       formData.append("bukti_bayar", photo.file)
       const { data } = await axios.post(
-        process.env.BASE_API + "/auth/order/createOrderPayment",
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/createOrderPayment",
         formData,
         config
       )
@@ -86,7 +86,7 @@ const MyOrderDetail = () => {
         },
       }
       const { data } = await axios.get(
-        process.env.BASE_API + "/auth/order/getDetailOrder/" + id,
+        process.env.NEXT_PUBLIC_BASE_API + "/auth/order/getDetailOrder/" + id,
         config
       )
       setOrder(data.data)
@@ -160,7 +160,7 @@ const MyOrderDetail = () => {
               <div className="h-64 w-64 rounded-md relative">
                 <Image
                   priority
-                  src={process.env.BASE_STORAGE + order.imageUrl}
+                  src={process.env.NEXT_PUBLIC_BASE_STORAGE + order.imageUrl}
                   alt="lenjhelenan"
                   fill
                   sizes="auto"
@@ -190,7 +190,7 @@ const MyOrderDetail = () => {
                     <Image
                       priority
                       src={
-                        process.env.BASE_STORAGE +
+                        process.env.NEXT_PUBLIC_BASE_STORAGE +
                         order.payment_detail[order.payment_detail.length - 1]
                           .payment_proof
                       }
